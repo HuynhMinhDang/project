@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testmodule title="CA_S401_BL01_V3.0" version="1.0">
+	<variants>
+		<variant name="Automated">SERVICE_22Automated Testcase</variant>
+	</variants>
+	<testgroup title="SERVICE_22Automated Testcase">
+		<externalref type="doors" owner="TAE - DOORS extension" title="ID_2" />
+		<testgroup title="F190_VINDataIdentifier">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_3" />
+			<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F190 using physical addressing" ident="-">
+				<caplparam name="Request" type="string">22f190</caplparam>
+				<caplparam name="Response" type="string">62f1903030303030303030303030303030303030</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="2- Send service 0x22 to the camera for the DID F190 using functional addressing" ident="-">
+				<caplparam name="Request" type="string">22f190</caplparam>
+				<caplparam name="Response" type="string">62f1903030303030303030303030303030303030</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+		</testgroup>
+		<testgroup title="F1F0_vehicle type">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_4" />
+			<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F0 using physical addressing" ident="-">
+				<caplparam name="Request" type="string">22f1f0</caplparam>
+				<caplparam name="Response" type="string">62f1f000</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="2- Send service 0x22 to the camera for the DID F1F0 using functional addressing" ident="-">
+				<caplparam name="Request" type="string">22f1f0</caplparam>
+				<caplparam name="Response" type="string">62f1f000</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+		</testgroup>
+		<testgroup title="F1F4_vehicle configuration">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_5" />
+			<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F4 using physical addressing" ident="-">
+				<caplparam name="Request" type="string">22f1f4</caplparam>
+				<caplparam name="Response" type="string">62f1f401</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="2- Send service 0x22 to the camera for the DID F1F4 using functional addressing" ident="-">
+				<caplparam name="Request" type="string">22f1f4</caplparam>
+				<caplparam name="Response" type="string">62f1f401</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+		</testgroup>
+		<testgroup title="F1F1_FAB switch">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_6" />
+			<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F1 using physical addressing" ident="-">
+				<caplparam name="Request" type="string">22f1f1</caplparam>
+				<caplparam name="Response" type="string">62f1f101</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="2- Send service 0x22 to the camera for the DID F1F1 using functional addressing" ident="-">
+				<caplparam name="Request" type="string">22f1f1</caplparam>
+				<caplparam name="Response" type="string">62f1f101</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+		</testgroup>
+		<testgroup title="F1F2_TSR switch">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_7" />
+			<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F2 using physical addressing" ident="-">
+				<caplparam name="Request" type="string">22f1f2</caplparam>
+				<caplparam name="Response" type="string">62f1f201</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="2- Send service 0x22 to the camera for the DID F1F2 using functional addressing" ident="-">
+				<caplparam name="Request" type="string">22f1f2</caplparam>
+				<caplparam name="Response" type="string">62f1f201</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+		</testgroup>
+		<testgroup title="F1F3_TLA switch">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_8" />
+			<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F3 using physical addressing" ident="-">
+				<caplparam name="Request" type="string">22f1f3</caplparam>
+				<caplparam name="Response" type="string">62f1f301</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="2- Send service 0x22 to the camera for the DID F1F3 using functional addressing" ident="-">
+				<caplparam name="Request" type="string">22f1f3</caplparam>
+				<caplparam name="Response" type="string">62f1f301</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+		</testgroup>
+		<testgroup title="F1FE_Lane Function Configuration">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_9" />
+			<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1FE using physical addressing" ident="-">
+				<caplparam name="Request" type="string">22f1fe</caplparam>
+				<caplparam name="Response" type="string">62f1fe00</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="2- Send service 0x22 to the camera for the DID F1FE using functional addressing" ident="-">
+				<caplparam name="Request" type="string">22f1fe</caplparam>
+				<caplparam name="Response" type="string">62f1fe00</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+		</testgroup>
+	</testgroup>
+</testmodule>

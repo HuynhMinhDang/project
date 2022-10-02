@@ -1,0 +1,643 @@
+/*@!Encoding:1252*/
+
+variables
+{
+    //Used interact between raw and the physical environment variables
+    byte chgEv_LCDAR_2A4_LCDAR_ELK_oStatus = 0;
+    byte chgEv_LCDAR_2A4_LCDAR_Left_ELK_oAlert = 0;
+    byte chgEv_LCDAR_2A4_LCDAR_ELK_oAlert = 0;
+    
+    message LCDAR_2A4        Msg_LCDAR_2A4;
+    msTimer Tm_LCDAR_2A4;
+    int Cycle_LCDAR_2A4 = 50;
+    
+    int LCDAR_2A4_LCDAR_CRCCheck_2AF_counter =0;
+    int LCDAR_2A4_LCDAR_CRCCheck_2AF_wrongvalctr =0;
+    int LCDAR_2A4_LCDAR_RollingCounter_2AF_counter =0;
+    int LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr =0;
+    
+    //CRC Polynomial for MQB     
+    byte cb_ChkSum_POLY_MQB =0x2F;
+	// CANFD DLC
+	byte Dbc_dlc;
+	int i=0;
+	char CAN_DLC[7]={9,10,11,12,13,14,15};
+	char CANFD_DLC[7]={12,16,20,24,32,48,64};
+    
+
+    
+        byte CRC_J1850_Table[256] = {
+ /*0 - 7*/  0x00, 0x1D, 0x3A, 0x27, 0x74, 0x69, 0x4E, 0x53,
+ /*8 - 15*/ 0xE8, 0xF5, 0xD2, 0xCF, 0x9C, 0x81, 0xA6, 0xBB,
+ /*16 - 23*/ 0xCD, 0xD0, 0xF7, 0xEA, 0xB9, 0xA4, 0x83, 0x9E,
+ /*24 - 31*/ 0x25, 0x38, 0x1F, 0x02, 0x51, 0x4C, 0x6B, 0x76,
+ /*32 - 39*/ 0x87, 0x9A, 0xBD, 0xA0, 0xF3, 0xEE, 0xC9, 0xD4,
+ /*40 - 47*/ 0x6F, 0x72, 0x55, 0x48, 0x1B, 0x06, 0x21, 0x3C,
+ /*48 - 55*/ 0x4A, 0x57, 0x70, 0x6D, 0x3E, 0x23, 0x04, 0x19,
+ /*56 - 63*/ 0xA2, 0xBF, 0x98, 0x85, 0xD6, 0xCB, 0xEC, 0xF1,
+ /*64 - 71*/  0x13, 0x0E, 0x29, 0x34, 0x67, 0x7A, 0x5D, 0x40,
+ /*72 - 79*/ 0xFB, 0xE6, 0xC1, 0xDC, 0x8F, 0x92, 0xB5, 0xA8,
+ /*80 - 87*/ 0xDE, 0xC3, 0xE4, 0xF9, 0xAA, 0xB7, 0x90, 0x8D,
+ /*88 - 95*/ 0x36, 0x2B, 0x0C, 0x11, 0x42, 0x5F, 0x78, 0x65,
+ /*96 - 103*/ 0x94, 0x89, 0xAE, 0xB3, 0xE0, 0xFD, 0xDA, 0xC7,
+ /*104 - 111*/ 0x7C, 0x61, 0x46, 0x5B, 0x08, 0x15, 0x32, 0x2F,
+ /*112 - 119*/ 0x59, 0x44, 0x63, 0x7E, 0x2D, 0x30, 0x17, 0x0A,
+ /*120 - 127*/ 0xB1, 0xAC, 0x8B, 0x96, 0xC5, 0xD8, 0xFF, 0xE2,
+ /*128 - 135*/ 0x26, 0x3B, 0x1C, 0x01, 0x52, 0x4F, 0x68, 0x75,
+ /*136 - 143*/ 0xCE, 0xD3, 0xF4, 0xE9, 0xBA, 0xA7, 0x80, 0x9D,
+ /*144 - 151*/ 0xEB, 0xF6, 0xD1, 0xCC, 0x9F, 0x82, 0xA5, 0xB8,
+ /*152 - 159*/ 0x03, 0x1E, 0x39, 0x24, 0x77, 0x6A, 0x4D, 0x50,
+ /*160 - 167*/ 0xA1, 0xBC, 0x9B, 0x86, 0xD5, 0xC8, 0xEF, 0xF2,
+ /*168 - 175*/ 0x49, 0x54, 0x73, 0x6E, 0x3D, 0x20, 0x07, 0x1A,
+ /*176 - 183*/ 0x6C, 0x71, 0x56, 0x4B, 0x18, 0x05, 0x22, 0x3F,
+ /*184 - 191*/ 0x84, 0x99, 0xBE, 0xA3, 0xF0, 0xED, 0xCA, 0xD7,
+ /*192 - 199*/ 0x35, 0x28, 0x0F, 0x12, 0x41, 0x5C, 0x7B, 0x66,
+ /*200 - 207*/ 0xDD, 0xC0, 0xE7, 0xFA, 0xA9, 0xB4, 0x93, 0x8E,
+ /*208 - 215*/ 0xF8, 0xE5, 0xC2, 0xDF, 0x8C, 0x91, 0xB6, 0xAB,
+ /*216 - 223*/ 0x10, 0x0D, 0x2A, 0x37, 0x64, 0x79, 0x5E, 0x43,
+ /*224 - 231*/ 0xB2, 0xAF, 0x88, 0x95, 0xC6, 0xDB, 0xFC, 0xE1,
+ /*232 - 239*/ 0x5A, 0x47, 0x60, 0x7D, 0x2E, 0x33, 0x14, 0x09,
+ /*240 - 247*/ 0x7F, 0x62, 0x45, 0x58, 0x0B, 0x16, 0x31, 0x2C,
+ /*248 - 255*/ 0x97, 0x8A, 0xAD, 0xB0, 0xE3, 0xFE, 0xD9, 0xC4
+};
+
+         
+}
+
+
+on start
+{
+    //Initialise cycle time and message timer 
+    putValue(E_pubc_LCDAR_LCDAR_2A4_cycleTm,Cycle_LCDAR_2A4);
+    SetTimer( Tm_LCDAR_2A4,100);
+    putValue(E_pubc_LCDAR_LCDAR_2A4_Tm,1);
+    
+    //Initialise signals with init raw value
+    Msg_LCDAR_2A4.LCDAR_ELK_oStatus   =getvalue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_Rv);
+    Msg_LCDAR_2A4.LCDAR_Left_ELK_oAlert   =getvalue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_Rv);
+    Msg_LCDAR_2A4.LCDAR_ELK_oAlert   =getvalue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_Rv);
+}
+
+on envVar E_pubc_LCDAR_CycMsgsON
+{
+    // enable all the cyclic messages 
+    putValue(E_pubc_LCDAR_LCDAR_2A4_Tm,1);
+}
+
+on envVar E_pubc_LCDAR_CycMsgsOFF
+{
+    // disable all the cyclic messages
+    putValue(E_pubc_LCDAR_LCDAR_2A4_Tm,0);
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+on timer Tm_LCDAR_2A4
+{
+    //cyclic message timer 
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_Tm) == 1)
+    {
+        
+		//update the BZ Signal
+        if(LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr == 0)
+        {
+            update_LCDAR_2A4_LCDAR_RollingCounter_2AF_counter();
+            Msg_LCDAR_2A4.LCDAR_RollingCounter_2AF= LCDAR_2A4_LCDAR_RollingCounter_2AF_counter;
+        }
+        else if(LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr > 0)
+        {
+			 LCDAR_2A4_LCDAR_RollingCounter_2AF_counter=LCDAR_2A4_LCDAR_RollingCounter_2AF_counter + LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr;
+			  Msg_LCDAR_2A4.LCDAR_RollingCounter_2AF= LCDAR_2A4_LCDAR_RollingCounter_2AF_counter;
+             /*LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr--;
+             //if counter becomes zero, update panel controller to zero
+             if(LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr == 0)
+             {
+                putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr,0);
+             }*/
+        }
+        else
+        {
+            // do nothing
+        }
+	
+        update_LCDAR_2A4_CRC_CheckSum();
+        output(Msg_LCDAR_2A4);
+        
+    }
+    //Reset Timer
+    SetTimer(Tm_LCDAR_2A4,Cycle_LCDAR_2A4);
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_cycleTm
+{
+    // update the cycle time 
+    Cycle_LCDAR_2A4=getvalue(this);
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_tx
+{
+    if(getValue(this))
+    {       
+        
+        //update the BZ Signal
+        if(LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr == 0)
+        {
+            update_LCDAR_2A4_LCDAR_RollingCounter_2AF_counter();
+            Msg_LCDAR_2A4.LCDAR_RollingCounter_2AF= LCDAR_2A4_LCDAR_RollingCounter_2AF_counter;
+        }
+        else if(LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr > 0)
+        {
+			LCDAR_2A4_LCDAR_RollingCounter_2AF_counter=LCDAR_2A4_LCDAR_RollingCounter_2AF_counter + LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr;
+			 Msg_LCDAR_2A4.LCDAR_RollingCounter_2AF= LCDAR_2A4_LCDAR_RollingCounter_2AF_counter;
+             /*LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr--;
+              // if counter becomes zero, update panel controller to zero
+             if(LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr == 0)
+             {
+                 putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr,0);
+             } */
+        }
+        else
+        { 
+			// do nothing
+        }    
+        //calculate the CRC CheckSum
+        update_LCDAR_2A4_CRC_CheckSum();
+
+        output(Msg_LCDAR_2A4);        
+    }
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_Range
+{
+    qword rawstatus = 0ll;
+    qword rawValue = 0ll;    
+    
+    rawstatus = getvalue(this);    
+    // set all the signals with min raw /max raw /init raw
+    switch (rawstatus) 
+    {
+     case(0) :
+        rawValue= 0;
+        putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_Rv, rawValue);
+        break;
+     case(1) :
+        rawValue= 3;
+        putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_Rv, rawValue);
+        rawValue= 3;
+        putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_Rv, rawValue);
+        rawValue= 3;
+        putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_Rv, rawValue);
+        break;
+     default :
+        rawValue= 0;
+        putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_Rv, rawValue);
+      break;
+   }
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_Dlc
+{
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_enDlc))
+    {
+        Msg_LCDAR_2A4.dlc =getValue(this);
+    }
+    else
+    {   
+	   Msg_LCDAR_2A4.dlc = 64;
+	   	
+  }
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_enDlc
+{
+    //For Messages with DLC = 8, set wrong DLC to smaller than defined DLC
+    //For Messages with DLC < 8 set wrong DLC to smaller/longer than defined DLC
+    if(getValue(this))
+    {
+        Msg_LCDAR_2A4.dlc =getValue(E_pubc_LCDAR_LCDAR_2A4_Dlc);
+    }
+    else
+    {
+	   Msg_LCDAR_2A4.dlc = 64;
+			
+    }
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_CRCCheck_2AF_wrongvalctr
+{
+    //update disturb count
+    //disturb value range:(-1 = always send wrong value),( X>0 ,x is the number of Messages with wrong CHK sent)
+    LCDAR_2A4_LCDAR_CRCCheck_2AF_wrongvalctr =getValue(this);    
+}
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr
+{
+    //update disturb count
+    //disturb value range:(-1 = always send wrong value),( X>0 ,x is the number of Messages with wrong CHK sent)
+    LCDAR_2A4_LCDAR_RollingCounter_2AF_wrongvalctr =getValue(this);    
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_Rv
+{
+    int64 rawValue = 0ll;
+    float rawValue_float = 0.0;
+    float phyValue = 0.0;        
+
+    //set the signal with updated raw value
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_SetVt)==0)
+    {
+        rawValue = getvalue(this);
+        if(chgEv_LCDAR_2A4_LCDAR_ELK_oStatus == 0)
+        {
+            //type conversion to float
+            rawValue_float = rawValue;        
+            // raw to physical conversion
+            phyValue = ((rawValue_float *1)+(0));
+            putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_Pv, phyValue);
+            chgEv_LCDAR_2A4_LCDAR_ELK_oStatus = 1;
+        }
+        else
+        {
+            chgEv_LCDAR_2A4_LCDAR_ELK_oStatus = 0;
+        }    
+        //update the signal value
+        Msg_LCDAR_2A4.LCDAR_ELK_oStatus=rawValue;        
+    }                                                                           
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_Pv
+{
+    int64 rawValue = 0ll;
+    float phyValue = 0.0;
+    
+    //update the raw value with physical value 
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_SetVt)==0)
+    {
+        if(chgEv_LCDAR_2A4_LCDAR_ELK_oStatus == 0)
+        {
+            phyValue = getvalue(this);
+            // physical to raw conversion
+            rawValue = ((phyValue -(0))/1);
+            putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_Rv, rawValue);
+            chgEv_LCDAR_2A4_LCDAR_ELK_oStatus = 1;  
+        }
+        else
+        {
+            chgEv_LCDAR_2A4_LCDAR_ELK_oStatus = 0;
+        }
+    }
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_Vt
+{
+    qword rawValue = 0ll;
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_SetVt))
+    {
+        //update the signal value
+        Msg_LCDAR_2A4.LCDAR_ELK_oStatus=getValue(this);
+    }
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_SetVt
+{
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_SetVt))
+    {
+        //update the signal value
+        Msg_LCDAR_2A4.LCDAR_ELK_oStatus=getvalue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_Vt);
+    }
+    else
+    {
+        Msg_LCDAR_2A4.LCDAR_ELK_oStatus=getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oStatus_Rv);
+    }
+}
+ 
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_Rv
+{
+    int64 rawValue = 0ll;
+    float rawValue_float = 0.0;
+    float phyValue = 0.0;        
+
+    //set the signal with updated raw value
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_SetVt)==0)
+    {
+        rawValue = getvalue(this);
+        if(chgEv_LCDAR_2A4_LCDAR_Left_ELK_oAlert == 0)
+        {
+            //type conversion to float
+            rawValue_float = rawValue;        
+            // raw to physical conversion
+            phyValue = ((rawValue_float *1)+(0));
+            putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_Pv, phyValue);
+            chgEv_LCDAR_2A4_LCDAR_Left_ELK_oAlert = 1;
+        }
+        else
+        {
+            chgEv_LCDAR_2A4_LCDAR_Left_ELK_oAlert = 0;
+        }    
+        //update the signal value
+        Msg_LCDAR_2A4.LCDAR_Left_ELK_oAlert=rawValue;        
+    }                                                                           
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_Pv
+{
+    int64 rawValue = 0ll;
+    float phyValue = 0.0;
+    
+    //update the raw value with physical value 
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_SetVt)==0)
+    {
+        if(chgEv_LCDAR_2A4_LCDAR_Left_ELK_oAlert == 0)
+        {
+            phyValue = getvalue(this);
+            // physical to raw conversion
+            rawValue = ((phyValue -(0))/1);
+            putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_Rv, rawValue);
+            chgEv_LCDAR_2A4_LCDAR_Left_ELK_oAlert = 1;  
+        }
+        else
+        {
+            chgEv_LCDAR_2A4_LCDAR_Left_ELK_oAlert = 0;
+        }
+    }
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_Vt
+{
+    qword rawValue = 0ll;
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_SetVt))
+    {
+        //update the signal value
+        Msg_LCDAR_2A4.LCDAR_Left_ELK_oAlert=getValue(this);
+    }
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_SetVt
+{
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_SetVt))
+    {
+        //update the signal value
+        Msg_LCDAR_2A4.LCDAR_Left_ELK_oAlert=getvalue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_Vt);
+    }
+    else
+    {
+        Msg_LCDAR_2A4.LCDAR_Left_ELK_oAlert=getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_Left_ELK_oAlert_Rv);
+    }
+}
+ 
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_Rv
+{
+    int64 rawValue = 0ll;
+    float rawValue_float = 0.0;
+    float phyValue = 0.0;        
+
+    //set the signal with updated raw value
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_SetVt)==0)
+    {
+        rawValue = getvalue(this);
+        if(chgEv_LCDAR_2A4_LCDAR_ELK_oAlert == 0)
+        {
+            //type conversion to float
+            rawValue_float = rawValue;        
+            // raw to physical conversion
+            phyValue = ((rawValue_float *1)+(0));
+            putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_Pv, phyValue);
+            chgEv_LCDAR_2A4_LCDAR_ELK_oAlert = 1;
+        }
+        else
+        {
+            chgEv_LCDAR_2A4_LCDAR_ELK_oAlert = 0;
+        }    
+        //update the signal value
+        Msg_LCDAR_2A4.LCDAR_ELK_oAlert=rawValue;        
+    }                                                                           
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_Pv
+{
+    int64 rawValue = 0ll;
+    float phyValue = 0.0;
+    
+    //update the raw value with physical value 
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_SetVt)==0)
+    {
+        if(chgEv_LCDAR_2A4_LCDAR_ELK_oAlert == 0)
+        {
+            phyValue = getvalue(this);
+            // physical to raw conversion
+            rawValue = ((phyValue -(0))/1);
+            putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_Rv, rawValue);
+            chgEv_LCDAR_2A4_LCDAR_ELK_oAlert = 1;  
+        }
+        else
+        {
+            chgEv_LCDAR_2A4_LCDAR_ELK_oAlert = 0;
+        }
+    }
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_Vt
+{
+    qword rawValue = 0ll;
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_SetVt))
+    {
+        //update the signal value
+        Msg_LCDAR_2A4.LCDAR_ELK_oAlert=getValue(this);
+    }
+}
+
+on envVar E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_SetVt
+{
+    if(getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_SetVt))
+    {
+        //update the signal value
+        Msg_LCDAR_2A4.LCDAR_ELK_oAlert=getvalue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_Vt);
+    }
+    else
+    {
+        Msg_LCDAR_2A4.LCDAR_ELK_oAlert=getValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_ELK_oAlert_Rv);
+    }
+}
+ 
+
+update_LCDAR_2A4_LCDAR_RollingCounter_2AF_counter()
+{
+    //update the signal value
+    Msg_LCDAR_2A4.LCDAR_RollingCounter_2AF=LCDAR_2A4_LCDAR_RollingCounter_2AF_counter;
+    
+    if(LCDAR_2A4_LCDAR_RollingCounter_2AF_counter == 15)
+    {
+        LCDAR_2A4_LCDAR_RollingCounter_2AF_counter =0;
+    }
+    else
+    {
+        LCDAR_2A4_LCDAR_RollingCounter_2AF_counter =LCDAR_2A4_LCDAR_RollingCounter_2AF_counter+1;
+    }    
+    
+}
+
+
+update_LCDAR_2A4_CRC_CheckSum()
+{
+  int l_Crc_Len=0,l_count=0;
+  int l_data[64];
+ 
+  l_Crc_Len = 8-1;
+  for (l_count=0;l_count<l_Crc_Len;l_count++)
+    {
+      l_data[l_count] = Msg_LCDAR_2A4.BYTE(l_count);    
+    }
+       
+	Msg_LCDAR_2A4.BYTE(l_Crc_Len) = calc_SAE_J1850(l_data,l_Crc_Len); 
+
+	
+	if(LCDAR_2A4_LCDAR_CRCCheck_2AF_wrongvalctr != 0)
+    {
+		Msg_LCDAR_2A4.LCDAR_CRCCheck_2AF+=1; 
+        //update signal with wrong CRC value
+		if(LCDAR_2A4_LCDAR_CRCCheck_2AF_wrongvalctr > 0)
+        {
+             LCDAR_2A4_LCDAR_CRCCheck_2AF_wrongvalctr--;
+              // if counter becomes zero, update panel controller to zero
+             if(LCDAR_2A4_LCDAR_CRCCheck_2AF_wrongvalctr == 0)
+             {
+                 putValue(E_pubc_LCDAR_LCDAR_2A4_LCDAR_CRCCheck_2AF_wrongvalctr,0);
+             }
+        }
+	}
+}
+
+
+
+int calc_SAE_J1850(int data[], int Crc_len)
+	{
+		int idx,crc,temp,temp1;
+		crc = 0xFF;
+        idx = 0;
+        temp = 0;
+        temp1 = 0;
+	
+        for(idx=0;idx < Crc_len;idx++)
+        {
+			temp1 = data[idx];
+			temp = (crc^temp1);
+			crc = CRC_J1850_Table[temp];
+        }
+		crc ^= 0xFF;
+		return crc;
+	}
+
+
+/*	int calc_SAE_J1851(int data[], int Crc_len)
+	{
+		int crc;
+		
+        crc = (data[0]+data[1]+data[2]+data[3]+data[4]+data[5]+data[6]) ;
+          
+		crc ^= 255;
+		return crc;
+	}*/
+
+	
+
+/* 	int calc_SAE_J1850(int data[], int Crc_len)
+	{
+		int idx,crc,temp,temp1,temp2,idy;
+		crc = 0xFF;
+        idx = 0;
+        idy = 0;
+        temp = 0;
+        temp1 = 0;
+        temp2 = 0;
+	
+        for(idx=0;idx < Crc_len;idx++)
+        {
+         temp1 = data[idx];
+         crc = (crc^temp1);
+          for (idy=8; idy>0; idy--)
+          {
+              // Save the value before the top bit is shifted out.
+              temp2 = crc;
+              crc <<= 1;
+              if (0 != (temp2 & 128))
+              {
+                  crc ^= 0x2f;
+              }
+          } 
+          
+         //crc = CRC_J1850_Table[temp];
+        }
+		crc ^= 0xFF;
+		return crc;
+	} */
+
+int Calc_Canfd_dlc(byte Dbc_dlc1)
+	{
+		if(Dbc_dlc > 8)
+		    {
+			 while (i<=7)
+			  {
+				if (CANFD_DLC[i]==Dbc_dlc)
+				{
+				return CAN_DLC[i];
+				 break;
+				}
+				i++ ;
+			}
+		}
+    else
+	
+	return Dbc_dlc1 ;
+	
+		
+	}
+	
+	int calc_Checksum(int data[], int Crc_len)
+ {
+	int crc;
+	crc=0x00;
+	
+    crc = (data[0]+data[1]+data[2]+data[3]+data[4]+data[5]+data[6]) ;
+      
+	crc ^= 255;
+	return crc;
+ }
+	//For Messages with DLC = 8, CAN FD data length =8
+	//For Messages with DLC = 9, CAN FD data length =12
+	//For Messages with DLC = 10, CAN FD data length =16
+	//For Messages with DLC = 11, CAN FD data length =20
+	//For Messages with DLC = 12, CAN FD data length =24
+	//For Messages with DLC = 13, CAN FD data length =32
+	//For Messages with DLC = 14, CAN FD data length =48
+	//For Messages with DLC = 15, CAN FD data length =64
+	
+

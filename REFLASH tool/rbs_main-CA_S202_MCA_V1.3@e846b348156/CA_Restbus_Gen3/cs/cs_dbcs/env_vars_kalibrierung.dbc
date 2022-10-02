@@ -1,0 +1,252 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_:
+
+
+
+
+EV_ EnvManualCodingProgress: 0 [0|256] "" 0 1 DUMMY_NODE_VECTOR3 Vector__XXX;
+
+EV_ EnvManualCoding: 0 [0|1] "" 0 2 DUMMY_NODE_VECTOR3 Vector__XXX;
+
+EV_ EnvEOLcalib_writeAdaptionValues: 0 [0|0] "" 0 3 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvEOLcalib_Start: 0 [0|1] "" 0 4 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvEOLcalib_Radhauskanten: 0 [0|0] "" 0 5 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ EnvEOLcalib_Querposition: 0 [0|0] "" 0 6 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ EnvEOLcalib_Kalibriertafel: 0 [0|0] "" 0 7 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ EnvSessionVWEOL: 0 [0|1] "" 0 8 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_RBEOL_internal_Stereo_write: 0 [0|1] "" 0 9 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_RBEOL_internal_Stereo: 0 [0|0] "" 0 10 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ Env_RBEOL_internal_mono_write: 0 [0|1] "" 0 11 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_RBEOL_internal_mono: 0 [0|0] "" 0 12 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ Env_RBEOL_int_SVC2_5_Stero_write: 0 [0|1] "" 0 13 DUMMY_NODE_VECTOR3 Vector__XXX;
+
+EV_ Env_RBEOL_intrinsic_SVC2_5_Stero: 0 [0|0] "" 0 14 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ Env_RBEOL_int_SVC2_5_mono_write: 0 [0|1] "" 0 15 DUMMY_NODE_VECTOR3 Vector__XXX;
+
+EV_ Env_RBEOL_intrinsic_SVC2_5_mono: 0 [0|0] "" 0 16 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ EnvCalibStatus: 0 [0|0] "" 0 17 DUMMY_NODE_VECTOR8003 Vector__XXX;
+
+EV_ EnvHappySadResult: 0 [0|1] "" 0 18 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvAPResult: 0 [0|1] "" 0 19 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvStartHappySad: 0 [0|1] "" 0 20 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvStartAP: 0 [0|1] "" 0 21 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_RBEOL_extrinsic_MPC2_5_write: 0 [0|1] "" 0 22 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_RBEOL_extrinsic_MPC2_5: 0 [0|0] "" 0 23 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ EnvSCal: 0 [0|1] "" 0 24 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_RBEOL_intrinsic_MPC2_5_write: 0 [0|1] "" 0 25 DUMMY_NODE_VECTOR3 Vector__XXX;
+
+EV_ Env_RBEOL_intrinsic_MPC2_5: 0 [0|0] "" 0 26 DUMMY_NODE_VECTOR8003 Vector__XXX;
+
+EV_ Env_RBEOL_intrinsic_SVC2: 0 [0|0] "" 0 27 DUMMY_NODE_VECTOR8003 Vector__XXX;
+
+EV_ Env_RBEOL_intrinsic_SVC2_write: 0 [0|1] "" 0 28 DUMMY_NODE_VECTOR3 Vector__XXX;
+
+EV_ Env_RBEOL_intrinsic_write: 0 [0|1] "" 0 29 DUMMY_NODE_VECTOR3 Vector__XXX;
+
+EV_ Env_RBEOL_extrinsic_write: 0 [0|1] "" 0 30 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env_RBEOL_intrinsic: 0 [0|0] "" 0 31 DUMMY_NODE_VECTOR8003 Vector__XXX;
+
+EV_ Env_RBEOL_extrinsic: 0 [0|1] "" 0 32 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ Env2E_StartIntrinsicStereo: 0 [0|1] "" 0 33 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env2E_intrinsicStereo: 0 [0|0] "" 0 34 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ Env2E_StartExtrinsic: 0 [0|1] "" 0 35 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env2E_StartInstrinsic: 0 [0|1] "" 0 36 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ Env2E_extrinsic: 0 [0|0] "" 0 37 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ Env2E_intrinsic: 0 [0|0] "" 0 38 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ EnvVIN: 0 [0|0] "" 0 39 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ EnvSKilometerstand: 0 [0|0] "" 0 40 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvSHour: 0 [0|0] "" 0 41 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvSMinute: 0 [0|0] "" 0 42 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvSSecond: 0 [0|0] "" 0 43 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvSDay: 0 [0|0] "" 0 44 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvSMonth: 0 [0|0] "" 0 45 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvSYear: 0 [0|0] "" 0 46 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvDetails: 0 [0|0] "" 0 47 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvReadDetails: 0 [0|0] "" 0 48 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvReadAnpasswerte: 0 [0|0] "" 0 49 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvReadKalibStatus: 0 [0|1] "" 0 50 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvNRC: 0 [0|0] "" 0 51 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ EnvStatus: 0 [0|0] "" 0 52 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ EnvReadKalibValues: 0 [0|0] "" 0 53 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvProgress1: 0 [0|256] "" 0 54 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvKamerahoehe: 1 [0|0] "" 0 55 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvWankwinkel: 1 [0|0] "" 0 56 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvNickwinkel: 1 [0|0] "" 0 57 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvGierwinkel: 1 [0|0] "" 0 58 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvRadhauskanteHL: 0 [0|0] "" 0 59 DUMMY_NODE_VECTOR1 Vector__XXX;
+
+EV_ EnvRadhauskanteHR: 0 [0|0] "" 0 60 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvRadhauskanteVL: 0 [0|0] "" 0 61 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvRadhauskanteVR: 1 [0|0] "" 0 62 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvKalibriertafelabstand: 0 [0|0] "" 0 63 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvEOLString: 0 [0|0] "" 0 64 DUMMY_NODE_VECTOR8000 Vector__XXX;
+
+EV_ EnvStartKDA: 0 [0|1] "" 0 65 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvStartKundendienst: 0 [0|1] "" 0 66 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvStartEOL: 0 [0|1] "" 0 67 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvStartKTS: 0 [0|1] "" 0 68 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile5Punkt6: 0 [0|1] "" 0 69 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile5Punkt5: 0 [0|1] "" 0 70 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile5Punkt4: 0 [0|1] "" 0 71 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile5Punkt3: 0 [0|1] "" 0 72 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile5Punkt2: 0 [0|1] "" 0 73 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile5Punkt1: 0 [0|1] "" 0 74 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile4Punkt6: 0 [0|1] "" 0 75 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile4Punkt5: 0 [0|1] "" 0 76 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile4Punkt4: 0 [0|1] "" 0 77 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile4Punkt3: 0 [0|1] "" 0 78 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile4Punkt2: 0 [0|1] "" 0 79 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile4Punkt1: 0 [0|1] "" 0 80 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile3Punkt6: 0 [0|1] "" 0 81 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile3Punkt5: 0 [0|1] "" 0 82 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile3Punkt4: 0 [0|1] "" 1 83 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile3Punkt3: 0 [0|1] "" 1 84 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile3Punkt2: 0 [0|1] "" 0 85 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile3Punkt1: 0 [0|1] "" 0 86 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile2Punkt6: 0 [0|1] "" 0 87 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile2Punkt5: 0 [0|1] "" 0 88 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile2Punkt4: 0 [0|1] "" 0 89 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile2Punkt3: 0 [0|1] "" 0 90 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile2Punkt2: 0 [0|1] "" 0 91 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile2Punkt1: 0 [0|1] "" 0 92 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile1Punkt6: 0 [0|1] "" 0 93 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile1Punkt5: 0 [0|1] "" 0 94 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile1Punkt4: 0 [0|1] "" 0 95 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile1Punkt3: 0 [0|1] "" 0 96 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile1Punkt2: 0 [0|1] "" 0 97 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvZeile1Punkt1: 0 [0|1] "" 0 98 DUMMY_NODE_VECTOR0 Vector__XXX;
+ENVVAR_DATA_ EnvDetails: 44;
+
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "ECU" STRING ;
+BA_DEF_ BU_  "CANoeJitterMax" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMin" INT 0 0;
+BA_DEF_ BU_  "CANoeDrift" INT 0 0;
+BA_DEF_ BU_  "CANoeStartDelay" INT 0 0;
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "NodeLayerModules" "";
+BA_DEF_DEF_  "ECU" "";
+BA_DEF_DEF_  "CANoeJitterMax" 0;
+BA_DEF_DEF_  "CANoeJitterMin" 0;
+BA_DEF_DEF_  "CANoeDrift" 0;
+BA_DEF_DEF_  "CANoeStartDelay" 0;
+

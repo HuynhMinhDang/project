@@ -1,0 +1,3281 @@
+/*@!Encoding:1250*/
+//!****************************************************************************************
+//! Copyright(c) - This program/software is the exclusive property of Robert Bosch
+//! Gmbh. Without their consent it may not be reproduced or given to third parties.
+//!****************************************************************************************
+
+/*!
+* \file common_functions.can
+* \brief	Contains all commonly used functions.
+*
+* \authors Test engineers of CC_DA/EAV2-Bp.
+*
+* \par Module description
+* 	Implements the functions and test cases commonly used in the CC_DA/EAV2-Bp group for JLR project test automation.
+*
+*/
+
+/// @cond
+includes
+{
+  //#include "GlobalVariables.cin"
+  //#include "D:\02-Project_Env\06-BJEV\Coresi_For_R2.0RC02\coresi_BJEV_N60_V1.42\GlobalParams.cin"
+}
+
+variables
+{ ///@endcond
+
+	//- - 
+	//! \brief  Global variable to set bus context for correct CAN channel usage.
+	//! 
+	//! \type int type variable
+	//- -
+    int     g_debug = 0;
+    
+	//- - 
+	//! \brief  Global variable stores the size of the transmitted message
+	//! 
+	//! \type int type variable
+	//- -
+    int     ByteSize;
+	
+	//- - 
+	//! \brief  Global variable stores the service ID of the diagnostic message
+	//! 
+	//! \type int type variable
+	//- -	
+    int     SID;
+	
+	//- - 
+	//! \brief  Global variable to store the value of a signal so it could be restored later.
+	//! 
+	//! \type int type variable
+	//- -	
+    long     StoredSignalValue;
+	
+	//- - 
+	//! \brief  Global variable to store the bus context.
+	//! 
+	//! \type dword type variable
+	//- -
+    dword     StoredBuxContext;
+	
+	//- - 
+	//! \brief  Global variable stores the arrived response bytes in string variable
+	//! 
+	//! \type char array type variable
+	//- -
+    char    byteString[8194];
+	
+	//- - 
+	//! \brief  Global variable to save the previously received response
+	//! 
+	//! \type char array type variable
+	//- -
+    char    seedString[8194]; 
+	
+	//- - 
+	//! \brief  Global variable to save the previously received response in byte format
+	//! 
+	//! \type byte array type variable
+	//- -
+    byte    seedData[8194];
+	
+	//-
+	//! \brief  Global variable to store a timestamp. \n
+	//!			E.g., this is used in the <em> <b> TimeNowStart </b> </em> testcase.
+	//! 
+	//! \type Float type variable.
+	//-
+	float   tMesStart;
+  
+  //-
+	//! \brief  Global variable to store a time value. \n
+	//! 
+	//! \type Float type variable.
+	//-
+	float   timeValue;
+  
+  //-
+	//! \brief  Global array to store any char type information. \n
+	//! 
+	//! \type Char array type variable.
+	//-
+	char   tempArray[8194];
+	
+	//- - 
+	//! \brief  Global variable to save the count of received message bytes
+	//! 
+	//! \type long type variable
+	//- -	
+	long    ResponseLength = 0;
+    
+	//- - 
+	//! \brief  Global variable for the transmitted message
+	//! 
+	//! \type byte array type variable
+	//- -		
+    byte    RqTxData[8194];
+  byte TxDataBuffer[8194];
+	
+	//- - 
+	//! \brief  Global variable to store the actual transmitted message in string type
+	//! 
+	//! \type char array type variable
+	//- -	
+    char    RqTxStringData[8194];
+	
+	//- - 
+	//! \brief  Global variable for the received message
+	//! 
+	//! \type byte array type variable
+	//- -
+    byte    RsRxIntData[8194];
+	
+	//- - 
+	//! \brief  Global variable to store the actual received message in string type
+	//! 
+	//! \type char array type variable
+	//- -	
+    char    RsRxStringData[8194];
+	
+	//- - 
+	//! \brief  Global variable to store the actual received message in string type
+	//! 
+	//! \type char array type variable
+	//- -	
+    int g_rxId = 0x75A;
+    int g_txId_PhysicalAddr = 0x752;
+	  int g_txId_FunctionalAddr = 0x7DF;
+    long handle_testS;
+    long handle_funcS;
+    long handle_testPresent;
+    long gWaitingHandle;
+    //long currentConnHandle;
+    byte flagOfCF=0;
+    byte TxLength = 0;
+    //long handle_response;
+  //const int TesterPresentTime = 1000;
+  
+  ///@cond
+  msTimer t10;
+  msTimer t20;
+  //msTimer TesterPresentTimer;
+  //msTimer tClearWaiting;
+  ///@endcond
+
+///@cond	
+}///@endcond
+
+/// @cond
+on preStart
+{
+    dword BusContext;
+    int stMinTime;
+    int blockSize;
+    int rxId;
+    int txId;
+
+    //putValue(EnvFilePath,"");
+
+    /* Set Bus context for correct CAN channel usage */
+    if (1 == g_debug)
+    {
+        BusContext = GetBusContext();
+        write("BusContext pre set = %x",BusContext); //Debugmsg   
+    }
+    SetBusContext(0x10001); //Set CAN channel
+    CanOnline(3); //reset CAN
+    BusContext = GetBusContext(); //Read CAN bus channel context
+    write("BusContext set = %x",BusContext);
+
+    stMinTime = 0x14;
+    blockSize = 0x08;
+	
+    rxId = g_rxId;
+    txId = g_txId_PhysicalAddr;
+    
+    //handle_test = CanTpCreateConnection(0);
+    //handle_func = CanTpCreateConnection(0);
+    
+    /*
+    SysSetVariableString(sysvar::Diag::SessionID, "0xFF");
+    SysSetVariableString(sysvar::Diag::Data, "0xFF");
+    SysSetVariableString(sysvar::Diag::ServiceID, "0xFF");
+    SysSetVariableString(sysvar::Diag::LocalID, "0xFFFF");
+    */
+
+    /* Init */
+    /*OSEKTL_SetTxId(txId);
+    OSEKTL_SetRxId(rxId);
+    OSEKTL_SetSTMIN(stMinTime);
+    OSEKTL_SetBS(blockSize);
+    OSEKTL_SetNrmlMode();*/
+    /****************/
+    
+    
+//    write("start");
+//    write ("handle_testS: %d", handle_testS);
+//    write ("handle_funcS: %d", handle_funcS);
+        
+}/// @endcond
+
+/// @cond
+on timer t10
+{
+    TestSupplyTextEvent("Minimum time delay is reached!");  
+} /// @endcond
+
+/// @cond
+on timer t20
+{
+    TestSupplyTextEvent("Minimum time delay is reached!"); 
+} /// @endcond
+
+//on timer TesterPresentTimer
+//{
+//         TxDataBuffer[0] = 0x3E;
+//         TxDataBuffer[1] = 0x80;  
+// 
+//         write("Start Timer.");
+//  
+//         TxLength = 2;
+//        
+//  if(handle_testS == 0)
+//  {
+//        handle_testS = CanTpCreateConnection(0);
+//      
+//        CanTpSetAddressType( handle_testS, 0); // physical
+//        CanTpSetMaxCANFDFrameLength( handle_testS, 64);  // activate CAN FD
+//        CanTpSetRxIdentifier( handle_testS, g_rxId);
+//        CanTpSetTxIdentifier( handle_testS, g_txId_PhysicalAddr);//set message
+//        CanTpSetBitRateSwitch( handle_testS, 1);//set to can FD
+//  }     
+//  
+//  CanTpSendData(handle_testS, TxDataBuffer, TxLength);
+//  
+//   // reStart timer
+//   setTimer (TesterPresentTimer, TesterPresentTime);
+//}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to convert char array to byte array.
+//!
+//! \note	It is necessary to convert the char array to byte array before sending it out with the inside Vector function. \n	
+//!			This function converts the request string to a compatible byte array to send for the camera and calculates the byte size. \n	
+//!			This byte array is a global variable.
+//!
+//! \param  char convertable_array is the request diagnostic character string
+//!
+//! \note	The parameter character string should contain only numbers and lowercase letters.
+//!
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void CharArray2Byte(char convertable_array[])
+{
+    int i;
+    char c1,c2;
+    int strIndex;
+    
+    strIndex = 0;
+    
+    for (i = 0; i < elcount(RqTxStringData); i++)
+      {
+          RqTxStringData[i] = 0;
+      } 
+   
+    for (i = 0; i < elcount(convertable_array); i++)
+     {
+      RqTxStringData[i] = convertable_array[i];     //RqTxStringData is a global variable
+     }
+
+    ByteSize = 0;  //ByteSize is a global variable
+    for (i = 0; i < (strlen(RqTxStringData)/2); i++)
+    {
+        strIndex = i * 2;
+         
+        c1 = RqTxStringData[strIndex];
+        c2 = RqTxStringData[strIndex + 1];
+//        write ("Here is c1: %c and c2: %c", c1, c2);
+        RqTxData[i] = char2byte(c1, 16) + char2byte(c2, 1);     // RqTxData is a global variable
+        //write("%x",RqTxData[i]);
+        ByteSize++;
+    }
+    SID = RqTxData[0];
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function that sets the the CAN transmit and receive message IDs.
+//!
+//! \note	This function can set the CanIDs for the transmission of messages.		
+//!
+//! \param  int rxId is the ID of the transmit messages in CAN.
+//! \param  int txId is the ID of the receive messages in CAN.
+//!
+//! \note	The parameters should be hexadecimal values and compatible with normal addressing mode.
+//!
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void setType(int rxId, int txId, long handle)
+{
+// TODO:   Check if the rxId an txId is a valid hex format
+
+//They will be from now the message IDs in CAN
+  //OSEKTL_SetTxId(txId);   
+  //OSEKTL_SetRxId(rxId);
+  CanTpSetRxIdentifier( handle, rxId);
+  CanTpSetTxIdentifier( handle, txId);//set message
+}
+
+void canTpConfiguration(char method[])
+{
+
+    if(0 == handle_testS )
+    {
+        handle_testS = CanTpCreateConnection(0);
+          
+        CanTpSetAddressType( handle_testS, 0); // physical
+        CanTpSetMaxCANFDFrameLength( handle_testS, 64);  // activate CAN FD
+        CanTpSetRxIdentifier( handle_testS, g_rxId);
+        CanTpSetTxIdentifier( handle_testS, g_txId_PhysicalAddr);//set message
+        CanTpSetBitRateSwitch( handle_testS, 1);//set to can FD
+        CanTpSetBlockSize(handle_testS,8);
+        CanTpSetSTmin(handle_testS,0x14);
+      
+    }if(0 == handle_funcS  && 0 == strncmp("Functional",method,strlen(method)))
+    {    
+            handle_funcS = CanTpCreateConnection(0);
+      
+            CanTpSetAddressType( handle_funcS, 1); // functional
+            CanTpSetMaxCANFDFrameLength( handle_funcS, 64);  // activate CAN FD
+            //CanTpSetRxIdentifier( handle_funcS, g_rxId);
+            CanTpSetTxIdentifier( handle_funcS, g_txId_FunctionalAddr);//set message
+            CanTpSetBitRateSwitch( handle_funcS, 1);//set to can FD
+            //CanTpSetBlockSize(handle_funcS,8);
+            //CanTpSetSTmin(handle_funcS,0x14);
+            CanTpUseFlowControlFrames(handle_funcS, 0);
+    }
+}
+
+void DTCsCompareResult(byte data[], long datalength, char expectedDTCNumber[][], char expectedDTCName[][], int expectedLength)
+{
+  char buffer[10];
+  char tempDTCNumber[10];
+  char tempDTCName[50];
+  int RxBufferIndex;
+  int NrOfReadDTC;
+  int DtcNr;
+  int i;
+  int j;
+  int k;
+  dword errorDTC;
+  dword errorStatus;
+  byte flag=0;
+  
+  RxBufferIndex = 3;
+  NrOfReadDTC = (datalength - 3)/4;
+  DtcNr = 1;
+  write("DTC number: %d",NrOfReadDTC);
+  for (i = 0; i < NrOfReadDTC; i++)
+  {
+    errorDTC     = (dword)data[RxBufferIndex++] << 16;
+    errorDTC     += (dword)data[RxBufferIndex++] << 8;
+    errorDTC     += (dword)data[RxBufferIndex++];
+    
+    snprintf (buffer, 10, "%06x", errorDTC);
+    toUpper(buffer,buffer,elcount(buffer));
+    
+    errorStatus = data[RxBufferIndex++];
+    flag = 0;
+
+    for(j = 0; j < expectedLength;j++)
+    {
+      
+      if(strncmp(buffer,expectedDTCNumber[j],strlen(buffer))==0)
+      {
+        if(errorStatus == 0x09 | errorStatus == 0x08 | errorStatus == 0x00)
+        {
+          TestStepPass("INFO","The supported DTC Number is %s, DTC Name is %s, reported by 190A",expectedDTCNumber[j],expectedDTCName[j]);
+        }else
+        {
+          TestStepFail("INFO","The supported DTC Number has wrong DTC status: 0x%2x",errorStatus);
+        }
+        // expectedDTCNumber[j] replace expectedDTCNumber[expectedLength], same with expectedDTCName
+        strncpy(tempDTCNumber,expectedDTCNumber[j],10);
+        strncpy(expectedDTCNumber[j],expectedDTCNumber[expectedLength-1],10);
+        strncpy(expectedDTCNumber[expectedLength-1],tempDTCNumber,10);
+        strncpy(tempDTCName,expectedDTCName[j],50);
+        strncpy(expectedDTCName[j],expectedDTCName[expectedLength-1],50);
+        strncpy(expectedDTCName[expectedLength-1],tempDTCName,50);
+        expectedLength--;
+        flag = 1;
+        break;
+      }
+   }
+    if(flag == 0)
+    {
+      TestStepFail("INFO","The reported DTC Number is %s, DTC status is 0x%02x, not supported in UDS sheet",buffer,errorStatus);
+    }
+  }
+  if(expectedLength >= 1)
+  {
+    for(j=0;j<expectedLength;j++)
+    {
+      TestStepFail("INFO","The supported DTC Number is %s, DTC Name is %s, not reported by 0x190A",expectedDTCNumber[j],expectedDTCName[j]);
+    }
+  }else
+  {
+    TestStepPass("INFO","All supported DTCs in UDS sheet is reported by 0x190A");
+  }
+}
+//- -----------------------------------------------------------------------------------------------
+//! \brief Function for comparing DTCs in 0x190A with those in UDS sheet
+//! 
+//! \Author Edit by Zeng Bright(BEG/ECD3-CN) , 3/13/2019
+//!
+//! \param UDS sheet file path
+//! 
+//! \return Compare result
+//- -----------------------------------------------------------------------------------------------
+testcase supportDTCsCompare(char filePath[], char AddressingMethod[])
+{
+  long result ;
+  long glbHandle = 0;
+  char supportedDTCs[100][100];
+  char supportedDTCNumber[100][10];
+  char supportedDTCName[100][50];
+  int i;
+  byte responsePending;
+  int numberRPs;
+  int timeOutValue;
+  int expectedDTCsQuatity;
+  
+  result = 0;
+  responsePending = 0;
+  i = 0;
+  numberRPs = 0;
+  // get supportedDTCNumber and supportedDTCName
+  glbHandle = openFileRead(filePath,0);
+  
+  if(glbHandle == 0)
+  {
+    TestStepFail("INFO","supportDTCS.txt not found!");
+  }else
+  {
+    while(fileGetStringSZ(supportedDTCs[i],elcount(supportedDTCs[i]),glbHandle)!=0) 
+    {
+      //write(supportedDTCs);
+      substr_cpy(supportedDTCNumber[i],supportedDTCs[i],0,6,elcount(supportedDTCNumber[i]));
+      substr_cpy(supportedDTCName[i],supportedDTCs[i],7,-1,elcount(supportedDTCName[i]));
+      i++;
+    }
+    expectedDTCsQuatity = i;
+    fileClose(glbHandle);
+  }
+  
+  //testWaitForTimeout(2000);
+  
+  // send Data
+  canTpConfiguration(AddressingMethod);
+  RqTxData[0]=0x19; RqTxData[1]=0x0a;
+  
+  if(0 == strncmp("Physical",AddressingMethod,strlen(AddressingMethod)))
+  {
+    CanTpSendData(handle_testS, RqTxData, 2);
+  }else if(0 == strncmp("Functional",AddressingMethod,strlen(AddressingMethod)))
+  {
+    CanTpSendData(handle_funcS, RqTxData, 2);
+  }
+
+  
+  
+  //write("%d",expectedDTCsQuatity);
+  do
+  {
+    responsePending = 0;
+    result = TestWaitForTextEvent("TpMsgReceived", timeOutValue);
+    if(result == 0)
+    {
+      TestStepFail("INFO","Timeout while waiting for diag response");
+    }else if(result == 1)
+    {
+      if( RsRxIntData[0] == 0x7f && RsRxIntData[1] == 0x19 ) 
+				{           
+            if( RsRxIntData[2] == 0x78 )
+            {
+              TestStep("INFO","Response Pending received from ECU");
+  						responsePending = 1;
+  						numberRPs++;
+  						timeOutValue = 10000;
+					  }
+					  else
+					  {
+						  TestStepFail("INFO","NRC%s Not wanted!",RsRxIntData[2]);
+					  }
+				}
+        if( RsRxIntData[0] == 0x59 )
+				{ 
+					//write("positive answer");
+          DTCsCompareResult(RsRxIntData,ResponseLength,supportedDTCNumber,supportedDTCName,expectedDTCsQuatity);
+				}
+    }
+  }while((responsePending == 1) && (numberRPs < 24));
+    
+  if(responsePending == 1)
+  {
+    TestStepFail("INFO","Timeout while waiting for diag response!");
+  }
+}
+
+testcase securityUnlockLevel1()
+{
+    long result;
+    byte seed_1[4], Seed_2[4], Const_1[4], key_1[4], key_0[4], key_2[4];
+    byte i, j;
+    int responsePending = 0;
+    int numberRPs = 0;
+    
+    result = 0;
+    
+    canTpConfiguration("Physical");
+    // fill in RqTxData
+    RqTxData[0]=0x27; RqTxData[1]=0x01;
+    CanTpSendData(handle_testS, RqTxData, 2);
+    
+    do 
+    {
+      responsePending = 0;
+      result = TestWaitForTextEvent("TpMsgReceived", 5000);
+      
+      if(result == 0)
+      {
+        TestStepFail("INFO","No response return.");
+      }
+      else if(result == 1)
+      {
+        if(RsRxIntData[2] == 0x78)
+        {
+          responsePending = 1;
+          numberRPs++;
+          TestStep("INFO","Response Pending received from ECU");
+        }
+        else if(RsRxIntData[0]== 0x67)
+        {
+          seed_1[0] = RsRxIntData[2];seed_1[1] = RsRxIntData[3];seed_1[2] = RsRxIntData[4];seed_1[3] = RsRxIntData[5];
+          
+           Const_1[0]=0x80;
+           Const_1[1]=0xb1;
+           Const_1[2]=0x00;
+           Const_1[3]=0x00;
+           j=3;
+                
+           for (i = 0; i < 4;i++)
+           {
+           key_1[i] = seed_1 [i] ^ Const_1[i];
+           Seed_2[i] = seed_1 [j];
+           key_2[i] = Seed_2[i] ^ Const_1[i];
+           key_0[i] = (key_1[i] + key_2[i]+0x2F);
+           j--;
+
+          RqTxData[5]=key_0[3];
+          RqTxData[4]=key_0[2];
+          RqTxData[3]=key_0[1];
+          RqTxData[2]=key_0[0];
+          }
+        }
+      }
+    }while((responsePending == 1) && (numberRPs < 24));
+    
+    testWaitForTimeout(1000);
+    RqTxData[0]=0x27; RqTxData[1]=0x02;
+    CanTpSendData(handle_testS, RqTxData, 6);
+    numberRPs = 0;
+    
+    do 
+    {
+      responsePending = 0;
+      result = TestWaitForTextEvent("TpMsgReceived", 5000);
+      
+      if(result == 0)
+      {
+        TestStepFail("INFO","Unlock Failed");
+      }
+      else if(result == 1)
+      {
+        if(RsRxIntData[2] == 0x78)
+        {
+          responsePending = 1;
+          numberRPs++;
+          TestStep("INFO","Response Pending received from ECU");
+        }
+        else if(RsRxIntData[0]== 0x67)
+        {
+          testStepPass("INFO","Unlock Successfully");
+        }
+      }
+    }while((responsePending == 1) && (numberRPs < 24));
+}
+    
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to send message using functional addressing.
+//!
+//! \note	Set the CANIDs to the functional addresses, after the request was sent, function set back the CANIDs to the physical addresses.\n
+//! 		JLR uses CanID g_txId_FunctionalAddr for the transmit messages.\n
+//! 		JLR uses CanID 0x70E for the receive messages.
+//!
+//! \param  char Request is the request should be sent.
+//! \param  char Response is the expected response should be awaited.
+//! \param  char CompareMode is the compare mode should be used to check the response.
+//- -----------------------------------------------------------------------------------------------
+testcase FunctionalMessage(char Request[], char Response[], char CompareMode[])
+{
+    TestStep("INFO","Requested using functional address mode: %x", g_txId_FunctionalAddr);
+	//setType (g_rxId,g_txId_FunctionalAddr, handle_func);
+	RequestResponseCompareLogic(Request, Response, CompareMode, "Functional");
+    //Reset the default CAN message IDs
+
+}
+
+testcase TestPresentOnOff(char switchFlag[])
+{
+  if(0 == strncmp( "ON", switchFlag, elcount(switchFlag)))
+  {
+    TestStep("INFO","TesterPresent Service is: %s", switchFlag);
+    write("Success");
+    //setTimer (TesterPresentTimer, 20);   
+  }else if(0 == strncmp( "OFF", switchFlag, elcount(switchFlag)))
+  {
+    //cancelTimer(TesterPresentTimer);
+  }
+}
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function that sends diagnostic message and check the response
+//!
+//! \note	The function can send a string to the ECU from the parameter (Request) and check the received message (Response). \n	
+//! 		String to byte conversion is needed to send and receive the string parameters, the function also includes this feature.
+//! 		
+//! \param  char Request is the request should be sent.
+//! \param  char Response is the expected response should be awaited.
+//! \param  char CompareMode is the compare mode should be used to check the response.
+//!
+//! \note	Valid compare modes can be: \n	
+//!			- Equal: Response has to match with the whole response. \n	
+//!			- Regexp: Response can be a substring of the response. \n	
+//!			- None: It is expected that the response does not contain Response as substring. \n	
+//!			- Suppressed_Equal: Response pending is received and response has to match with the whole response. \n	
+//!			- Suppressed_Regexp: Response pending is received and response can be a substring of the response. \n	
+//!			- NotEqual: The received response is not equal with the expected. \n	
+//!			- NotEqual_Regexp: The received response substring is not equal with the expected. \n
+//!			- RegexpNoFailed: Compare the response with substring without test evaluation.
+//!
+//! \return The result of the response matching. If the expected response is received, the function returns with 1 and test step passed state, otherwise with 0 and test step failed state.
+//- -----------------------------------------------------------------------------------------------
+int RequestResponseCompareLogic(char Request[], char Response[], char CompareMode[], char AddressingMode[])
+{
+    byte responsePending;
+    long result;
+    long timeOutValue;
+    int numberRPs;
+    int getData;
+    int i = 0;
+    
+    responsePending = 0;
+    numberRPs = 0;
+    timeOutValue = 5000;
+	//check the validity of the compare mode
+  
+    //write("handle_test is %d", currenthandle_test);
+    if( ! (0 == strncmp("Equal", CompareMode,strlen(CompareMode)) || 0 == strncmp("Regexp", CompareMode,strlen(CompareMode)) || 0 == strncmp("None", CompareMode,strlen(CompareMode)) || 0 == strncmp("Suppressed_Equal", CompareMode,strlen(CompareMode)) 
+		|| 0 == strncmp("Suppressed_Regexp", CompareMode,strlen(CompareMode)) || 0 == strncmp("NotEqual", CompareMode,strlen(CompareMode)) || 0 == strncmp("NotEqual_Regexp", CompareMode,strlen(CompareMode)) || 0 == strncmp("RegexpNoFailed", CompareMode,strlen(CompareMode))))
+	{
+		    TestStepFail("INFO","The CompareMode '%s' is not valid!", CompareMode);
+        TestStepFail("INFO","Please choose from the following CompareMode types: Equal, Regexp, None, NotEqual, Suppressed_Equal, Suppressed_Regexp or RegexpNoFailed!");
+		    return 0;
+	}
+	else
+	{
+		//The compare mode is valid
+		CharArray2Byte(Request);              // It is necessary to convert the char array to byte array before sending it out with the inside Vector function
+		TestStep("INFO","REQUEST: %s (The compare mode is: %s)", Request, CompareMode);
+		//OSEKTL_ActivateAck(1);
+    //write("%x", RqTxData[5]);
+		//OSEKTL_DataReq(RqTxData, ByteSize);   //Sending out Request in a RxTxData global byte array
+    
+    //write("handle_test: %d", handle_testS);
+    //write("handle_func: %d", handle_funcS);
+    
+    if(handle_testS == 0)
+    {
+        handle_testS = CanTpCreateConnection(0);
+          
+        CanTpSetAddressType( handle_testS, 0); // physical
+        CanTpSetMaxCANFDFrameLength( handle_testS, 64);  // activate CAN FD
+        CanTpSetRxIdentifier( handle_testS, g_rxId);
+        CanTpSetTxIdentifier( handle_testS, g_txId_PhysicalAddr);//set message
+        CanTpSetBitRateSwitch( handle_testS, 1);//set to can FD
+        CanTpSetBlockSize(handle_testS,8);
+        CanTpSetSTmin(handle_testS,0x14);
+    }
+    
+    if(0 == strncmp("Physical",AddressingMode,strlen(AddressingMode)))
+    {
+              //CanTpUseFlowControlFrames(handle_testS, 0);
+        //CanTpUseFlowControlFrames(handle_test, 0);
+        CanTpSendData(handle_testS, RqTxData, ByteSize);
+        //write("1");
+    }
+    else if (0 == strncmp("Functional",AddressingMode,strlen(AddressingMode)))
+    {
+            
+            handle_funcS = CanTpCreateConnection(0);
+      
+            CanTpSetAddressType( handle_funcS, 1); // functional
+            CanTpSetMaxCANFDFrameLength( handle_funcS, 64);  // activate CAN FD
+            //CanTpSetRxIdentifier( handle_funcS, g_rxId);
+            CanTpSetTxIdentifier( handle_funcS, g_txId_FunctionalAddr);//set message
+            CanTpSetBitRateSwitch( handle_funcS, 1);//set to can FD
+            //CanTpSetBlockSize(handle_funcS,8);
+            //CanTpSetSTmin(handle_funcS,0x14);
+            CanTpUseFlowControlFrames(handle_funcS, 0);
+      
+        CanTpSendData(handle_funcS, RqTxData, ByteSize);
+    }
+    
+		//CanTpSetRxIdentifier( handle_test, g_txId_PhysicalAddr);
+    //CanTpSetTxIdentifier( handle_test, g_rxId);
+		//START check the response from the camera: 
+		do
+		{ 
+			//Wait for the message from the camera
+			responsePending = 0;
+			if(ResponseLength < 1000)
+			{
+				result = TestWaitForTextEvent("TpMsgReceived", timeOutValue);
+			}
+			else if(ResponseLength < 3000)
+			{
+				result = TestWaitForTextEvent("TpMsgReceived", timeOutValue*2);
+			}
+			else
+			{
+				result = TestWaitForTextEvent("TpMsgReceived", timeOutValue*3);
+			}
+			if(result == 0)
+			{  
+//				if(handle_testS != 0)
+//        {
+//          CanTpCloseConnection(handle_testS);
+//        }
+//        if(handle_funcS != 0)
+//        {
+//          CanTpCloseConnection(handle_funcS);
+//        }
+        //If no response is received
+				return responseMatching(CompareMode, Response, numberRPs, "Noresponse", result);
+			}
+			else if(result == 1)
+			{   
+        //If response is received
+				//Negative branch starts
+				if( RsRxIntData[0] == 0x7f && RsRxIntData[1] == SID ) 
+				{           
+            if( RsRxIntData[2] == 0x78 )
+            {
+              TestStep("INFO","Response Pending received from ECU");
+  						responsePending = 1;
+  						numberRPs++;
+  						timeOutValue = 10000;
+					  }
+					  else
+					  {
+//              if(handle_testS != 0)
+//              {
+//                CanTpCloseConnection(handle_testS);
+//              }
+//              if(handle_funcS != 0)
+//              {
+//                CanTpCloseConnection(handle_funcS);
+//              }
+              //TestStep("INFO","Negative Response from ECU!");
+						  return responseMatching(CompareMode, Response, numberRPs, "NRC", result);
+					  }
+				}
+				//Positive branch starts
+				if( RsRxIntData[0] == (SID + 0x40) )  
+				{ 
+//            if(handle_testS != 0)
+//            {
+//              CanTpCloseConnection(handle_testS);
+//            }
+//            if(handle_funcS != 0)
+//            {
+//              CanTpCloseConnection(handle_funcS);
+//            }
+          //TestStep("INFO","Positive Response from ECU!");
+					return responseMatching(CompareMode, Response, numberRPs, "response", result);
+				}	
+			}
+		}while( (responsePending == 1) && (numberRPs < 24) );  //Pending response handling
+	  
+//    write("Before handle_test:%d",handle_test);
+//    write("Before handle_func:%d",handle_func);
+//    
+//    if(handle_test != 0)
+//      CanTpCloseConnection( handle_test );
+//    if(handle_func != 0)
+//      CanTpCloseConnection( handle_func );
+//    
+//    write("After handle_test:%d",handle_test);
+//    write("After handle_func:%d",handle_func);
+    
+		if( responsePending == 1 )
+		{
+			TestStepFail("INFO","Timeout while waiting for diag response!");
+			return 0;
+		}
+    
+    //CanTpCloseConnection( handle_test );
+	}
+  
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to check whether response received and the response match or not.
+//!
+//! 		
+//! \param  char CompareMode is the compare mode should be used to check the response.
+//! \param  char Response is the expected response.
+//! \param  int NumberRPs is the count of the arrived response pendings.
+//! \param  char MessageFormat identifies the response type. (Response or NRC)
+//! \param  long Result identifies that response is received or not. (0 = not received, 1 = received)
+//!
+//! \note	Valid compare modes can be: \n
+//!			- Equal: Response has to match with the whole response. \n
+//!			- Regexp: Response can be a substring of the response. \n
+//!			- None: It is expected that the response does not contain Response as substring. \n
+//!			- Suppressed_Equal: Response pending is received and response has to match with the whole response. \n
+//!			- Suppressed_Regexp: Response pending is received and response can be a substring of the response. \n
+//!			- NotEqual: The received response is not equal with the expected. \n
+//!			- NotEqual_Regexp: The received response substring is not equal with the expected. \n
+//!			- RegexpNoFailed: Compare the response with substring without test evaluation.
+//!
+//! \return If the expected response is received, the function returns with 1 and test step passed state, otherwise with 0 and test step failed state.
+//- -----------------------------------------------------------------------------------------------
+int responseMatching(char CompareMode[], char Response[], int NumberRPs, char MessageFormat[], long result)
+{
+
+  if(result == 1)
+	{
+		TestStep("INFO","EXPECTED: %s", Response);
+		TestStep("INFO","RECEIVED: %s", byteString);
+    result = 0;
+		//Message received, Compare mode is equal
+		if(0 == strncmp("Equal", CompareMode,strlen(CompareMode)))
+		{
+			if(0 == strncmp(byteString, Response, strlen(Response))&& strlen(byteString) == strlen(Response))
+			{
+				TestStepPass("INFO","Expected %s received!", MessageFormat);
+				return 1;
+			}
+			else
+			{
+				TestStepFail("INFO","Unexpected %s received!", MessageFormat);
+				return 0;
+			}
+		}
+		//Message received, Compare mode is regexp
+		else if(0 == strncmp("Regexp", CompareMode,strlen(CompareMode)))
+		{   
+			if(1 == str_match_regex(byteString, Response))
+			{
+				TestStepPass("INFO","Expected substring in %s received!", MessageFormat);
+				return 1;
+			}
+			else
+			{
+				TestStepFail("INFO","Unexpected %s or wrong substring received!", MessageFormat);
+				return 0;
+			}
+		}
+		//Message received, Compare mode is not equal
+		else if(0 == strncmp("NotEqual", CompareMode, strlen(CompareMode)) || 0 == strncmp("NotEqual_Regexp", CompareMode, strlen(CompareMode)))
+		{
+			if(0 == strncmp("NotEqual", CompareMode, strlen(CompareMode)))
+			{
+				if(0 != strncmp(byteString, Response, strlen(Response)) || strlen(byteString) != strlen(Response))
+				{
+					TestStepPass("INFO","Not equal %s received as expected!", MessageFormat);
+					return 1;
+				}
+				else
+				{      
+					TestStepFail("INFO","Unexpected equal %s is received!", MessageFormat);
+					return 0;
+				}
+			}
+			else
+			{
+				if(0 == str_match_regex(byteString, Response))
+				{
+					TestStepPass("INFO","Wrong substring in %s received as expected!", MessageFormat);
+					return 1;
+				}
+				else
+				{
+					TestStepFail("INFO","Unexpected %s with correct substring received!", MessageFormat);
+					return 0;
+				}
+			}
+		}
+		//Message received, Compare mode is suppressed (equal or regexp)
+		else if(0 == strncmp("Suppressed_Equal", CompareMode,strlen(CompareMode)) || 0 == strncmp("Suppressed_Regexp", CompareMode,strlen(CompareMode)))
+		{
+			if(0 == strncmp("response", MessageFormat,strlen(MessageFormat)))
+			{
+				if(NumberRPs > 0)
+				{
+					if(0 == strncmp("Suppressed_Equal", CompareMode,strlen(CompareMode)))
+					{
+						if(0 == strncmp(byteString, Response, strlen(Response))&& strlen(byteString) == strlen(Response))
+						{
+							TestStepPass("INFO","Expected %s received after response pending!", MessageFormat);
+							return 1;
+						}
+						else
+						{
+							TestStepFail("INFO","Unexpected %s received after response pending!", MessageFormat);
+							return 0;
+						}
+					}
+					else
+					{
+						if(1 == str_match_regex(byteString, Response))
+						{
+							TestStepPass("INFO","Expected substring in %s received after response pending!", MessageFormat);
+							return 1;
+						}
+						else
+						{
+							TestStepFail("INFO","There is not expected substring after response pending in %s!", MessageFormat);
+							return 0;
+						}
+					}
+				}
+				else
+				{
+					TestStepFail("INFO","Response received without response pending!");
+					return 0;
+				}
+			}
+			else
+			{
+				if(0 == strncmp("Suppressed_Equal", CompareMode,strlen(CompareMode)))
+				{
+					if(0 == strncmp(byteString, Response, strlen(Response))&& strlen(byteString) == strlen(Response))
+					{
+						TestStepPass("INFO","Expected %s received!", MessageFormat);
+						return 1;
+					}
+					else
+					{
+						TestStepFail("INFO","Unexpected %s received!", MessageFormat);
+						return 0;
+					}
+				}
+				else
+				{
+					if(1 == str_match_regex(byteString, Response))
+					{
+						TestStepPass("INFO","Expected substring in %s received!", MessageFormat);
+						return 1;
+					}
+					else
+					{
+						TestStepFail("INFO","There is not expected substring in %s!", MessageFormat);
+						return 0;
+					}
+				}	
+			}
+		}
+		//Message received, Compare mode is regexpNoFailed
+		else if(0 == strncmp("RegexpNoFailed", CompareMode,strlen(CompareMode)))
+		{   
+			if(1 == str_match_regex(byteString, Response))
+			{
+				TestStep("INFO","Expected substring in %s received!", MessageFormat);
+				return 1;
+			}
+			else
+			{
+				TestStep("INFO","Unexpected %s or wrong substring received!", MessageFormat);
+				return 0;
+			}
+		}
+		//Message received, Compare mode is none
+		else if(0 == strncmp("None", CompareMode,strlen(CompareMode)))
+		{
+			TestStepFail("INFO","Response arrived but it was NOT expected!");
+			return 0;
+		}
+	}
+	else
+	{
+		//Message does not received, Compare mode is suppressed (equal or regexp)
+		if(0 == strncmp("Suppressed_Equal", CompareMode,strlen(CompareMode)) || 0 == strncmp("Suppressed_Regexp", CompareMode,strlen(CompareMode)))
+		{
+			if(NumberRPs == 0)
+			{
+				TestStepPass("INFO","No response pending and no response are received as expected!");
+				return 1;
+			}
+			else
+			{
+				TestStepFail("INFO","No response is received after response pending!");
+				return 0;
+			}
+		}
+		//Message does not received, Compare mode is none
+		else if(0 == strncmp("None", CompareMode,strlen(CompareMode)))
+		{
+			TestStepPass("INFO","Response did not arrive as expected!");
+			return 1;
+		}
+		//Message does not received, Compare mode is not supported here
+		else
+		{
+			TestStepFail("INFO","Timeout while waiting for diag response");
+			return 0;
+		}
+	}
+
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to read the error memory. If there is any DTC logged in the memory, then checks the MIDs of the DTC. 
+//!		
+//! \param  char DTC_Request is the diagnostic request for reading the DTC.
+//! \param  char DTC_Response is the expected response.
+//!
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void check_MID_Of_DTCs (char DTC_Request[], char DTC_Response[])
+{
+	int i, j, k, stateOfDTC;
+    long result, timeOutValue, counter;
+    char buffer[9], copy_byteString[100], array_of_MID[13] = "1904______1_"; // The missed part will be filled with the DTC itself and first/last appearance check
+    
+    //init
+    counter = 0;
+    stateOfDTC = 0;  
+
+	TestStep("INFO","DTC_Request: %s", DTC_Request);
+	TestStep("INFO","DTC_Response: %s", DTC_Response);
+	RequestResponseCompareLogic (DTC_Request, DTC_Response, "Equal","Physical");                
+	//write("Debug ==> the value of the byteString: %s and its lenght: %d", byteString, strlen(byteString));
+	strncpy(copy_byteString, byteString, strlen(byteString)+1); //since I call RequestResponseCompareLogic function several times in this function I have to copy the original byteString
+	counter = strlen(copy_byteString);
+	  
+	if (strlen(DTC_Response) < strlen(copy_byteString))
+	  { 
+		counter = (strlen(copy_byteString) - strlen(DTC_Response))/8; //number of characters in the response - the fix size(6 = strlen(DTC_Response) ) of the UDS response divided by 8 (DTC lenght+status)
+		TestStep("INFO","The number of DTCs on the Camera: %d! Checking for status and MIDs...", counter);
+		
+		for (i=0; i<counter;i++ )
+		{
+          for (j = 0; j < 8 ; j++ ) // 
+          {
+            buffer[j] = copy_byteString[j+6+i*8]; //6 is the offset of the positive response for UDS message            
+          }      
+          stateOfDTC = char2byte(buffer[7], 1); // if it is even --> PASSIVE; if it is odd --> ACTIVE
+          //write("\t%d. DTC is: %s", i+1, buffer);         
+          
+          if (0 == (stateOfDTC%2)) //Checking whether the DTC is passive or Active by even or odd number check
+            {
+              TestStep("INFO","\t%d. DTC %c%c%c%c%c%c is in PASSIVE state! The Status byte is: %c%c", i+1, buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], buffer[6], buffer[7]);
+            }
+          else
+            {
+              TestStep("INFO","\t%d. DTC %c%c%c%c%c%c is in ACTIVE state! The Status byte is: %c%c", i+1, buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], buffer[6], buffer[7]);
+            }
+          
+          for (k = 0; k < 6; k++) //Only the 3 byte long DTC needed. The 4th byte is the status
+            {
+               array_of_MID[k+4] = buffer[k];
+            }
+          
+          array_of_MID[11] = '0'; // Checking the first appearance of the MID of the DTC
+          //write("Debug array_of_MID ==> the value of the array_of_MID: %s and its length: %d", array_of_MID, strlen(array_of_MID)); 
+          TestStep("INFO","********************************************* Checking the FIRST appearance of the MID for DTC %c%c%c%c%c%c! ********************************************************************************", buffer[0], buffer[1], buffer[2],buffer[3],buffer[4],buffer[5]);
+          RequestResponseCompareLogic (array_of_MID, "5904.*", "Regexp","Physical");
+          strncpy(byteString, byteString, strlen(byteString)+1);
+          TestStep("INFO","##### The FIRST appearance of the corresponding MID of the %d. DTC is: 0x%c%c%c%c, which is %d in decimal", i+1, byteString[strlen(byteString)-4], byteString[strlen(byteString)-3], byteString[strlen(byteString)-2], byteString[strlen(byteString)-1], char2dec(byteString[strlen(byteString)-4],4096) + char2dec(byteString[strlen(byteString)-3], 256) + char2dec(byteString[strlen(byteString)-2],16) + char2dec(byteString[strlen(byteString)-1], 1));
+          
+          TestStep("INFO","********************************************* Checking the LAST appearance of the MID for DTC %c%c%c%c%c%c! *********************************************************************************", buffer[0], buffer[1], buffer[2],buffer[3],buffer[4],buffer[5]);
+          array_of_MID[11] = '1'; // Checking the last appearance of the MID of the DTC
+          RequestResponseCompareLogic (array_of_MID, "5904.*", "Regexp","Physical");      
+          TestStep("INFO","##### The LAST appearance of the corresponding MID of the %d. DTC is: 0x%c%c%c%c, which is %d in decimal", i+1, byteString[strlen(byteString)-4], byteString[strlen(byteString)-3], byteString[strlen(byteString)-2], byteString[strlen(byteString)-1], char2dec(byteString[strlen(byteString)-4],4096) + char2dec(byteString[strlen(byteString)-3], 256) +char2dec(byteString[strlen(byteString)-2],16) + char2dec(byteString[strlen(byteString)-1], 1));
+        }              
+      }
+    else
+      {
+        TestStep("INFO","##### There is NO DTC on the Camera! #####");
+        //write("Number of characters in the response is :%d", strlen(copy_byteString));
+      }
+  
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to wait till a specific DTC has been qualified.
+//!
+//! \param  char Request is the diagnostic request should be sent.
+//! \param  char Response is the expected response should be awaited.
+//! \param  char CompareMode is the compare mode should be used.
+//- -----------------------------------------------------------------------------------------------
+testcase WaitForDTC(char Request[], char Response[], char CompareMode[])
+{
+	int result;
+	int i;
+	
+	result = 0;
+	i =0;
+		
+	while(result ==0 && i<120)
+	{
+		//Wait 2 s
+		testWaitForTimeout(2000);
+		//Read the Error memory whether the DTC of the failure is stored in or not
+		result = RequestResponseCompareLogic(Request, Response, CompareMode,"Physical");
+    
+		//Increment i variable by 1
+		i++;
+	}
+	//Verification of test result
+	if (i!=120)
+	{
+		//The testcase is passed, the expected response has received
+		testStepPass("INFO", "The DTC is activated!");
+	}	
+    else
+    {
+	  //4 mins elapsed and qualification did not occure
+	  testStepFail("INFO", "TestStep timeout!");
+    }
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to save the previously received response to a global variable
+//!
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void saveResponse()
+{
+    int i;
+    for (i=1; i<8194; i++)
+    { 
+        seedString[i] = byteString[i];
+        seedData[i] =  RsRxIntData[i];
+        //write(">>save<< seedString values: %c",seedString[i]);
+    }
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to compare the previously saved seed with the actual.	
+//!
+//! \note	Preconditions: \n
+//!			1. Request seed \n
+//!			2. Save response \n
+//!			3. Request seed again	
+//!
+//! \return 0 or 1. \n
+//!			0: Seeds are different. \n
+//!			1: Seeds are identical.
+//- -----------------------------------------------------------------------------------------------
+int compareSeedAlgo()
+{
+    int i, equal;
+    equal = 0;
+    for (i=4; i<12; i++)
+    { 
+        write("seedString values: %c",seedString[i]);
+        write("byteString values: %c",byteString[i]);
+        if (seedString[i] != byteString[i])
+        {
+            equal++;
+        }
+    }
+    if (equal == 0)
+    {   
+        return 1;//TestStepPass("INFO","Seeds are identical!");
+    }
+    else
+    {
+        return 0;//TestStepFail("INFO","Seeds are different!");
+    }
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to send key to the camera based on the previously saved seed in the application.
+//!
+//! \note	The tester requests a seed from the ECU and uses it to calculate the key using a specified formula. \n
+//! 		The calculation procedure is used for the key: Key = Seed + Pin. \n
+//!			After the key calculation the function will send the key to the ECU and check the response.
+//! 			
+//! \param  char sendKey is the request to send the calculated key.
+//! \param  char sendKeyResponse is the expected response should be awaited.
+//! \param  dword Pin is used to identify the authentication.
+//! \param  char CompareMode is the compare mode should be used to check the response for the sent key.
+//!			
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void sendKeyAlgo(char sendKey[], char sendKeyResponse[], char Fixed[], char CompareMode[])
+{
+    int i, j, c_index, bin;
+    int challenge[64], position_one[24], position_two[24];
+    int init_array[24] = {1,0,0,1,0,1,0,1,1,0,0,0,0,0,1,0,1,0,1,0,0,0,1,1};
+    byte input[8];
+    byte resultarray[5] = {0,0,0,0,0};
+    bin = 0x80;
+    c_index=0;
+    input[0] = seedData[2];
+    input[1] = seedData[3];
+    input[2] = seedData[4];
+    input[3] = char2byte(Fixed[0], 16) + char2byte(Fixed[1], 1);
+    input[4] = char2byte(Fixed[2], 16) + char2byte(Fixed[3], 1);
+    input[5] = char2byte(Fixed[4], 16) + char2byte(Fixed[5], 1);
+    input[6] = char2byte(Fixed[6], 16) + char2byte(Fixed[7], 1);
+    input[7] = char2byte(Fixed[8], 16) + char2byte(Fixed[9], 1);
+    
+    for(i = 0; i < 24; i++)
+    {
+        position_one[i]=init_array[i];
+    }
+
+    for(i = 0; i < 8; i++)
+    {
+        for(j = 7; j >= 0; j--)
+        {
+            challenge[c_index + j] = input[i] & bin;
+            if(challenge[c_index + j] > 0)
+            {
+                challenge[c_index + j] = 1;
+            }
+            bin = bin >> 1;
+        }
+        bin = 0x80;
+        c_index+=8;
+    }
+    
+    for(i = 0; i < 64; i++)
+    {
+        position_two[23] = challenge[i] ^ position_one[0];
+        for(j = 0; j < 23; j++)
+        {
+            position_two[j] = position_one[j+1];
+        }
+        for(j = 0; j < 24; j++)
+        {
+            if(j == 3 || j == 5 || j == 12 || j == 15 || j == 20)
+            {
+                position_one[j] = position_two[j] ^ position_two[23];
+            }
+            else
+            {
+                position_one[j] = position_two[j];
+            }
+        }        
+    }
+    
+    resultarray[0] = char2byte(sendKey[0], 16) + char2byte(sendKey[1], 1);
+    resultarray[1] = char2byte(sendKey[2], 16) + char2byte(sendKey[3], 1);
+    resultarray[2] = (byte)((position_one[11] * 8 + position_one[10] * 4 + position_one[9] *2 + position_one[8]) * 16 + (position_one[7] * 8 + position_one[6] * 4 + position_one[5] *2 + position_one[4]));
+    resultarray[3] = (byte)((position_one[15] * 8 + position_one[14] * 4 + position_one[13] *2 + position_one[12]) * 16 + (position_one[23] * 8 + position_one[22] * 4 + position_one[21] *2 + position_one[20]));
+    resultarray[4] = (byte)((position_one[3] * 8 + position_one[2] * 4 + position_one[1] *2 + position_one[0]) * 16 + (position_one[19] * 8 + position_one[18] * 4 + position_one[17] *2 + position_one[16]));
+    
+    CreateByteString(resultarray, 0, elcount(resultarray));
+
+	RequestResponseCompareLogic(byteString, sendKeyResponse, CompareMode, "Physical");
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to send key to the camera based on the previously saved seed in the plant mode.
+//!
+//! \note	The tester requests a seed from the ECU and uses it to calculate the key using a specified formula. \n
+//!			After the key calculation the function will send the key to the ECU and check the response.
+//! 			
+//! \param  char sendKey is the request to send the calculated key.
+//! \param  char sendKeyResponse is the expected response should be awaited.
+//! \param  dword RBEOLPin is used to define RBEOL unique pin
+//! \param  dword PMARequest is used to define the plant mode activation part2 request
+//! \param  char CompareMode is the compare mode should be used to check the response for the sent key.
+//!			
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void sendKeyAlgoRBEOL(char sendKey[], char sendKeyResponse[], dword RBEOLPin, dword PMARequest, char CompareMode[])
+{
+    //Calculation of the key is described in MPC2 MDC DCOM BASE module:
+    //doors://abt-doors-da.de.bosch.com:36665/?version=2&prodID=0&view=0000001d&urn=urn:telelogic::1-4147106800294823-O-1044-0002a241
+    dword authKey;
+    byte resultarray[6] = {0,0,0,0,0,0};
+    
+    resultarray[0] = char2byte(sendKey[0], 16) + char2byte(sendKey[1], 1);
+    resultarray[1] = char2byte(sendKey[2], 16) + char2byte(sendKey[3], 1);
+      
+    authKey = seedData[5] |
+		(seedData[4] << 8) |
+        (seedData[3] << 16) |
+		(seedData[2] << 24);
+               
+    authKey = authKey & RBEOLPin; //It has been derived from the ASCII values of "Bosch Diagnostics for Driver Assistance"
+    authKey = authKey | PMARequest; //Plant mode activation part request
+      
+    resultarray[5] = (byte)(authKey & 0xff);
+    resultarray[4] = (byte)((authKey >> 8) & 0xff);
+    resultarray[3] = (byte)((authKey >> 16) & 0xff);
+    resultarray[2] = (byte)((authKey >> 24) & 0xff);
+      
+    CreateByteString(resultarray, 0, elcount(resultarray));
+
+	RequestResponseCompareLogic(byteString, sendKeyResponse, CompareMode, "Physical");
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function which returns the number of data successfully sent.
+//!
+//! \param  long c stores the data length.
+//- -----------------------------------------------------------------------------------------------
+OSEKTL_DataCon (long c)
+{
+    TestStep("INFO","Data Transmission done!");
+    //write ("Successfully sent data length: %d", c);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function which returns the number of data received.
+//!
+//! \param  long count stores the data length.
+//- -----------------------------------------------------------------------------------------------
+/*OSEKTL_DataInd (long count)
+{
+    int RIP;
+    int i = 0;
+    //char tmpString[255];
+    RIP = SID + 0x40;
+    OSEKTL_GetRxData(RsRxIntData, elcount(RsRxIntData));
+	ResponseLength = count;
+
+    if(count <= elcount(RsRxIntData))
+    {
+        if(0x7F == RsRxIntData[0] &&
+           0x21 == RsRxIntData[2]  )
+        {
+           
+            OSEKTL_DataReq(RqTxData, ByteSize);
+            write("Busy Repeat Request detected -> Repeat last request!"); 
+            write("***********************************************************"); 
+        }
+        else
+        {
+       // write("Debug ==> the value of RsRxIntData is: - %x", RsRxIntData[1]);
+            CreateByteString(RsRxIntData, 0, count);
+            TestSupplyTextEvent("TpMsgReceived");
+        }
+    }
+} */
+
+/*
+void CanTp_SendCon( long connHandle, dword count)
+{
+  write( "Transmission of %d byte on connection %d successful"
+  , count, connHandle);
+}
+*/
+
+void CanTp_TxTimeoutInd(long handle, word dlc[], byte msgData[])
+{
+  write("Send timeout!");
+}
+
+void CanTp_FirstFrameInd( long connHandle, dword length)
+{
+  //write("Consecutive Frame. connHandle: %d, Length: %d", connHandle, length);
+} 
+
+void CanTp_SendCon( long connHandle, dword count)
+{
+  //write("Single Frame. connHandle: %d, Length: %d", connHandle, count);
+  //currentConnHandle = connHandle;
+  
+  if(handle_funcS != 0)
+    CanTpCloseConnection(handle_funcS);
+  
+  //if(handle_testPresent != 0)
+  //  CanTpCloseConnection(handle_testPresent);
+}
+
+void CanTp_ReceptionInd(long connHandle, byte data[])
+{
+  int RIP;
+  int i = 0;
+  long Ind;
+  RIP = SID + 0x40;
+  
+  //write("Reception Frame. connHandle: %d", connHandle);
+  
+  //if(connHandle == handle_testS)
+  {
+      for(i = 0; i<elcount(data); i++)
+        RsRxIntData[i] = data[i];
+      //Ind = CanTpCopyDataReceived(1, RsRxIntData, elcount(RsRxIntData));
+      ResponseLength = elcount(data);
+      
+      if(0x7F == data[0] && 
+         0x21 == data[2])
+      {
+        CanTpSendData(connHandle, RqTxData, ByteSize);
+        write("Busy Repeat Request detected -> Repeat last request!");
+        write("***********************************************************");
+      }else{
+//      else if(0x7F == data[0] && 
+//              0x78 == data[2])
+//      {
+//        CreateByteString(RsRxIntData, 0, elcount(data));
+//        TestSupplyTextEvent("TpMsgReceived");
+//      }
+//      else
+//      {
+        CreateByteString(RsRxIntData, 0, elcount(data));
+        TestSupplyTextEvent("TpMsgReceived");
+        //CanTpCloseConnection( connHandle );
+      }
+  }
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Shows error message from transport layer.
+//!
+//! \param  long count stores the data length.
+//!
+//! \note:	Errors:  \n
+//!   		• 1: Timeout waiting for CF\n
+//!  		• 2: Timeout waiting for FC\n
+//!  		• 3: Received Wrong SN\n
+//!  		• 4: TxBusy, only one transmission possible at the same time\n
+//!   		• 5: Received unexpected PDU\n
+//!  		• 6: Timeout while trying to send a CAN message\n
+//!  		• 7: Too many FC.WFT sent\n
+//!  		• 8: Receiver buffer overflow\n
+//!  		• 9: Wrong parameter\n
+//!  		• 10: Invalid flow status received\n
+//!  		• 11: Transfer has been aborted explicitly\n
+//!  		• <0: Unknown Error.
+//- -----------------------------------------------------------------------------------------------
+OSEKTL_ErrorInd(int error)
+{
+    write("TP Error %d", error);
+}
+
+/* @cond
+on sysvar Diag::PlainData
+{
+    int i = 0;
+    int byteLen = 4096;
+    char c1;
+    char c2;
+    int strIndex = 0;
+ 
+    for (i = 0; i < elcount(RqTxStringData); i++)
+    {
+        RqTxStringData[i] = 0;
+    }
+    SysGetVariableString(sysvar::Diag::PlainData, RqTxStringData, elcount(RqTxStringData));
+
+    ByteSize = 0;
+    for (i = 0; i < byteLen; i++)
+    {
+        strIndex = i * 2;
+        if (RqTxStringData[strIndex] != 0)
+        {
+            c1 = RqTxStringData[strIndex];
+            c2 = RqTxStringData[strIndex + 1];
+            RqTxData[i] = char2byte(c1, 16) + char2byte(c2, 1);
+            ByteSize++;
+        }
+    }
+    SID = RqTxData[0];
+}@endcond */
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to convert characters to byte.
+//!
+//! \param  char c is the character to be converted.
+//! \param  int factor identifies the nibble of the byte. For the first nibble, the factor should be 16, for the second it should be 1.
+//!
+//!
+//! \return The characters in byte.
+//- -----------------------------------------------------------------------------------------------
+byte char2byte (char c, int factor)
+{
+    switch(c){
+    case 'F':
+    case 'f': return 15 * factor;
+    case 'E':
+    case 'e': return 14 * factor;
+    case 'D':
+    case 'd': return 13 * factor;
+    case 'C':
+    case 'c': return 12 * factor;
+    case 'B':
+    case 'b': return 11 * factor;
+    case 'A':
+    case 'a': return 10 * factor;
+    case '9': return 9 * factor;
+    case '8': return 8 * factor;
+    case '7': return 7 * factor;
+    case '6': return 6 * factor;
+    case '5': return 5 * factor;
+    case '4': return 4 * factor;
+    case '3': return 3 * factor;
+    case '2': return 2 * factor;
+    case '1': return 1 * factor;
+    }
+    return 0;
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to convert characters to decimal number.
+//!
+//! \param  char c is the character to be converted.
+//! \param  int factor identifies the nibble of the byte.
+//!
+//!
+//! \return The characters in decimal number.
+//- -----------------------------------------------------------------------------------------------
+dword char2dec (char c, int factor)
+{
+    switch(c){
+    case 'F':
+    case 'f': return 15 * factor;
+    case 'E':
+    case 'e': return 14 * factor;
+    case 'D':
+    case 'd': return 13 * factor;
+    case 'C':
+    case 'c': return 12 * factor;
+    case 'B':
+    case 'b': return 11 * factor;
+    case 'A':
+    case 'a': return 10 * factor;
+    case '9': return 9 * factor;
+    case '8': return 8 * factor;
+    case '7': return 7 * factor;
+    case '6': return 6 * factor;
+    case '5': return 5 * factor;
+    case '4': return 4 * factor;
+    case '3': return 3 * factor;
+    case '2': return 2 * factor;
+    case '1': return 1 * factor;
+    }
+    return 0;
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase which send diagnostic message and check the response with specified CAN ID.
+//!
+//! \note	The function can send a string to the ECU from the parameter (Request) and check the received message (Response). \n
+//! 		String to byte conversion is needed to send and receive the string parameters, the function also includes this feature. \n
+//!			Function set the transmit and receive CAN IDs to send the request message, finally it resets the default CAN IDs.
+//! 		
+//! \param  char Request is the request should be sent.
+//! \param  char Response is the expected response should be awaited.
+//! \param  char CompareMode is the compare mode should be used to check the response.
+//! \param  int rxId is the ID of the transmit messages in CAN.
+//! \param  int txId is the ID of the receive messages in CAN.
+//!
+//! \note	Valid compare modes can be: \n
+//!			- Equal: Response has to match with the whole response. \n
+//!			- Regexp: Response can be a substring of the response. \n
+//!			- None: It is expected that the response does not contain Response as substring. \n
+//!			- Suppressed_Equal: Response pending is received and response has to match with the whole response. \n
+//!			- Suppressed_Regexp: Response pending is received and response can be a substring of the response. \n
+//!			- NotEqual: The received response is not equal with the expected. \n
+//!			- RegexpNoFailed: Compare the response with substring without test evaluation.
+//- -----------------------------------------------------------------------------------------------
+testcase RequestResponseCanMsgId(char Request[], char Response[], char CompareMode[], int rxId, int txId)
+{
+    /* CompareMode is an extension for being able to check whether the response contains the Response as substring */
+    /* values: Equal  - Response has to match with the whole response                                                   */
+    /*         Regexp - Response can be a substring of the response                                                     */
+    /*         None   - it is expected that the response does not contain Response as substring                         */
+
+
+// Check whether is the rxId and the txId is empty (empty = 0)
+    if(rxId != 0 && txId !=0)
+    {
+       setType (rxId, txId, handle_testS);
+    }
+    else 
+    {
+       setType (g_rxId,g_txId_PhysicalAddr,handle_testS);
+    }
+         
+    RequestResponseCompareLogic(Request, Response, CompareMode, "Physical");
+    
+    //Reset the deafult CAN message IDs
+    //setType (g_rxId,g_txId_PhysicalAddr,handle_testS);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase which send diagnostic message and check the response.
+//!
+//! \note	The function can send a string to the ECU from the parameter (Request) and check the received message (Response). \n
+//! 		String to byte conversion is needed to send and receive the string parameters, the function also includes this feature.
+//! 		
+//! \param  char Request is the request should be sent.
+//! \param  char Response is the expected response should be awaited.
+//! \param  char CompareMode is the compare mode should be used to check the response.
+//!
+//! \note	Valid compare modes can be: \n
+//!			- Equal: Response has to match with the whole response. \n
+//!			- Regexp: Response can be a substring of the response. \n
+//!			- None: It is expected that the response does not contain Response as substring. \n
+//!			- Suppressed_Equal: Response pending is received and response has to match with the whole response. \n
+//!			- Suppressed_Regexp: Response pending is received and response can be a substring of the response. \n
+//!			- NotEqual: The received response is not equal with the expected. \n
+//!			- RegexpNoFailed: Compare the response with substring without test evaluation.
+//- -----------------------------------------------------------------------------------------------
+testcase RequestResponse(char Request[], char Response[], char CompareMode[])
+{
+  //setType(g_rxId, g_txId_PhysicalAddr, handle_test);
+  RequestResponseCompareLogic(Request, Response, CompareMode, "Physical");
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to unlock the ECU.
+//!
+//! \note	It contains the seed and key method and the key calculation with the following process: \n
+//! 		1. The tester requests a seed from the system \n
+//! 		2. The ECU sends the seed in the positive response \n
+//! 		3. The tester sends the key to the ECU \n
+//! 		4. The ECU confirms the correct key and unlocks all the services, parameters, \n
+//!			   or data in the active diagnostic session that are protected with this key
+//!
+//! \param  char LoginType is the request should be sent.
+//!
+//! \note	LoginType should be: \n
+//!			- AppRepair: The pin for the repair shop. This pin doesn't unlock the development pin, i.e. has lowest priority. \n
+//!			- AppDev: The pin for development. This pin unlocks the repair shop pin, i.e. has highest priority. \n
+//!			- FblRep: Unlock the flash bootloader security \n
+//!			- RBEOL: Unlock the security key in plant mode
+//- -----------------------------------------------------------------------------------------------
+testcase Login (char LoginType[])
+{
+	LoginFunction(LoginType);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to reset the ECU.
+//!
+//! \note	Reset the ECU and wait after the reset request.
+//!
+//! \param  dword WaitTime defines the amount of waiting time after the reset (ms).
+//- -----------------------------------------------------------------------------------------------
+testcase ResetCamera(dword WaitTime)
+{
+	long result;
+  
+	RequestResponseCompareLogic("1101", "5101", "Equal","Physical");
+	result = testWaitForTimeout(WaitTime);
+	if (-1 == result)
+	{
+		TestStepFail("INFO","General error with the testWaitForTimeout function, for example, functionality is not available!");
+	}
+	else if (-2 == result)
+	{
+		TestStepFail("INFO","Resume due to constraint violation in the testWaitForTimeout function!");
+	}
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to unlock the ECU.
+//!
+//! \note	It contains the seed and key method and the key calculation with the following process: \n
+//! 		1. The tester requests a seed from the system \n
+//! 		2. The ECU sends the seed in the positive response \n
+//! 		3. The tester sends the key to the ECU \n
+//! 		4. The ECU confirms the correct key and unlocks all the services, parameters, \n
+//!			   or data in the active diagnostic session that are protected with this key
+//!
+//! \param  char LoginType is the request should be sent.
+//!
+//! \note	LoginType should be: \n
+//!			- AppRepair: The pin for the repair shop. This pin doesn't unlock the development pin, i.e. has lowest priority. \n
+//!			- AppDev: The pin for development. This pin unlocks the repair shop pin, i.e. has highest priority. \n
+//!			- FblRep: Unlock the flash bootloader security \n
+//!			- RBEOL: Unlock the security key in plant mode
+//!
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void LoginFunction (char LoginType[])
+{ 
+	if(0 == strncmp("App", LoginType, strlen(LoginType)))
+	{
+		TestStep("INFO","The LoginType is: %s", LoginType);
+		RequestResponseCompareLogic("2703", "6703.+", "Regexp","Physical");
+		saveResponse();
+		sendKeyAlgo("2704", "6704", "b716d3c65b", "Equal");
+	}
+	else if(0 == strncmp("FblRep", LoginType, strlen(LoginType)))
+	{
+		TestStep("INFO","The LoginType is: %s", LoginType);
+		RequestResponseCompareLogic("2701", "6701.+", "Regexp","Physical");
+		saveResponse();
+		sendKeyAlgo("2702", "6702", "a3cf823278", "Equal");
+	}
+	else if(0 == strncmp("RBEOL", LoginType, strlen(LoginType)))
+	{
+		TestStep("INFO","The LoginType is: %s", LoginType);
+		RequestResponseCompareLogic("2761", "6761.+", "Regexp","Physical");
+		saveResponse();
+		sendKeyAlgoRBEOL("2762", "6762", 0x42444441, 0x80FA1108, "Equal"); 
+	}
+	else
+	{
+		TestStepFail("INFO","The LoginType is not valid!");
+		TestStepFail("INFO","Please choose from the following Login types: AppDev, AppRepair, FblRep, RBEOL!");
+	}  
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to enter into the chosen session.
+//!
+//! \param  char sessionName is the name of the session we want to enter into.
+//!
+//! \note	Available sessions are: \n
+//!     - Default\n
+//!     - Extended\n
+//!     - Programming\n
+//!     - RBEOL
+//- -----------------------------------------------------------------------------------------------
+testcase DiagSessionCtrl (char sessionName[])
+{
+	if(0 == strncmp("Default", sessionName, strlen(sessionName)))
+	{
+		TestStep("INFO","The sessionName is: %s", sessionName);
+		RequestResponseCompareLogic("1001", "5001.{8}", "Regexp","Physical");  
+    }
+    else if(0 == strncmp("Extended", sessionName, strlen(sessionName)))
+    {
+		TestStep("INFO","The sessionName is: %s", sessionName);
+		RequestResponseCompareLogic("1003", "5003.{8}", "Regexp","Physical");   
+    }
+    else if(0 == strncmp("Programming", sessionName, strlen(sessionName)))
+    {
+		TestStep("INFO","The sessionName is: %s", sessionName);
+		RequestResponseCompareLogic("1002", "5002.{8}", "Regexp","Physical");
+    }
+	else if(0 == strncmp("RBEOL", sessionName, strlen(sessionName)))
+	{
+		TestStep("INFO","The sessionName is: %s", sessionName);
+		RequestResponseCompareLogic("80fa31033005", "c0fa", "Equal","Physical");
+		RequestResponseCompareLogic("80fa1108", "c0fa00", "Equal","Physical");
+	}
+    else
+    {
+		TestStepFail("INFO","The sessionName is not valid!");
+		TestStepFail("INFO","Please choose from the following sessionName types: Default, Extended, Programming!");
+    }
+   
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase which stores the value of the given environment variable.
+//!
+//! \param  char EnvvarName is the name of the environment variable which value should be stored.
+//!
+//! \note	This test case is mostly used to store signal values by using it's environment variable.
+//- -----------------------------------------------------------------------------------------------
+testcase SaveSignalValue (char EnvvarName[])
+{
+    StoredSignalValue = getValue (EnvvarName);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase which sets the value of the given environment variable to a previously stored value.
+//!
+//! \param  char EnvvarName is the name of the environment variable which value should be set.
+//! 
+//!\note	This test case is mostly used after the SaveSignalValue test case to restore the value
+//!			of a specific signal by it's environment variable.
+//- -----------------------------------------------------------------------------------------------
+testcase RestoreSignalValue (char EnvvarName[])
+{
+    putValue (EnvvarName, StoredSignalValue);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to checks whether the ECU is error free. \n
+//!			If there is any DTC logged in the memory, then checks the MIDs of the DTC. 
+//!
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+testcase Check_DTC_and_MID ()
+{
+	char DTC_Request[7]       = "190209";
+	char JLR_DTC_Response[7]  = "59027b"; 
+	check_MID_Of_DTCs(DTC_Request, JLR_DTC_Response);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function that stores the arrived response in the byteString variable.
+//!
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void CreateByteString (byte response[], long offset,long responseLength)
+{
+    char intString[4096];
+    char catString[10];
+    int i=0;
+    long dataLength;
+
+    snprintf(byteString, elcount(byteString), "");
+    dataLength = responseLength;
+
+    for(i=offset; i < dataLength;i++)
+    {
+        ltoa(response[i], intString, 16);
+
+        if( 1==strlen(intString) )
+        {
+            snprintf(catString, elcount(catString), "0");
+            strncat(catString, intString, elcount(catString));
+            strncpy(intString, catString, elcount(intString));
+        }
+       
+        strncat(byteString, intString, elcount(byteString));
+    }
+
+//    write("Debug ==> Created byte string - %s", byteString);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function that stores one byte in the byteString variable.
+//!
+//! \param  byte response is the byte that should be converted.
+//! \param  char char is the character array where the byte should be stored.
+//! \param  long base is the number base of the byte.
+//!
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void CreateByteCharacter (byte response, char s[], long base)
+{
+    char intString[3];
+    char catString[3];
+
+    snprintf(s, elcount(s), "");
+
+    ltoa(response, intString, base);
+
+    if( 1==strlen(intString) )
+    {
+        snprintf(catString, elcount(catString), "0");
+        strncat(catString, intString, elcount(catString));
+        strncpy(intString, catString, elcount(intString));
+    }
+   
+    strncat(s, intString, elcount(intString));
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function that measures the time interval between a sent request and an expected response.
+//!
+//! \note	This function sends a diagnostic request and waits for a specific response. \n
+//! 		Measures the time interval between the first sent request and the awaited response. \n
+//! 		This time interval is compared to an expected time interval.
+//!
+//! \param  char Request is the request should be sent.
+//! \param  char Response is the expected response should be awaited.
+//! \param  char CompareMode is the compare mode should be used.
+//! \param  char aTime1 is the low threshold of the expected time interval in ms.
+//! \param  char aTime2 is the high threshold of the expected time interval in ms.
+//!
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void RequestResponseTimeElapsedFn(char Request[], char Response[], char CompareMode[], char aTime1[], char aTime2[])
+{
+	byte responsePending;
+	long result;
+	long timeOutValue;
+	int numberRPs;
+	float startTime1;
+	float startTime2;
+	float endTime;
+	int respOk;
+	int i;
+	float time1;
+	float time2;
+ 
+	//Init
+	respOk = 0;
+	endTime = 0;
+	i = 0;
+	time1 = 0;
+	time2 = 0;
+  
+	time1 = atodbl(aTime1);
+	time2 = atodbl(aTime2);
+    
+	responsePending = 0;
+	numberRPs = 0;
+	timeOutValue = 5000;
+  
+	//Check the validity of the compare mode
+	if( ! (0 == strncmp("Equal", CompareMode,strlen(CompareMode)) || 0 == strncmp("Regexp", CompareMode,strlen(CompareMode)) || 0 == strncmp("None", CompareMode,strlen(CompareMode)) || 0 == strncmp("Suppressed_Equal", CompareMode,strlen(CompareMode)) 
+		|| 0 == strncmp("Suppressed_Regexp", CompareMode,strlen(CompareMode)) || 0 == strncmp("NotEqual", CompareMode,strlen(CompareMode))|| 0 == strncmp("RegexpNoFailed", CompareMode,strlen(CompareMode))))
+	{
+		TestStepFail("INFO","The CompareMode '%s' is not valid!", CompareMode);
+		TestStepFail("INFO","Please choose from the following CompareMode types: Equal, Regexp, None, NotEqual, Suppressed_Equal, Suppressed_Regexp or RegexpNoFailed!");
+	}
+	else
+	{
+		//The compare mode is valid
+		    
+		//Set timer (t20ms) to 20ms
+		//setTimer(t20ms, 20);
+		//Store start time
+		startTime1 = timeNow()/100.0;
+  
+		//START check the response from the camera: 
+		do
+		{ 
+			if( ((timeToElapse(t20) > 0)||(timeToElapse(t10) > 0))  && (i != 0)) //
+			{
+				TestStep("INFO","Waiting for timer!");
+        TestWaitForTextEvent("Minimum time delay is reached!", 100);
+			}
+			/*else if(  timeToElapse(t10ms) > 0 )
+			{		
+				TestWaitForTextEvent("Minimum time delay is reached!", 100);
+			}*/
+		  
+			CharArray2Byte(Request);              // It is necessary to convert the char array to byte array before sending it out with the inside Vector function
+			TestStep("INFO","REQUEST: %s (The compare mode is: %s)", Request, CompareMode);
+		  
+					//OSEKTL_ActivateAck(1);
+			OSEKTL_DataReq(RqTxData, ByteSize);   //Sending out Request in a RxTxData global byte array
+			//setType (g_rxId,g_txId_PhysicalAddr, handle_testS);
+
+			setTimer(t20, 20);
+			startTime2 = timeNow()/100.0;
+		  
+			//Wait for the message from the camera
+			responsePending = 0;
+			result = TestWaitForTextEvent("TpMsgReceived", timeOutValue);
+					endTime = timeNow()/100.0;
+		  
+			if(result == 0)
+			{  
+				//If no response is received
+				responseMatching(CompareMode, Response, numberRPs, "Noresponse", result);
+			}
+			else if(result == 1)
+			{    
+				//If response is received
+				//Negative branch starts
+				if( RsRxIntData[0] == 0x7f && RsRxIntData[1] == SID ) 
+				{ 
+					respOk = 0;
+					if( RsRxIntData[2] == 0x78 )
+					{
+						TestStep("INFO","Response Pending received from ECU");
+						responsePending = 1;
+						numberRPs++;
+						timeOutValue = 10000;
+					}
+					else
+					{
+						//TestStep("INFO","Negative Response from ECU!");
+						responseMatching(CompareMode, Response, numberRPs, "NRC", result);
+					}
+				}
+				//Positive branch starts
+				if( RsRxIntData[0] == (SID + 0x40) )  
+				{
+					//TestStep("INFO","Positive Response from ECU!");
+					respOk = responseMatching(CompareMode, Response, numberRPs, "response", result);
+				}
+        // if elapsed time more than 20ms, start 10ms counter
+  			if( (endTime - startTime2)/100.0 >= 20.0 )
+  			{ 
+  				setTimer(t10,10); // set msTimer (t10) to 10ms
+  			}
+			}
+			i++;
+	        }while( ((responsePending == 1) && (numberRPs < 24)) || ((respOk != 1) && ((endTime - startTime1) < 35000.0)) );  //Handling of pending response  and maximum testcase duration
+	        }
+		if( responsePending == 1 )
+		{
+			TestStepFail("INFO","Timeout while waiting for diag response!");
+		}
+
+  //Evaluation of test result
+	TestStep("INFO","Start Time [ms]: %f", startTime1);
+	TestStep("INFO","End Time [ms]: %f", endTime);
+  timeValue = endTime - startTime1;
+	TestStep("INFO","Elapsed Time [ms]: %.0f", (timeValue));
+  
+	if(timeValue >= 35000.0)
+	{
+		testStepFail("INFO", "TestStep timeout!");
+	}
+	else if( timeValue >= time1 && timeValue <= time2)
+	{
+		testStepPass("INFO", "Elapsed time is in the expected range!");
+	}
+	else
+	{
+		testStepFail("INFO", "Elapsed time is out of the expected range!");
+	}
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to wait for the occurrence of the next specific message.
+//!
+//! \param  dword MessageID is the numeric ID of the message that should be awaited.
+//! \param  long Timeout is the maximum time that should be waited [ms].
+//!
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void WaitForMessageFunction(dword MessageID, long Timeout)
+{
+  long result;
+  
+  result = 0;
+  
+ 	result = TestWaitForMessage(MessageID, Timeout);
+  
+  if (result == 1)
+  {
+    // Signal with expected value arrived!      
+		TestStepPass("INFO","The message arrived");
+	}
+	else if (result == 0)
+	{ 
+    // Timeout occured!       
+		TestStepFail("INFO","The message has not arrived within timeout!");  
+	}
+	else if(result == -2)
+	{
+		TestStepFail("INFO","Constraint violation!");
+	}
+	else
+	{
+		TestStepFail("INFO","General error!");
+	}
+}
+
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase that measures the time interval between a sent request and an expected response.
+//!
+//! \note	This testcase sends a diagnostic request and waits for a specific response. \n
+//! 		Measures the time interval between a sent request and the awaited response. \n
+//! 		This time interval is compared to an expected time interval.
+//!
+//! \param  char Request is the request should be sent.
+//! \param  char Response is the expected response should be awaited.
+//! \param  char CompareMode is the compare mode should be used.
+//! \param  char aTime1 is the low threshold of the expected time interval in ms.
+//! \param  char aTime2 is the high threshold of the expected time interval in ms.
+//- -----------------------------------------------------------------------------------------------
+testcase RequestResponseTimeElapsed(char Request[], char Response[], char CompareMode[], char aTime1[], char aTime2[])
+{
+	RequestResponseTimeElapsedFn(Request, Response, CompareMode, aTime1, aTime2);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase that saves timestamp for start time.
+//- -----------------------------------------------------------------------------------------------
+testcase TimeNowStart()
+{    
+    tMesStart = timeNow()/100;
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase that saves timestamp for end time, calculates the time elapsed from the start time saved 
+//! 		with testcase TimeNowStart and compares it to an expected time interval.
+//!
+//! \param  char aTime1 is the low threshold of the expected time interval.
+//! \param  char aTime2 is the high threshold of the expected time interval.
+//- -----------------------------------------------------------------------------------------------
+testcase TimeNowEnd(char aTime1[], char aTime2[])
+{    
+	float time1;
+	float time2;
+	float tMesEnd;
+  
+	time1 = 0;
+	time2 = 0;
+	
+	time1 = atodbl(aTime1);
+	time2 = atodbl(aTime2);
+	
+	tMesEnd = timeNow()/100;
+	
+	TestStep("INFO","Start Time [ms]: %f", tMesStart);
+	TestStep("INFO","End Time [ms]: %f", tMesEnd);
+	TestStep("INFO","Elapsed Time [ms]: %f", (tMesEnd - tMesStart));
+	
+	if( (tMesEnd - tMesStart) >= time1 && (tMesEnd - tMesStart) <= time2)
+	{
+		testStepPass("INFO", "Elapsed time is in the expected range!");
+	}
+	else
+	{
+		testStepFail("INFO", "Elapsed time is out of the expected range!");
+	}
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to change to the given CAN channel.
+//!
+//! \note	The ID of the original CAN channel is saved so it can be restored later.
+//!
+//! \param  char CanChannel is the name of the CAN channel we want to change to.
+//!
+//! \note	Available CAN Channels are: \n
+//!     		E_Can\n
+//!     		SF_Can\n
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void ChangeCanChannelFn(char CanChannel[])
+{
+  dword BusContext;
+  dword ECanBusContext;
+  dword FSCanBusContext;
+  
+  ECanBusContext = 0x10001;
+  FSCanBusContext = 0x10002;
+  
+  StoredBuxContext = GetBusContext(); //Store CAN bus channel context
+
+  if (0 == strncmp("E_Can", CanChannel,strlen(CanChannel)))
+  {
+    BusContext = GetBusContext();
+    
+    if(ECanBusContext != BusContext)
+    {
+      canOffline(3); 
+      SetBusContext(ECanBusContext);
+      canOnline(3);
+      
+      testStepPass("INFO","Switched to %s channel.", CanChannel);
+    }
+    else 
+    {
+      testStepPass("INFO","The %s channel was already selected.", CanChannel);
+    }
+  }
+  else if (0 == strncmp("SF_Can", CanChannel,strlen(CanChannel)))
+  {
+    BusContext = GetBusContext();
+    
+    if(FSCanBusContext != BusContext)
+    {
+      canOffline(3); 
+      SetBusContext(FSCanBusContext);
+      canOnline(3);
+      
+      testStepPass("INFO","Switched to %s channel.", CanChannel);
+    }
+    else 
+    {
+      testStepPass("INFO","The %s channel was already selected.", CanChannel);
+    }
+  }
+  else
+  {
+    TestStepFail("INFO","The channel is not valid!");
+  }
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to restore to the original CAN channel.
+//!
+//! \note	The ID of the original CAN channel is saved by the ChangeCanChannelFn funtion.
+//!
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void RestoreCanChannelFn()
+{
+   canOffline(3); 
+   SetBusContext(StoredBuxContext);
+   canOnline(3);
+    
+   testStepPass("INFO","CAN channel restored to %x",StoredBuxContext);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to wait for the occurrence of the next specific message.
+//!
+//! \param  char MessageName is the name of the message that should be awaited.
+//! \param  long Timeout is the maximum time that should be waited [ms].
+//!
+//! \note	The testcase searches the CAN channel the message is sent on.
+//- -----------------------------------------------------------------------------------------------
+testcase WaitForMessage (char MessageName[], long Timeout)
+{
+    dword MessageID;
+	char MsgName[64];
+	
+    MessageID = GetMessageID(MessageName);
+	write("ID= %x", MessageID);
+	
+	if ( getMessageName( MessageID, 0x10001, MsgName, elcount( MsgName)))
+	{
+		write("Message %s found on 0x10001 channel", MessageName);
+		WaitForMessageFunction(MessageID, Timeout);
+	}
+    else if ( getMessageName( MessageID, 0x10002, MsgName, elcount( MsgName)))
+	{
+		write("Message %s found on 0x10002 channel", MessageName);
+		
+		canOffline(3); 
+		SetBusContext(0x10002);
+		canOnline(3);
+	  
+		WaitForMessageFunction(MessageID, Timeout);
+		
+		canOffline(3); 
+		SetBusContext(0x10001);
+		canOnline(3);
+	}
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to wait for the occurrence of the next specific message on the given CAN channel.
+//!
+//! \param  char MessageName is the name of the message that should be awaited.
+//! \param  char CanChannel is the name of the CAN channel the message is awaited on.
+//! \param  long Timeout is the maximum time that should be waited [ms].
+//!
+//! \note	Available CAN Channels are: \n
+//!     		E_Can\n
+//!     		SF_Can\n
+//- -----------------------------------------------------------------------------------------------
+testcase WaitForMessageOnBus (char MessageName[], char CanChannel[], long Timeout)
+{
+	dword MessageID;
+	
+	ChangeCanChannelFn(CanChannel);
+	
+	MessageID = GetMessageID(MessageName);
+
+	  write("ID= %x", MessageID);
+    
+    WaitForMessageFunction(MessageID, Timeout);
+	
+	RestoreCanChannelFn();
+	
+	
+}
+  
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to change to the given CAN channel.
+//!
+//! \note	The ID of the original CAN channel is saved so it can be restored later.
+//!
+//! \param  char CanChannel is the name of the CAN channel we want to change to.
+//!
+//! \note	Available CAN Channels are: \n
+//!     		E_Can\n
+//!     		SF_Can\n
+//- -----------------------------------------------------------------------------------------------
+Testcase ChangeCanChannel(char CanChannel[])
+{
+  ChangeCanChannelFn(CanChannel);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to restore to the original CAN channel.
+//!
+//! \note	The ID of the original CAN channel is saved by the ChangeCanChannelFn funtion.
+//!
+//- -----------------------------------------------------------------------------------------------
+Testcase RestoreCanChannel()
+{
+  RestoreCanChannelFn();
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase which checks the given value against the value of the signal and waits for the given value.
+//!
+//! \note If this condition is already met when this function is called, it returns immediately 
+//!   without waiting. The test step is evaluated as either passed or failed depending on the results.
+//!
+//! \param  signal signalName is the name of the signal which is tested.
+//! \param  float signalValue is the value of the tested signal what we wait for.
+//! \param  long Timeout is the timeout for the test.
+//- -----------------------------------------------------------------------------------------------
+testcase WaitForSignalValue (signal * signalName,  float signalValue, long Timeout)
+{
+  WaitForSignalValueFunction(signalName, signalValue, Timeout);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function that checks the given value against the value of the signal and waits for the given value.
+//!  
+//! \note 	If this condition is already met when this function is called, it returns immediately 
+//!   without waiting. The test step is evaluated as either passed or failed depending on the results.
+//!
+//! \param  signal signalName is the name of the signal which is tested.
+//! \param  float signalValue is the value of the tested signal what we wait for.
+//! \param  long Timeout is the timeout for the test.
+//!
+//! \return No return value.
+//- -----------------------------------------------------------------------------------------------
+void WaitForSignalValueFunction (signal * signalName,  float signalValue, long Timeout)
+{
+  long result;
+  float signalActualValue;
+
+  result = 0;
+  signalActualValue = 0;
+  
+  
+  result = TestWaitForSignalMatch (signalName, signalValue, Timeout);
+  
+  if (result == 1)
+  {
+    // Signal with expected value arrived!      
+		TestStepPass("INFO","The signal arrived with the expected value: %f", signalValue);
+	}
+	else if (result == 0)
+	{ 
+    // Timeout occured! 
+    signalActualValue = getSignal(signalName);
+		TestStep("INFO","The signal has the following value: %f,", signalActualValue);        
+		TestStepFail("INFO","The signal has not arrived with the expected value within timeout!");  
+	}
+	else if(result == -2)
+	{
+		TestStepFail("INFO","Signal is not valid");
+	}
+	else
+	{
+		TestStepFail("INFO","General error");
+	}
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to call the AvoidSignalValueFunction.
+//!
+//! \param  signal signalName is the name of the signal which is tested.
+//! \param  float signalValue is the value of the tested signal should not get.
+//! \param  long Timeout is the timeout for the test.
+//- -----------------------------------------------------------------------------------------------
+testcase AvoidSignalValue (signal * signalName,  float signalValue, long Timeout)
+{
+    AvoidSignalValueFunction(signalName, signalValue, Timeout);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to check that the given signal doesn't get the given value
+//!
+//! \param  signal signalName is the name of the signal which is tested.
+//! \param  float signalValue is the value of the tested signal should not get.
+//! \param  long Timeout is the timeout for the test.
+//- -----------------------------------------------------------------------------------------------
+AvoidSignalValueFunction (signal * signalName,  float signalValue, long Timeout)
+{
+    long result;
+    float signalActualValue;
+
+    result = 0;
+    signalActualValue = 0;
+    
+    result = TestWaitForSignalMatch (signalName, signalValue, Timeout);
+  
+    if (result == 1)
+    {
+        // Signal with expected value arrived!      
+        TestStepFail("INFO","The signal got the value ( %.d ) within the timeout period!", signalValue);
+    }
+    else if (result == 0)
+    { 
+        // Timeout occured!   
+        TestStepPass("INFO","The signal did not get the value ( %.d ) within the timeout period!", signalValue);  
+    }
+    else if(result == -2)
+    {
+        TestStepFail("INFO","Signal is not valid");
+    }
+    else
+    {
+        TestStepFail("INFO","General error");
+    }
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to read out the supply voltage measured by the camera.
+//!
+//! \note	The result may differ (around 100-200mV) from the voltage set on the power supply.
+//!			Before calling this testcase, enter into Plant mode and RBEOL.
+//- -----------------------------------------------------------------------------------------------
+testcase ReadVoltage()
+{
+	ReadSupplyVoltage();
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to read out the supply voltage measured by the camera.
+//!
+//! \note	The result may differ (around 100-200mV) from the voltage set on the power supply. 
+//!			This testcase works in Default session.
+//- -----------------------------------------------------------------------------------------------
+testcase ReadVoltageDefault()
+{
+	ReadSupplyVoltageDefault();
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to read out the available temperature values in Default session.
+//!
+//!	\param	char type indicates what type of measured temperature value should be read out.
+//!
+//!	\note	Offset is considered.
+//!			\n
+//!			Available types:\n
+//!			- GenericECU: Returns the average of the ECU temperatures.\n
+//!			- Zynq0: Returns the temperature of the Zynq0.\n
+//!			- Zynq1: Returns the temperature of the Zynq1.
+//- -----------------------------------------------------------------------------------------------
+testcase ReadTempDefaultSession(char value[])
+{
+	ReadTempDefault(value);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to read out the available temperature values for all ECUs and Imagers.
+//!
+//! \note	This testcase is available in all platforms. Before calling this testcase, enter into Plant mode and RBEOL.
+//!
+//!	\param	char type indicates what type of measured temperature value should be read out.
+//!
+//!	\note	Offset is considered.
+//!			\n
+//!			Available types:\n
+//!			- GenericECU: Returns the average of the ECU temperatures.\n
+//!			- GenericImager: Returns the average of the Imager temperatures.\n
+//!			- Zynq0: Returns the temperature of the Zynq0.\n
+//!			- Zynq1: Returns the temperature of the Zynq1.\n
+//!			- ImagerA: Returns the temperature of the ImagerA.\n
+//!			- ImagerB: Returns the temperature of the ImagerB.
+//- -----------------------------------------------------------------------------------------------
+testcase ReadTempRBEOL(char value[])
+{
+	ReadTempPlant(value);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to read out the supply voltage measured by the camera.
+//!
+//! \note	The result of the function may differ (around 100-200mV) from the voltage set on the power supply. 
+//!			Before calling this function, enter into Plant mode and RBEOL.
+//!
+//! \return	Measured supply voltage in float.
+//- -----------------------------------------------------------------------------------------------
+float ReadSupplyVoltage()
+{
+	//Variables
+	float v; //The decimal value of the supply voltage will be stored here
+	char temp[4]; //This is needed for the response extraction
+	
+	v=0.0;
+	
+	if(RequestResponseCompareLogic("224258", "624258.+", "Regexp","Physical"))
+	{
+		saveResponse();
+	
+		temp[0] = '0';
+		temp[1] = 'x';
+		temp[2] = seedString[6];
+		temp[3] = seedString[7];
+	
+		//TestStep("INFO", "The measured supply voltage is in hex: %c%c", temp[2],temp[3]);
+	
+		v = (float) atol(temp);
+		v = v *0.1; //this is how the actual voltage value is calculated
+	
+		TestStep("INFO", "The measured supply voltage is: %f V", v);
+
+		return v;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to read out the supply voltage measured by the camera.
+//!
+//! \note	The result of the function may differ (around 100-200mV) from the voltage set on the power supply. 
+//!			This function works in Default session.
+//!
+//! \return	Measured supply voltage in float.
+//- -----------------------------------------------------------------------------------------------
+float ReadSupplyVoltageDefault()
+{
+	//Variables
+	float v; //The decimal value of the supply voltage will be stored here
+	char temp[4]; //This is needed for the response extraction
+	
+	v=0.0;
+	
+	if(RequestResponseCompareLogic("22d112", "62d112.+", "Regexp","Physical"))
+	{
+		saveResponse();
+	
+		temp[0] = '0';
+		temp[1] = 'x';
+		temp[2] = seedString[6];
+		temp[3] = seedString[7];
+	
+		//TestStep("INFO", "The measured supply voltage is in hex: %c%c", temp[2],temp[3]);
+	
+		v = (float) atol(temp);
+		v = v *0.08; //this is how the actual voltage value is calculated
+	
+		TestStep("INFO", "The measured supply voltage is: %f V", v);
+
+		return v;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to read out the available temperature values in Default session.
+//!
+//!	\param	char type indicates what type of measured temperature value should be read out.
+//!
+//!	\note	Offset is considered.
+//!			\n
+//!			Available types:\n
+//!			- GenericECU: Returns the average of the ECU temperatures.\n
+//!			- Zynq0: Returns the temperature of the Zynq0.\n
+//!			- Zynq1: Returns the temperature of the Zynq1.
+//!
+//! \return Desired temperature value in integer.
+//- -----------------------------------------------------------------------------------------------
+int ReadTempDefault(char type[])
+{
+	//Variables
+	int t; //The decimal value of the temperature will be stored here
+	char tempECU[4]; //This is needed for the response extraction
+	char tempZ0[4]; //This is needed for the response extraction
+	char tempZ1[4]; //This is needed for the response extraction
+	
+	//At this point RBEOL session is assumed
+	if(RequestResponseCompareLogic("22f200","62f200.*","Regexp","Physical"))
+	{
+		saveResponse();
+	
+		if(0 == strncmp("GenericECU", type, strlen(type)))
+		{
+			tempECU[0]='0';
+			tempECU[1]='x';
+			tempECU[2]=seedString[16]; //ECU temp
+			tempECU[3]=seedString[17];
+		
+			t=(int)atol(tempECU);
+			t=t-100;
+		
+			TestStep("INFO", "The measured ECU temperature is: %d degC", t);	
+		}
+		else if(0 == strncmp("Zynq0", type, strlen(type)))
+		{
+			tempZ0[0]='0';
+			tempZ0[1]='x';
+			tempZ0[2]=seedString[8]; //Z0 ECU
+			tempZ0[3]=seedString[9];
+		
+			t=(int)atol(tempZ0);
+			t=t-100;
+		
+			TestStep("INFO", "The measured Zynq0 temperature is: %d degC", t);	
+		}
+		else if(0 == strncmp("Zynq1", type, strlen(type)))
+		{
+			tempZ1[0]='0';
+			tempZ1[1]='x';
+			tempZ1[2]=seedString[12]; //Z1 ECU
+			tempZ1[3]=seedString[13];
+		
+			t=(int)atol(tempZ1);
+			t=t-100;
+		
+			TestStep("INFO", "The measured Zynq1 temperature is: %d degC", t);	
+		}
+		else
+		{
+			TestStepFail("INFO","The type '%s' is not valid!", type);
+		}
+		return t;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Function to read out the available temperature values for all ECUs and Imagers.
+//!
+//! \note	This function is available in all platforms. Before calling this function, enter into Plant mode and RBEOL.
+//!
+//!	\param	char type indicates what type of measured temperature value should be read out.
+//!
+//!	\note	Offset is considered.
+//!			\n
+//!			Available types:\n
+//!			- GenericECU: Returns the average of the ECU temperatures.\n
+//!			- GenericImager: Returns the average of the Imager temperatures.\n
+//!			- Zynq0: Returns the temperature of the Zynq0.\n
+//!			- Zynq1: Returns the temperature of the Zynq1.\n
+//!			- ImagerA: Returns the temperature of the ImagerA.\n
+//!			- ImagerB: Returns the temperature of the ImagerB.
+//!
+//! \return Desired temperature value in integer.
+//- -----------------------------------------------------------------------------------------------
+int ReadTempPlant(char type[])
+{
+
+	//Variables
+	int t; //The decimal value of the temperature will be stored here
+	char tempECU[4]; //This is needed for the response extraction
+	char tempImg[4]; //This is needed for the response extraction
+	char tempZ0[4]; //This is needed for the response extraction
+	char tempZ1[4]; //This is needed for the response extraction
+	char tempImgA[4]; //This is needed for the response extraction
+	char tempImgB[4]; //This is needed for the response extraction
+	
+	//At this point RBEOL session is assumed
+	if(RequestResponseCompareLogic("224250","624250.*","Regexp","Physical"))
+	{
+		saveResponse();
+		
+		if(0 == strncmp("GenericECU", type, strlen(type)))
+		{
+			tempECU[0]='0';
+			tempECU[1]='x';
+			tempECU[2]=seedString[8]; //ECU temp
+			tempECU[3]=seedString[9];
+		
+			t=(int)atol(tempECU);
+			t=t-128;
+		
+			TestStep("INFO", "The measured ECU temperature is: %d degC", t);
+		}
+		else if(0 == strncmp("GenericImager", type, strlen(type)))
+		{
+			tempImg[0]='0';
+			tempImg[1]='x';
+			tempImg[2]=seedString[12]; //Img temp
+			tempImg[3]=seedString[13];
+	
+			t=(int)atol(tempImg);
+			t=t-128;
+		
+			TestStep("INFO", "The measured Imager temperature is: %d degC", t);	
+		}
+		else if(0 == strncmp("Zynq0", type, strlen(type)))
+		{
+			tempZ0[0]='0';
+			tempZ0[1]='x';
+			tempZ0[2]=seedString[16]; //Z0 ECU
+			tempZ0[3]=seedString[17];
+		
+			t=(int)atol(tempZ0);
+			t=t-128;
+		
+			TestStep("INFO", "The measured Zynq0 temperature is: %d degC", t);
+		}
+		else if(0 == strncmp("Zynq1", type, strlen(type)))
+		{
+			tempZ1[0]='0';
+			tempZ1[1]='x';
+			tempZ1[2]=seedString[20]; //Z1 ECU
+			tempZ1[3]=seedString[21];
+		
+			t=(int)atol(tempZ1);
+			t=t-128;
+		
+			TestStep("INFO", "The measured Zynq1 temperature is: %d degC", t);	
+		}
+		else if(0 == strncmp("ImagerA", type, strlen(type)))
+		{
+			tempImgA[0]='0';
+			tempImgA[1]='x';
+			tempImgA[2]=seedString[24]; //Img A
+			tempImgA[3]=seedString[25];
+		
+			t=(int)atol(tempImgA);
+			t=t-128;
+	
+			TestStep("INFO", "The measured Imager A temperature is: %d degC", t);
+		}
+		else if(0 == strncmp("ImagerB", type, strlen(type)))
+		{
+			tempImgB[0]='0';
+			tempImgB[1]='x';
+			tempImgB[2]=seedString[28]; //Img A
+			tempImgB[3]=seedString[29];
+		
+			t=(int)atol(tempImgB);
+			t=t-128;
+	
+			TestStep("INFO", "The measured Imager B temperature is: %d degC", t);
+		}
+		else
+		{
+			TestStepFail("INFO","The type '%s' is not valid!", type);
+		}
+		return t;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to test the time the camera calibration takes.
+//!
+//!
+//!	\param	int loop is the number of requested iterations of calibration.
+//!
+//- -----------------------------------------------------------------------------------------------
+testcase CalibTimeMeasurement(int loop)
+{
+  char Request[20] = "3103800b";
+  char Response[20] = "7103800b2000";
+  char CompareMode[15] = "RegexpNoFailed";
+  char aTime1[10] = "0";
+  char aTime2[10] = "20000";
+  char loopNr[10];
+  char timeString[100];
+  int i;
+  dword   fileHandleWrite;
+  long    filestate;
+  
+  fileHandleWrite = 0;
+  filestate = 0;
+  
+  snprintf(tempArray, elcount(tempArray), ""); //Clear the tempArray array
+  snprintf(timeString, elcount(timeString), ""); //Clear the timeString array
+  
+	for(i = 0; i < loop; i ++)
+  {
+    //Start Auto Calibrate Camera Target routine
+    RequestResponseCompareLogic("1003", "5003.*", "Regexp","Physical");
+	
+	RequestResponseCompareLogic("3101800b0001000100080208000a00be0000", "7101800b22", "Equal","Physical");
+    
+    RequestResponseTimeElapsedFn(Request, Response, CompareMode, aTime1, aTime2);
+    
+    ltoa(i, loopNr, 10);
+    ltoa(timeValue, timeString, 10);
+    
+    strncat(tempArray, loopNr, elcount(tempArray));
+    strncat(tempArray, ";", elcount(tempArray));
+    strncat(tempArray, timeString, elcount(tempArray));
+    strncat(tempArray, "\n", elcount(tempArray));
+	
+	RequestResponseCompareLogic("1001", "5001.*", "Regexp","Physical");
+	
+	testWaitForTimeout(2000);
+  }
+  
+  //Write out the stored measurement values into to a txt file in the global variable solution is not appropriate
+  SetWritePath("C:\\temp");
+  fileHandleWrite = openFilewrite("Calibration.csv", 0); // If mode=0 writing can be executed in ASCII mode. An already existing file will be overwritten.
+  
+  if(0 == fileHandleWrite)
+  {
+      TestStepFail("INFO","Error at Fileopen for writing"); //Error message if no file is opened for writing
+      //stop(); //Stop measurement
+  }
+  else
+  {
+    filePutString(tempArray, strlen(tempArray), fileHandleWrite);
+  }
+  filestate = fileClose (fileHandleWrite);
+  
+  if (0 == filestate)
+  {
+      TestStepFail("INFO","Error at FileClose after writing it!");
+  } 
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to test the changing of the given two signals in a message against the given signal values.
+//!
+//! \param  signal firstSingalName is the name of the first signal to be tested.
+//! \param  float firstAssumedValue is the assumed signal value of the first signal at the begining of the test.
+//! \param  cfloat firstExpectedValue is the expected signal value of the first signal at the end of the test.
+//! \param  signal secondSingalName is the name of the second signal to be tested.
+//! \param  float secondAssumedValue is the assumed signal value of the second signal at the begining of the test.
+//! \param  cfloat secondExpectedValue is the expected signal value of the second signal at the end of the test.
+//! \param  char MessageName is the message what contains the signals.
+//- -----------------------------------------------------------------------------------------------
+testcase SignalMonitoring (signal * firstSingalName, float firstAssumedValue, float firstExpectedValue,signal * secondSingalName, float secondAssumedValue, float secondExpectedValue, char MessageName[] )
+{
+  int changeOccured;
+  float firstSignalActualValue;
+  float secondSignalActualValue;
+  dword MessageID;
+  long Timeout;
+  int i;
+  
+  changeOccured = 0;
+  firstSignalActualValue = 0;
+  secondSignalActualValue = 0;
+  MessageID = GetMessageID(MessageName);
+  Timeout = 1000;
+  i = 0;
+  
+    while (changeOccured == 0 && i < 15000)
+    {
+      firstSignalActualValue = getsignal(firstSingalName);
+      secondSignalActualValue = getsignal(secondSingalName);
+      
+      if (firstSignalActualValue == firstAssumedValue && secondSignalActualValue ==  secondAssumedValue)
+      {
+        changeOccured = 0;
+        TestStep("INFO","The values of the monitored signals did not change.");
+      }
+      else if (firstSignalActualValue != firstAssumedValue && secondSignalActualValue ==  secondAssumedValue)
+      {
+        changeOccured = 1;
+        TestStep("INFO","The value of the %s signal changed to %f", firstSingalName.name, firstSignalActualValue);
+        continue;
+      }
+      else if (firstSignalActualValue == firstAssumedValue && secondSignalActualValue !=  secondAssumedValue)
+      {
+        changeOccured = 2;
+        TestStep("INFO","The value of the %s signal changed to %f", secondSingalName.name, secondSignalActualValue);
+        continue;
+      }
+      else if (firstSignalActualValue != firstAssumedValue && secondSignalActualValue !=  secondAssumedValue)
+      {
+        changeOccured = 3;
+        TestStep("INFO","The value of the %s signal changed to %f", firstSingalName.name, firstSignalActualValue);
+        TestStep("INFO","The value of the %s signal changed to %f", secondSingalName.name, secondSignalActualValue);
+        continue;
+      }
+      
+      if(i == 0 && firstSignalActualValue == firstExpectedValue && secondSignalActualValue == secondExpectedValue)
+      { 
+        changeOccured = -1;
+        // if at the begining, the signals ALREADY have the expected value
+		TestStep("INFO:","Assumed value is not present at the time when the function is called.");
+      }
+      
+      TestWaitForMessage(MessageID, Timeout);   // kicserélve, hogy ne spammelje tele a html-t
+      
+      i++;
+    }
+    if (i!=15000)
+    {
+      if (i == 1 && changeOccured == -1)
+      {
+        testStepFail("INFO", "The monitored signals already have the expected values.");
+      }
+      else if(firstSignalActualValue == firstExpectedValue && secondSignalActualValue == secondExpectedValue)
+      {
+        testStepPass("INFO", "The monitored signals have the expected values.");
+      }
+      else if(firstSignalActualValue == firstExpectedValue && secondSignalActualValue != secondExpectedValue)
+      {
+        TestStep("INFO","The %s signal has the expected value", firstSingalName.name);
+        TestStepFail("INFO","The %s signal doesn't have the expected value", secondSingalName.name);
+      }
+      else if(firstSignalActualValue != firstExpectedValue && secondSignalActualValue == secondExpectedValue)
+      {
+        TestStep("INFO","The %s signal has the expected value", secondSingalName.name);
+        TestStepFail("INFO","INFO","The %s signal doesn't have the expected value", firstSingalName.name);
+      }
+      else
+      {
+        TestStepFail("INFO","None of the monitored signals have the expected value");
+      }
+    }
+    else
+    {
+      testStepFail("INFO", "TestStep timeout!");
+    }
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to check if the specified signal values remain unchanged for a specified time.
+//!
+//! \param  signal firstSingalName is the name of the first signal to be tested.
+//! \param  cfloat firstExpectedValue is the expected signal value of the first signal.
+//! \param  signal secondSingalName is the name of the second signal to be tested.
+//! \param  cfloat secondExpectedValue is the expected signal value of the second signal.
+//! \param  char MessageName is the message what contains the signals.
+//! \param  long supressTime is the time the signal should not change.
+//- -----------------------------------------------------------------------------------------------
+testcase SignalMonitoringStable (signal * firstSingalName, float firstExpectedValue,signal * secondSingalName, float secondExpectedValue, char MessageName[], long supressTime )
+{
+  int changeOccured;
+  float firstSignalActualValue;
+  float secondSignalActualValue;
+  dword MessageID;
+  long Timeout;
+  long result;
+  long i;
+  
+  changeOccured = 0;
+  firstSignalActualValue = 0;
+  secondSignalActualValue = 0;
+  MessageID = GetMessageID(MessageName);
+  Timeout = 1001;
+  result = 1;
+  i = 0;
+  
+  supressTime = supressTime / 20;
+  
+ // suppressed testcase
+    while (changeOccured == 0 && i < supressTime && result == 1)
+    {
+      firstSignalActualValue = getsignal(firstSingalName);
+      secondSignalActualValue = getsignal(secondSingalName);
+      
+      if (firstSignalActualValue == firstExpectedValue && secondSignalActualValue ==  secondExpectedValue)
+      {
+        changeOccured = 0;
+        //TestStep("INFO","The values of the monitored signals did not change.");
+      }
+      else
+      {
+        changeOccured = 1;
+        TestStep("INFO","The value of the %s signal is: %f", firstSingalName.name, firstSignalActualValue);
+        TestStep("INFO","The value of the %s signal is: %f", secondSingalName.name, secondSignalActualValue);
+        continue;
+      }
+      result = TestWaitForMessage(MessageID, Timeout);   // kicserélve, mert kell a visszatérési értéke!
+      
+      i++;
+    }
+    
+    if(i==supressTime && result == 1)
+    {
+      testStepPass("INFO", "The values of the monitored signals did not change during the monitored time-period.");
+    }
+    else if (i <= supressTime && result == 0 && changeOccured == 0 )
+    {
+      testStepPass("INFO", "The values of the monitored signals did not change. The sequence ended!");
+    }
+    else if (result == -2) 
+    {
+      TestStepFail("INFO","Constraint violation!");
+    }
+    else
+    {
+      TestStepFail("INFO","The values of the monitored signals CHANGED during the monitored time-period!");
+    }
+}
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase which sets the value of the given environment variable to a specified value PLUS the offset.
+//!
+//! \param  char EnvvarName is the name of the environment variable which value should be set.
+//! \param  char value is the base value
+//! \param  char offset is the offset added to the base value
+//! 
+//! \note	 This test case can be used as a way to use predefined variables, then use it as a base value.
+//!        Examle usage: (set to the param value)
+//!                      #) SetEnvvarTo (string EnvvarName ENV_NAME_YOU_KNOW, string value @some_param@, string offset 0)
+//!                      
+//!                      (set to less than the value)
+//!                      #) SetEnvvarTo (string EnvvarName ENV_NAME_YOU_KNOW, string value @some_param@, string offset -13)
+//- -----------------------------------------------------------------------------------------------
+/*
+testcase SetEnvvarTo (char EnvvarName[], char value[], char offset[])
+{
+  double value_db;
+  double offset_db;
+    
+  value_db = atodbl(value);
+  offset_db = atodbl(offset);
+  
+  putValue (EnvvarName, value_db + offset_db);
+   TestStepPass("INFO","The value of the variable is now equal with the given value + offset value.  OK" );
+}
+*/
+void setType(int rxId, int txId)
+{
+	//TODO: Check if the rxId an txId is a valid hex format
+	//They will be from now the message IDs in CAN
+	OSEKTL_SetTxId(txId);   
+	OSEKTL_SetRxId(rxId);
+}
+testcase FunctionalMessage_SPRB(char Request[])
+{
+	setType (0x75A,0x7DF);
+	RequestResponseCompareLogic(Request," ", "None", "Functional");
+    //Reset the default CAN message IDs
+    //setType (0x75A,0x752);
+}
+//- -----------------------------------------------------------------------------------------------
+//! \teststep Send $1 Using physical addressing
+//! \testresponse NO response is received 
+//- -----------------------------------------------------------------------------------------------
+testcase RequestResponse_SPRB(char Request[])
+{
+     setType (0x75A,0x752);
+	RequestResponseCompareLogic(Request," ", "None","Physical");
+}
+
+testcase Wait(long Time)
+{
+	TestWaitForTimeout(Time);
+}
+
+testcase SetEnvVar(char Name[], char Value[], long WaitTime)
+{
+    function_SetEnvVar(Name, Value, WaitTime);
+} 
+function_SetEnvVar(char Name[], char Value[], long WaitTime)
+{
+    int intValue;
+	float floatValue;
+	
+	if(1 == str_match_regex(Value, "^(\\d+)$")) //int
+	{
+		intValue = atol(Value);
+		strtod(Value, floatValue);
+		putValue(Name, intValue);
+		putValue(Name, floatValue);
+        TestStepPass("Passed","The %s envvar (int) value was set to %s .", Name, Value);	
+	}
+	else if(1 == str_match_regex(Value, "^(\\d+(\\.\\d+)?)$")) //float
+	{
+		strtod(Value, floatValue);
+		putValue(Name, floatValue);
+        TestStepPass("Passed","The %s envvar (float) value was set to %s .", Name, Value);	
+	}
+	else //string
+	{
+		putValue(Name, Value);
+        TestStepPass("Passed","The %s envvar (string) value was set to %s .", Name, Value);	
+	}
+	if(WaitTime == 0) //Handling to avoid infinite loop
+	{
+		TestWaitForTimeout(1);
+	}
+	else
+	{
+		TestWaitForTimeout(WaitTime);
+	}
+}
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Testcase to turn off and on the camera.
+//- -----------------------------------------------------------------------------------------------
+testcase cameraHardReset()
+{
+	putValue(Env_VoltBKStat,0);
+	TestWaitForTimeout(1000);
+	putValue(Env_VoltBKStat,1);
+}
+
+//- -----------------------------------------------------------------------------------------------
+//
+
+//- -----------------------------------------------------------------------------------------------
+
+
+testcase  FaultCounterCheck(char Env_Variable[],char Request[], char Response[],char CompareMode[],long NuOfCount,long FaultCountReset, long FaultCounterBytePos, long TestWait)
+  
+{
+  int i;
+  int FaultCount=0;
+
+
+  for (i=0; i<NuOfCount; i++)
+  {
+  FaultCount = FaultCount+1;
+  
+  putValue(Env_Variable,0);
+  testWaitForTimeout(TestWait);
+
+  RequestResponseCompareLogic(Request, Response, CompareMode, "Physical");
+    
+  write("Expected FaultCounter value %d",FaultCount);
+  write("Received FaultCounter value %d",RsRxIntData[FaultCounterBytePos]);
+    
+  TestStep("INFO","Expected FaultCounter value = %d ", FaultCount);
+    
+    if (RsRxIntData[FaultCounterBytePos]==FaultCount)
+    {
+     TestStepPass("PASSED","Received FaultCounter value = %d",RsRxIntData[FaultCounterBytePos]);	
+    }
+    else
+    {
+      testStepFail("FAILED","Received FaultCounter value = %d",RsRxIntData[FaultCounterBytePos]);
+      putValue(Env_Variable,1);
+      testWaitForTimeout(500);
+      break;
+    }
+
+  if (RsRxIntData[FaultCounterBytePos]==FaultCountReset)
+    {
+      FaultCount=0;
+     }
+  putValue(Env_Variable,1);
+  testWaitForTimeout(TestWait); 
+  }
+  RequestResponseCompareLogic("14ffffff", "54", "Equal", "Physical");
+}
+
+//- -----------------------------------------------------------------------------------------------
+// Env_Variable - Env variable to create DTC
+// RestartType - Type of restart to be done (1101,1102,1103)
+// NuOfRestart - How many restart to be done 
+// ClearDTCCycles - After how many ignition cycle passive DTC will clear
+// AgingCounterBytePos - Byte position of Aging counte in rsponse 
+// AgedCounterBytePos - Byte position of Aged counter in response
+// TestWait - wait time after restart
+//- -----------------------------------------------------------------------------------------------
+
+testcase  Aging_Aged_Counter(char Env_Variable[],char Request[], char Response[], char CompareMode[],char RestartType[], long NuOfRestart,long ClearDTCCycles, long AgingCounterBytePos,long AgedCounterBytePos, long TestWait)
+  
+{
+  int i;
+  int AgingCount=0;
+  int AgedCount=0;
+
+  putValue(Env_Variable,0);
+  testWaitForTimeout(1000);
+  putValue(Env_Variable,1);
+  testWaitForTimeout(1000);
+  
+  RequestResponseCompareLogic(Request, Response, CompareMode, "Physical"); 
+  
+    if (RsRxIntData[5]==00) 
+  {
+    testStepFail("FAILED","Expected DTCis not Available",AgingCount);
+  }
+  
+  for (i=0; i<NuOfRestart; i++)
+  {
+  AgingCount = AgingCount+1;
+    
+  testWaitForTimeout(5000);
+  RequestResponseCompareLogic(RestartType, "51.*", "Regexp", "Physical");
+  testWaitForTimeout(TestWait); 
+  RequestResponseCompareLogic(Request, Response, CompareMode, "Physical");
+    
+   if (RsRxIntData[5]==00) 
+  {
+    testStepFail("FAILED","DTC is Cleared at %d Restarts",AgingCount);
+    break;
+  }
+  write("Expected AgingCounter value %d",AgingCount);
+  write("Received AgingCounter value %d",RsRxIntData[AgingCounterBytePos]);
+  write("Expected AgedCounter value %d",AgedCount);
+  write("Received AgedCounter value %d",RsRxIntData[AgedCounterBytePos]);
+  TestStep("INFO","Expected AgingCounter value = %d ", AgingCount);
+  TestStep("INFO","Expected AgedCounter value = %d ", AgedCount);
+    
+    if (RsRxIntData[AgingCounterBytePos]==AgingCount&&RsRxIntData[AgedCounterBytePos]==AgedCount)
+      
+    {
+     TestStepPass("PASSED","Received AgingCounter value = %d .",RsRxIntData[AgingCounterBytePos]);	
+     TestStepPass("PASSED","Received AgedCounter value = %d .",RsRxIntData[AgedCounterBytePos]);
+    }
+    else if(RsRxIntData[AgingCounterBytePos]!=AgingCount)
+    {
+      testStepFail("FAILED","Received AgingCounter value = %d",RsRxIntData[AgingCounterBytePos]);
+      testStepPass("PASSED","Received AgedCounter value = %d",RsRxIntData[AgedCounterBytePos]);
+
+      break;
+    }
+    else if(RsRxIntData[AgedCounterBytePos]!=AgedCount)
+    {
+      testStepPass("PASSED","Received AgingCounter value = %d",RsRxIntData[AgingCounterBytePos]);
+      testStep("FAILED","Received AgedCounter value = %d",RsRxIntData[AgedCounterBytePos]);
+
+      break;
+    }
+    
+    if (AgingCount==ClearDTCCycles)
+    {
+
+      RequestResponseCompareLogic(Request, "19.*", "Regexp", "Physical");
+      
+      if(RsRxIntData[5]==00) 
+      {
+        testStepPass("PASSED","DTC is cleared after expected ignition cycles = %d restart",RsRxIntData[ClearDTCCycles]);
+        AgedCount=AgedCount+1;
+        AgingCount=0;
+        putValue(Env_Variable,0);
+        testWaitForTimeout(500);
+        putValue(Env_Variable,1);
+        testWaitForTimeout(500);
+      }
+      else
+      {
+        testStepFail("FAILED","DTC is not cleared after = %d restart",RsRxIntData[ClearDTCCycles]);
+        break;
+      }
+     }
+
+  }
+  testWaitForTimeout(500);
+  //RequestResponseCompareLogic("14ffffff", "54", "Equal", "Physical");
+}
+
+testcase MID_Check(char Env_Variable,char Request[], char Response[], char CompareMode[],int MID)
+{
+}
+
+testcase Occurance_Counter_100(char Env_Variable[],char Counter_Req[],char Counter_resp[],char compareMode[])
+{
+int i=0;
+for(i=0;i<100;i++)
+{
+
+	putvalue(Env_Variable,0);
+	putvalue(Env_Variable,1);
+	RequestResponseCompareLogic(Counter_Req, Counter_resp, compareMode,"Physical");         
+}
+}
+
+testcase Occurance_Counter_50(char Env_Variable[],char Counter_Req[],char Counter_resp[],char compareMode[])
+{
+int i=0;
+for(i=0;i<50;i++)
+{
+
+	putvalue(Env_Variable,0);
+	putvalue(Env_Variable,1);
+	RequestResponseCompareLogic(Counter_Req, Counter_resp, compareMode,"Physical");         
+}
+}
+
+testcase Occurance_Counter_4(char Env_Variable[],char Counter_Req[],char Counter_resp[],char compareMode[])
+{
+int i=0;
+for(i=0;i<4;i++)
+{
+
+	putvalue(Env_Variable,0);
+	putvalue(Env_Variable,1);
+	RequestResponseCompareLogic(Counter_Req, Counter_resp, compareMode,"Physical");         
+}
+}

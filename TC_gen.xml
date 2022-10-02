@@ -1,0 +1,1857 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testmodule title="Reflash full test" version="1.0">
+	<variants>
+		<variant name="Automated">REFFLASHAutomated Testcase</variant>
+	</variants>
+	<testgroup title="REFFLASHAutomated Testcase">
+		<externalref type="doors" owner="TAE - DOORS extension" title="ID_2" />
+		<testgroup title="Base SW to Latest SW M3">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_3" />
+			<testgroup title="Flash Base SW via UART">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_4" />
+				<testgroup title="Flash SW">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_5" />
+					<testgroup title="UART flash CA_S311_BL01_RC03">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_6" />
+						<testcase title="1- Flash Base Software CA_S311_BL01_RC03 via UART successful" ident="-" variants="Automated">
+							<testerconfirmation title="Flash Base Software CA_S311_BL01_RC03 via UART successful">Flash Base Software CA_S311_BL01_RC03 via UART successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_7" />
+					<testgroup title="Select_and_check_variant">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_8" />
+						<testcase title="1- Tester Present is ON" ident="-">
+							<set title="EnvTesterPresentOnOff">
+								<envvar name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait time="0" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+							<caplparam name="Request" type="string">1003</caplparam>
+							<caplparam name="Response" type="string">5003.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="3- wait" ident="-">
+							<wait time="1000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Select variant" ident="-">
+							<caplparam name="Request" type="string">2ef1f004</caplparam>
+							<caplparam name="Response" type="string">6ef1f0</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Check variant" ident="-">
+							<caplparam name="Request" type="string">22f1f0</caplparam>
+							<caplparam name="Response" type="string">62f1f004</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F194 Supplier Software number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_9" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F194 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f194</caplparam>
+							<caplparam name="Response" type="string">62f1945333313120424c30315f52433033.{4}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_10" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f189</caplparam>
+							<caplparam name="Response" type="string">62f1895357432e362e30.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F089 ECUHardwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_11" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F089 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f089</caplparam>
+							<caplparam name="Response" type="string">62f0894857432e322e30.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_12" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f187</caplparam>
+							<caplparam name="Response" type="string">62f187373931373033302d43443033.{18}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F188 Software Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_13" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F188 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f188</caplparam>
+							<caplparam name="Response" type="string">62f188393231323430312d43443033.{16}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F170 FBL Version Information">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_14" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F170 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f170</caplparam>
+							<caplparam name="Response" type="string">62f17056392e33</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1F4 vehicle configuration">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_15" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F4 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f1f4</caplparam>
+							<caplparam name="Response" type="string">62f1f4.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1F0 vehicle configuration">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_16" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F0 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f1f0</caplparam>
+							<caplparam name="Response" type="string">62f1f030.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_17" />
+					<testgroup title="ProgrammingCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_18" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220200</caplparam>
+							<caplparam name="Response" type="string">620200.*0</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_19" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220201</caplparam>
+							<caplparam name="Response" type="string">620201.*0</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_20" />
+					<testgroup title="Check RBEOLDID">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_21" />
+						<testcase title="1- Access to RBEOL" ident="-">
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="2- Unlock RBEOL" ident="-">
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="3- Wait 5s" ident="-">
+							<wait time="5000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Send service 0x22 to the camera for the DID F1E0" ident="-">
+							<caplparam name="Request" type="string">22f1e0</caplparam>
+							<caplparam name="Response" type="string">62f1e0.*3</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Send service 0x22 to the camera for the DID F1DD" ident="-">
+							<caplparam name="Request" type="string">22f1dd</caplparam>
+							<caplparam name="Response" type="string">62f1dd.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="6- Send service 0x22 to the camera for the DID 4255" ident="-">
+							<caplparam name="Request" type="string">224255</caplparam>
+							<caplparam name="Response" type="string">624255.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="7- Send service 0x22 to the camera for the DID 4259" ident="-">
+							<caplparam name="Request" type="string">224259</caplparam>
+							<caplparam name="Response" type="string">624259.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="8- Reset ECU" ident="-">
+							<caplparam name="Request" type="string">1101</caplparam>
+							<caplparam name="Response" type="string">5101</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase title="9- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="10- Send 1001" ident="-">
+							<caplparam name="Request" type="string">1001</caplparam>
+							<caplparam name="Response" type="string">5001.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="11- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+			<testgroup title="Re-Flash Latest SW M3 via X-Flash 1st">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_22" />
+				<testgroup title="Flash SW">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_23" />
+					<testgroup title="Xflash CA_S311_BL01_RC05">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_24" />
+						<testcase title="1- Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful" ident="-" variants="Automated">
+							<testerconfirmation title="Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful">Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_25" />
+					<testgroup title="Select_and_check_variant">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_26" />
+						<testcase title="1- Tester Present is ON" ident="-">
+							<set title="EnvTesterPresentOnOff">
+								<envvar name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait time="0" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+							<caplparam name="Request" type="string">1003</caplparam>
+							<caplparam name="Response" type="string">5003.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="3- wait" ident="-">
+							<wait time="1000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Select variant" ident="-">
+							<caplparam name="Request" type="string">2ef1f004</caplparam>
+							<caplparam name="Response" type="string">6ef1f0</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Check variant" ident="-">
+							<caplparam name="Request" type="string">22f1f0</caplparam>
+							<caplparam name="Response" type="string">62f1f004</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F194 Supplier Software number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_27" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F194 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f194</caplparam>
+							<caplparam name="Response" type="string">62f1945333313120424c30315f52433035.{4}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_28" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f189</caplparam>
+							<caplparam name="Response" type="string">62f1895357432e372e31.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F089 ECUHardwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_29" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F089 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f089</caplparam>
+							<caplparam name="Response" type="string">62f0894857432e322e30.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_30" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f187</caplparam>
+							<caplparam name="Response" type="string">62f187373931373033302d43443033.{18}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F188 Software Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_31" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F188 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f188</caplparam>
+							<caplparam name="Response" type="string">62f188393231323430312d43443033.{16}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F170 FBL Version Information">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_32" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F170 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f170</caplparam>
+							<caplparam name="Response" type="string">62f17056392e33</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1F4 vehicle configuration">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_33" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F4 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f1f4</caplparam>
+							<caplparam name="Response" type="string">62f1f40.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_34" />
+					<testgroup title="ProgrammingCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_35" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220200</caplparam>
+							<caplparam name="Response" type="string">620200.*1</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_36" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220201</caplparam>
+							<caplparam name="Response" type="string">620201.*1</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_37" />
+					<testgroup title="Check RBEOLDID">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_38" />
+						<testcase title="1- Access to RBEOL" ident="-">
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="2- Unlock RBEOL" ident="-">
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="3- Wait 5s" ident="-">
+							<wait time="5000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Send service 0x22 to the camera for the DID F1E0" ident="-">
+							<caplparam name="Request" type="string">22f1e0</caplparam>
+							<caplparam name="Response" type="string">62f1e0.*3</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Send service 0x22 to the camera for the DID F1DD" ident="-">
+							<caplparam name="Request" type="string">22f1dd</caplparam>
+							<caplparam name="Response" type="string">62f1dd.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="6- Send service 0x22 to the camera for the DID 4255" ident="-">
+							<caplparam name="Request" type="string">224255</caplparam>
+							<caplparam name="Response" type="string">624255.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="7- Send service 0x22 to the camera for the DID 4259" ident="-">
+							<caplparam name="Request" type="string">224259</caplparam>
+							<caplparam name="Response" type="string">624259.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="8- Reset ECU" ident="-">
+							<caplparam name="Request" type="string">1101</caplparam>
+							<caplparam name="Response" type="string">5101</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase title="9- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="10- Send 1001" ident="-">
+							<caplparam name="Request" type="string">1001</caplparam>
+							<caplparam name="Response" type="string">5001.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="11- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+		</testgroup>
+		<testgroup title="Base SW to Latest SW M5">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_39" />
+			<testgroup title="Flash Base SW via UART">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_40" />
+				<testgroup title="Flash SW">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_41" />
+					<testgroup title="UART flash CA_S311_BL01_RC03">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_42" />
+						<testcase title="1- Flash Base Software CA_S311_BL01_RC03 via UART successful" ident="-" variants="Automated">
+							<testerconfirmation title="Flash Base Software CA_S311_BL01_RC03 via UART successful">Flash Base Software CA_S311_BL01_RC03 via UART successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_43" />
+					<testgroup title="Select_and_check_variant">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_44" />
+						<testcase title="1- Tester Present is ON" ident="-">
+							<set title="EnvTesterPresentOnOff">
+								<envvar name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait time="0" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+							<caplparam name="Request" type="string">1003</caplparam>
+							<caplparam name="Response" type="string">5003.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="3- wait" ident="-">
+							<wait time="1000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Select variant" ident="-">
+							<caplparam name="Request" type="string">2ef1f004</caplparam>
+							<caplparam name="Response" type="string">6ef1f0</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Check variant" ident="-">
+							<caplparam name="Request" type="string">22f1f0</caplparam>
+							<caplparam name="Response" type="string">62f1f004</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F194 Supplier Software number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_45" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F194 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f194</caplparam>
+							<caplparam name="Response" type="string">62f1945333313120424c30315f52433033.{4}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_46" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f189</caplparam>
+							<caplparam name="Response" type="string">62f1895357432e362e30.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F089 ECUHardwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_47" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F089 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f089</caplparam>
+							<caplparam name="Response" type="string">62f0894857432e322e30.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_48" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f187</caplparam>
+							<caplparam name="Response" type="string">62f187373931373033302d43443033.{18}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F188 Software Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_49" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F188 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f188</caplparam>
+							<caplparam name="Response" type="string">62f188393231323430312d43443033.{16}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F170 FBL Version Information">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_50" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F170 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f170</caplparam>
+							<caplparam name="Response" type="string">62f17056392e33</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1F4 vehicle configuration">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_51" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F4 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f1f4</caplparam>
+							<caplparam name="Response" type="string">62f1f4.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1F0 vehicle configuration">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_52" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F0 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f1f0</caplparam>
+							<caplparam name="Response" type="string">62f1f030.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_53" />
+					<testgroup title="ProgrammingCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_54" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220200</caplparam>
+							<caplparam name="Response" type="string">620200.*0</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_55" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220201</caplparam>
+							<caplparam name="Response" type="string">620201.*0</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_56" />
+					<testgroup title="Check RBEOLDID">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_57" />
+						<testcase title="1- Access to RBEOL" ident="-">
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="2- Unlock RBEOL" ident="-">
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="3- Wait 5s" ident="-">
+							<wait time="5000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Send service 0x22 to the camera for the DID F1E0" ident="-">
+							<caplparam name="Request" type="string">22f1e0</caplparam>
+							<caplparam name="Response" type="string">62f1e0.*3</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Send service 0x22 to the camera for the DID F1DD" ident="-">
+							<caplparam name="Request" type="string">22f1dd</caplparam>
+							<caplparam name="Response" type="string">62f1dd.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="6- Send service 0x22 to the camera for the DID 4255" ident="-">
+							<caplparam name="Request" type="string">224255</caplparam>
+							<caplparam name="Response" type="string">624255.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="7- Send service 0x22 to the camera for the DID 4259" ident="-">
+							<caplparam name="Request" type="string">224259</caplparam>
+							<caplparam name="Response" type="string">624259.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="8- Reset ECU" ident="-">
+							<caplparam name="Request" type="string">1101</caplparam>
+							<caplparam name="Response" type="string">5101</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase title="9- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="10- Send 1001" ident="-">
+							<caplparam name="Request" type="string">1001</caplparam>
+							<caplparam name="Response" type="string">5001.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="11- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+			<testgroup title="Re-Flash Latest SW M5 via X-Flash 1st">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_58" />
+				<testgroup title="Flash SW">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_59" />
+					<testgroup title="Xflash CA_S311_BL01_RC05">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_60" />
+						<testcase title="1- Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful" ident="-" variants="Automated">
+							<testerconfirmation title="Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful">Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_61" />
+					<testgroup title="Select_and_check_variant">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_62" />
+						<testcase title="1- Tester Present is ON" ident="-">
+							<set title="EnvTesterPresentOnOff">
+								<envvar name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait time="0" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+							<caplparam name="Request" type="string">1003</caplparam>
+							<caplparam name="Response" type="string">5003.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="3- wait" ident="-">
+							<wait time="1000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Select variant" ident="-">
+							<caplparam name="Request" type="string">2ef1f004</caplparam>
+							<caplparam name="Response" type="string">6ef1f0</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Check variant" ident="-">
+							<caplparam name="Request" type="string">22f1f0</caplparam>
+							<caplparam name="Response" type="string">62f1f004</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F194 Supplier Software number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_63" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F194 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f194</caplparam>
+							<caplparam name="Response" type="string">62f1945333313120424c30315f52433035.{4}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_64" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f189</caplparam>
+							<caplparam name="Response" type="string">62f1895357432e372e31.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F089 ECUHardwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_65" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F089 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f089</caplparam>
+							<caplparam name="Response" type="string">62f0894857432e322e30.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_66" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f187</caplparam>
+							<caplparam name="Response" type="string">62f187373931373033302d43443033.{18}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F188 Software Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_67" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F188 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f188</caplparam>
+							<caplparam name="Response" type="string">62f188393231323430312d43443033.{16}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F170 FBL Version Information">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_68" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F170 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f170</caplparam>
+							<caplparam name="Response" type="string">62f17056392e33</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1F4 vehicle configuration">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_69" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F4 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f1f4</caplparam>
+							<caplparam name="Response" type="string">62f1f40.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_70" />
+					<testgroup title="ProgrammingCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_71" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220200</caplparam>
+							<caplparam name="Response" type="string">620200.*1</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_72" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220201</caplparam>
+							<caplparam name="Response" type="string">620201.*1</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_73" />
+					<testgroup title="Check RBEOLDID">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_74" />
+						<testcase title="1- Access to RBEOL" ident="-">
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="2- Unlock RBEOL" ident="-">
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="3- Wait 5s" ident="-">
+							<wait time="5000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Send service 0x22 to the camera for the DID F1E0" ident="-">
+							<caplparam name="Request" type="string">22f1e0</caplparam>
+							<caplparam name="Response" type="string">62f1e0.*5</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Send service 0x22 to the camera for the DID F1DD" ident="-">
+							<caplparam name="Request" type="string">22f1dd</caplparam>
+							<caplparam name="Response" type="string">62f1dd.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="6- Send service 0x22 to the camera for the DID 4255" ident="-">
+							<caplparam name="Request" type="string">224255</caplparam>
+							<caplparam name="Response" type="string">624255.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="7- Send service 0x22 to the camera for the DID 4259" ident="-">
+							<caplparam name="Request" type="string">224259</caplparam>
+							<caplparam name="Response" type="string">624259.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="8- Reset ECU" ident="-">
+							<caplparam name="Request" type="string">1101</caplparam>
+							<caplparam name="Response" type="string">5101</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase title="9- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="10- Send 1001" ident="-">
+							<caplparam name="Request" type="string">1001</caplparam>
+							<caplparam name="Response" type="string">5001.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="11- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+			<testgroup title="Re-Flash Latest SW M3 via X-Flash 2nd">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_75" />
+				<testgroup title="Flash SW">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_76" />
+					<testgroup title="Xflash CA_S311_BL01_RC05">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_77" />
+						<testcase title="1- Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful" ident="-" variants="Automated">
+							<testerconfirmation title="Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful">Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_78" />
+					<testgroup title="Select_and_check_variant">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_79" />
+						<testcase title="1- Tester Present is ON" ident="-">
+							<set title="EnvTesterPresentOnOff">
+								<envvar name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait time="0" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+							<caplparam name="Request" type="string">1003</caplparam>
+							<caplparam name="Response" type="string">5003.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="3- wait" ident="-">
+							<wait time="1000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Select variant" ident="-">
+							<caplparam name="Request" type="string">2ef1f004</caplparam>
+							<caplparam name="Response" type="string">6ef1f0</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Check variant" ident="-">
+							<caplparam name="Request" type="string">22f1f0</caplparam>
+							<caplparam name="Response" type="string">62f1f004</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F194 Supplier Software number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_80" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F194 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f194</caplparam>
+							<caplparam name="Response" type="string">62f1945333313120424c30315f52433035.{4}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_81" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f189</caplparam>
+							<caplparam name="Response" type="string">62f1895357432e372e31.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F089 ECUHardwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_82" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F089 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f089</caplparam>
+							<caplparam name="Response" type="string">62f0894857432e322e30.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_83" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f187</caplparam>
+							<caplparam name="Response" type="string">62f187373931373033302d43443033.{18}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F188 Software Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_84" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F188 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f188</caplparam>
+							<caplparam name="Response" type="string">62f188393231323430312d43443033.{16}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F170 FBL Version Information">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_85" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F170 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f170</caplparam>
+							<caplparam name="Response" type="string">62f17056392e33</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1F4 vehicle configuration">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_86" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F4 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f1f4</caplparam>
+							<caplparam name="Response" type="string">62f1f40.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_87" />
+					<testgroup title="ProgrammingCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_88" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220200</caplparam>
+							<caplparam name="Response" type="string">620200.*2</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_89" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220201</caplparam>
+							<caplparam name="Response" type="string">620201.*2</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_90" />
+					<testgroup title="Check RBEOLDID">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_91" />
+						<testcase title="1- Access to RBEOL" ident="-">
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="2- Unlock RBEOL" ident="-">
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="3- Wait 5s" ident="-">
+							<wait time="5000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Send service 0x22 to the camera for the DID F1E0" ident="-">
+							<caplparam name="Request" type="string">22f1e0</caplparam>
+							<caplparam name="Response" type="string">62f1e0.*3</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Send service 0x22 to the camera for the DID F1DD" ident="-">
+							<caplparam name="Request" type="string">22f1dd</caplparam>
+							<caplparam name="Response" type="string">62f1dd.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="6- Send service 0x22 to the camera for the DID 4255" ident="-">
+							<caplparam name="Request" type="string">224255</caplparam>
+							<caplparam name="Response" type="string">624255.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="7- Send service 0x22 to the camera for the DID 4259" ident="-">
+							<caplparam name="Request" type="string">224259</caplparam>
+							<caplparam name="Response" type="string">624259.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="8- Reset ECU" ident="-">
+							<caplparam name="Request" type="string">1101</caplparam>
+							<caplparam name="Response" type="string">5101</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase title="9- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="10- Send 1001" ident="-">
+							<caplparam name="Request" type="string">1001</caplparam>
+							<caplparam name="Response" type="string">5001.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="11- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+		</testgroup>
+		<testgroup title="latest SW to Dummy SW M3">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_92" />
+			<testgroup title="Flash latest SW via UART">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_93" />
+				<testgroup title="Flash SW">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_94" />
+					<testgroup title="UART Flash CA_S311_BL01_RC05">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_95" />
+						<testcase title="1- Flash Latest Software CA_S311_BL01_RC05 via UART successful" ident="-" variants="Automated">
+							<testerconfirmation title="Flash Latest Software CA_S311_BL01_RC05 via UART successful">Flash Latest Software CA_S311_BL01_RC05 via UART successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_96" />
+					<testgroup title="Select_and_check_variant">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_97" />
+						<testcase title="1- Tester Present is ON" ident="-">
+							<set title="EnvTesterPresentOnOff">
+								<envvar name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait time="0" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+							<caplparam name="Request" type="string">1003</caplparam>
+							<caplparam name="Response" type="string">5003.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="3- wait" ident="-">
+							<wait time="1000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Select variant" ident="-">
+							<caplparam name="Request" type="string">2ef1f004</caplparam>
+							<caplparam name="Response" type="string">6ef1f0</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Check variant" ident="-">
+							<caplparam name="Request" type="string">22f1f0</caplparam>
+							<caplparam name="Response" type="string">62f1f004</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F194 Supplier Software number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_98" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F194 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f194</caplparam>
+							<caplparam name="Response" type="string">62f1945333313120424c30315f52433035.{4}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_99" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f189</caplparam>
+							<caplparam name="Response" type="string">62f1895357432e372e31.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F089 ECUHardwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_100" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F089 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f089</caplparam>
+							<caplparam name="Response" type="string">62f0894857432e322e30.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_101" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f187</caplparam>
+							<caplparam name="Response" type="string">62f187373931373033302d43443033.{18}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F188 Software Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_102" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F188 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f188</caplparam>
+							<caplparam name="Response" type="string">62f188393231323430312d43443033.{16}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F170 FBL Version Information">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_103" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F170 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f170</caplparam>
+							<caplparam name="Response" type="string">62f17056392e33</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1F4 vehicle configuration">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_104" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F4 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f1f4</caplparam>
+							<caplparam name="Response" type="string">62f1f40.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_105" />
+					<testgroup title="ProgrammingCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_106" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220200</caplparam>
+							<caplparam name="Response" type="string">620200.*0</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_107" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220201</caplparam>
+							<caplparam name="Response" type="string">620201.*0</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_108" />
+					<testgroup title="Check RBEOLDID">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_109" />
+						<testcase title="1- Access to RBEOL" ident="-">
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="2- Unlock RBEOL" ident="-">
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="3- Wait 5s" ident="-">
+							<wait time="5000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Send service 0x22 to the camera for the DID F1E0" ident="-">
+							<caplparam name="Request" type="string">22f1e0</caplparam>
+							<caplparam name="Response" type="string">62f1e0.*3</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Send service 0x22 to the camera for the DID F1DD" ident="-">
+							<caplparam name="Request" type="string">22f1dd</caplparam>
+							<caplparam name="Response" type="string">62f1dd.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="6- Send service 0x22 to the camera for the DID 4255" ident="-">
+							<caplparam name="Request" type="string">224255</caplparam>
+							<caplparam name="Response" type="string">624255.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="7- Send service 0x22 to the camera for the DID 4259" ident="-">
+							<caplparam name="Request" type="string">224259</caplparam>
+							<caplparam name="Response" type="string">624259.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="8- Reset ECU" ident="-">
+							<caplparam name="Request" type="string">1101</caplparam>
+							<caplparam name="Response" type="string">5101</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase title="9- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="10- Send 1001" ident="-">
+							<caplparam name="Request" type="string">1001</caplparam>
+							<caplparam name="Response" type="string">5001.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="11- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+			<testgroup title="Re-Flash Dummy SW M3 via X-Flash 1st">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_110" />
+				<testgroup title="Flash SW">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_111" />
+					<testgroup title="Xflash CA_S311_BL01_RC05">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_112" />
+						<testcase title="1- Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful" ident="-" variants="Automated">
+							<testerconfirmation title="Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful">Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_113" />
+					<testgroup title="Select_and_check_variant">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_114" />
+						<testcase title="1- Tester Present is ON" ident="-">
+							<set title="EnvTesterPresentOnOff">
+								<envvar name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait time="0" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+							<caplparam name="Request" type="string">1003</caplparam>
+							<caplparam name="Response" type="string">5003.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="3- wait" ident="-">
+							<wait time="1000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Select variant" ident="-">
+							<caplparam name="Request" type="string">2ef1f004</caplparam>
+							<caplparam name="Response" type="string">6ef1f0</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Check variant" ident="-">
+							<caplparam name="Request" type="string">22f1f0</caplparam>
+							<caplparam name="Response" type="string">62f1f004</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F194 Supplier Software number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_115" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F194 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f194</caplparam>
+							<caplparam name="Response" type="string">62f194.{32}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_116" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f189</caplparam>
+							<caplparam name="Response" type="string">62f1895357432e372e31.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F089 ECUHardwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_117" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F089 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f089</caplparam>
+							<caplparam name="Response" type="string">62f0894857432e322e30.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_118" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f187</caplparam>
+							<caplparam name="Response" type="string">62f187373931373033302d43443033.{18}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F188 Software Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_119" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F188 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f188</caplparam>
+							<caplparam name="Response" type="string">62f188393231323430312d43443033.{16}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F170 FBL Version Information">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_120" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F170 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f170</caplparam>
+							<caplparam name="Response" type="string">62f17056392e33</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1F4 vehicle configuration">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_121" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F4 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f1f4</caplparam>
+							<caplparam name="Response" type="string">62f1f40.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_122" />
+					<testgroup title="ProgrammingCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_123" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220200</caplparam>
+							<caplparam name="Response" type="string">620200.*1</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_124" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220201</caplparam>
+							<caplparam name="Response" type="string">620201.*1</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_125" />
+					<testgroup title="Check RBEOLDID">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_126" />
+						<testcase title="1- Access to RBEOL" ident="-">
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="2- Unlock RBEOL" ident="-">
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="3- Wait 5s" ident="-">
+							<wait time="5000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Send service 0x22 to the camera for the DID F1E0" ident="-">
+							<caplparam name="Request" type="string">22f1e0</caplparam>
+							<caplparam name="Response" type="string">62f1e0.*3</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Send service 0x22 to the camera for the DID F1DD" ident="-">
+							<caplparam name="Request" type="string">22f1dd</caplparam>
+							<caplparam name="Response" type="string">62f1dd.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="6- Send service 0x22 to the camera for the DID 4255" ident="-">
+							<caplparam name="Request" type="string">224255</caplparam>
+							<caplparam name="Response" type="string">624255.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="7- Send service 0x22 to the camera for the DID 4259" ident="-">
+							<caplparam name="Request" type="string">224259</caplparam>
+							<caplparam name="Response" type="string">624259.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="8- Reset ECU" ident="-">
+							<caplparam name="Request" type="string">1101</caplparam>
+							<caplparam name="Response" type="string">5101</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase title="9- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="10- Send 1001" ident="-">
+							<caplparam name="Request" type="string">1001</caplparam>
+							<caplparam name="Response" type="string">5001.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="11- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+		</testgroup>
+		<testgroup title="latest SW to Dummy SW M5">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_127" />
+			<testgroup title="Flash latest SW via UART">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_128" />
+				<testgroup title="Flash SW">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_129" />
+					<testgroup title="UART Flash CA_S311_BL01_RC05">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_130" />
+						<testcase title="1- Flash Latest Software CA_S311_BL01_RC05 via UART successful" ident="-" variants="Automated">
+							<testerconfirmation title="Flash Latest Software CA_S311_BL01_RC05 via UART successful">Flash Latest Software CA_S311_BL01_RC05 via UART successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_131" />
+					<testgroup title="Select_and_check_variant">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_132" />
+						<testcase title="1- Tester Present is ON" ident="-">
+							<set title="EnvTesterPresentOnOff">
+								<envvar name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait time="0" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+							<caplparam name="Request" type="string">1003</caplparam>
+							<caplparam name="Response" type="string">5003.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="3- wait" ident="-">
+							<wait time="1000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Select variant" ident="-">
+							<caplparam name="Request" type="string">2ef1f004</caplparam>
+							<caplparam name="Response" type="string">6ef1f0</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Check variant" ident="-">
+							<caplparam name="Request" type="string">22f1f0</caplparam>
+							<caplparam name="Response" type="string">62f1f004</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F194 Supplier Software number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_133" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F194 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f194</caplparam>
+							<caplparam name="Response" type="string">62f1945333313120424c30315f52433035.{4}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_134" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f189</caplparam>
+							<caplparam name="Response" type="string">62f1895357432e372e31.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F089 ECUHardwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_135" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F089 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f089</caplparam>
+							<caplparam name="Response" type="string">62f0894857432e322e30.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_136" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f187</caplparam>
+							<caplparam name="Response" type="string">62f187373931373033302d43443033.{18}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F188 Software Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_137" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F188 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f188</caplparam>
+							<caplparam name="Response" type="string">62f188393231323430312d43443033.{16}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F170 FBL Version Information">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_138" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F170 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f170</caplparam>
+							<caplparam name="Response" type="string">62f17056392e33</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1F4 vehicle configuration">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_139" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F4 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f1f4</caplparam>
+							<caplparam name="Response" type="string">62f1f40.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_140" />
+					<testgroup title="ProgrammingCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_141" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220200</caplparam>
+							<caplparam name="Response" type="string">620200.*0</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_142" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220201</caplparam>
+							<caplparam name="Response" type="string">620201.*0</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_143" />
+					<testgroup title="Check RBEOLDID">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_144" />
+						<testcase title="1- Access to RBEOL" ident="-">
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="2- Unlock RBEOL" ident="-">
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="3- Wait 5s" ident="-">
+							<wait time="5000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Send service 0x22 to the camera for the DID F1E0" ident="-">
+							<caplparam name="Request" type="string">22f1e0</caplparam>
+							<caplparam name="Response" type="string">62f1e0.*3</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Send service 0x22 to the camera for the DID F1DD" ident="-">
+							<caplparam name="Request" type="string">22f1dd</caplparam>
+							<caplparam name="Response" type="string">62f1dd.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="6- Send service 0x22 to the camera for the DID 4255" ident="-">
+							<caplparam name="Request" type="string">224255</caplparam>
+							<caplparam name="Response" type="string">624255.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="7- Send service 0x22 to the camera for the DID 4259" ident="-">
+							<caplparam name="Request" type="string">224259</caplparam>
+							<caplparam name="Response" type="string">624259.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="8- Reset ECU" ident="-">
+							<caplparam name="Request" type="string">1101</caplparam>
+							<caplparam name="Response" type="string">5101</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase title="9- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="10- Send 1001" ident="-">
+							<caplparam name="Request" type="string">1001</caplparam>
+							<caplparam name="Response" type="string">5001.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="11- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+			<testgroup title="Re-Flash Dummy SW M5 via X-Flash 1st">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_145" />
+				<testgroup title="Flash SW">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_146" />
+					<testgroup title="Xflash CA_S311_BL01_RC05">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_147" />
+						<testcase title="1- Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful" ident="-" variants="Automated">
+							<testerconfirmation title="Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful">Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_148" />
+					<testgroup title="Select_and_check_variant">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_149" />
+						<testcase title="1- Tester Present is ON" ident="-">
+							<set title="EnvTesterPresentOnOff">
+								<envvar name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait time="0" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+							<caplparam name="Request" type="string">1003</caplparam>
+							<caplparam name="Response" type="string">5003.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="3- wait" ident="-">
+							<wait time="1000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Select variant" ident="-">
+							<caplparam name="Request" type="string">2ef1f004</caplparam>
+							<caplparam name="Response" type="string">6ef1f0</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Check variant" ident="-">
+							<caplparam name="Request" type="string">22f1f0</caplparam>
+							<caplparam name="Response" type="string">62f1f004</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F194 Supplier Software number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_150" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F194 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f194</caplparam>
+							<caplparam name="Response" type="string">62f194.{32}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_151" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f189</caplparam>
+							<caplparam name="Response" type="string">62f1895357432e372e31.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F089 ECUHardwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_152" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F089 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f089</caplparam>
+							<caplparam name="Response" type="string">62f0894857432e322e30.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_153" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f187</caplparam>
+							<caplparam name="Response" type="string">62f187373931373033302d43443033.{18}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F188 Software Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_154" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F188 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f188</caplparam>
+							<caplparam name="Response" type="string">62f188393231323430312d43443033.{16}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F170 FBL Version Information">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_155" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F170 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f170</caplparam>
+							<caplparam name="Response" type="string">62f17056392e33</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1F4 vehicle configuration">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_156" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F4 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f1f4</caplparam>
+							<caplparam name="Response" type="string">62f1f40.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_157" />
+					<testgroup title="ProgrammingCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_158" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220200</caplparam>
+							<caplparam name="Response" type="string">620200.*1</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_159" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220201</caplparam>
+							<caplparam name="Response" type="string">620201.*1</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_160" />
+					<testgroup title="Check RBEOLDID">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_161" />
+						<testcase title="1- Access to RBEOL" ident="-">
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="2- Unlock RBEOL" ident="-">
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="3- Wait 5s" ident="-">
+							<wait time="5000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Send service 0x22 to the camera for the DID F1E0" ident="-">
+							<caplparam name="Request" type="string">22f1e0</caplparam>
+							<caplparam name="Response" type="string">62f1e0.*5</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Send service 0x22 to the camera for the DID F1DD" ident="-">
+							<caplparam name="Request" type="string">22f1dd</caplparam>
+							<caplparam name="Response" type="string">62f1dd.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="6- Send service 0x22 to the camera for the DID 4255" ident="-">
+							<caplparam name="Request" type="string">224255</caplparam>
+							<caplparam name="Response" type="string">624255.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="7- Send service 0x22 to the camera for the DID 4259" ident="-">
+							<caplparam name="Request" type="string">224259</caplparam>
+							<caplparam name="Response" type="string">624259.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="8- Reset ECU" ident="-">
+							<caplparam name="Request" type="string">1101</caplparam>
+							<caplparam name="Response" type="string">5101</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase title="9- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="10- Send 1001" ident="-">
+							<caplparam name="Request" type="string">1001</caplparam>
+							<caplparam name="Response" type="string">5001.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="11- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+			<testgroup title="Re-Flash Dummy SW M3 via X-Flash 2nd">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_162" />
+				<testgroup title="Flash SW">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_163" />
+					<testgroup title="Xflash CA_S311_BL01_RC05">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_164" />
+						<testcase title="1- Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful" ident="-" variants="Automated">
+							<testerconfirmation title="Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful">Flash Latest Software CA_S311_BL01_RC05 via IFLASH successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_165" />
+					<testgroup title="Select_and_check_variant">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_166" />
+						<testcase title="1- Tester Present is ON" ident="-">
+							<set title="EnvTesterPresentOnOff">
+								<envvar name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait time="0" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+							<caplparam name="Request" type="string">1003</caplparam>
+							<caplparam name="Response" type="string">5003.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="3- wait" ident="-">
+							<wait time="1000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Select variant" ident="-">
+							<caplparam name="Request" type="string">2ef1f004</caplparam>
+							<caplparam name="Response" type="string">6ef1f0</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Check variant" ident="-">
+							<caplparam name="Request" type="string">22f1f0</caplparam>
+							<caplparam name="Response" type="string">62f1f004</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F194 Supplier Software number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_167" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F194 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f194</caplparam>
+							<caplparam name="Response" type="string">62f194.{32}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_168" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f189</caplparam>
+							<caplparam name="Response" type="string">62f1895357432e372e31.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F089 ECUHardwareVersionNumberDataIdentifier">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_169" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F089 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f089</caplparam>
+							<caplparam name="Response" type="string">62f0894857432e322e30.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_170" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f187</caplparam>
+							<caplparam name="Response" type="string">62f187373931373033302d43443033.{18}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F188 Software Number">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_171" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F188 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f188</caplparam>
+							<caplparam name="Response" type="string">62f188393231323430312d43443033.{16}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F170 FBL Version Information">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_172" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F170 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f170</caplparam>
+							<caplparam name="Response" type="string">62f17056392e33</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1F4 vehicle configuration">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_173" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID F1F4 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">22f1f4</caplparam>
+							<caplparam name="Response" type="string">62f1f40.{2}</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_174" />
+					<testgroup title="ProgrammingCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_175" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220200</caplparam>
+							<caplparam name="Response" type="string">620200.*2</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_176" />
+						<capltestcase name="RequestResponse" title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" ident="-">
+							<caplparam name="Request" type="string">220201</caplparam>
+							<caplparam name="Response" type="string">620201.*2</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref type="doors" owner="TAE - DOORS extension" title="ID_177" />
+					<testgroup title="Check RBEOLDID">
+						<externalref type="doors" owner="TAE - DOORS extension" title="ID_178" />
+						<testcase title="1- Access to RBEOL" ident="-">
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="EnvRBEOL">
+								<envvar name="EnvRBEOL">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="2- Unlock RBEOL" ident="-">
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+							<set title="Env_MPC3_EOL_unlock">
+								<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait time="1000" title="wait" />
+						</testcase>
+						<testcase title="3- Wait 5s" ident="-">
+							<wait time="5000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="4- Send service 0x22 to the camera for the DID F1E0" ident="-">
+							<caplparam name="Request" type="string">22f1e0</caplparam>
+							<caplparam name="Response" type="string">62f1e0.*3</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="5- Send service 0x22 to the camera for the DID F1DD" ident="-">
+							<caplparam name="Request" type="string">22f1dd</caplparam>
+							<caplparam name="Response" type="string">62f1dd.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="6- Send service 0x22 to the camera for the DID 4255" ident="-">
+							<caplparam name="Request" type="string">224255</caplparam>
+							<caplparam name="Response" type="string">624255.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="7- Send service 0x22 to the camera for the DID 4259" ident="-">
+							<caplparam name="Request" type="string">224259</caplparam>
+							<caplparam name="Response" type="string">624259.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase name="RequestResponse" title="8- Reset ECU" ident="-">
+							<caplparam name="Request" type="string">1101</caplparam>
+							<caplparam name="Response" type="string">5101</caplparam>
+							<caplparam name="CompareMode" type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase title="9- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+						<capltestcase name="RequestResponse" title="10- Send 1001" ident="-">
+							<caplparam name="Request" type="string">1001</caplparam>
+							<caplparam name="Response" type="string">5001.*</caplparam>
+							<caplparam name="CompareMode" type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase title="11- Wait 3s" ident="-">
+							<wait time="3000" title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+		</testgroup>
+	</testgroup>
+</testmodule>

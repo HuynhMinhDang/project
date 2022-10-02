@@ -1,0 +1,1095 @@
+/*@!Encoding:1252*/
+
+variables
+{
+    //Used interact between raw and the physical environment variables
+    byte chgEv_ADS_1BF_ADS_SYNC_SyncTime = 0;
+    byte chgEv_ADS_1BF_ADS_SYNC_Type = 0;
+    byte chgEv_ADS_1BF_ADS_SYNC_TimeDomain = 0;
+    byte chgEv_ADS_1BF_ADS_SYNC_SequenceCnt = 0;
+    byte chgEv_ADS_1BF_ADS_SYNC_Reserved = 0;
+    byte chgEv_ADS_1BF_ADS_SYNC_SGW = 0;
+    byte chgEv_ADS_1BF_ADS_SYNC_OVS = 0;
+    byte chgEv_ADS_1C0_ADS_IACCHWAMode = 0;
+    byte chgEv_ADS_1C0_ADS_UDLCStatus = 0;
+    
+    message ADS_1BF        Msg_ADS_1BF;
+    msTimer Tm_ADS_1BF;
+    int Cycle_ADS_1BF = 20;
+    message ADS_1C0        Msg_ADS_1C0;
+    msTimer Tm_ADS_1C0;
+    int Cycle_ADS_1C0 = 100;
+	
+	//testing purpose
+   msTimer Tm_ADS_1BF_1;
+    int Cycle_ADS_1BF_1 = 20;
+   msTimer Tm_ADS_1BF_2;
+    int Cycle_ADS_1BF_2 = 480;
+  int t;
+    
+    int ADS_1BF_ADS_SYNC_CRC_counter =0;
+    int ADS_1BF_ADS_SYNC_CRC_wrongvalctr =0;
+    
+    //CRC Polynomial for MQB     
+    byte cb_ChkSum_POLY_MQB =0x2F;
+	byte Dbc_dlc;
+	int i=0;
+	char CAN_DLC[7]={9,10,11,12,13,14,15};
+	char CANFD_DLC[7]={12,16,20,24,32,48,64};
+    
+
+    
+        byte CRC_J1850_Table[256] = {
+ /*0 - 7*/  0x00, 0x1D, 0x3A, 0x27, 0x74, 0x69, 0x4E, 0x53,
+ /*8 - 15*/ 0xE8, 0xF5, 0xD2, 0xCF, 0x9C, 0x81, 0xA6, 0xBB,
+ /*16 - 23*/ 0xCD, 0xD0, 0xF7, 0xEA, 0xB9, 0xA4, 0x83, 0x9E,
+ /*24 - 31*/ 0x25, 0x38, 0x1F, 0x02, 0x51, 0x4C, 0x6B, 0x76,
+ /*32 - 39*/ 0x87, 0x9A, 0xBD, 0xA0, 0xF3, 0xEE, 0xC9, 0xD4,
+ /*40 - 47*/ 0x6F, 0x72, 0x55, 0x48, 0x1B, 0x06, 0x21, 0x3C,
+ /*48 - 55*/ 0x4A, 0x57, 0x70, 0x6D, 0x3E, 0x23, 0x04, 0x19,
+ /*56 - 63*/ 0xA2, 0xBF, 0x98, 0x85, 0xD6, 0xCB, 0xEC, 0xF1,
+ /*64 - 71*/  0x13, 0x0E, 0x29, 0x34, 0x67, 0x7A, 0x5D, 0x40,
+ /*72 - 79*/ 0xFB, 0xE6, 0xC1, 0xDC, 0x8F, 0x92, 0xB5, 0xA8,
+ /*80 - 87*/ 0xDE, 0xC3, 0xE4, 0xF9, 0xAA, 0xB7, 0x90, 0x8D,
+ /*88 - 95*/ 0x36, 0x2B, 0x0C, 0x11, 0x42, 0x5F, 0x78, 0x65,
+ /*96 - 103*/ 0x94, 0x89, 0xAE, 0xB3, 0xE0, 0xFD, 0xDA, 0xC7,
+ /*104 - 111*/ 0x7C, 0x61, 0x46, 0x5B, 0x08, 0x15, 0x32, 0x2F,
+ /*112 - 119*/ 0x59, 0x44, 0x63, 0x7E, 0x2D, 0x30, 0x17, 0x0A,
+ /*120 - 127*/ 0xB1, 0xAC, 0x8B, 0x96, 0xC5, 0xD8, 0xFF, 0xE2,
+ /*128 - 135*/ 0x26, 0x3B, 0x1C, 0x01, 0x52, 0x4F, 0x68, 0x75,
+ /*136 - 143*/ 0xCE, 0xD3, 0xF4, 0xE9, 0xBA, 0xA7, 0x80, 0x9D,
+ /*144 - 151*/ 0xEB, 0xF6, 0xD1, 0xCC, 0x9F, 0x82, 0xA5, 0xB8,
+ /*152 - 159*/ 0x03, 0x1E, 0x39, 0x24, 0x77, 0x6A, 0x4D, 0x50,
+ /*160 - 167*/ 0xA1, 0xBC, 0x9B, 0x86, 0xD5, 0xC8, 0xEF, 0xF2,
+ /*168 - 175*/ 0x49, 0x54, 0x73, 0x6E, 0x3D, 0x20, 0x07, 0x1A,
+ /*176 - 183*/ 0x6C, 0x71, 0x56, 0x4B, 0x18, 0x05, 0x22, 0x3F,
+ /*184 - 191*/ 0x84, 0x99, 0xBE, 0xA3, 0xF0, 0xED, 0xCA, 0xD7,
+ /*192 - 199*/ 0x35, 0x28, 0x0F, 0x12, 0x41, 0x5C, 0x7B, 0x66,
+ /*200 - 207*/ 0xDD, 0xC0, 0xE7, 0xFA, 0xA9, 0xB4, 0x93, 0x8E,
+ /*208 - 215*/ 0xF8, 0xE5, 0xC2, 0xDF, 0x8C, 0x91, 0xB6, 0xAB,
+ /*216 - 223*/ 0x10, 0x0D, 0x2A, 0x37, 0x64, 0x79, 0x5E, 0x43,
+ /*224 - 231*/ 0xB2, 0xAF, 0x88, 0x95, 0xC6, 0xDB, 0xFC, 0xE1,
+ /*232 - 239*/ 0x5A, 0x47, 0x60, 0x7D, 0x2E, 0x33, 0x14, 0x09,
+ /*240 - 247*/ 0x7F, 0x62, 0x45, 0x58, 0x0B, 0x16, 0x31, 0x2C,
+ /*248 - 255*/ 0x97, 0x8A, 0xAD, 0xB0, 0xE3, 0xFE, 0xD9, 0xC4
+};
+         
+}
+
+
+on start
+{
+    //Initialise cycle time and message timer 
+    putValue(E_pric_ADS_ADS_1BF_cycleTm,Cycle_ADS_1BF);
+    SetTimer( Tm_ADS_1BF,100);
+    putValue(E_pric_ADS_ADS_1BF_Tm,0);
+    putValue(E_pric_ADS_ADS_1C0_cycleTm,Cycle_ADS_1C0);
+    SetTimer( Tm_ADS_1C0,101);
+    putValue(E_pric_ADS_ADS_1C0_Tm,1);
+    
+    //Initialise signals with init raw value
+    Msg_ADS_1BF.ADS_SYNC_SyncTime   =getvalue(E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_Rv);
+    Msg_ADS_1BF.ADS_SYNC_Type   =getvalue(E_pric_ADS_ADS_1BF_ADS_SYNC_Type_Rv);
+    Msg_ADS_1BF.ADS_SYNC_TimeDomain   =getvalue(E_pric_ADS_ADS_1BF_ADS_SYNC_TimeDomain_Rv);
+    Msg_ADS_1BF.ADS_SYNC_SequenceCnt   =getvalue(E_pric_ADS_ADS_1BF_ADS_SYNC_SequenceCnt_Rv);
+    Msg_ADS_1BF.ADS_SYNC_Reserved   =getvalue(E_pric_ADS_ADS_1BF_ADS_SYNC_Reserved_Rv);
+    Msg_ADS_1BF.ADS_SYNC_SGW   =getvalue(E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_Rv);
+    Msg_ADS_1BF.ADS_SYNC_OVS   =getvalue(E_pric_ADS_ADS_1BF_ADS_SYNC_OVS_Rv);
+    Msg_ADS_1C0.ADS_IACCHWAMode   =getvalue(E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_Rv);
+    Msg_ADS_1C0.ADS_UDLCStatus   =getvalue(E_pric_ADS_ADS_1C0_ADS_UDLCStatus_Rv);
+}
+
+on envVar E_pric_ADS_CycMsgsON
+{
+    // enable all the cyclic messages 
+    putValue(E_pric_ADS_ADS_1BF_Tm,1);
+    putValue(E_pric_ADS_ADS_1C0_Tm,1);
+}
+
+on envVar E_pric_ADS_CycMsgsOFF
+{
+    // disable all the cyclic messages
+    putValue(E_pric_ADS_ADS_1BF_Tm,0);
+    putValue(E_pric_ADS_ADS_1C0_Tm,0);
+    
+}
+on timer Tm_ADS_1BF
+{
+    //cyclic message timer 
+    if(getValue(E_pric_ADS_ADS_1BF_Tm) == 1)
+    {
+        
+    
+        update_ADS_1BF_ChkSum_Checksum();
+        output(Msg_ADS_1BF);
+        
+    }
+    //Reset Timer
+    SetTimer(Tm_ADS_1BF,Cycle_ADS_1BF);
+}
+
+on envVar E_pric_ADS_ADS_1BF_cycleTm
+{
+    // update the cycle time 
+    Cycle_ADS_1BF=getvalue(this);
+}
+on timer Tm_ADS_1C0
+{
+    //cyclic message timer 
+    if(getValue(E_pric_ADS_ADS_1C0_Tm) == 1)
+    {
+        
+    
+        output(Msg_ADS_1C0);
+        
+    }
+    //Reset Timer
+    SetTimer(Tm_ADS_1C0,Cycle_ADS_1C0);
+}
+
+on envVar E_pric_ADS_ADS_1C0_cycleTm
+{
+    // update the cycle time 
+    Cycle_ADS_1C0=getvalue(this);
+}
+
+on envVar E_pric_ADS_ADS_1BF_tx
+{
+    if(getValue(this))
+    {       
+        
+        //calculate the CRC checksum
+        update_ADS_1BF_ChkSum_Checksum();
+
+        output(Msg_ADS_1BF);        
+    }
+}
+
+on envVar E_pric_ADS_ADS_1BF_Range
+{
+    qword rawstatus = 0ll;
+    qword rawValue = 0ll;    
+    
+    rawstatus = getvalue(this);    
+    // set all the signals with min raw /max raw /init raw
+    switch (rawstatus) 
+    {
+     case(0) :
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Type_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_TimeDomain_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SequenceCnt_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Reserved_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_OVS_Rv, rawValue);
+        break;
+     case(1) :
+        rawValue= 4294967295;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_Rv, rawValue);
+        rawValue= 255;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Type_Rv, rawValue);
+        rawValue= 15;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_TimeDomain_Rv, rawValue);
+        rawValue= 15;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SequenceCnt_Rv, rawValue);
+        rawValue= 31;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Reserved_Rv, rawValue);
+        rawValue= 1;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_Rv, rawValue);
+        rawValue= 3;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_OVS_Rv, rawValue);
+        break;
+     default :
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Type_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_TimeDomain_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SequenceCnt_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Reserved_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_OVS_Rv, rawValue);
+      break;
+   }
+}
+
+on envVar E_pric_ADS_ADS_1BF_Dlc
+{
+   if(getValue(E_pric_ADS_ADS_1BF_enDlc))
+    {
+        Msg_ADS_1BF.dlc =getValue(this);
+    }
+    else
+    {
+       Dbc_dlc = 8;
+	   Msg_ADS_1BF.dlc = Calc_Canfd_dlc(Dbc_dlc);
+	   	
+  }
+}
+
+on envVar E_pric_ADS_ADS_1BF_enDlc
+{	
+    if(getValue(this))
+    {
+        Msg_ADS_1BF.dlc =getValue(E_pric_ADS_ADS_1BF_Dlc);
+    }
+    else
+    {
+       Dbc_dlc = 8;
+	   Msg_ADS_1BF.dlc = Calc_Canfd_dlc(Dbc_dlc);
+			
+    }
+	   	
+  }
+
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_CRC_wrongvalctr
+{
+    //update disturb count
+    //disturb value range:(-1 = always send wrong value),( X>0 ,x is the number of Messages with wrong CHK sent)
+    ADS_1BF_ADS_SYNC_CRC_wrongvalctr =getValue(this);    
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_Rv
+{
+    qword rawValue = 0ll;
+    float rawValue_float = 0.0;
+    float phyValue = 0.0;        
+
+    //set the signal with updated raw value
+    if(getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_SetVt)==0)
+    {
+        rawValue = getvalue(this);
+        if(chgEv_ADS_1BF_ADS_SYNC_SyncTime == 0)
+        {
+            //type conversion to float
+            rawValue_float = rawValue;        
+            // raw to physical conversion
+            phyValue = ((rawValue_float *1)+(0));
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_Pv, phyValue);
+            chgEv_ADS_1BF_ADS_SYNC_SyncTime = 1;
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_SyncTime = 0;
+        }    
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_SyncTime=rawValue;        
+    }                                                                           
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_Pv
+{
+    qword rawValue = 0ll;
+    float phyValue = 0.0;
+    
+    //update the raw value with physical value 
+    if(getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_SetVt)==0)
+    {
+        if(chgEv_ADS_1BF_ADS_SYNC_SyncTime == 0)
+        {
+            phyValue = getvalue(this);
+            // physical to raw conversion
+            rawValue = ((phyValue -(0))/1);
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_Rv, rawValue);
+            chgEv_ADS_1BF_ADS_SYNC_SyncTime = 1;  
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_SyncTime = 0;
+        }
+    }
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_Vt
+{
+    qword rawValue = 0ll;
+    if(getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_SetVt))
+    {
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_SyncTime=getValue(this);
+    }
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_SetVt
+{
+    if(getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_SetVt))
+    {
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_SyncTime=getvalue(E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_Vt);
+    }
+    else
+    {
+        Msg_ADS_1BF.ADS_SYNC_SyncTime=getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SyncTime_Rv);
+    }
+}
+ 
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_Type_Rv
+{
+    qword rawValue = 0ll;
+    float rawValue_float = 0.0;
+    float phyValue = 0.0;        
+
+    //set the signal with updated raw value
+    if(getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Type_SetVt)==0)
+    {
+        rawValue = getvalue(this);
+        if(chgEv_ADS_1BF_ADS_SYNC_Type == 0)
+        {
+            //type conversion to float
+            rawValue_float = rawValue;        
+            // raw to physical conversion
+            phyValue = ((rawValue_float *1)+(0));
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Type_Pv, phyValue);
+            chgEv_ADS_1BF_ADS_SYNC_Type = 1;
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_Type = 0;
+        }    
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_Type=rawValue;        
+    }                                                                           
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_Type_Pv
+{
+    qword rawValue = 0ll;
+    float phyValue = 0.0;
+    
+    //update the raw value with physical value 
+    if(getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Type_SetVt)==0)
+    {
+        if(chgEv_ADS_1BF_ADS_SYNC_Type == 0)
+        {
+            phyValue = getvalue(this);
+            // physical to raw conversion
+            rawValue = ((phyValue -(0))/1);
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Type_Rv, rawValue);
+            chgEv_ADS_1BF_ADS_SYNC_Type = 1;  
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_Type = 0;
+        }
+    }
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_Type_Vt
+{
+    qword rawValue = 0ll;
+    if(getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Type_SetVt))
+    {
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_Type=getValue(this);
+    }
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_Type_SetVt
+{
+    if(getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Type_SetVt))
+    {
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_Type=getvalue(E_pric_ADS_ADS_1BF_ADS_SYNC_Type_Vt);
+    }
+    else
+    {
+        Msg_ADS_1BF.ADS_SYNC_Type=getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Type_Rv);
+    }
+}
+ 
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_TimeDomain_Rv
+{
+    qword rawValue = 0ll;
+    float rawValue_float = 0.0;
+    float phyValue = 0.0;        
+
+    //set the signal with updated raw value
+    {
+        rawValue = getvalue(this);
+        if(chgEv_ADS_1BF_ADS_SYNC_TimeDomain == 0)
+        {
+            //type conversion to float
+            rawValue_float = rawValue;        
+            // raw to physical conversion
+            phyValue = ((rawValue_float *1)+(0));
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_TimeDomain_Pv, phyValue);
+            chgEv_ADS_1BF_ADS_SYNC_TimeDomain = 1;
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_TimeDomain = 0;
+        }    
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_TimeDomain=rawValue;        
+    }                                                                           
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_TimeDomain_Pv
+{
+    qword rawValue = 0ll;
+    float phyValue = 0.0;
+    
+    //update the raw value with physical value 
+    {
+        if(chgEv_ADS_1BF_ADS_SYNC_TimeDomain == 0)
+        {
+            phyValue = getvalue(this);
+            // physical to raw conversion
+            rawValue = ((phyValue -(0))/1);
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_TimeDomain_Rv, rawValue);
+            chgEv_ADS_1BF_ADS_SYNC_TimeDomain = 1;  
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_TimeDomain = 0;
+        }
+    }
+}
+
+
+ 
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_SequenceCnt_Rv
+{
+    qword rawValue = 0ll;
+    float rawValue_float = 0.0;
+    float phyValue = 0.0;        
+
+    //set the signal with updated raw value
+    {
+        rawValue = getvalue(this);
+        if(chgEv_ADS_1BF_ADS_SYNC_SequenceCnt == 0)
+        {
+            //type conversion to float
+            rawValue_float = rawValue;        
+            // raw to physical conversion
+            phyValue = ((rawValue_float *1)+(0));
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SequenceCnt_Pv, phyValue);
+            chgEv_ADS_1BF_ADS_SYNC_SequenceCnt = 1;
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_SequenceCnt = 0;
+        }    
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_SequenceCnt=rawValue;        
+    }                                                                           
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_SequenceCnt_Pv
+{
+    qword rawValue = 0ll;
+    float phyValue = 0.0;
+    
+    //update the raw value with physical value 
+    {
+        if(chgEv_ADS_1BF_ADS_SYNC_SequenceCnt == 0)
+        {
+            phyValue = getvalue(this);
+            // physical to raw conversion
+            rawValue = ((phyValue -(0))/1);
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SequenceCnt_Rv, rawValue);
+            chgEv_ADS_1BF_ADS_SYNC_SequenceCnt = 1;  
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_SequenceCnt = 0;
+        }
+    }
+}
+
+
+ 
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_Reserved_Rv
+{
+    qword rawValue = 0ll;
+    float rawValue_float = 0.0;
+    float phyValue = 0.0;        
+
+    //set the signal with updated raw value
+    {
+        rawValue = getvalue(this);
+        if(chgEv_ADS_1BF_ADS_SYNC_Reserved == 0)
+        {
+            //type conversion to float
+            rawValue_float = rawValue;        
+            // raw to physical conversion
+            phyValue = ((rawValue_float *1)+(0));
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Reserved_Pv, phyValue);
+            chgEv_ADS_1BF_ADS_SYNC_Reserved = 1;
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_Reserved = 0;
+        }    
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_Reserved=rawValue;        
+    }                                                                           
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_Reserved_Pv
+{
+    qword rawValue = 0ll;
+    float phyValue = 0.0;
+    
+    //update the raw value with physical value 
+    {
+        if(chgEv_ADS_1BF_ADS_SYNC_Reserved == 0)
+        {
+            phyValue = getvalue(this);
+            // physical to raw conversion
+            rawValue = ((phyValue -(0))/1);
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_Reserved_Rv, rawValue);
+            chgEv_ADS_1BF_ADS_SYNC_Reserved = 1;  
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_Reserved = 0;
+        }
+    }
+}
+
+
+ 
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_Rv
+{
+    qword rawValue = 0ll;
+    float rawValue_float = 0.0;
+    float phyValue = 0.0;        
+
+    //set the signal with updated raw value
+    if(getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_SetVt)==0)
+    {
+        rawValue = getvalue(this);
+        if(chgEv_ADS_1BF_ADS_SYNC_SGW == 0)
+        {
+            //type conversion to float
+            rawValue_float = rawValue;        
+            // raw to physical conversion
+            phyValue = ((rawValue_float *1)+(0));
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_Pv, phyValue);
+            chgEv_ADS_1BF_ADS_SYNC_SGW = 1;
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_SGW = 0;
+        }    
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_SGW=rawValue;        
+    }                                                                           
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_Pv
+{
+    qword rawValue = 0ll;
+    float phyValue = 0.0;
+    
+    //update the raw value with physical value 
+    if(getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_SetVt)==0)
+    {
+        if(chgEv_ADS_1BF_ADS_SYNC_SGW == 0)
+        {
+            phyValue = getvalue(this);
+            // physical to raw conversion
+            rawValue = ((phyValue -(0))/1);
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_Rv, rawValue);
+            chgEv_ADS_1BF_ADS_SYNC_SGW = 1;  
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_SGW = 0;
+        }
+    }
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_Vt
+{
+    qword rawValue = 0ll;
+    if(getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_SetVt))
+    {
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_SGW=getValue(this);
+    }
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_SetVt
+{
+    if(getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_SetVt))
+    {
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_SGW=getvalue(E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_Vt);
+    }
+    else
+    {
+        Msg_ADS_1BF.ADS_SYNC_SGW=getValue(E_pric_ADS_ADS_1BF_ADS_SYNC_SGW_Rv);
+    }
+}
+ 
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_OVS_Rv
+{
+    qword rawValue = 0ll;
+    float rawValue_float = 0.0;
+    float phyValue = 0.0;        
+
+    //set the signal with updated raw value
+    {
+        rawValue = getvalue(this);
+        if(chgEv_ADS_1BF_ADS_SYNC_OVS == 0)
+        {
+            //type conversion to float
+            rawValue_float = rawValue;        
+            // raw to physical conversion
+            phyValue = ((rawValue_float *1)+(0));
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_OVS_Pv, phyValue);
+            chgEv_ADS_1BF_ADS_SYNC_OVS = 1;
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_OVS = 0;
+        }    
+        //update the signal value
+        Msg_ADS_1BF.ADS_SYNC_OVS=rawValue;        
+    }                                                                           
+}
+
+on envVar E_pric_ADS_ADS_1BF_ADS_SYNC_OVS_Pv
+{
+    qword rawValue = 0ll;
+    float phyValue = 0.0;
+    
+    //update the raw value with physical value 
+    {
+        if(chgEv_ADS_1BF_ADS_SYNC_OVS == 0)
+        {
+            phyValue = getvalue(this);
+            // physical to raw conversion
+            rawValue = ((phyValue -(0))/1);
+            putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_OVS_Rv, rawValue);
+            chgEv_ADS_1BF_ADS_SYNC_OVS = 1;  
+        }
+        else
+        {
+            chgEv_ADS_1BF_ADS_SYNC_OVS = 0;
+        }
+    }
+}
+
+
+ 
+on envVar E_pric_ADS_ADS_1C0_tx
+{
+    if(getValue(this))
+    {       
+        
+
+        output(Msg_ADS_1C0);        
+    }
+}
+
+on envVar E_pric_ADS_ADS_1C0_Range
+{
+    qword rawstatus = 0ll;
+    qword rawValue = 0ll;    
+    
+    rawstatus = getvalue(this);    
+    // set all the signals with min raw /max raw /init raw
+    switch (rawstatus) 
+    {
+     case(0) :
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1C0_ADS_UDLCStatus_Rv, rawValue);
+        break;
+     case(1) :
+        rawValue= 7;
+        putValue(E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_Rv, rawValue);
+        rawValue= 15;
+        putValue(E_pric_ADS_ADS_1C0_ADS_UDLCStatus_Rv, rawValue);
+        break;
+     default :
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_Rv, rawValue);
+        rawValue= 0;
+        putValue(E_pric_ADS_ADS_1C0_ADS_UDLCStatus_Rv, rawValue);
+      break;
+   }
+}
+
+on envVar E_pric_ADS_ADS_1C0_Dlc
+{
+   if(getValue(E_pric_ADS_ADS_1C0_enDlc))
+    {
+        Msg_ADS_1C0.dlc =getValue(this);
+    }
+    else
+    {
+       Dbc_dlc = 64;
+	   Msg_ADS_1C0.dlc = Calc_Canfd_dlc(Dbc_dlc);
+	   	
+  }
+}
+
+on envVar E_pric_ADS_ADS_1C0_enDlc
+{	
+    if(getValue(this))
+    {
+        Msg_ADS_1C0.dlc =getValue(E_pric_ADS_ADS_1C0_Dlc);
+    }
+    else
+    {
+       Dbc_dlc = 64;
+	   Msg_ADS_1C0.dlc = Calc_Canfd_dlc(Dbc_dlc);
+			
+    }
+	   	
+  }
+
+
+
+on envVar E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_Rv
+{
+    qword rawValue = 0ll;
+    float rawValue_float = 0.0;
+    float phyValue = 0.0;        
+
+    //set the signal with updated raw value
+    if(getValue(E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_SetVt)==0)
+    {
+        rawValue = getvalue(this);
+        if(chgEv_ADS_1C0_ADS_IACCHWAMode == 0)
+        {
+            //type conversion to float
+            rawValue_float = rawValue;        
+            // raw to physical conversion
+            phyValue = ((rawValue_float *1)+(0));
+            putValue(E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_Pv, phyValue);
+            chgEv_ADS_1C0_ADS_IACCHWAMode = 1;
+        }
+        else
+        {
+            chgEv_ADS_1C0_ADS_IACCHWAMode = 0;
+        }    
+        //update the signal value
+        Msg_ADS_1C0.ADS_IACCHWAMode=rawValue;        
+    }                                                                           
+}
+
+on envVar E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_Pv
+{
+    qword rawValue = 0ll;
+    float phyValue = 0.0;
+    
+    //update the raw value with physical value 
+    if(getValue(E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_SetVt)==0)
+    {
+        if(chgEv_ADS_1C0_ADS_IACCHWAMode == 0)
+        {
+            phyValue = getvalue(this);
+            // physical to raw conversion
+            rawValue = ((phyValue -(0))/1);
+            putValue(E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_Rv, rawValue);
+            chgEv_ADS_1C0_ADS_IACCHWAMode = 1;  
+        }
+        else
+        {
+            chgEv_ADS_1C0_ADS_IACCHWAMode = 0;
+        }
+    }
+}
+
+on envVar E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_Vt
+{
+    qword rawValue = 0ll;
+    if(getValue(E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_SetVt))
+    {
+        //update the signal value
+        Msg_ADS_1C0.ADS_IACCHWAMode=getValue(this);
+    }
+}
+
+on envVar E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_SetVt
+{
+    if(getValue(E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_SetVt))
+    {
+        //update the signal value
+        Msg_ADS_1C0.ADS_IACCHWAMode=getvalue(E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_Vt);
+    }
+    else
+    {
+        Msg_ADS_1C0.ADS_IACCHWAMode=getValue(E_pric_ADS_ADS_1C0_ADS_IACCHWAMode_Rv);
+    }
+}
+ 
+on envVar E_pric_ADS_ADS_1C0_ADS_UDLCStatus_Rv
+{
+    qword rawValue = 0ll;
+    float rawValue_float = 0.0;
+    float phyValue = 0.0;        
+
+    //set the signal with updated raw value
+    if(getValue(E_pric_ADS_ADS_1C0_ADS_UDLCStatus_SetVt)==0)
+    {
+        rawValue = getvalue(this);
+        if(chgEv_ADS_1C0_ADS_UDLCStatus == 0)
+        {
+            //type conversion to float
+            rawValue_float = rawValue;        
+            // raw to physical conversion
+            phyValue = ((rawValue_float *1)+(0));
+            putValue(E_pric_ADS_ADS_1C0_ADS_UDLCStatus_Pv, phyValue);
+            chgEv_ADS_1C0_ADS_UDLCStatus = 1;
+        }
+        else
+        {
+            chgEv_ADS_1C0_ADS_UDLCStatus = 0;
+        }    
+        //update the signal value
+        Msg_ADS_1C0.ADS_UDLCStatus=rawValue;        
+    }                                                                           
+}
+
+on envVar E_pric_ADS_ADS_1C0_ADS_UDLCStatus_Pv
+{
+    qword rawValue = 0ll;
+    float phyValue = 0.0;
+    
+    //update the raw value with physical value 
+    if(getValue(E_pric_ADS_ADS_1C0_ADS_UDLCStatus_SetVt)==0)
+    {
+        if(chgEv_ADS_1C0_ADS_UDLCStatus == 0)
+        {
+            phyValue = getvalue(this);
+            // physical to raw conversion
+            rawValue = ((phyValue -(0))/1);
+            putValue(E_pric_ADS_ADS_1C0_ADS_UDLCStatus_Rv, rawValue);
+            chgEv_ADS_1C0_ADS_UDLCStatus = 1;  
+        }
+        else
+        {
+            chgEv_ADS_1C0_ADS_UDLCStatus = 0;
+        }
+    }
+}
+
+on envVar E_pric_ADS_ADS_1C0_ADS_UDLCStatus_Vt
+{
+    qword rawValue = 0ll;
+    if(getValue(E_pric_ADS_ADS_1C0_ADS_UDLCStatus_SetVt))
+    {
+        //update the signal value
+        Msg_ADS_1C0.ADS_UDLCStatus=getValue(this);
+    }
+}
+
+on envVar E_pric_ADS_ADS_1C0_ADS_UDLCStatus_SetVt
+{
+    if(getValue(E_pric_ADS_ADS_1C0_ADS_UDLCStatus_SetVt))
+    {
+        //update the signal value
+        Msg_ADS_1C0.ADS_UDLCStatus=getvalue(E_pric_ADS_ADS_1C0_ADS_UDLCStatus_Vt);
+    }
+    else
+    {
+        Msg_ADS_1C0.ADS_UDLCStatus=getValue(E_pric_ADS_ADS_1C0_ADS_UDLCStatus_Rv);
+    }
+}
+ 
+
+
+
+/* update_ADS_1BF_ChkSum_CheckSum()
+{
+  int64 l_data[64],l_Crc_Len=0,l_count=0;
+	
+  l_Crc_Len = 8-1;
+  
+	for (l_count=0;l_count<l_Crc_Len;l_count++)
+    {
+      l_data[l_count] = Msg_ADS_1BF.BYTE(l_count+1);    
+    }
+       
+	Msg_ADS_1BF.BYTE(l_Crc_Len) = calc_ADS_1BF_Checksum(l_data,l_Crc_Len); 
+	
+	if(ADS_1BF_ADS_SYNC_CRC_wrongvalctr != 0)
+    {
+		Msg_ADS_1BF.ADS_SYNC_CRC+=1;
+        //update signal with wrong CRC value
+		if(ADS_1BF_ADS_SYNC_CRC_wrongvalctr > 0)
+        {
+            ADS_1BF_ADS_SYNC_CRC_wrongvalctr--;
+             // if counter becomes zero, update panel controller to zero
+             if(ADS_1BF_ADS_SYNC_CRC_wrongvalctr == 0)
+             {
+                putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_CRC_wrongvalctr,0);
+             }
+        }       
+    }  
+} */
+update_ADS_1BF_ChkSum_CheckSum()
+{
+  int l_data[8],l_Crc_Len=0,l_count=0;
+	
+  l_Crc_Len = 8;
+  //copy till 0 to 5 byte
+	for (l_count=2;l_count<l_Crc_Len;l_count++)
+    {
+      l_data[l_count-2] = Msg_ADS_1BF.BYTE(l_count);    
+    }
+    l_data[6] = 0xFF;	
+       
+	Msg_ADS_1BF.BYTE(1) = calc_ADS_1BF_Checksum(l_data,l_Crc_Len); 
+	
+	if(ADS_1BF_ADS_SYNC_CRC_wrongvalctr != 0)
+    {
+		Msg_ADS_1BF.ADS_SYNC_CRC+=1;
+        //update signal with wrong CRC value
+		if(ADS_1BF_ADS_SYNC_CRC_wrongvalctr > 0)
+        {
+            ADS_1BF_ADS_SYNC_CRC_wrongvalctr--;
+             // if counter becomes zero, update panel controller to zero
+             if(ADS_1BF_ADS_SYNC_CRC_wrongvalctr == 0)
+             {
+                putValue(E_pric_ADS_ADS_1BF_ADS_SYNC_CRC_wrongvalctr,0);
+             }
+        }       
+    }  
+}
+
+
+
+
+int calc_SAE_J1850(int64 data[], int Crc_len)
+	{
+		int idx,crc,temp,temp1;
+		crc = 0xFF;
+        idx = 0;
+        temp = 0;
+        temp1 = 0;
+	
+        for(idx=0;idx < Crc_len;idx++)
+        {
+         temp1 = data[idx];
+         temp = (crc^temp1);
+         crc = CRC_J1850_Table[temp];
+       }
+		crc ^= 0xFF;
+		return crc;
+	}
+	
+	int Calc_Canfd_dlc(byte Dbc_dlc1)
+	{
+		if(Dbc_dlc > 8)
+		    {
+			 while (i<=7)
+			  {
+				if (CANFD_DLC[i]==Dbc_dlc)
+				{
+				return CAN_DLC[i];
+				 break;
+				}
+				i++ ;
+			}
+		}
+    else
+	
+	return Dbc_dlc1 ;
+	
+		
+	}
+	
+	//Time sync checksum
+	int calc_ADS_1BF_Checksum(int data[], int Crc_len)
+	{
+	   int i, j;
+       byte u8_crc8;
+       byte u8_poly;
+       u8_crc8 = 0xFF;
+
+       u8_poly = 0x2F;
+
+       for (i = 0; i < Crc_len; i++)
+       {
+             u8_crc8 ^= data[i];
+             for (j = 0; j < 8; j++)
+             {
+                    if (u8_crc8 & 0x80)
+                    {
+                           u8_crc8 = (u8_crc8 << 1) ^ u8_poly;
+                    }
+                    else
+                    {
+                           u8_crc8 <<= 1;
+                    }
+             }
+       }
+       u8_crc8 ^= 0xFF;
+
+       return u8_crc8;
+	}
+	//For Messages with DLC = 8, CAN FD data length =8
+	//For Messages with DLC = 9, CAN FD data length =12
+	//For Messages with DLC = 10, CAN FD data length =16
+	//For Messages with DLC = 11, CAN FD data length =20
+	//For Messages with DLC = 12, CAN FD data length =24
+	//For Messages with DLC = 13, CAN FD data length =32
+	//For Messages with DLC = 14, CAN FD data length =48
+	//For Messages with DLC = 15, CAN FD data length =64
+	
+	 on envVar Env_timesync_switch
+{
+    if(getValue(Env_timesync_switch)==1)
+  {
+ i=0;
+// putValue(E_pric_DASy_ADS_1BF_ADS_SYNC_Type_Pv,20);
+ //putValue( E_pric_DASy_ADS_1BF_ADS_SYNC_SequenceCnt_wrongvalctr,0);
+ Msg_ADS_1BF.ADS_SYNC_Type=32;
+ Msg_ADS_1BF.ADS_SYNC_SequenceCnt=0;
+     Msg_ADS_1BF.ADS_SYNC_TimeDomain=2;
+ update_ADS_1BF_ChkSum_CheckSum();
+ output(Msg_ADS_1BF); 
+ setTimer(Tm_ADS_1BF_1,Cycle_ADS_1BF_1);
+  }
+}
+
+On timer Tm_ADS_1BF_1
+{
+  if(getValue(Env_timesync_switch)==1)
+  {
+ Msg_ADS_1BF.ADS_SYNC_Type=40;
+ update_ADS_1BF_ChkSum_CheckSum();
+ output(Msg_ADS_1BF);
+ setTimer(Tm_ADS_1BF_2,Cycle_ADS_1BF_2);
+  }
+}
+On timer Tm_ADS_1BF_2
+{
+    if(getValue(Env_timesync_switch)==1)
+  {
+  i=i+1;
+  Msg_ADS_1BF.ADS_SYNC_Type=32;
+  //putValue(E_pric_DASy_ADS_1BF_ADS_SYNC_SequenceCnt_wrongvalctr,i);
+  Msg_ADS_1BF.ADS_SYNC_SequenceCnt=i;
+ update_ADS_1BF_ChkSum_CheckSum();
+ output(Msg_ADS_1BF);
+ setTimer(Tm_ADS_1BF_1,Cycle_ADS_1BF_1); 
+}
+}
+
+	
+	
+	
+	
+

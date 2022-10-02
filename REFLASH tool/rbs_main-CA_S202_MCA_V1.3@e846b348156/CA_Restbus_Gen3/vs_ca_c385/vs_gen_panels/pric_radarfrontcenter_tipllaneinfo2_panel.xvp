@@ -1,0 +1,702 @@
+<?xml version="1.0"?>
+<Panel Type="Vector.CANalyzer.Panels.PanelSerializer, Vector.CANalyzer.Panels.Serializer, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null">
+  <Object Type="Vector.CANalyzer.Panels.Runtime.Panel, Vector.CANalyzer.Panels.Common, Version=1.0.12.0, Culture=neutral, PublicKeyToken=null" Name="Panel1" Children="Controls">
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl1" Children="Controls">        
+        <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl2" Children="Controls">        
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl1">
+              <Property Name="Font">Verdana, 7pt</Property>
+              <Property Name="Size">113, 20</Property>
+              <Property Name="TextAlign">MiddleCenter</Property>
+              <Property Name="Text">set all signals with</Property>
+              <Property Name="Location">2, 18</Property>
+              <Property Name="Name">StaticTextControl1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ComboBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="ComboBoxControl1">
+              <Property Name="DropDownStyle">DropDownList</Property>
+              <Property Name="Size">90, 20</Property>
+              <Property Name="Name">ComboBoxControl1</Property>
+              <Property Name="Location">116, 20</Property>
+              <Property Name="TabIndex">7</Property>
+              <Property Name="MaxDropDownItems">4</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_Range;1</Property>
+            </Object>
+            <Property Name="Size">210, 50</Property>
+            <Property Name="Location">15, 20</Property>
+            <Property Name="Name">GroupBoxControl2</Property>
+        </Object>
+        <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl1">
+          <Property Name="Size">80, 25</Property>
+          <Property Name="BackColor">LightGray</Property>
+          <Property Name="TabIndex">0</Property>
+          <Property Name="ReleaseValue">0</Property>
+          <Property Name="Text">Send Msg</Property>
+          <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_tx;1</Property>
+          <Property Name="Location">651, 38</Property>
+          <Property Name="Name">ButtonControl1</Property>
+          <Property Name="ImageFile">Choose Image...</Property>
+          <Property Name="PressValue">1</Property>
+        </Object>
+
+      <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl4" Children="Controls">        
+        <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl3" Children="Controls">
+          <Property Name="Name">StaticTextControl3</Property>
+          <Property Name="Size">101, 18</Property>
+          <Property Name="Location">8, 21</Property>
+          <Property Name="BackColor">WhiteSmoke</Property>
+          <Property Name="Font">Verdana, 8.25pt</Property>
+          <Property Name="Text">Correct DLC=12</Property>
+        </Object>
+        <Object Type="Vector.CANalyzer.Panels.Design.CheckBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="CheckBoxControl1" Children="Controls">
+          <Property Name="Name">CheckBoxControl1</Property>
+          <Property Name="Size">202, 20</Property>
+          <Property Name="Location">115, 18</Property>
+          <Property Name="Text">Enable for wrong DLC; Set to</Property>
+          <Property Name="BackColor">WhiteSmoke</Property>
+          <Property Name="Font">Verdana, 8.25pt</Property>
+          <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_enDlc;1</Property>
+          <Property Name="TabIndex">10</Property>
+        </Object>
+        <Object Type="Vector.CANalyzer.Panels.Design.NumericUpDownControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="NumericUpDownControl1" Children="Controls">
+          <Property Name="Name">NumericUpDownControl1</Property>
+          <Property Name="Size">40, 20</Property>
+          <Property Name="Location">319, 18</Property>
+          <Property Name="Minimum">0</Property>
+          <Property Name="Maximum">15</Property>
+          <Property Name="Font">Verdana, 8pt, style=Bold</Property>          
+          <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_Dlc;1</Property>
+        </Object>
+        <Property Name="Name">GroupBoxControl4</Property>
+        <Property Name="Size">375, 44</Property>
+        <Property Name="Location">15, 76</Property>
+        <Property Name="Text">DLC Error</Property>               
+      </Object>
+
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl100" Children="Controls">
+        <Property Name="Size">230, 40</Property>
+        <Property Name="Text">TIPLLaneInfo2_dLowerLimitLane_sw:</Property>
+        <Property Name="Font">Verdana, 8pt, style=Bold</Property>
+        <Property Name="ForeColor">Purple</Property>
+        <Property Name="TextAlign">TopLeft</Property>        
+        <Property Name="Location">15, 140</Property>
+        <Property Name="Name">StaticTextControl100</Property>
+    </Object>
+  
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl200" Children="Controls">
+        <Property Name="Size">39, 20</Property>
+        <Property Name="Text">Raw:</Property>
+        <Property Name="TextAlign">TopCenter</Property>
+        <Property Name="Font">Verdana, 7pt,style=Bold </Property>
+        <Property Name="Location">243, 140</Property>
+        <Property Name="Name">StaticTextControl200</Property>
+    </Object>
+
+
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl400" Children="Controls">
+        <Property Name="Name">TextBoxControl400</Property>
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_dLowerLimitLane_sw_Rv;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">0</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Decimal</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 7pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;3;-32768;32767</Property>
+        <Property Name="DisplayLabel">Hide</Property>
+        <Property Name="TextFont">Verdana, 8pt</Property>
+        <Property Name="DescriptionText"></Property>
+        <Property Name="Location">290, 140</Property>
+        <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+        <Property Name="Size">100, 20</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>
+         
+
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl500" Children="Controls">
+        <Property Name="Size">140, 15</Property>
+        <Property Name="Text">Min:-32768,Max:32767</Property>
+        <Property Name="TextAlign">BottomLeft</Property>
+        <Property Name="Font">Verdana, 7pt</Property>
+        <Property Name="Location">280, 164</Property>
+        <Property Name="Name">StaticTextControl500</Property>
+    </Object>
+  
+    
+  <Object Type="Vector.CANalyzer.Panels.Design.CheckBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="CheckBoxControl600">
+    <Property Name="Size">165, 19</Property>
+    <Property Name="TabIndex">32</Property>
+    <Property Name="Font">Verdana, 7pt</Property>
+    <Property Name="Text">No special value</Property>
+    <Property Name="ReadOnlyControl">True</Property>
+    <Property Name="UncheckValue">0</Property>
+    <Property Name="CheckValue">1</Property>    
+    <Property Name="SymbolConfiguration">2;1;;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_dLowerLimitLane_sw_SetVt;1</Property>
+    <Property Name="Location">420, 161</Property>
+    <Property Name="Name">CheckBoxControl600</Property> 
+  </Object>
+  
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.ComboBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="ComboBoxControl700">
+        <Property Name="DropDownStyle">DropDownList</Property>
+        <Property Name="Size">150, 20</Property>
+        <Property Name="Font">Verdana, 7.5pt,style=Bold</Property>        
+        <Property Name="Name">ComboBoxControl700</Property>
+        <Property Name="Location">422,140</Property>
+        <Property Name="TabIndex">6</Property>
+        <Property Name="ReadOnlyControl">True</Property>
+        <Property Name="MaxDropDownItems">1</Property>
+        <Property Name="BackColor">InactiveCaptionText</Property>
+    </Object>  
+  
+                                                                                                                            
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl800" Children="Controls">
+        <Property Name="Name">TextBoxControl800</Property>       
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_dLowerLimitLane_sw_Pv;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">4</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Double</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 8pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;3;-256;255.9921875</Property>
+        <Property Name="DisplayLabel">Left</Property>
+        <Property Name="TextFont">Verdana, 7pt,style=Bold</Property>
+        <Property Name="DescriptionText">Phys:</Property>
+        <Property Name="Location">592, 140</Property>        
+        <Property Name="AlarmLowerFont">Verdana, 7pt</Property>
+        <Property Name="Size">125, 20</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>    
+    
+
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl900" Children="Controls">
+        <Property Name="Size">140, 15</Property>
+        <Property Name="Text">Min:-256,Max:255.9921875</Property>
+        <Property Name="TextAlign">BottomLeft</Property>
+        <Property Name="Font">Verdana, 7pt</Property>
+        <Property Name="Location">592, 164</Property>
+        <Property Name="Name">StaticTextControl900</Property>
+    </Object>    
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl101" Children="Controls">
+        <Property Name="Size">230, 40</Property>
+        <Property Name="Text">TIPLLaneInfo2_dRightBorder_sw:</Property>
+        <Property Name="Font">Verdana, 8pt, style=Bold</Property>
+        <Property Name="ForeColor">Purple</Property>
+        <Property Name="TextAlign">TopLeft</Property>        
+        <Property Name="Location">15, 197</Property>
+        <Property Name="Name">StaticTextControl101</Property>
+    </Object>
+  
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl201" Children="Controls">
+        <Property Name="Size">39, 20</Property>
+        <Property Name="Text">Raw:</Property>
+        <Property Name="TextAlign">TopCenter</Property>
+        <Property Name="Font">Verdana, 7pt,style=Bold </Property>
+        <Property Name="Location">243, 197</Property>
+        <Property Name="Name">StaticTextControl201</Property>
+    </Object>
+
+
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl401" Children="Controls">
+        <Property Name="Name">TextBoxControl401</Property>
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_dRightBorder_sw_Rv;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">0</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Decimal</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 7pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;3;-32768;32767</Property>
+        <Property Name="DisplayLabel">Hide</Property>
+        <Property Name="TextFont">Verdana, 8pt</Property>
+        <Property Name="DescriptionText"></Property>
+        <Property Name="Location">290, 197</Property>
+        <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+        <Property Name="Size">100, 20</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>
+         
+
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl501" Children="Controls">
+        <Property Name="Size">140, 15</Property>
+        <Property Name="Text">Min:-32768,Max:32767</Property>
+        <Property Name="TextAlign">BottomLeft</Property>
+        <Property Name="Font">Verdana, 7pt</Property>
+        <Property Name="Location">280, 221</Property>
+        <Property Name="Name">StaticTextControl501</Property>
+    </Object>
+  
+    
+  <Object Type="Vector.CANalyzer.Panels.Design.CheckBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="CheckBoxControl601">
+    <Property Name="Size">165, 19</Property>
+    <Property Name="TabIndex">32</Property>
+    <Property Name="Font">Verdana, 7pt</Property>
+    <Property Name="Text">No special value</Property>
+    <Property Name="ReadOnlyControl">True</Property>
+    <Property Name="UncheckValue">0</Property>
+    <Property Name="CheckValue">1</Property>    
+    <Property Name="SymbolConfiguration">2;1;;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_dRightBorder_sw_SetVt;1</Property>
+    <Property Name="Location">420, 218</Property>
+    <Property Name="Name">CheckBoxControl601</Property> 
+  </Object>
+  
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.ComboBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="ComboBoxControl701">
+        <Property Name="DropDownStyle">DropDownList</Property>
+        <Property Name="Size">150, 20</Property>
+        <Property Name="Font">Verdana, 7.5pt,style=Bold</Property>        
+        <Property Name="Name">ComboBoxControl701</Property>
+        <Property Name="Location">422,197</Property>
+        <Property Name="TabIndex">6</Property>
+        <Property Name="ReadOnlyControl">True</Property>
+        <Property Name="MaxDropDownItems">1</Property>
+        <Property Name="BackColor">InactiveCaptionText</Property>
+    </Object>  
+  
+                                                                                                                            
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl801" Children="Controls">
+        <Property Name="Name">TextBoxControl801</Property>       
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_dRightBorder_sw_Pv;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">4</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Double</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 8pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;3;-256;255.9921875</Property>
+        <Property Name="DisplayLabel">Left</Property>
+        <Property Name="TextFont">Verdana, 7pt,style=Bold</Property>
+        <Property Name="DescriptionText">Phys:</Property>
+        <Property Name="Location">592, 197</Property>        
+        <Property Name="AlarmLowerFont">Verdana, 7pt</Property>
+        <Property Name="Size">125, 20</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>    
+    
+
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl901" Children="Controls">
+        <Property Name="Size">140, 15</Property>
+        <Property Name="Text">Min:-256,Max:255.9921875</Property>
+        <Property Name="TextAlign">BottomLeft</Property>
+        <Property Name="Font">Verdana, 7pt</Property>
+        <Property Name="Location">592, 221</Property>
+        <Property Name="Name">StaticTextControl901</Property>
+    </Object>    
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl102" Children="Controls">
+        <Property Name="Size">230, 40</Property>
+        <Property Name="Text">TIPLLaneInfo2_dLeftBorder_sw:</Property>
+        <Property Name="Font">Verdana, 8pt, style=Bold</Property>
+        <Property Name="ForeColor">Purple</Property>
+        <Property Name="TextAlign">TopLeft</Property>        
+        <Property Name="Location">15, 254</Property>
+        <Property Name="Name">StaticTextControl102</Property>
+    </Object>
+  
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl202" Children="Controls">
+        <Property Name="Size">39, 20</Property>
+        <Property Name="Text">Raw:</Property>
+        <Property Name="TextAlign">TopCenter</Property>
+        <Property Name="Font">Verdana, 7pt,style=Bold </Property>
+        <Property Name="Location">243, 254</Property>
+        <Property Name="Name">StaticTextControl202</Property>
+    </Object>
+
+
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl402" Children="Controls">
+        <Property Name="Name">TextBoxControl402</Property>
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_dLeftBorder_sw_Rv;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">0</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Decimal</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 7pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;3;-32768;32767</Property>
+        <Property Name="DisplayLabel">Hide</Property>
+        <Property Name="TextFont">Verdana, 8pt</Property>
+        <Property Name="DescriptionText"></Property>
+        <Property Name="Location">290, 254</Property>
+        <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+        <Property Name="Size">100, 20</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>
+         
+
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl502" Children="Controls">
+        <Property Name="Size">140, 15</Property>
+        <Property Name="Text">Min:-32768,Max:32767</Property>
+        <Property Name="TextAlign">BottomLeft</Property>
+        <Property Name="Font">Verdana, 7pt</Property>
+        <Property Name="Location">280, 278</Property>
+        <Property Name="Name">StaticTextControl502</Property>
+    </Object>
+  
+    
+  <Object Type="Vector.CANalyzer.Panels.Design.CheckBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="CheckBoxControl602">
+    <Property Name="Size">165, 19</Property>
+    <Property Name="TabIndex">32</Property>
+    <Property Name="Font">Verdana, 7pt</Property>
+    <Property Name="Text">No special value</Property>
+    <Property Name="ReadOnlyControl">True</Property>
+    <Property Name="UncheckValue">0</Property>
+    <Property Name="CheckValue">1</Property>    
+    <Property Name="SymbolConfiguration">2;1;;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_dLeftBorder_sw_SetVt;1</Property>
+    <Property Name="Location">420, 275</Property>
+    <Property Name="Name">CheckBoxControl602</Property> 
+  </Object>
+  
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.ComboBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="ComboBoxControl702">
+        <Property Name="DropDownStyle">DropDownList</Property>
+        <Property Name="Size">150, 20</Property>
+        <Property Name="Font">Verdana, 7.5pt,style=Bold</Property>        
+        <Property Name="Name">ComboBoxControl702</Property>
+        <Property Name="Location">422,254</Property>
+        <Property Name="TabIndex">6</Property>
+        <Property Name="ReadOnlyControl">True</Property>
+        <Property Name="MaxDropDownItems">1</Property>
+        <Property Name="BackColor">InactiveCaptionText</Property>
+    </Object>  
+  
+                                                                                                                            
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl802" Children="Controls">
+        <Property Name="Name">TextBoxControl802</Property>       
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_dLeftBorder_sw_Pv;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">4</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Double</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 8pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;3;-256;255.9921875</Property>
+        <Property Name="DisplayLabel">Left</Property>
+        <Property Name="TextFont">Verdana, 7pt,style=Bold</Property>
+        <Property Name="DescriptionText">Phys:</Property>
+        <Property Name="Location">592, 254</Property>        
+        <Property Name="AlarmLowerFont">Verdana, 7pt</Property>
+        <Property Name="Size">125, 20</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>    
+    
+
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl902" Children="Controls">
+        <Property Name="Size">140, 15</Property>
+        <Property Name="Text">Min:-256,Max:255.9921875</Property>
+        <Property Name="TextAlign">BottomLeft</Property>
+        <Property Name="Font">Verdana, 7pt</Property>
+        <Property Name="Location">592, 278</Property>
+        <Property Name="Name">StaticTextControl902</Property>
+    </Object>    
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl103" Children="Controls">
+        <Property Name="Size">230, 40</Property>
+        <Property Name="Text">TIPLLaneInfo2_dUpperLimitLane_sw:</Property>
+        <Property Name="Font">Verdana, 8pt, style=Bold</Property>
+        <Property Name="ForeColor">Purple</Property>
+        <Property Name="TextAlign">TopLeft</Property>        
+        <Property Name="Location">15, 311</Property>
+        <Property Name="Name">StaticTextControl103</Property>
+    </Object>
+  
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl203" Children="Controls">
+        <Property Name="Size">39, 20</Property>
+        <Property Name="Text">Raw:</Property>
+        <Property Name="TextAlign">TopCenter</Property>
+        <Property Name="Font">Verdana, 7pt,style=Bold </Property>
+        <Property Name="Location">243, 311</Property>
+        <Property Name="Name">StaticTextControl203</Property>
+    </Object>
+
+
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl403" Children="Controls">
+        <Property Name="Name">TextBoxControl403</Property>
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_dUpperLimitLane_sw_Rv;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">0</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Decimal</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 7pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;3;-32768;32767</Property>
+        <Property Name="DisplayLabel">Hide</Property>
+        <Property Name="TextFont">Verdana, 8pt</Property>
+        <Property Name="DescriptionText"></Property>
+        <Property Name="Location">290, 311</Property>
+        <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+        <Property Name="Size">100, 20</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>
+         
+
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl503" Children="Controls">
+        <Property Name="Size">140, 15</Property>
+        <Property Name="Text">Min:-32768,Max:32767</Property>
+        <Property Name="TextAlign">BottomLeft</Property>
+        <Property Name="Font">Verdana, 7pt</Property>
+        <Property Name="Location">280, 335</Property>
+        <Property Name="Name">StaticTextControl503</Property>
+    </Object>
+  
+    
+  <Object Type="Vector.CANalyzer.Panels.Design.CheckBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="CheckBoxControl603">
+    <Property Name="Size">165, 19</Property>
+    <Property Name="TabIndex">32</Property>
+    <Property Name="Font">Verdana, 7pt</Property>
+    <Property Name="Text">No special value</Property>
+    <Property Name="ReadOnlyControl">True</Property>
+    <Property Name="UncheckValue">0</Property>
+    <Property Name="CheckValue">1</Property>    
+    <Property Name="SymbolConfiguration">2;1;;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_dUpperLimitLane_sw_SetVt;1</Property>
+    <Property Name="Location">420, 332</Property>
+    <Property Name="Name">CheckBoxControl603</Property> 
+  </Object>
+  
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.ComboBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="ComboBoxControl703">
+        <Property Name="DropDownStyle">DropDownList</Property>
+        <Property Name="Size">150, 20</Property>
+        <Property Name="Font">Verdana, 7.5pt,style=Bold</Property>        
+        <Property Name="Name">ComboBoxControl703</Property>
+        <Property Name="Location">422,311</Property>
+        <Property Name="TabIndex">6</Property>
+        <Property Name="ReadOnlyControl">True</Property>
+        <Property Name="MaxDropDownItems">1</Property>
+        <Property Name="BackColor">InactiveCaptionText</Property>
+    </Object>  
+  
+                                                                                                                            
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl803" Children="Controls">
+        <Property Name="Name">TextBoxControl803</Property>       
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_dUpperLimitLane_sw_Pv;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">4</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Double</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 8pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;3;-256;255.9921875</Property>
+        <Property Name="DisplayLabel">Left</Property>
+        <Property Name="TextFont">Verdana, 7pt,style=Bold</Property>
+        <Property Name="DescriptionText">Phys:</Property>
+        <Property Name="Location">592, 311</Property>        
+        <Property Name="AlarmLowerFont">Verdana, 7pt</Property>
+        <Property Name="Size">125, 20</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>    
+    
+
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl903" Children="Controls">
+        <Property Name="Size">140, 15</Property>
+        <Property Name="Text">Min:-256,Max:255.9921875</Property>
+        <Property Name="TextAlign">BottomLeft</Property>
+        <Property Name="Font">Verdana, 7pt</Property>
+        <Property Name="Location">592, 335</Property>
+        <Property Name="Name">StaticTextControl903</Property>
+    </Object>    
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl104" Children="Controls">
+        <Property Name="Size">230, 40</Property>
+        <Property Name="Text">TIPLLaneInfo2_prob1Lane_ub:</Property>
+        <Property Name="Font">Verdana, 8pt, style=Bold</Property>
+        <Property Name="ForeColor">Purple</Property>
+        <Property Name="TextAlign">TopLeft</Property>        
+        <Property Name="Location">15, 368</Property>
+        <Property Name="Name">StaticTextControl104</Property>
+    </Object>
+  
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl204" Children="Controls">
+        <Property Name="Size">39, 20</Property>
+        <Property Name="Text">Raw:</Property>
+        <Property Name="TextAlign">TopCenter</Property>
+        <Property Name="Font">Verdana, 7pt,style=Bold </Property>
+        <Property Name="Location">243, 368</Property>
+        <Property Name="Name">StaticTextControl204</Property>
+    </Object>
+
+
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl404" Children="Controls">
+        <Property Name="Name">TextBoxControl404</Property>
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_prob1Lane_ub_Rv;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">0</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Decimal</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 7pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;3;0;255</Property>
+        <Property Name="DisplayLabel">Hide</Property>
+        <Property Name="TextFont">Verdana, 8pt</Property>
+        <Property Name="DescriptionText"></Property>
+        <Property Name="Location">290, 368</Property>
+        <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+        <Property Name="Size">100, 20</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>
+         
+
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl504" Children="Controls">
+        <Property Name="Size">140, 15</Property>
+        <Property Name="Text">Min:0,Max:255</Property>
+        <Property Name="TextAlign">BottomLeft</Property>
+        <Property Name="Font">Verdana, 7pt</Property>
+        <Property Name="Location">280, 392</Property>
+        <Property Name="Name">StaticTextControl504</Property>
+    </Object>
+  
+    
+  <Object Type="Vector.CANalyzer.Panels.Design.CheckBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="CheckBoxControl604">
+    <Property Name="Size">165, 19</Property>
+    <Property Name="TabIndex">32</Property>
+    <Property Name="Font">Verdana, 7pt</Property>
+    <Property Name="Text">No special value</Property>
+    <Property Name="ReadOnlyControl">True</Property>
+    <Property Name="UncheckValue">0</Property>
+    <Property Name="CheckValue">1</Property>    
+    <Property Name="SymbolConfiguration">2;1;;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_prob1Lane_ub_SetVt;1</Property>
+    <Property Name="Location">420, 389</Property>
+    <Property Name="Name">CheckBoxControl604</Property> 
+  </Object>
+  
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.ComboBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="ComboBoxControl704">
+        <Property Name="DropDownStyle">DropDownList</Property>
+        <Property Name="Size">150, 20</Property>
+        <Property Name="Font">Verdana, 7.5pt,style=Bold</Property>        
+        <Property Name="Name">ComboBoxControl704</Property>
+        <Property Name="Location">422,368</Property>
+        <Property Name="TabIndex">6</Property>
+        <Property Name="ReadOnlyControl">True</Property>
+        <Property Name="MaxDropDownItems">1</Property>
+        <Property Name="BackColor">InactiveCaptionText</Property>
+    </Object>  
+  
+                                                                                                                            
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl804" Children="Controls">
+        <Property Name="Name">TextBoxControl804</Property>       
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_prob1Lane_ub_Pv;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">4</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Double</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 8pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;3;0;1.9921875</Property>
+        <Property Name="DisplayLabel">Left</Property>
+        <Property Name="TextFont">Verdana, 7pt,style=Bold</Property>
+        <Property Name="DescriptionText">Phys:</Property>
+        <Property Name="Location">592, 368</Property>        
+        <Property Name="AlarmLowerFont">Verdana, 7pt</Property>
+        <Property Name="Size">125, 20</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>    
+    
+
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl904" Children="Controls">
+        <Property Name="Size">140, 15</Property>
+        <Property Name="Text">Min:0,Max:1.9921875</Property>
+        <Property Name="TextAlign">BottomLeft</Property>
+        <Property Name="Font">Verdana, 7pt</Property>
+        <Property Name="Location">592, 392</Property>
+        <Property Name="Name">StaticTextControl904</Property>
+    </Object>    
+    
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl1000" Children="Controls">
+        <Property Name="Name">TextBoxControl1000</Property>       
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_blockCtr_wrongvalctr;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">4</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Decimal</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 8pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;0;-1;100</Property>
+        <Property Name="DisplayLabel">Right</Property>
+        <Property Name="TextFont">Verdana, 8pt,style=Bold</Property>
+        <Property Name="DescriptionText">TIPLLaneInfo2_blockCtr: Disturb count for wrong Value</Property>
+        <Property Name="Location">15,536</Property>        
+        <Property Name="AlarmLowerFont">Verdana, 7pt</Property>
+        <Property Name="Size">600, 25</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>            
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl1001" Children="Controls">
+        <Property Name="Name">TextBoxControl1001</Property>       
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_MsgCtr_wrongvalctr;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">4</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Decimal</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 8pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;0;-1;100</Property>
+        <Property Name="DisplayLabel">Right</Property>
+        <Property Name="TextFont">Verdana, 8pt,style=Bold</Property>
+        <Property Name="DescriptionText">TIPLLaneInfo2_MsgCtr: Disturb count for wrong Value</Property>
+        <Property Name="Location">15,486</Property>        
+        <Property Name="AlarmLowerFont">Verdana, 7pt</Property>
+        <Property Name="Size">600, 25</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>            
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=7.1.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl1002" Children="Controls">
+        <Property Name="Name">TextBoxControl1002</Property>       
+        <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pric_RadarFrontCenter_TIPLLaneInfo2_TIPLLaneInfo2_CRC_wrongvalctr;2</Property>
+        <Property Name="AlarmUpperTextColor">ControlText</Property>
+        <Property Name="ValueDecimalPlaces">4</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="ValueDisplay">Decimal</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">ControlText</Property>
+        <Property Name="BoxFont">Verdana, 8pt</Property>
+        <Property Name="AlarmUpperFont">Verdana, 8pt</Property>
+        <Property Name="AlarmGeneralSettings">1;0;-1;100</Property>
+        <Property Name="DisplayLabel">Right</Property>
+        <Property Name="TextFont">Verdana, 8pt,style=Bold</Property>
+        <Property Name="DescriptionText">TIPLLaneInfo2_CRC: Disturb count for wrong Value</Property>
+        <Property Name="Location">15,436</Property>        
+        <Property Name="AlarmLowerFont">Verdana, 7pt</Property>
+        <Property Name="Size">600, 25</Property>
+        <Property Name="TabIndex">3</Property>
+    </Object>            
+    
+      <Property Name="Size">750,596</Property>
+      <Property Name="Text">Tx Message:TIPLLaneInfo2(ID:0x118)</Property>
+      <Property Name="Location">10,10</Property>
+      <Property Name="BackColor">WhiteSmoke</Property>
+      <Property Name="Font">Verdana, 8pt, style=Bold</Property>
+      <Property Name="Name">GroupBoxControl1</Property>
+    </Object>
+    <Property Name="Size">770,616</Property>
+    <Property Name="BackColor">Lavender</Property>
+    <Property Name="Name">TIPLLaneInfo2</Property>
+  </Object>
+</Panel>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Panel Type="Vector.CANalyzer.Panels.PanelSerializer, Vector.CANalyzer.Panels.Serializer, Version=8.2.80.0, Culture=neutral, PublicKeyToken=null">
+  <Object Type="Vector.CANalyzer.Panels.Runtime.Panel, Vector.CANalyzer.Panels.Common, Version=8.2.80.0, Culture=neutral, PublicKeyToken=null" Name="Panel" Children="Controls" ControlName="PathDiag">
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=8.2.80.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl1" Children="Controls" ControlName="StaticTextControl1">
+      <Property Name="Name">StaticTextControl1</Property>
+      <Property Name="Size">57, 13</Property>
+      <Property Name="Location">3, 3</Property>
+      <Property Name="BackColor">LightGray</Property>
+      <Property Name="Font">Microsoft Sans Serif, 8.25pt, style=Bold, Underline</Property>
+      <Property Name="Text">DSD File</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.PathControl, Vector.CANalyzer.Panels.CommonControls, Version=8.2.80.0, Culture=neutral, PublicKeyToken=null" Name="PathControl1" Children="Controls" ControlName="PathControl1">
+      <Property Name="Name">PathControl1</Property>
+      <Property Name="Size">115, 23</Property>
+      <Property Name="Location">3, 22</Property>
+      <Property Name="DlgTitle">Choose Dataset </Property>
+      <Property Name="FileDlgFilter">Dataset|*.xml</Property>
+      <Property Name="SymbolConfiguration">3;1;Diag_Env;;;EnvFilePath;4;;</Property>
+      <Property Name="TabIndex">0</Property>
+    </Object>
+    <Property Name="Name">Panel</Property>
+    <Property Name="Size">144, 57</Property>
+    <Property Name="BackColor">LightGray</Property>
+  </Object>
+</Panel>

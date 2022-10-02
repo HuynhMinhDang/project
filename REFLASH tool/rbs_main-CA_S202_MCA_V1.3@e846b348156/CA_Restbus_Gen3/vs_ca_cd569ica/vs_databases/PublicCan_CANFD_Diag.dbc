@@ -1,0 +1,174 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: Tester GW APA LCDAR LAS FC BDC ADS ACC FR LCDAL FLC FRC HPP
+
+
+BO_ 2015 DIAG_Functional_Req_FD: 64 Tester
+ SG_ Function_Req_CAN_FD : 71|64@0+ (1,0) [0|0] ""  LAS
+
+BO_ 1874 DIAG_Phy_Req: 64 Tester
+ SG_ Phys_Diag_Rx : 7|64@0+ (1,0) [0|0] ""  LAS
+
+BO_ 1882 DIAG_Response: 64 LAS
+ SG_ Diag_Response : 7|64@0+ (1,0) [0|0] ""  Tester
+
+
+
+CM_ BO_ 2015 "DLC length is 8 to 64 CANFD message frame";
+CM_ BO_ 1874 "DLC length is 8 to 64 CANFD message frame";
+CM_ BO_ 1882 "DLC length is 8 to 64 CANFD message frame";
+BA_DEF_ SG_  "GenSigStartValue" INT 0 0;
+BA_DEF_ SG_  "GenSigInvalidValue" STRING ;
+BA_DEF_ SG_  "GenSigInactiveValue" INT 0 0;
+BA_DEF_ SG_  "GenSigCycleTimeActive" INT 0 0;
+BA_DEF_ SG_  "GenSigCycleTime" INT 0 0;
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType","NotUsed","NotUsed","NotUsed","NotUsed","NotUsed";
+BA_DEF_  "Baudrate" INT 0 1000000;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_  "NmType" STRING ;
+BA_DEF_  "Manufacturer" STRING ;
+BA_DEF_  "VersionYear" INT 2009 2210;
+BA_DEF_  "VersionWeek" INT 0 82;
+BA_DEF_  "VersionNumber" INT 0 65535;
+BA_DEF_  "VersionMonth" INT 0 18;
+BA_DEF_  "VersionDay" INT 0 49;
+BA_DEF_ BO_  "TpTxIndex" INT 0 255;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "NmStationAddress" HEX 0 0;
+BA_DEF_ BU_  "NmNode" ENUM  "No","Yes";
+BA_DEF_ BO_  "NmMessage" ENUM  "No","Yes";
+BA_DEF_ SG_  "NWM-WakeupAllowed" ENUM  "No","Yes";
+BA_DEF_ BU_  "ILUsed" ENUM  "No","Yes";
+BA_DEF_  "ILTxTimeout" INT 0 100;
+BA_DEF_ BU_  "GenNodSleepTime" INT 0 65535;
+BA_DEF_  "GenNWMTalkNM" STRING ;
+BA_DEF_  "GenNWMSleepTime" INT 0 1000000;
+BA_DEF_  "GenNWMGotoMode_BusSleep" STRING ;
+BA_DEF_  "GenNWMGotoMode_Awake" STRING ;
+BA_DEF_  "GenNWMApCanWakeUp" STRING ;
+BA_DEF_  "GenNWMApCanSleep" STRING ;
+BA_DEF_  "GenNWMApCanOn" STRING ;
+BA_DEF_  "GenNWMApCanOff" STRING ;
+BA_DEF_  "GenNWMApCanNormal" STRING ;
+BA_DEF_  "GenNWMApBusSleep" STRING ;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","Event","NotUsed","NotUsed","NotUsed","Cyclic","NotUsed","IfActive","NoMsgSendType","NotUsed";
+BA_DEF_ BO_  "GenMsgILSupport" ENUM  "No","Yes";
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ BO_  "DiagState" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagResponse" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagRequest" ENUM  "No","Yes";
+BA_DEF_ BU_  "CANoeStartDelay" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMin" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMax" INT 0 0;
+BA_DEF_ BU_  "CANoeDrift" INT 0 0;
+BA_DEF_ BO_  "CANFD_BRS" ENUM  "0","1";
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","StandardCAN_FD","ExtendedCAN_FD";
+BA_DEF_REL_ BU_BO_REL_  "GenMsgStartDelayTime" INT 0 65535;
+BA_DEF_REL_ BU_BO_REL_  "GenMsgDelayTime" INT 0 65535;
+BA_DEF_REL_ BU_BO_REL_  "GenMsgNrOfRepetition" INT 0 65535;
+BA_DEF_REL_ BU_BO_REL_  "GenMsgCycleTimeFast" INT 0 65535;
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_DEF_DEF_  "GenSigInvalidValue" "/";
+BA_DEF_DEF_  "GenSigInactiveValue" 0;
+BA_DEF_DEF_  "GenSigCycleTimeActive" 0;
+BA_DEF_DEF_  "GenSigCycleTime" 0;
+BA_DEF_DEF_  "GenSigSendType" "Cyclic";
+BA_DEF_DEF_  "Baudrate" 500000;
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "NmType" "";
+BA_DEF_DEF_  "Manufacturer" "CHANA";
+BA_DEF_DEF_  "VersionYear" 2010;
+BA_DEF_DEF_  "VersionWeek" 0;
+BA_DEF_DEF_  "VersionNumber" 0;
+BA_DEF_DEF_  "VersionMonth" 11;
+BA_DEF_DEF_  "VersionDay" 0;
+BA_DEF_DEF_  "TpTxIndex" 0;
+BA_DEF_DEF_  "NodeLayerModules" "OSEKNM01.dll,CANoeILNLVector.dll";
+BA_DEF_DEF_  "NmStationAddress" 0;
+BA_DEF_DEF_  "NmNode" "No";
+BA_DEF_DEF_  "NmMessage" "No";
+BA_DEF_DEF_  "NWM-WakeupAllowed" "";
+BA_DEF_DEF_  "ILUsed" "Yes";
+BA_DEF_DEF_  "ILTxTimeout" 0;
+BA_DEF_DEF_  "GenNodSleepTime" 0;
+BA_DEF_DEF_  "GenNWMTalkNM" "TalkNM()";
+BA_DEF_DEF_  "GenNWMSleepTime" 0;
+BA_DEF_DEF_  "GenNWMGotoMode_BusSleep" "GotoMode_BusSleep()";
+BA_DEF_DEF_  "GenNWMGotoMode_Awake" "GotoMode_Awake()";
+BA_DEF_DEF_  "GenNWMApCanWakeUp" "apCanWakeUp()";
+BA_DEF_DEF_  "GenNWMApCanSleep" "apCanSleep()";
+BA_DEF_DEF_  "GenNWMApCanOn" "apCanOn()";
+BA_DEF_DEF_  "GenNWMApCanOff" "apCanOff()";
+BA_DEF_DEF_  "GenNWMApCanNormal" "apCanNormal()";
+BA_DEF_DEF_  "GenNWMApBusSleep" "apBusSleep()";
+BA_DEF_DEF_  "GenMsgSendType" "NoMsgSendType";
+BA_DEF_DEF_  "GenMsgILSupport" "Yes";
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "DiagState" "No";
+BA_DEF_DEF_  "DiagResponse" "No";
+BA_DEF_DEF_  "DiagRequest" "No";
+BA_DEF_DEF_  "CANoeStartDelay" 0;
+BA_DEF_DEF_  "CANoeJitterMin" 0;
+BA_DEF_DEF_  "CANoeJitterMax" 0;
+BA_DEF_DEF_  "CANoeDrift" 0;
+BA_DEF_DEF_  "CANFD_BRS" "1";
+BA_DEF_DEF_  "VFrameFormat" "StandardCAN";
+BA_DEF_DEF_REL_ "GenMsgStartDelayTime" 0;
+BA_DEF_DEF_REL_ "GenMsgDelayTime" 0;
+BA_DEF_DEF_REL_ "GenMsgNrOfRepetition" 0;
+BA_DEF_DEF_REL_ "GenMsgCycleTimeFast" 0;
+BA_ "VersionYear" 2020;
+BA_ "VersionNumber" 11;
+BA_ "VersionMonth" 6;
+BA_ "VersionDay" 22;
+BA_ "Baudrate" 2000000;
+BA_ "NmType" "OSEK";
+BA_ "Manufacturer" "CHANA";
+BA_ "DiagRequest" BO_ 2015 1;
+BA_ "DiagState" BO_ 2015 1;
+BA_ "GenMsgCycleTime" BO_ 2015 0;
+BA_ "VFrameFormat" BO_ 2015 14;
+BA_ "GenMsgCycleTime" BO_ 1874 0;
+BA_ "DiagState" BO_ 1874 1;
+BA_ "DiagRequest" BO_ 1874 1;
+BA_ "VFrameFormat" BO_ 1874 14;
+BA_ "GenMsgCycleTime" BO_ 1882 0;
+BA_ "DiagState" BO_ 1882 1;
+BA_ "DiagResponse" BO_ 1882 1;
+BA_ "VFrameFormat" BO_ 1882 14;
+BA_ "GenSigSendType" SG_ 1874 Phys_Diag_Rx 7;
+BA_ "GenSigSendType" SG_ 1882 Diag_Response 7;
+
