@@ -231,7 +231,7 @@ def DID_Compare_No_DPT(ws_report_review_DID_Compare_No_DPT, wb_report_review_DID
                 # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_add_value)
                 # print(value_of_EXPECTED_check_value_behinde)
-                
+                # 
                 # if value_of_EXPECTED_check_value_behinde != '':
                 #     print('dung')
                 #     value_of_EXPECTED = value_of_EXPECTED_check_value_behinde
@@ -243,8 +243,13 @@ def DID_Compare_No_DPT(ws_report_review_DID_Compare_No_DPT, wb_report_review_DID
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
                     if value_of_EXPECTED_add_value != '':
-                        value_of_EXPECTED= str(value_of_EXPECTED) + ' ' + str(value_of_EXPECTED_add_value) 
-                        length_of_EXPECTED = int(length_of_EXPECTED) + 1
+                        value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix'
+                    else:
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix_first'
+                        # print(fix_length_byte)
                     # print(value_of_EXPECTED)
 
                 else:
@@ -523,11 +528,11 @@ def Length_Byte_No_DPT(ws_report_review_Length_Byte_No_DPT, wb_report_review_Len
                 value_of_EXPECTED_add_value = value_of_EXPECTED.partition(".*")[2]
                 value_of_EXPECTED_check_value_behinde = value_of_EXPECTED.split('.', 1)[0]
 
-                print(value_of_EXPECTED_check_special)
+                # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_add_value)
                 # print(value_of_EXPECTED_check_value_behinde)
-                
+                # 
                 # if value_of_EXPECTED_check_value_behinde != '':
                 #     print('dung')
                 #     value_of_EXPECTED = value_of_EXPECTED_check_value_behinde
@@ -539,8 +544,13 @@ def Length_Byte_No_DPT(ws_report_review_Length_Byte_No_DPT, wb_report_review_Len
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
                     if value_of_EXPECTED_add_value != '':
-                        value_of_EXPECTED= str(value_of_EXPECTED) + ' ' + str(value_of_EXPECTED_add_value)
-                        length_of_EXPECTED = int(length_of_EXPECTED) + 1
+                        value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix'
+                    else:
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix_first'
+                        # print(fix_length_byte)                        
                     # print(value_of_EXPECTED)
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
@@ -821,11 +831,11 @@ def Hex_value_No_DPT(ws_report_review_Hex_value_No_DPT, wb_report_review_Hex_val
                 value_of_EXPECTED_add_value = value_of_EXPECTED.partition(".*")[2]
                 value_of_EXPECTED_check_value_behinde = value_of_EXPECTED.split('.', 1)[0]
 
-                print(value_of_EXPECTED_check_special)
+                # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_add_value)
                 # print(value_of_EXPECTED_check_value_behinde)
-                
+                # 
                 # if value_of_EXPECTED_check_value_behinde != '':
                 #     print('dung')
                 #     value_of_EXPECTED = value_of_EXPECTED_check_value_behinde
@@ -837,8 +847,14 @@ def Hex_value_No_DPT(ws_report_review_Hex_value_No_DPT, wb_report_review_Hex_val
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
                     if value_of_EXPECTED_add_value != '':
-                        value_of_EXPECTED= str(value_of_EXPECTED) + ' ' + str(value_of_EXPECTED_add_value)
-                        length_of_EXPECTED = int(length_of_EXPECTED) + 1
+                        value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix'
+                    else:
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix_first'
+                        # print(fix_length_byte)
+                        
                     # print(value_of_EXPECTED)
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
@@ -1139,11 +1155,11 @@ def ASCII_Value_No_DPT(ws_report_review_ASCII_value_No_DPT, wb_report_review_ASC
                 value_of_EXPECTED_add_value = value_of_EXPECTED.partition(".*")[2]
                 value_of_EXPECTED_check_value_behinde = value_of_EXPECTED.split('.', 1)[0]
 
-                print(value_of_EXPECTED_check_special)
+                # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_add_value)
                 # print(value_of_EXPECTED_check_value_behinde)
-                
+                # 
                 # if value_of_EXPECTED_check_value_behinde != '':
                 #     print('dung')
                 #     value_of_EXPECTED = value_of_EXPECTED_check_value_behinde
@@ -1155,8 +1171,14 @@ def ASCII_Value_No_DPT(ws_report_review_ASCII_value_No_DPT, wb_report_review_ASC
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
                     if value_of_EXPECTED_add_value != '':
-                        value_of_EXPECTED= str(value_of_EXPECTED) + ' ' + str(value_of_EXPECTED_add_value)
-                        length_of_EXPECTED = int(length_of_EXPECTED) + 1
+                        value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix'
+                    else:
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix_first'
+                        # print(fix_length_byte)
+                        
                     # print(value_of_EXPECTED)
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
@@ -1553,11 +1575,11 @@ def DID_Compare(ws_report_review_DID_Compare, wb_report_review_DID_Compare,url):
                 value_of_EXPECTED_add_value = value_of_EXPECTED.partition(".*")[2]
                 value_of_EXPECTED_check_value_behinde = value_of_EXPECTED.split('.', 1)[0]
 
-                print(value_of_EXPECTED_check_special)
+                # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_add_value)
                 # print(value_of_EXPECTED_check_value_behinde)
-                
+                # 
                 # if value_of_EXPECTED_check_value_behinde != '':
                 #     print('dung')
                 #     value_of_EXPECTED = value_of_EXPECTED_check_value_behinde
@@ -1569,8 +1591,14 @@ def DID_Compare(ws_report_review_DID_Compare, wb_report_review_DID_Compare,url):
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
                     if value_of_EXPECTED_add_value != '':
-                        value_of_EXPECTED= str(value_of_EXPECTED) + ' ' + str(value_of_EXPECTED_add_value)
-                        length_of_EXPECTED = int(length_of_EXPECTED) + 1
+                        value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix'
+                    else:
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix_first'
+                        # print(fix_length_byte)
+                        
                     # print(value_of_EXPECTED)
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
@@ -1996,11 +2024,11 @@ def Length_Byte(ws_report_review_Length_Byte, wb_report_review_Length_Byte,url):
                 value_of_EXPECTED_add_value = value_of_EXPECTED.partition(".*")[2]
                 value_of_EXPECTED_check_value_behinde = value_of_EXPECTED.split('.', 1)[0]
 
-                print(value_of_EXPECTED_check_special)
+                # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_add_value)
                 # print(value_of_EXPECTED_check_value_behinde)
-                
+                # 
                 # if value_of_EXPECTED_check_value_behinde != '':
                 #     print('dung')
                 #     value_of_EXPECTED = value_of_EXPECTED_check_value_behinde
@@ -2012,8 +2040,14 @@ def Length_Byte(ws_report_review_Length_Byte, wb_report_review_Length_Byte,url):
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
                     if value_of_EXPECTED_add_value != '':
-                        value_of_EXPECTED= str(value_of_EXPECTED) + ' ' + str(value_of_EXPECTED_add_value)
-                        length_of_EXPECTED = int(length_of_EXPECTED) + 1
+                        value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix'
+                    else:
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix_first'
+                        # print(fix_length_byte)
+                        
                     # print(value_of_EXPECTED)
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
@@ -2424,11 +2458,11 @@ def Hex_value(ws_report_review_Hex_value, wb_report_review_Hex_value,url):
                 value_of_EXPECTED_add_value = value_of_EXPECTED.partition(".*")[2]
                 value_of_EXPECTED_check_value_behinde = value_of_EXPECTED.split('.', 1)[0]
 
-                print(value_of_EXPECTED_check_special)
+                # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_add_value)
                 # print(value_of_EXPECTED_check_value_behinde)
-                
+                # 
                 # if value_of_EXPECTED_check_value_behinde != '':
                 #     print('dung')
                 #     value_of_EXPECTED = value_of_EXPECTED_check_value_behinde
@@ -2440,8 +2474,14 @@ def Hex_value(ws_report_review_Hex_value, wb_report_review_Hex_value,url):
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
                     if value_of_EXPECTED_add_value != '':
-                        value_of_EXPECTED= str(value_of_EXPECTED) + ' ' + str(value_of_EXPECTED_add_value)
-                        length_of_EXPECTED = int(length_of_EXPECTED) + 1
+                        value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix'
+                    else:
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix_first'
+                        # print(fix_length_byte)
+                        
                     # print(value_of_EXPECTED)
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
@@ -2916,11 +2956,11 @@ def ASCII_Value(ws_report_review_ASCII_value, wb_report_review_ASCII_value,url):
                 value_of_EXPECTED_add_value = value_of_EXPECTED.partition(".*")[2]
                 value_of_EXPECTED_check_value_behinde = value_of_EXPECTED.split('.', 1)[0]
 
-                print(value_of_EXPECTED_check_special)
+                # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_check_special)
                 # print(value_of_EXPECTED_add_value)
                 # print(value_of_EXPECTED_check_value_behinde)
-                
+                # 
                 # if value_of_EXPECTED_check_value_behinde != '':
                 #     print('dung')
                 #     value_of_EXPECTED = value_of_EXPECTED_check_value_behinde
@@ -2932,8 +2972,14 @@ def ASCII_Value(ws_report_review_ASCII_value, wb_report_review_ASCII_value,url):
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
                     if value_of_EXPECTED_add_value != '':
-                        value_of_EXPECTED= str(value_of_EXPECTED) + ' ' + str(value_of_EXPECTED_add_value)
-                        length_of_EXPECTED = int(length_of_EXPECTED) + 1
+                        value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix'
+                    else:
+                        fix_length_byte = len(value_of_EXPECTED)
+                        fix_length = 'fix_first'
+                        # print(fix_length_byte)
+                        
                     # print(value_of_EXPECTED)
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
