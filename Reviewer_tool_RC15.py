@@ -173,6 +173,7 @@ def DID_Compare_No_DPT(ws_report_review_DID_Compare_No_DPT, wb_report_review_DID
 
     id = 1
     r = 2
+    
     with open(url, 'r') as f:
 
         ws_report_review_DID_Compare_No_DPT.append(['ID' ,'RECEIVED','EXPECTED','RESULT'])
@@ -216,6 +217,7 @@ def DID_Compare_No_DPT(ws_report_review_DID_Compare_No_DPT, wb_report_review_DID
             DID_of_EXPECTED = DID_of_EXPECTED.upper()
             # print(value_of_EXPECTED)
 
+            fix_length = ''
             try:
                 bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
                 # print(bytes_object_of_EXPECTED)
@@ -242,15 +244,33 @@ def DID_Compare_No_DPT(ws_report_review_DID_Compare_No_DPT, wb_report_review_DID
                 if value_of_EXPECTED_check_special == '.*':
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
+                    # print(value_of_EXPECTED)
                     if value_of_EXPECTED_add_value != '':
                         value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix'
+                        fix_length = 'fix_first'
+                        
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            value_none = ''
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_none)
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
                     else:
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix_first'
+                        # print(fix_length_byte)
+                        fix_length = 'fix_after'
                         # print(fix_length_byte)
                     # print(value_of_EXPECTED)
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            ascii_string_of_EXPECTED = ' '
+                    # print(bytes_object_of_EXPECTED)
 
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
@@ -295,6 +315,21 @@ def DID_Compare_No_DPT(ws_report_review_DID_Compare_No_DPT, wb_report_review_DID
 
             bytes_object_of_RECEIVED = bytes.fromhex(value_of_RECEIVED)
                 # Convert to bytes object
+            if fix_length == 'fix_after':
+                # print(value_of_RECEIVED)
+                fix_length_byte = fix_length_byte + 4
+                value_of_RECEIVED = result_of_RECEIVED[4:fix_length_byte]
+                length_of_RECEIVED = len(value_of_RECEIVED)
+                # print(length_of_RECEIVED)
+                # print(value_of_RECEIVED)
+                fix_length = ''
+            if fix_length == 'fix_first':
+                remove_length = length_of_RECEIVED - fix_length_byte
+                value_of_RECEIVED = result_of_RECEIVED[remove_length:]
+                fix_length = ''
+                # print(value_of_RECEIVED)
+            
+                
 
             length_of_RECEIVED = (length_of_RECEIVED - 4) // 2
 
@@ -515,11 +550,13 @@ def Length_Byte_No_DPT(ws_report_review_Length_Byte_No_DPT, wb_report_review_Len
 
             value_of_EXPECTED = result_of_EXPECTED[4:length_of_EXPECTED]
             DID_of_EXPECTED = result_of_EXPECTED[0:4]
-
+            DID_of_EXPECTED = DID_of_EXPECTED.upper()
             # print(value_of_EXPECTED)
 
+            fix_length = ''
             try:
                 bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+                # print(bytes_object_of_EXPECTED)
                 
             except:
                 # print(value_of_EXPECTED)
@@ -543,15 +580,33 @@ def Length_Byte_No_DPT(ws_report_review_Length_Byte_No_DPT, wb_report_review_Len
                 if value_of_EXPECTED_check_special == '.*':
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
+                    # print(value_of_EXPECTED)
                     if value_of_EXPECTED_add_value != '':
                         value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix'
+                        fix_length = 'fix_first'
+                        
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            value_none = ''
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_none)
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
                     else:
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix_first'
-                        # print(fix_length_byte)                        
+                        # print(fix_length_byte)
+                        fix_length = 'fix_after'
+                        # print(fix_length_byte)
                     # print(value_of_EXPECTED)
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            ascii_string_of_EXPECTED = ' '
+
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
                         missing_length_byte_of_EXPECTED = value_of_EXPECTED.partition(".{")[2]
@@ -591,9 +646,22 @@ def Length_Byte_No_DPT(ws_report_review_Length_Byte_No_DPT, wb_report_review_Len
 
             value_of_RECEIVED = result_of_RECEIVED[4:length_of_RECEIVED]
             DID_of_RECEIVED = result_of_RECEIVED[0:4]
+            DID_of_RECEIVED = DID_of_RECEIVED.upper()
 
             bytes_object_of_RECEIVED = bytes.fromhex(value_of_RECEIVED)
                 # Convert to bytes object
+            if fix_length == 'fix_after':
+                # print(value_of_RECEIVED)
+                fix_length_byte = fix_length_byte + 4
+                value_of_RECEIVED = result_of_RECEIVED[4:fix_length_byte]
+                length_of_RECEIVED = len(value_of_RECEIVED)
+                # print(value_of_RECEIVED)
+                fix_length = ''
+            if fix_length == 'fix_first':
+                remove_length = length_of_RECEIVED - fix_length_byte
+                value_of_RECEIVED = result_of_RECEIVED[remove_length:]
+                fix_length = ''
+                # print(value_of_RECEIVED)
 
             length_of_RECEIVED = (length_of_RECEIVED - 4) // 2
 
@@ -818,11 +886,13 @@ def Hex_value_No_DPT(ws_report_review_Hex_value_No_DPT, wb_report_review_Hex_val
 
             value_of_EXPECTED = result_of_EXPECTED[4:length_of_EXPECTED]
             DID_of_EXPECTED = result_of_EXPECTED[0:4]
-
+            DID_of_EXPECTED = DID_of_EXPECTED.upper()
             # print(value_of_EXPECTED)
-            missing_length_byte_of_EXPECTED = ''
+
+            fix_length = ''
             try:
                 bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+                # print(bytes_object_of_EXPECTED)
                 
             except:
                 # print(value_of_EXPECTED)
@@ -846,16 +916,33 @@ def Hex_value_No_DPT(ws_report_review_Hex_value_No_DPT, wb_report_review_Hex_val
                 if value_of_EXPECTED_check_special == '.*':
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
+                    # print(value_of_EXPECTED)
                     if value_of_EXPECTED_add_value != '':
                         value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix'
+                        fix_length = 'fix_first'
+                        
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            value_none = ''
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_none)
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
                     else:
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix_first'
                         # print(fix_length_byte)
-                        
+                        fix_length = 'fix_after'
+                        # print(fix_length_byte)
                     # print(value_of_EXPECTED)
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            ascii_string_of_EXPECTED = ' '
+
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
                         missing_length_byte_of_EXPECTED = value_of_EXPECTED.partition(".{")[2]
@@ -887,8 +974,7 @@ def Hex_value_No_DPT(ws_report_review_Hex_value_No_DPT, wb_report_review_Hex_val
 
             ### This is the part that measures the length before '<'
             length_of_RECEIVED = result_of_string.find('<')
-            length_of_RECEIVED_real = int(length_of_RECEIVED) - 4
-            # print(length_of_RECEIVED_real)
+            # print(length)
             
 
             result_of_RECEIVED = result_of_string
@@ -896,14 +982,22 @@ def Hex_value_No_DPT(ws_report_review_Hex_value_No_DPT, wb_report_review_Hex_val
 
             value_of_RECEIVED = result_of_RECEIVED[4:length_of_RECEIVED]
             DID_of_RECEIVED = result_of_RECEIVED[0:4]
-
-            if str(missing_length_byte_of_EXPECTED) != '': 
-                # length_minus = int(length_of_RECEIVED_real) - int(length_of_EXPECTED_real)
-                # print(str(missing_length_byte_of_EXPECTED))
-                value_of_RECEIVED = value_of_RECEIVED[:-int(missing_length_byte_of_EXPECTED)]
+            DID_of_RECEIVED = DID_of_RECEIVED.upper()
 
             bytes_object_of_RECEIVED = bytes.fromhex(value_of_RECEIVED)
                 # Convert to bytes object
+            if fix_length == 'fix_after':
+                # print(value_of_RECEIVED)
+                fix_length_byte = fix_length_byte + 4
+                value_of_RECEIVED = result_of_RECEIVED[4:fix_length_byte]
+                length_of_RECEIVED = len(value_of_RECEIVED)
+                # print(value_of_RECEIVED)
+                fix_length = ''
+            if fix_length == 'fix_first':
+                remove_length = length_of_RECEIVED - fix_length_byte
+                value_of_RECEIVED = result_of_RECEIVED[remove_length:]
+                fix_length = ''
+                # print(value_of_RECEIVED)
 
             length_of_RECEIVED = (length_of_RECEIVED - 4) // 2
 
@@ -1142,11 +1236,13 @@ def ASCII_Value_No_DPT(ws_report_review_ASCII_value_No_DPT, wb_report_review_ASC
 
             value_of_EXPECTED = result_of_EXPECTED[4:length_of_EXPECTED]
             DID_of_EXPECTED = result_of_EXPECTED[0:4]
-
+            DID_of_EXPECTED = DID_of_EXPECTED.upper()
             # print(value_of_EXPECTED)
 
+            fix_length = ''
             try:
                 bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+                # print(bytes_object_of_EXPECTED)
                 
             except:
                 # print(value_of_EXPECTED)
@@ -1170,16 +1266,33 @@ def ASCII_Value_No_DPT(ws_report_review_ASCII_value_No_DPT, wb_report_review_ASC
                 if value_of_EXPECTED_check_special == '.*':
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
+                    # print(value_of_EXPECTED)
                     if value_of_EXPECTED_add_value != '':
                         value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix'
+                        fix_length = 'fix_first'
+                        
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            value_none = ''
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_none)
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
                     else:
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix_first'
                         # print(fix_length_byte)
-                        
+                        fix_length = 'fix_after'
+                        # print(fix_length_byte)
                     # print(value_of_EXPECTED)
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            ascii_string_of_EXPECTED = ' '
+
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
                         missing_length_byte_of_EXPECTED = value_of_EXPECTED.partition(".{")[2]
@@ -1219,9 +1332,22 @@ def ASCII_Value_No_DPT(ws_report_review_ASCII_value_No_DPT, wb_report_review_ASC
 
             value_of_RECEIVED = result_of_RECEIVED[4:length_of_RECEIVED]
             DID_of_RECEIVED = result_of_RECEIVED[0:4]
+            DID_of_RECEIVED = DID_of_RECEIVED.upper()
 
             bytes_object_of_RECEIVED = bytes.fromhex(value_of_RECEIVED)
                 # Convert to bytes object
+            if fix_length == 'fix_after':
+                # print(value_of_RECEIVED)
+                fix_length_byte = fix_length_byte + 4
+                value_of_RECEIVED = result_of_RECEIVED[4:fix_length_byte]
+                length_of_RECEIVED = len(value_of_RECEIVED)
+                # print(value_of_RECEIVED)
+                fix_length = ''
+            if fix_length == 'fix_first':
+                remove_length = length_of_RECEIVED - fix_length_byte
+                value_of_RECEIVED = result_of_RECEIVED[remove_length:]
+                fix_length = ''
+                # print(value_of_RECEIVED)
 
             length_of_RECEIVED = (length_of_RECEIVED - 4) // 2
 
@@ -1565,8 +1691,10 @@ def DID_Compare(ws_report_review_DID_Compare, wb_report_review_DID_Compare,url):
             DID_of_EXPECTED = DID_of_EXPECTED.upper()
             # print(value_of_EXPECTED)
 
+            fix_length = ''
             try:
                 bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+                # print(bytes_object_of_EXPECTED)
                 
             except:
                 # print(value_of_EXPECTED)
@@ -1590,16 +1718,33 @@ def DID_Compare(ws_report_review_DID_Compare, wb_report_review_DID_Compare,url):
                 if value_of_EXPECTED_check_special == '.*':
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
+                    # print(value_of_EXPECTED)
                     if value_of_EXPECTED_add_value != '':
                         value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix'
+                        fix_length = 'fix_first'
+                        
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            value_none = ''
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_none)
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
                     else:
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix_first'
                         # print(fix_length_byte)
-                        
+                        fix_length = 'fix_after'
+                        # print(fix_length_byte)
                     # print(value_of_EXPECTED)
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            ascii_string_of_EXPECTED = ' '
+
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
                         missing_length_byte_of_EXPECTED = value_of_EXPECTED.partition(".{")[2]
@@ -1642,6 +1787,19 @@ def DID_Compare(ws_report_review_DID_Compare, wb_report_review_DID_Compare,url):
             DID_of_RECEIVED = DID_of_RECEIVED.upper()
 
             bytes_object_of_RECEIVED = bytes.fromhex(value_of_RECEIVED)
+                # Convert to bytes object
+            if fix_length == 'fix_after':
+                # print(value_of_RECEIVED)
+                fix_length_byte = fix_length_byte + 4
+                value_of_RECEIVED = result_of_RECEIVED[4:fix_length_byte]
+                length_of_RECEIVED = len(value_of_RECEIVED)
+                # print(value_of_RECEIVED)
+                fix_length = ''
+            if fix_length == 'fix_first':
+                remove_length = length_of_RECEIVED - fix_length_byte
+                value_of_RECEIVED = result_of_RECEIVED[remove_length:]
+                fix_length = ''
+                # print(value_of_RECEIVED)
                 # Convert to bytes object
 
             length_of_RECEIVED = (length_of_RECEIVED - 4) // 2
@@ -2011,11 +2169,13 @@ def Length_Byte(ws_report_review_Length_Byte, wb_report_review_Length_Byte,url):
 
             value_of_EXPECTED = result_of_EXPECTED[4:length_of_EXPECTED]
             DID_of_EXPECTED = result_of_EXPECTED[0:4]
-
+            DID_of_EXPECTED = DID_of_EXPECTED.upper()
             # print(value_of_EXPECTED)
 
+            fix_length = ''
             try:
                 bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+                # print(bytes_object_of_EXPECTED)
                 
             except:
                 # print(value_of_EXPECTED)
@@ -2039,16 +2199,33 @@ def Length_Byte(ws_report_review_Length_Byte, wb_report_review_Length_Byte,url):
                 if value_of_EXPECTED_check_special == '.*':
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
+                    # print(value_of_EXPECTED)
                     if value_of_EXPECTED_add_value != '':
                         value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix'
+                        fix_length = 'fix_first'
+                        
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            value_none = ''
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_none)
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
                     else:
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix_first'
                         # print(fix_length_byte)
-                        
+                        fix_length = 'fix_after'
+                        # print(fix_length_byte)
                     # print(value_of_EXPECTED)
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            ascii_string_of_EXPECTED = ' '
+
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
                         missing_length_byte_of_EXPECTED = value_of_EXPECTED.partition(".{")[2]
@@ -2062,6 +2239,7 @@ def Length_Byte(ws_report_review_Length_Byte, wb_report_review_Length_Byte,url):
                         bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
 
                         ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+
                 # Convert to bytes object
             try:
                 ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
@@ -2087,9 +2265,22 @@ def Length_Byte(ws_report_review_Length_Byte, wb_report_review_Length_Byte,url):
 
             value_of_RECEIVED = result_of_RECEIVED[4:length_of_RECEIVED]
             DID_of_RECEIVED = result_of_RECEIVED[0:4]
+            DID_of_RECEIVED = DID_of_RECEIVED.upper()
 
             bytes_object_of_RECEIVED = bytes.fromhex(value_of_RECEIVED)
                 # Convert to bytes object
+            if fix_length == 'fix_after':
+                # print(value_of_RECEIVED)
+                fix_length_byte = fix_length_byte + 4
+                value_of_RECEIVED = result_of_RECEIVED[4:fix_length_byte]
+                length_of_RECEIVED = len(value_of_RECEIVED)
+                # print(value_of_RECEIVED)
+                fix_length = ''
+            if fix_length == 'fix_first':
+                remove_length = length_of_RECEIVED - fix_length_byte
+                value_of_RECEIVED = result_of_RECEIVED[remove_length:]
+                fix_length = ''
+                # print(value_of_RECEIVED)
 
             length_of_RECEIVED = (length_of_RECEIVED - 4) // 2
 
@@ -2445,11 +2636,13 @@ def Hex_value(ws_report_review_Hex_value, wb_report_review_Hex_value,url):
 
             value_of_EXPECTED = result_of_EXPECTED[4:length_of_EXPECTED]
             DID_of_EXPECTED = result_of_EXPECTED[0:4]
-
+            DID_of_EXPECTED = DID_of_EXPECTED.upper()
             # print(value_of_EXPECTED)
-            missing_length_byte_of_EXPECTED = ''
+
+            fix_length = ''
             try:
                 bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+                # print(bytes_object_of_EXPECTED)
                 
             except:
                 # print(value_of_EXPECTED)
@@ -2473,16 +2666,33 @@ def Hex_value(ws_report_review_Hex_value, wb_report_review_Hex_value,url):
                 if value_of_EXPECTED_check_special == '.*':
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
+                    # print(value_of_EXPECTED)
                     if value_of_EXPECTED_add_value != '':
                         value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix'
+                        fix_length = 'fix_first'
+                        
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            value_none = ''
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_none)
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
                     else:
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix_first'
                         # print(fix_length_byte)
-                        
+                        fix_length = 'fix_after'
+                        # print(fix_length_byte)
                     # print(value_of_EXPECTED)
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            ascii_string_of_EXPECTED = ' '
+
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
                         missing_length_byte_of_EXPECTED = value_of_EXPECTED.partition(".{")[2]
@@ -2496,6 +2706,7 @@ def Hex_value(ws_report_review_Hex_value, wb_report_review_Hex_value,url):
                         bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
 
                         ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+
                 # Convert to bytes object
             try:
                 ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
@@ -2513,8 +2724,7 @@ def Hex_value(ws_report_review_Hex_value, wb_report_review_Hex_value,url):
 
             ### This is the part that measures the length before '<'
             length_of_RECEIVED = result_of_string.find('<')
-            length_of_RECEIVED_real = int(length_of_RECEIVED) - 4
-            # print(length_of_RECEIVED_real)
+            # print(length)
             
 
             result_of_RECEIVED = result_of_string
@@ -2522,14 +2732,22 @@ def Hex_value(ws_report_review_Hex_value, wb_report_review_Hex_value,url):
 
             value_of_RECEIVED = result_of_RECEIVED[4:length_of_RECEIVED]
             DID_of_RECEIVED = result_of_RECEIVED[0:4]
-
-            if str(missing_length_byte_of_EXPECTED) != '': 
-                # length_minus = int(length_of_RECEIVED_real) - int(length_of_EXPECTED_real)
-                # print(str(missing_length_byte_of_EXPECTED))
-                value_of_RECEIVED = value_of_RECEIVED[:-int(missing_length_byte_of_EXPECTED)]
+            DID_of_RECEIVED = DID_of_RECEIVED.upper()
 
             bytes_object_of_RECEIVED = bytes.fromhex(value_of_RECEIVED)
                 # Convert to bytes object
+            if fix_length == 'fix_after':
+                # print(value_of_RECEIVED)
+                fix_length_byte = fix_length_byte + 4
+                value_of_RECEIVED = result_of_RECEIVED[4:fix_length_byte]
+                length_of_RECEIVED = len(value_of_RECEIVED)
+                # print(value_of_RECEIVED)
+                fix_length = ''
+            if fix_length == 'fix_first':
+                remove_length = length_of_RECEIVED - fix_length_byte
+                value_of_RECEIVED = result_of_RECEIVED[remove_length:]
+                fix_length = ''
+                # print(value_of_RECEIVED)
 
             length_of_RECEIVED = (length_of_RECEIVED - 4) // 2
 
@@ -2943,11 +3161,13 @@ def ASCII_Value(ws_report_review_ASCII_value, wb_report_review_ASCII_value,url):
 
             value_of_EXPECTED = result_of_EXPECTED[4:length_of_EXPECTED]
             DID_of_EXPECTED = result_of_EXPECTED[0:4]
-
+            DID_of_EXPECTED = DID_of_EXPECTED.upper()
             # print(value_of_EXPECTED)
 
+            fix_length = ''
             try:
                 bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+                # print(bytes_object_of_EXPECTED)
                 
             except:
                 # print(value_of_EXPECTED)
@@ -2971,16 +3191,33 @@ def ASCII_Value(ws_report_review_ASCII_value, wb_report_review_ASCII_value,url):
                 if value_of_EXPECTED_check_special == '.*':
                     # print('nodung')
                     value_of_EXPECTED = value_of_EXPECTED.split('.', 1)[0]
+                    # print(value_of_EXPECTED)
                     if value_of_EXPECTED_add_value != '':
                         value_of_EXPECTED= str(value_of_EXPECTED) + str(value_of_EXPECTED_add_value)
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix'
+                        fix_length = 'fix_first'
+                        
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            value_none = ''
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_none)
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
                     else:
                         fix_length_byte = len(value_of_EXPECTED)
-                        fix_length = 'fix_first'
                         # print(fix_length_byte)
-                        
+                        fix_length = 'fix_after'
+                        # print(fix_length_byte)
                     # print(value_of_EXPECTED)
+                        try:
+                            bytes_object_of_EXPECTED = bytes.fromhex(value_of_EXPECTED)
+
+                            ascii_string_of_EXPECTED = bytes_object_of_EXPECTED.decode("ASCII")
+                        except:
+                            ascii_string_of_EXPECTED = ' '
+
                 else:
                     if value_of_EXPECTED_check_special2 == '.{':
                         missing_length_byte_of_EXPECTED = value_of_EXPECTED.partition(".{")[2]
@@ -3020,9 +3257,22 @@ def ASCII_Value(ws_report_review_ASCII_value, wb_report_review_ASCII_value,url):
 
             value_of_RECEIVED = result_of_RECEIVED[4:length_of_RECEIVED]
             DID_of_RECEIVED = result_of_RECEIVED[0:4]
+            DID_of_RECEIVED = DID_of_RECEIVED.upper()
 
             bytes_object_of_RECEIVED = bytes.fromhex(value_of_RECEIVED)
                 # Convert to bytes object
+            if fix_length == 'fix_after':
+                # print(value_of_RECEIVED)
+                fix_length_byte = fix_length_byte + 4
+                value_of_RECEIVED = result_of_RECEIVED[4:fix_length_byte]
+                length_of_RECEIVED = len(value_of_RECEIVED)
+                # print(value_of_RECEIVED)
+                fix_length = ''
+            if fix_length == 'fix_first':
+                remove_length = length_of_RECEIVED - fix_length_byte
+                value_of_RECEIVED = result_of_RECEIVED[remove_length:]
+                fix_length = ''
+                # print(value_of_RECEIVED)
 
             length_of_RECEIVED = (length_of_RECEIVED - 4) // 2
 
