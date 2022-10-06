@@ -3568,98 +3568,98 @@ def TC_FBL():
     percent.set(str((id//tasks)*100)+"%")
     app.update_idletasks()
     number2 +=1
-    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Default SS to Programming SS directly and vice versa' , 'Default SS to Programming SS directly and vice versa', "1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Programming Session (can't access directly and NRC 7E is responded)\n6) Wait 3s\n7) Check active session should be Default\n8) Wait 3s\n9) Access to Extended before access to Programming Session\n10) Tester Present ON\n11 Wait 5s\n12) Check active session should be Extended\n13) Wait 3s\n14) Access to Progamming Session\n15) Wait 3s\n16) Check active session should be Progamming Session\n17) Access to Default Session\n18) Wait 3s\n19) Check active session should be Progamming Session", "1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -\n16) -\n17) -\n18) -\n19) -", '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1002,7f107e, Equal)\n6) wait(3000)\n7) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n8) wait(3000)\n9) RequestResponse(1003,5003.*, Regexp)\n10) envvar(EnvTesterPresentOnOff(1;0))\n11) wait(5000)\n12) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n13) RequestResponse(1002,5002.*, Regexp)\n14) wait(3000)\n15) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n16) wait(3000)\n17) RequestResponse(1001,5001.*, Regexp)\n18) wait(3000)\n19) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])  
+    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Default SS to Programming SS directly and vice versa' , 'Default SS to Programming SS directly and vice versa', "1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Programming Session (can't access directly and NRC 7E is responded)\n6) Wait 3s\n7) Check active session should be Default\n8) Wait 3s\n9) Access to Extended before access to Programming Session\n10) Tester Present ON\n11 Wait 5s\n12) Check active session should be Extended\n13) Wait 3s\n14) Access to Progamming Session\n15) Wait 3s\n16) Check active session should be Progamming Session\n17) Access to Default Session\n18) Wait 3s\n19) Check active session should be Progamming Session", "1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -\n16) -\n17) -\n18) -\n19) -", '1) RequestResponse(1001, 5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1002, 7f107e, Equal)\n6) wait(3000)\n7) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n8) wait(3000)\n9) RequestResponse(1003, 5003.*, Regexp)\n10) envvar(EnvTesterPresentOnOff(1;0))\n11) wait(5000)\n12) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)\n13) RequestResponse(1002, 5002.*, Regexp)\n14) wait(3000)\n15) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)\n16) wait(3000)\n17) RequestResponse(1001, 5001.*, Regexp)\n18) wait(3000)\n19) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])  
 
-    id += 1
-    bar['value'] += 1
-    percent.set(str((id//tasks)*100)+"%")
-    app.update_idletasks()
-    number2 +=1
-    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Programming SS to Extended SS directly and vice versa' , 'Programming SS to Extended SS directly and vice versa', "1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Extended Session before access to Programming Session\n6) Tester Present ON\n7) Wait 5s\n8) Check active session should be Extended\n9) Access to Programming Session\n10) Wait 3s\n11) Check active session should be Programming Session\n12) Wait 3s\n13) Access to Extended Session (can't access directly and NRC 7E is responded)\n14) Wait 3s\n15) Check active session should be Programming Session\n16) Access to Default Session\n17) Wait 3s\n18) Check active session should be Default Session", '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -\n16) -\n17) -\n18) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1003,5003.*, Regexp)\n6) envvar(EnvTesterPresentOnOff(1;0))\n7) wait(5000)\n8) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)\n9) RequestResponse(1002,5002.*, Regexp)\n10) wait(3000)\n11) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)\n12) wait(3000)\n13) RequestResponse(1003,7f107e,Equal)\n14) wait(3000)\n15) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)\n16) RequestResponse(1001,5001.*, Regexp)\n17) wait(3000)\n18) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+    # id += 1
+    # bar['value'] += 1
+    # percent.set(str((id//tasks)*100)+"%")
+    # app.update_idletasks()
+    # number2 +=1
+    # ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Programming SS to Extended SS directly and vice versa' , 'Programming SS to Extended SS directly and vice versa', "1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Extended Session before access to Programming Session\n6) Tester Present ON\n7) Wait 5s\n8) Check active session should be Extended\n9) Access to Programming Session\n10) Wait 3s\n11) Check active session should be Programming Session\n12) Wait 3s\n13) Access to Extended Session (can't access directly and NRC 7E is responded)\n14) Wait 3s\n15) Check active session should be Programming Session\n16) Access to Default Session\n17) Wait 3s\n18) Check active session should be Default Session", '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -\n16) -\n17) -\n18) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1003,5003.*, Regexp)\n6) envvar(EnvTesterPresentOnOff(1;0))\n7) wait(5000)\n8) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)\n9) RequestResponse(1002,5002.*, Regexp)\n10) wait(3000)\n11) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)\n12) wait(3000)\n13) RequestResponse(1003,7f107e,Equal)\n14) wait(3000)\n15) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)\n16) RequestResponse(1001,5001.*, Regexp)\n17) wait(3000)\n18) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
 
 
 
-    # # # END TEST CASE 3
+    # # # # END TEST CASE 3
 
-    # # # # BEGIN TEST CASE 4
-        # DID in DPT
-    id += 1
-    bar['value'] += 1
-    percent.set(str((id//tasks)*100)+"%")
-    app.update_idletasks()
-    number1 += 1
-    number2 = 0
-    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Default section',
-                '', '', '', '', 'Test group', '', '', ''])
+    # # # # # BEGIN TEST CASE 4
+    #     # DID in DPT
+    # id += 1
+    # bar['value'] += 1
+    # percent.set(str((id//tasks)*100)+"%")
+    # app.update_idletasks()
+    # number1 += 1
+    # number2 = 0
+    # ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Default section',
+    #             '', '', '', '', 'Test group', '', '', ''])
     
-    for col in range(1, 11):
-        cell_header = ws_TC_FBL.cell(id, col)
-        # used hex code for red color
-        cell_header.fill = PatternFill(
-            start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
-        cell_header.border = border
-        cell_header.font = font_text
+    # for col in range(1, 11):
+    #     cell_header = ws_TC_FBL.cell(id, col)
+    #     # used hex code for red color
+    #     cell_header.fill = PatternFill(
+    #         start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
+    #     cell_header.border = border
+    #     cell_header.font = font_text
 
-    bar['value'] += 1
-    percent.set(str((id//tasks)*100)+"%")
-    app.update_idletasks()
-    status = 'Default'
-    id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
-    # print(id)
-    # # #  END TEST CASE 4
+    # bar['value'] += 1
+    # percent.set(str((id//tasks)*100)+"%")
+    # app.update_idletasks()
+    # status = 'Default'
+    # id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
+    # # print(id)
+    # # # #  END TEST CASE 4
 
-    # -------------------------------------------------------------------------------------------------------
+    # # -------------------------------------------------------------------------------------------------------
 
-    # # # # BEGIN TEST CASE 5
-    id += 1
-    bar['value'] += 1
-    percent.set(str((id//tasks)*100)+"%")
-    app.update_idletasks()
-    number1 += 1
-    number2 = 0
-    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Extended section',
-                '', '', '', '', 'Test group', '', '', ''])
+    # # # # # BEGIN TEST CASE 5
+    # id += 1
+    # bar['value'] += 1
+    # percent.set(str((id//tasks)*100)+"%")
+    # app.update_idletasks()
+    # number1 += 1
+    # number2 = 0
+    # ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Extended section',
+    #             '', '', '', '', 'Test group', '', '', ''])
     
-    for col in range(1, 11):
-        cell_header = ws_TC_FBL.cell(id, col)
-        # used hex code for red color
-        cell_header.fill = PatternFill(
-            start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
-        cell_header.border = border
-        cell_header.font = font_text
+    # for col in range(1, 11):
+    #     cell_header = ws_TC_FBL.cell(id, col)
+    #     # used hex code for red color
+    #     cell_header.fill = PatternFill(
+    #         start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
+    #     cell_header.border = border
+    #     cell_header.font = font_text
 
-    bar['value'] += 1
-    percent.set(str((id//tasks)*100)+"%")
-    app.update_idletasks()
-    status = 'Extended'
-    id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
-    # print(id)
-    # # # # END TEST CASE 5
+    # bar['value'] += 1
+    # percent.set(str((id//tasks)*100)+"%")
+    # app.update_idletasks()
+    # status = 'Extended'
+    # id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
+    # # print(id)
+    # # # # # END TEST CASE 5
 
-    # # # # # BEGIN TEST CASE 6
-    id += 1
-    bar['value'] += 1
-    percent.set(str((id//tasks)*100)+"%")
-    app.update_idletasks()
-    number1 += 1
-    number2 = 0
-    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Programming section',
-                '', '', '', '', 'Test group', '', '', ''])
+    # # # # # # BEGIN TEST CASE 6
+    # id += 1
+    # bar['value'] += 1
+    # percent.set(str((id//tasks)*100)+"%")
+    # app.update_idletasks()
+    # number1 += 1
+    # number2 = 0
+    # ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Programming section',
+    #             '', '', '', '', 'Test group', '', '', ''])
     
 
-    for col in range(1, 11):
-        cell_header = ws_TC_FBL.cell(id, col)
-        # used hex code for red color
-        cell_header.fill = PatternFill(
-            start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
-        cell_header.border = border
-        cell_header.font = font_text
+    # for col in range(1, 11):
+    #     cell_header = ws_TC_FBL.cell(id, col)
+    #     # used hex code for red color
+    #     cell_header.fill = PatternFill(
+    #         start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
+    #     cell_header.border = border
+    #     cell_header.font = font_text
 
-    bar['value'] += 1
-    percent.set(str((id//tasks)*100)+"%")
-    app.update_idletasks()
-    status = 'Programming'
-    id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
+    # bar['value'] += 1
+    # percent.set(str((id//tasks)*100)+"%")
+    # app.update_idletasks()
+    # status = 'Programming'
+    # id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
     # print(id)
     # # # # # END TEST CASE 6
 
