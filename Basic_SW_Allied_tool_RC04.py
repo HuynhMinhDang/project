@@ -2613,17 +2613,17 @@ def DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, numb
         # if str(row_list_name_DID_DPT) != "Supplier Software number":
 
         if str(status) == 'Default':
-            ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) +' Access to Default Session' , 'Access to Default Session', '1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default', '1) -\n2) -\n3) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+            ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Access to Default Session' , 'Access to Default Session', '1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default', '1) -\n2) -\n3) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
             id += 1
             number2 += 1
             status = ''
         if str(status) == 'Extended':
-            ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Access to Extended Session' , 'Access to Extended Session', '1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Extended Session\n6) Tester Present ON\n7) Wait 3s\n8) Check active session should be Extended', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1003,5003.*, Regexp)\n6) envvar(EnvTesterPresentOnOff(1;0))\n7) wait(5000)\n8) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+            ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Access to Extended Session' , 'Access to Extended Session', '1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Extended Session\n6) Tester Present ON\n7) Wait 5s\n8) Check active session should be Extended', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1003,5003.*, Regexp)\n6) envvar(EnvTesterPresentOnOff(1;0))\n7) wait(5000)\n8) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
             id += 1
             number2 += 1
             status = ''
         if str(status) == 'Programming':
-            ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Access to Extended Session' , 'Access to Extended Session', '1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Extended Session\n6) Tester Present ON\n7) Wait 3s\n8) Check active session should be Extended\n9) Wait 3s\n10) Access to Programming Session\n11) Wait 3s\n12) Check active session should be Programming Session', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1003,5003.*, Regexp)\n6) envvar(EnvTesterPresentOnOff(1;0))\n7) wait(5000)\n8) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)\n9) wait(3000)\n10) RequestResponse(1002,5002.*, Regexp)\n11) wait(3000)\n12) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+            ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Access to Extended Session' , 'Access to Extended Session', '1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Extended Session\n6) Tester Present ON\n7) Wait 5s\n8) Check active session should be Extended\n9) Access to Programming Session\n10) Wait 3s\n11) Check active session should be Programming', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1003,5003.*, Regexp)\n6) envvar(EnvTesterPresentOnOff(1;0))\n7) wait(5000)\n8) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)\n9) RequestResponse(1002, 5002.*, Regexp)\n10) wait(3000)\n11) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
             id += 1
             number2 += 1
             status = ''
@@ -2633,70 +2633,69 @@ def DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, numb
             
             if str(row_list_programming_type_DID_DPT) == 'APL and FCN':
                 if c == 1:
-                    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+                    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
                 
                 if c == 0:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)', 'Automated Testcase', 'implemented', latestSW, ''])
 
             if str(row_list_programming_type_DID_DPT) == 'APL':
                 if c == 1:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
                 if c == 0:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
 
             if str(row_list_programming_type_DID_DPT) == 'FCN':
                 if c == 1:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
                 if c == 0:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)', 'Automated Testcase', 'implemented', latestSW, ''])
 
             if str(row_list_programming_type_DID_DPT) == 'NONE':
                 if c == 1:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
                 if c == 0:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
 
         else:
             if str(row_list_type_DID_DPT) == 'APL and FCN':
                 if c == 1:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
                 
                 if c == 0:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)', 'Automated Testcase', 'implemented', latestSW, ''])
 
             if str(row_list_type_DID_DPT) == 'APL':
                 if c == 1:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
                 if c == 0:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
 
             if str(row_list_type_DID_DPT) == 'FCN':
                 if c == 1:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
                 if c == 0:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+'62'+str(row_list_DID_DID_DPT_lowercase) + str(hexvalue_DID_DPT) + ', Equal)', 'Automated Testcase', 'implemented', latestSW, ''])
 
             if str(row_list_type_DID_DPT) == 'NONE':
                 if c == 1:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
                 if c == 0:
                     ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' ' + str(row_list_DID_DID_DPT) + ' ' + str(row_list_name_DID_DPT), 'To check value of the DID ' + str(row_list_DID_DID_DPT), '1) Send service 0x22 to the camera for the DID ' +
-                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
+                                str(row_list_DID_DID_DPT) + ' using physical addressing\n2) Send service 0x22 to the camera for the DID ' + str(row_list_DID_DID_DPT) + ' using functional addressing', '1) -\n2) -', '1) RequestResponse(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)\n2) FunctionalMessage(' + '22' + str(row_list_DID_DID_DPT_lowercase) + ','+',None)', 'Automated Testcase', 'implemented', latestSW, ''])
 
 
         number2 += 1
@@ -3567,8 +3566,23 @@ def TC_FBL():
     bar['value'] += 1
     percent.set(str((id//tasks)*100)+"%")
     app.update_idletasks()
-    number2 +=1
-    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Default SS to Programming SS directly and vice versa' , 'Default SS to Programming SS directly and vice versa', "1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Programming Session (can't access directly and NRC 7E is responded)\n6) Wait 3s\n7) Check active session should be Default\n8) Wait 3s\n9) Access to Extended before access to Programming Session\n10) Tester Present ON\n11 Wait 5s\n12) Check active session should be Extended\n13) Wait 3s\n14) Access to Progamming Session\n15) Wait 3s\n16) Check active session should be Progamming Session\n17) Access to Default Session\n18) Wait 3s\n19) Check active session should be Progamming Session", "1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -\n16) -\n17) -\n18) -\n19) -", '1) RequestResponse(1001, 5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1002, 7f107e, Equal)\n6) wait(3000)\n7) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n8) wait(3000)\n9) RequestResponse(1003, 5003.*, Regexp)\n10) envvar(EnvTesterPresentOnOff(1;0))\n11) wait(5000)\n12) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)\n13) RequestResponse(1002, 5002.*, Regexp)\n14) wait(3000)\n15) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)\n16) wait(3000)\n17) RequestResponse(1001, 5001.*, Regexp)\n18) wait(3000)\n19) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])  
+    number2 += 1
+    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Default SS to Programming SS directly and vice versa' , 'Default SS to Programming SS directly and vice versa', '1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Programming Session (can not access directly and NRC 7E is responsed)\n6) Wait 3s\n7) Check active session should be Default\n8) Wait 3s\n9) Access to Extended Session before access to Programming session\n10) Tester Present ON\n11) Wait 5s\n12) Check active session should be Extended\n13) Access to Programming Session\n14) Wait 3s\n15) Check active session should be Programming\n16) Access to Default Session\n17) Wait 3s\n18) Check active session should be Default', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -\n16) -\n17) -\n18) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1002, 7f107e, Equal)\n6) wait(3000)\n7) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n8) wait(3000)\n9) RequestResponse(1003, 5003.*, Regexp)\n10) envvar(EnvTesterPresentOnOff(1;0))\n11) wait(5000)\n12) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)\n13) RequestResponse(1002, 5002.*, Regexp)\n14) wait(3000)\n15) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)\n16) RequestResponse(1001, 5001.*, Regexp)\n17) wait(3000)\n18) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+    
+    # id += 1
+    # bar['value'] += 1
+    # percent.set(str((id//tasks)*100)+"%")
+    # app.update_idletasks()
+    # number2 +=1
+    # ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Default SS to Programming SS directly and vice versa' , 'Default SS to Programming SS directly and vice versa', "1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Programming Session (can't access directly and NRC 7E is responded)\n6) Wait 3s\n7) Check active session should be Default\n8) Wait 3s\n9) Access to Extended before access to Programming Session\n10) Tester Present ON\n11 Wait 5s\n12) Check active session should be Extended\n13) Wait 3s\n14) Access to Progamming Session\n15) Wait 3s\n16) Check active session should be Progamming Session\n17) Access to Default Session\n18) Wait 3s\n19) Check active session should be Progamming Session", "1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -\n16) -\n17) -\n18) -\n19) -", '1) RequestResponse(1001, 5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1002, 7f107e, Equal)\n6) wait(3000)\n7) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n8) wait(3000)\n9) RequestResponse(1003, 5003.*, Regexp)\n10) envvar(EnvTesterPresentOnOff(1;0))\n11) wait(5000)\n12) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)\n13) RequestResponse(1002, 5002.*, Regexp)\n14) wait(3000)\n15) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)\n16) wait(3000)\n17) RequestResponse(1001, 5001.*, Regexp)\n18) wait(3000)\n19) RequestResponse(22' + str(row_DID_Check_Active_Session_lowercase) + ', '+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])  
+
+    id += 1
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    number2 += 1
+    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Programming SS to Extended SS directly and vice versa' , 'Programming SS to Extended SS directly and vice versa', '1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Extended Session before access to Programming session\n6) Tester Present ON\n7) Wait 5s\n8) Check active session should be Extended\n9) Access to Programming Session\n10) Wait 3s\n11) Check active session should be Programming\n12) Access to Extended Session (can not access directly and NRC 7E is responsed)\n13) Wait 3s\n14) Check active session should be Programming\n15) Access to Default Session\n16) Wait 3s\n17) Check active session should be Default', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -\n16) -\n17) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1003, 5003.*, Regexp)\n6) envvar(EnvTesterPresentOnOff(1;0))\n7) wait(5000)\n8) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)\n9) RequestResponse(1002, 5002.*, Regexp)\n10) wait(3000)\n11) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)\n12) RequestResponse(1003,7f107e, Equal)\n13) wait(3000)\n14) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)\n15) RequestResponse(1001, 5001.*, Regexp)\n16) wait(3000)\n17) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+    
 
     # id += 1
     # bar['value'] += 1
@@ -3579,89 +3593,89 @@ def TC_FBL():
 
 
 
-    # # # # END TEST CASE 3
+    # # # END TEST CASE 3
 
-    # # # # # BEGIN TEST CASE 4
-    #     # DID in DPT
-    # id += 1
-    # bar['value'] += 1
-    # percent.set(str((id//tasks)*100)+"%")
-    # app.update_idletasks()
-    # number1 += 1
-    # number2 = 0
-    # ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Default section',
-    #             '', '', '', '', 'Test group', '', '', ''])
+    # # # # BEGIN TEST CASE 4
+        # DID in DPT
+    id += 1
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    number1 += 1
+    number2 = 0
+    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Default section','', '', '', '', 'Test group', '', '', ''])
     
-    # for col in range(1, 11):
-    #     cell_header = ws_TC_FBL.cell(id, col)
-    #     # used hex code for red color
-    #     cell_header.fill = PatternFill(
-    #         start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
-    #     cell_header.border = border
-    #     cell_header.font = font_text
+    for col in range(1, 11):
+        cell_header = ws_TC_FBL.cell(id, col)
+        # used hex code for red color
+        cell_header.fill = PatternFill(
+            start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
+        cell_header.border = border
+        cell_header.font = font_text
 
-    # bar['value'] += 1
-    # percent.set(str((id//tasks)*100)+"%")
-    # app.update_idletasks()
-    # status = 'Default'
-    # id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
-    # # print(id)
-    # # # #  END TEST CASE 4
-
-    # # -------------------------------------------------------------------------------------------------------
-
-    # # # # # BEGIN TEST CASE 5
-    # id += 1
-    # bar['value'] += 1
-    # percent.set(str((id//tasks)*100)+"%")
-    # app.update_idletasks()
-    # number1 += 1
-    # number2 = 0
-    # ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Extended section',
-    #             '', '', '', '', 'Test group', '', '', ''])
-    
-    # for col in range(1, 11):
-    #     cell_header = ws_TC_FBL.cell(id, col)
-    #     # used hex code for red color
-    #     cell_header.fill = PatternFill(
-    #         start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
-    #     cell_header.border = border
-    #     cell_header.font = font_text
-
-    # bar['value'] += 1
-    # percent.set(str((id//tasks)*100)+"%")
-    # app.update_idletasks()
-    # status = 'Extended'
-    # id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
-    # # print(id)
-    # # # # # END TEST CASE 5
-
-    # # # # # # BEGIN TEST CASE 6
-    # id += 1
-    # bar['value'] += 1
-    # percent.set(str((id//tasks)*100)+"%")
-    # app.update_idletasks()
-    # number1 += 1
-    # number2 = 0
-    # ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Programming section',
-    #             '', '', '', '', 'Test group', '', '', ''])
-    
-
-    # for col in range(1, 11):
-    #     cell_header = ws_TC_FBL.cell(id, col)
-    #     # used hex code for red color
-    #     cell_header.fill = PatternFill(
-    #         start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
-    #     cell_header.border = border
-    #     cell_header.font = font_text
-
-    # bar['value'] += 1
-    # percent.set(str((id//tasks)*100)+"%")
-    # app.update_idletasks()
-    # status = 'Programming'
-    # id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    status = 'Default'
+    id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
     # print(id)
-    # # # # # END TEST CASE 6
+
+    # # #  END TEST CASE 4
+
+    # -------------------------------------------------------------------------------------------------------
+
+    # # # # BEGIN TEST CASE 5
+    id += 1
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    number1 += 1
+    number2 = 0
+    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Extended section',
+                '', '', '', '', 'Test group', '', '', ''])
+    
+    for col in range(1, 11):
+        cell_header = ws_TC_FBL.cell(id, col)
+        # used hex code for red color
+        cell_header.fill = PatternFill(
+            start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
+        cell_header.border = border
+        cell_header.font = font_text
+
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    status = 'Extended'
+    id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
+    # print(id)
+    # # # # END TEST CASE 5
+
+    # # # # # BEGIN TEST CASE 6
+    id += 1
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    number1 += 1
+    number2 = 0
+    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Programming section',
+                '', '', '', '', 'Test group', '', '', ''])
+    
+
+    for col in range(1, 11):
+        cell_header = ws_TC_FBL.cell(id, col)
+        # used hex code for red color
+        cell_header.fill = PatternFill(
+            start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
+        cell_header.border = border
+        cell_header.font = font_text
+
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    status = 'Programming'
+    id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
+    print(id)
+    # # # # END TEST CASE 6
 
     bar['value'] += 36
     percent.set(str((id//tasks)*100)+"%")
