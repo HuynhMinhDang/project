@@ -1,1 +1,0 @@
-CA_MPC3_BLXXRCXX_APP_CANFD;0x752;0x75A;0x7DF;security_dll\\SeednKey.dll;request_config\\CA_CD569_MPC3_APP.txt;1;security_dll\\CRC_CAMPC3.txt 

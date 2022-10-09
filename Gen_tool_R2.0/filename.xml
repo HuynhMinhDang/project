@@ -1,0 +1,1320 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testmodule title="Reflash full test" version="1.0">
+	<variants>
+		<variant aka1_name="Automated">FBLAutomated Testcase</variant>
+	</variants>
+	<testgroup title="FBLAutomated Testcase">
+		<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_2" />
+		<testgroup title="Base SW to Latest SW M3">
+			<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_3" />
+			<testgroup title="Flash Base SW via UART">
+				<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_4" />
+				<testgroup title="Flash SW">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_5" />
+					<testgroup title="UART flash GAC_A79 BL03V7">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_6" />
+						<testcase aka2_title="1- Flash Base Software GAC_A79 BL03V7 via UART successful" aka3_ident="-" aka4_variants="Automated">
+							<testerconfirmation aka1_title="Flash Base Software GAC_A79 BL03V7 via UART successful">Flash Base Software GAC_A79 BL03V7 via UART successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_7" />
+					<testgroup title="Select_and_check_variant">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_8" />
+						<testcase aka1_title="1- Tester Present is ON" aka2_ident="-">
+							<set aka1_title="EnvTesterPresentOnOff">
+								<envvar aka1_name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait aka1_time="0" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="2- Change to Extended session with Service 0x10 03" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1003</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5003.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="3- wait" aka2_ident="-">
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Select variant" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">2e010101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">6e0101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Check variant" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62010101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F195 Supplier Software number">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_9" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F195 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f195</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f195424c30335637.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F180 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_10" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F180 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f180</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f180383534303030394352563031422e303030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F181 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_11" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F181 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f181</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f181383534303030394352563031412e433031.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_12" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f187</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1873835343030303943525630313030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_13" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f189</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f189383738484352563030302020532e433031.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F17F ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_14" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F17F using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f17f</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f17f383748484352563030302020482e303030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1B2 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_15" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F1B2 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1b2</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1b2383534303030394352563031432e433030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1DE ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_16" />
+						<testcase aka1_title="1- Access to RBEOL" aka2_ident="-">
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="2- Unlock RBEOL" aka2_ident="-">
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="3- Wait 5s" aka2_ident="-">
+							<wait aka1_time="5000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Send service 0x22 to the camera for the DID F1DE using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1de</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1de303430303034303030323230533030303533.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase aka1_title="6- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="7- Send 1001" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="8- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_17" />
+					<testgroup title="ProgrammingCounter">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_18" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220200</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">620200.*0</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_19" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220201</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">620201.*0</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_20" />
+					<testgroup title="Check DID in RBEOL">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_21" />
+						<testcase aka1_title="1- Access to RBEOL" aka2_ident="-">
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="2- Unlock RBEOL" aka2_ident="-">
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="3- Wait 5s" aka2_ident="-">
+							<wait aka1_time="5000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Send service 0x22 to the camera for the DID F1E0" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1e0</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1e0.*3</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Send service 0x22 to the camera for the DID F1DD" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1dd</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1dd.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="6- Send service 0x22 to the camera for the DID 4255" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">224255</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">624255.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="7- Send service 0x22 to the camera for the DID 4259" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">224259</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">624259.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="8- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase aka1_title="9- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="10- Send 1001" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="11- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="12- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+			<testgroup title="Re-Flash Latest SW M3 via X-Flash 1st">
+				<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_22" />
+				<testgroup title="Flash SW">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_23" />
+					<testgroup title="Xflash GAC_A79 BL03V8">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_24" />
+						<testcase aka2_title="1- Flash Latest Software GAC_A79 BL03V8 via IFLASH successful" aka3_ident="-" aka4_variants="Automated">
+							<testerconfirmation aka1_title="Flash Latest Software GAC_A79 BL03V8 via IFLASH successful">Flash Latest Software GAC_A79 BL03V8 via IFLASH successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_25" />
+					<testgroup title="Select_and_check_variant">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_26" />
+						<testcase aka1_title="1- Tester Present is ON" aka2_ident="-">
+							<set aka1_title="EnvTesterPresentOnOff">
+								<envvar aka1_name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait aka1_time="0" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="2- Change to Extended session with Service 0x10 03" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1003</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5003.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="3- wait" aka2_ident="-">
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Select variant" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">2e010101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">6e0101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Check variant" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62010101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F195 Supplier Software number">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_27" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F195 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f195</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f195424c30335638.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F180 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_28" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F180 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f180</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f180383534303030394352563031422e303030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F181 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_29" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F181 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f181</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f181383534303030394352563031412e433031.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_30" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f187</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1873835343030303943525630313030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_31" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f189</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f189383738484352563030302020532e433031.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F17F ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_32" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F17F using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f17f</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f17f383748484352563030302020482e303030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1B2 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_33" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F1B2 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1b2</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1b2383534303030394352563031432e433030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1DE ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_34" />
+						<testcase aka1_title="1- Access to RBEOL" aka2_ident="-">
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="2- Unlock RBEOL" aka2_ident="-">
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="3- Wait 5s" aka2_ident="-">
+							<wait aka1_time="5000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Send service 0x22 to the camera for the DID F1DE using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1de</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1de303430303034303030323230533030303533.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase aka1_title="6- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="7- Send 1001" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="8- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_35" />
+					<testgroup title="ProgrammingCounter">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_36" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220200</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">620200.*1</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_37" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220201</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">620201.*1</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_38" />
+					<testgroup title="Check DID in RBEOL">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_39" />
+						<testcase aka1_title="1- Access to RBEOL" aka2_ident="-">
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="2- Unlock RBEOL" aka2_ident="-">
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="3- Wait 5s" aka2_ident="-">
+							<wait aka1_time="5000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Send service 0x22 to the camera for the DID F1E0" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1e0</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1e0.*3</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Send service 0x22 to the camera for the DID F1DD" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1dd</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1dd.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="6- Send service 0x22 to the camera for the DID 4255" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">224255</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">624255.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="7- Send service 0x22 to the camera for the DID 4259" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">224259</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">624259.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="8- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase aka1_title="9- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="10- Send 1001" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="11- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="12- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+		</testgroup>
+		<testgroup title="Base SW to Latest SW M5">
+			<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_40" />
+			<testgroup title="Flash Base SW via UART">
+				<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_41" />
+				<testgroup title="Flash SW">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_42" />
+					<testgroup title="UART flash GAC_A79 BL03V7">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_43" />
+						<testcase aka2_title="1- Flash Base Software GAC_A79 BL03V7 via UART successful" aka3_ident="-" aka4_variants="Automated">
+							<testerconfirmation aka1_title="Flash Base Software GAC_A79 BL03V7 via UART successful">Flash Base Software GAC_A79 BL03V7 via UART successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_44" />
+					<testgroup title="Select_and_check_variant">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_45" />
+						<testcase aka1_title="1- Tester Present is ON" aka2_ident="-">
+							<set aka1_title="EnvTesterPresentOnOff">
+								<envvar aka1_name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait aka1_time="0" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="2- Change to Extended session with Service 0x10 03" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1003</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5003.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="3- wait" aka2_ident="-">
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Select variant" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">2e010101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">6e0101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Check variant" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62010101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F195 Supplier Software number">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_46" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F195 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f195</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f195424c30335637.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F180 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_47" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F180 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f180</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f180383534303030394352563031422e303030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F181 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_48" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F181 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f181</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f181383534303030394352563031412e433031.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_49" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f187</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1873835343030303943525630313030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_50" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f189</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f189383738484352563030302020532e433031.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F17F ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_51" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F17F using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f17f</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f17f383748484352563030302020482e303030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1B2 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_52" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F1B2 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1b2</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1b2383534303030394352563031432e433030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1DE ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_53" />
+						<testcase aka1_title="1- Access to RBEOL" aka2_ident="-">
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="2- Unlock RBEOL" aka2_ident="-">
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="3- Wait 5s" aka2_ident="-">
+							<wait aka1_time="5000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Send service 0x22 to the camera for the DID F1DE using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1de</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1de303430303034303030323230533030303533.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase aka1_title="6- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="7- Send 1001" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="8- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_54" />
+					<testgroup title="ProgrammingCounter">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_55" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220200</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">620200.*0</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_56" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220201</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">620201.*0</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_57" />
+					<testgroup title="Check DID in RBEOL">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_58" />
+						<testcase aka1_title="1- Access to RBEOL" aka2_ident="-">
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="2- Unlock RBEOL" aka2_ident="-">
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="3- Wait 5s" aka2_ident="-">
+							<wait aka1_time="5000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Send service 0x22 to the camera for the DID F1E0" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1e0</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1e0.*3</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Send service 0x22 to the camera for the DID F1DD" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1dd</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1dd.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="6- Send service 0x22 to the camera for the DID 4255" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">224255</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">624255.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="7- Send service 0x22 to the camera for the DID 4259" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">224259</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">624259.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="8- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase aka1_title="9- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="10- Send 1001" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="11- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="12- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+			<testgroup title="Re-Flash Latest SW M5 via X-Flash 1st">
+				<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_59" />
+				<testgroup title="Flash SW">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_60" />
+					<testgroup title="Xflash GAC_A79 BL03V8">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_61" />
+						<testcase aka2_title="1- Flash Latest Software GAC_A79 BL03V8 via IFLASH successful" aka3_ident="-" aka4_variants="Automated">
+							<testerconfirmation aka1_title="Flash Latest Software GAC_A79 BL03V8 via IFLASH successful">Flash Latest Software GAC_A79 BL03V8 via IFLASH successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_62" />
+					<testgroup title="Select_and_check_variant">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_63" />
+						<testcase aka1_title="1- Tester Present is ON" aka2_ident="-">
+							<set aka1_title="EnvTesterPresentOnOff">
+								<envvar aka1_name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait aka1_time="0" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="2- Change to Extended session with Service 0x10 03" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1003</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5003.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="3- wait" aka2_ident="-">
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Select variant" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">2e010101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">6e0101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Check variant" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62010101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F195 Supplier Software number">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_64" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F195 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f195</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f195424c30335638.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F180 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_65" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F180 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f180</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f180383534303030394352563031422e303030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F181 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_66" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F181 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f181</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f181383534303030394352563031412e433031.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_67" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f187</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1873835343030303943525630313030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_68" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f189</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f189383738484352563030302020532e433031.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F17F ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_69" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F17F using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f17f</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f17f383748484352563030302020482e303030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1B2 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_70" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F1B2 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1b2</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1b2383534303030394352563031432e433030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1DE ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_71" />
+						<testcase aka1_title="1- Access to RBEOL" aka2_ident="-">
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="2- Unlock RBEOL" aka2_ident="-">
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="3- Wait 5s" aka2_ident="-">
+							<wait aka1_time="5000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Send service 0x22 to the camera for the DID F1DE using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1de</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1de303430303034303030323230533030303533.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase aka1_title="6- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="7- Send 1001" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="8- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_72" />
+					<testgroup title="ProgrammingCounter">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_73" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220200</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">620200.*1</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_74" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220201</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">620201.*1</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_75" />
+					<testgroup title="Check DID in RBEOL">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_76" />
+						<testcase aka1_title="1- Access to RBEOL" aka2_ident="-">
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="2- Unlock RBEOL" aka2_ident="-">
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="3- Wait 5s" aka2_ident="-">
+							<wait aka1_time="5000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Send service 0x22 to the camera for the DID F1E0" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1e0</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1e0.*5</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Send service 0x22 to the camera for the DID F1DD" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1dd</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1dd.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="6- Send service 0x22 to the camera for the DID 4255" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">224255</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">624255.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="7- Send service 0x22 to the camera for the DID 4259" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">224259</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">624259.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="8- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase aka1_title="9- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="10- Send 1001" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="11- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="12- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+			<testgroup title="Re-Flash Latest SW M3 via X-Flash 2nd">
+				<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_77" />
+				<testgroup title="Flash SW">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_78" />
+					<testgroup title="Xflash GAC_A79 BL03V8">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_79" />
+						<testcase aka2_title="1- Flash Latest Software GAC_A79 BL03V8 via IFLASH successful" aka3_ident="-" aka4_variants="Automated">
+							<testerconfirmation aka1_title="Flash Latest Software GAC_A79 BL03V8 via IFLASH successful">Flash Latest Software GAC_A79 BL03V8 via IFLASH successful</testerconfirmation>
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Variant and Software  Identification">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_80" />
+					<testgroup title="Select_and_check_variant">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_81" />
+						<testcase aka1_title="1- Tester Present is ON" aka2_ident="-">
+							<set aka1_title="EnvTesterPresentOnOff">
+								<envvar aka1_name="EnvTesterPresentOnOff">1</envvar>
+							</set>
+							<wait aka1_time="0" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="2- Change to Extended session with Service 0x10 03" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1003</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5003.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="3- wait" aka2_ident="-">
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Select variant" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">2e010101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">6e0101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Check variant" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62010101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F195 Supplier Software number">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_82" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F195 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f195</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f195424c30335638.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F180 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_83" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F180 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f180</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f180383534303030394352563031422e303030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F181 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_84" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F181 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f181</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f181383534303030394352563031412e433031.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F187 Part Number">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_85" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F187 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f187</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1873835343030303943525630313030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F189 ECUSoftwareVersionNumberDataIdentifier">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_86" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F189 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f189</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f189383738484352563030302020532e433031.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F17F ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_87" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F17F using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f17f</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f17f383748484352563030302020482e303030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1B2 ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_88" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID F1B2 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1b2</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1b2383534303030394352563031432e433030.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="F1DE ">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_89" />
+						<testcase aka1_title="1- Access to RBEOL" aka2_ident="-">
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="2- Unlock RBEOL" aka2_ident="-">
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="3- Wait 5s" aka2_ident="-">
+							<wait aka1_time="5000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Send service 0x22 to the camera for the DID F1DE using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1de</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1de303430303034303030323230533030303533.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase aka1_title="6- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="7- Send 1001" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="8- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="Programming Counter and Programming Attempt Counter">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_90" />
+					<testgroup title="ProgrammingCounter">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_91" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID 0200 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220200</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">620200.*2</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+					<testgroup title="ProgrammingAttemptCounter">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_92" />
+						<capltestcase aka1_name="RequestResponse" aka2_title="1- Send service 0x22 to the camera for the DID 0201 using physical addressing" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">220201</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">620201.*2</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+				<testgroup title="DID in RBEOL">
+					<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_93" />
+					<testgroup title="Check DID in RBEOL">
+						<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_94" />
+						<testcase aka1_title="1- Access to RBEOL" aka2_ident="-">
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="EnvRBEOL">
+								<envvar aka1_name="EnvRBEOL">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="2- Unlock RBEOL" aka2_ident="-">
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">1</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+							<set aka1_title="Env_MPC3_EOL_unlock">
+								<envvar aka1_name="Env_MPC3_EOL_unlock">0</envvar>
+							</set>
+							<wait aka1_time="1000" aka2_title="wait" />
+						</testcase>
+						<testcase aka1_title="3- Wait 5s" aka2_ident="-">
+							<wait aka1_time="5000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="4- Send service 0x22 to the camera for the DID F1E0" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1e0</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1e0.*3</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="5- Send service 0x22 to the camera for the DID F1DD" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">22f1dd</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">62f1dd.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="6- Send service 0x22 to the camera for the DID 4255" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">224255</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">624255.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="7- Send service 0x22 to the camera for the DID 4259" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">224259</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">624259.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="8- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+						<testcase aka1_title="9- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="10- Send 1001" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+						</capltestcase>
+						<testcase aka1_title="11- Wait 3s" aka2_ident="-">
+							<wait aka1_time="3000" aka2_title="wait" />
+						</testcase>
+						<capltestcase aka1_name="RequestResponse" aka2_title="12- Reset ECU" aka3_ident="-">
+							<caplparam aka1_name="Request" aka2_type="string">1101</caplparam>
+							<caplparam aka1_name="Response" aka2_type="string">5101</caplparam>
+							<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+						</capltestcase>
+					</testgroup>
+				</testgroup>
+			</testgroup>
+		</testgroup>
+		<testgroup title="SESSION TRANSITION">
+			<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_95" />
+			<testgroup title="Default SS to Extended SS directly and vice versa">
+				<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_96" />
+				<capltestcase aka1_name="RequestResponse" aka2_title="1- Access to Default Session" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase aka1_title="2- Wait 3s" aka2_ident="-">
+					<wait aka1_time="3000" aka2_title="wait" />
+				</testcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="3- Check active session should be Default" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">22f186</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">62f186.*1</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase aka1_title="4- Wait 3s" aka2_ident="-">
+					<wait aka1_time="3000" aka2_title="wait" />
+				</testcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="5- Access to Extended Session" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">1003</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">5003.*</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase aka1_title="6- Tester Present ON" aka2_ident="-">
+					<set aka1_title="EnvTesterPresentOnOff">
+						<envvar aka1_name="EnvTesterPresentOnOff">1</envvar>
+					</set>
+					<wait aka1_time="0" aka2_title="wait" />
+				</testcase>
+				<testcase aka1_title="7- Wait 5s" aka2_ident="-">
+					<wait aka1_time="5000" aka2_title="wait" />
+				</testcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="8- Check active session should be Extended" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">22f186</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">62f186.*3</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase aka1_title="9- Wait 3s" aka2_ident="-">
+					<wait aka1_time="3000" aka2_title="wait" />
+				</testcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="10- Access to Default Session" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase aka1_title="11- Wait 3s" aka2_ident="-">
+					<wait aka1_time="3000" aka2_title="wait" />
+				</testcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="12- Check active session should be Default" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">22f186</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">62f186.*1</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+			</testgroup>
+			<testgroup title="Default SS to Programming SS directly and vice versa">
+				<externalref aka1_type="doors" aka2_owner="TAE - DOORS extension" aka3_title="ID_97" />
+				<capltestcase aka1_name="RequestResponse" aka2_title="1- Access to Default Session" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase aka1_title="2- Wait 3s" aka2_ident="-">
+					<wait aka1_time="3000" aka2_title="wait" />
+				</testcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="3- Check active session should be Default" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">22f186</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">62f186.*1</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase aka1_title="4- Wait 3s" aka2_ident="-">
+					<wait aka1_time="3000" aka2_title="wait" />
+				</testcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="5- Access to Programming Session (can't access directly and NRC 7E is responded)" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">1002</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">7f107e</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase aka1_title="6- Wait 3s" aka2_ident="-">
+					<wait aka1_time="3000" aka2_title="wait" />
+				</testcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="7- Check active session should be Default" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">22f186</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">62f186.*1</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase aka1_title="8- Wait 3s" aka2_ident="-">
+					<wait aka1_time="3000" aka2_title="wait" />
+				</testcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="9- Access to Extended before access to Programming Session" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">1003</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">5003.*</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase aka1_title="10- Tester Present ON" aka2_ident="-">
+					<set aka1_title="EnvTesterPresentOnOff">
+						<envvar aka1_name="EnvTesterPresentOnOff">1</envvar>
+					</set>
+					<wait aka1_time="0" aka2_title="wait" />
+				</testcase>
+				<testcase aka1_title="11- Check active session should be Extended" aka2_ident="-">
+					<wait aka1_time="5000" aka2_title="wait" />
+				</testcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="12- Wait 3s" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">22f186</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">62f186.*3</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="13- Access to Progamming Session" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">1002</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">5002.*</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase aka1_title="14- Wait 3s" aka2_ident="-">
+					<wait aka1_time="3000" aka2_title="wait" />
+				</testcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="15- Check active session should be Progamming Session" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">22f186</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">62f186.*2</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase aka1_title="16- Access to Default Session" aka2_ident="-">
+					<wait aka1_time="3000" aka2_title="wait" />
+				</testcase>
+				<capltestcase aka1_name="RequestResponse" aka2_title="17- Wait 3s" aka3_ident="-">
+					<caplparam aka1_name="Request" aka2_type="string">1001</caplparam>
+					<caplparam aka1_name="Response" aka2_type="string">5001.*</caplparam>
+					<caplparam aka1_name="CompareMode" aka2_type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase aka1_title="18- Check active session should be Progamming Session" aka2_ident="-">
+					<wait aka1_time="3000" aka2_title="wait" />
+				</testcase>
+			</testgroup>
+		</testgroup>
+	</testgroup>
+</testmodule>

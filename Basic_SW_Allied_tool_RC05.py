@@ -354,7 +354,7 @@ def create_value_file():
         sheet4.column_dimensions['F'].alignment = alignment
         sheet4.column_dimensions['G'].alignment = alignment
         # column_count2 = sheet2.max_column
-        ws5.append(['DID', 'Description', 'Length (Byte)','ASCII Value', 'HEX_Value', 'Type', 'Programming Type'])
+        ws5.append(['DTC', 'Service11 support'])
         # # ws5.append(['DID', 'Description','ASCII Value', 'HEX_Value', 'Type'])
 
         for col in range(1, 8):
