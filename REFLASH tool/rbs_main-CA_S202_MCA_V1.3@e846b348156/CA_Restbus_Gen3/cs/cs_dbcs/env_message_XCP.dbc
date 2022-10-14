@@ -1,0 +1,131 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_:
+
+
+BO_ 2617062913 XCP_MPC_DTO: 8 Vector__XXX
+ SG_ XCP_MPC_DTO_Byte0 : 0|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_DTO_Byte1 : 8|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_DTO_Byte2 : 16|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_DTO_Byte3 : 24|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_DTO_Byte4 : 32|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_DTO_Byte5 : 40|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_DTO_Byte6 : 48|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_DTO_Byte7 : 56|8@1- (1,0) [0|255] "" Vector__XXX
+
+BO_ 2617062912 XCP_MPC_CRO: 8 Vector__XXX
+ SG_ XCP_MPC_CRO_Byte0 : 0|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_CRO_Byte1 : 8|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_CRO_Byte2 : 16|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_CRO_Byte3 : 24|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_CRO_Byte4 : 32|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_CRO_Byte5 : 40|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_CRO_Byte6 : 48|8@1- (1,0) [0|255] "" Vector__XXX
+ SG_ XCP_MPC_CRO_Byte7 : 56|8@1- (1,0) [0|255] "" Vector__XXX
+
+
+
+BA_DEF_ BO_  "DiagRequest" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagResponse" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagState" ENUM  "No","Yes";
+BA_DEF_ BO_  "GenMsgChkConstant" HEX 0 4095;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ BO_  "GenMsgCycleTimeFast" INT 0 65535;
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 100000;
+BA_DEF_ BO_  "GenMsgILSupport" ENUM  "No","Yes";
+BA_DEF_ BO_  "GenMsgNrOfRepetition" INT 0 100;
+BA_DEF_ BO_  "GenMsgPDUConstants" STRING ;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","not_used","not_used","not_used","not_used","not_used","not_used","IfActive","NoMsgSendType";
+BA_DEF_ BO_  "GenMsgStartDelayTime" INT 0 100000;
+BA_DEF_ BO_  "NmMessage" ENUM  "No","Yes";
+BA_DEF_ BO_  "NmhMessage" ENUM  "No","Yes";
+BA_DEF_ BO_  "MsgType" ENUM  "Application","NM","NMH","TP2.0","ISO-TP","BAP","EID","KS";
+BA_DEF_ BO_  "VAGTP20_API" HEX 0 255;
+BA_DEF_ BO_  "VAGTP20_DynConnection" ENUM  "No","Yes";
+BA_DEF_ BO_  "VAGTP20_DynSetup" ENUM  "No","Yes";
+BA_DEF_ BO_  "VAGTP20_StatConnection" ENUM  "No","Yes";
+BA_DEF_ SG_  "GenSigActiveRepetitions" INT -2147483648 2147483647;
+BA_DEF_ SG_  "GenSigInactiveValue" INT -2147483648 2147483647;
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType","OnChangeAndIfActive","OnChangeAndIfActiveWithRepetition";
+BA_DEF_ SG_  "GenSigStartValue" INT -2147483648 2147483647;
+BA_DEF_ SG_  "NWM-WakeupAllowed" ENUM  "No","Yes";
+BA_DEF_ SG_  "GenSigFuncType" ENUM  "NoFunction","MsgCounter","CRC-8","XOR","XOR-2","DatedBit","SW-Kl15","CHK","Constant","Protocol","CRC-8-SAE_J1850";
+BA_DEF_ SG_  "GenSigSwitchedByIgnition" ENUM  "No","Yes";
+BA_DEF_ SG_  "Fehlerwert" HEX 0 2147483647;
+BA_DEF_ SG_  "GenSigMissingSourceValue" HEX 0 2147483647;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "ECU" STRING ;
+BA_DEF_ BU_  "CANoeJitterMax" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMin" INT 0 0;
+BA_DEF_ BU_  "CANoeDrift" INT 0 0;
+BA_DEF_ BU_  "CANoeStartDelay" INT 0 0;
+BA_DEF_DEF_  "DiagRequest" "No";
+BA_DEF_DEF_  "DiagResponse" "No";
+BA_DEF_DEF_  "DiagState" "No";
+BA_DEF_DEF_  "GenMsgChkConstant" 0;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "GenMsgCycleTimeFast" 0;
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenMsgILSupport" "No";
+BA_DEF_DEF_  "GenMsgNrOfRepetition" 0;
+BA_DEF_DEF_  "GenMsgPDUConstants" "";
+BA_DEF_DEF_  "GenMsgSendType" "NoMsgSendType";
+BA_DEF_DEF_  "GenMsgStartDelayTime" 0;
+BA_DEF_DEF_  "NmMessage" "No";
+BA_DEF_DEF_  "NmhMessage" "No";
+BA_DEF_DEF_  "MsgType" "Application";
+BA_DEF_DEF_  "VAGTP20_API" 0;
+BA_DEF_DEF_  "VAGTP20_DynConnection" "No";
+BA_DEF_DEF_  "VAGTP20_DynSetup" "No";
+BA_DEF_DEF_  "VAGTP20_StatConnection" "No";
+BA_DEF_DEF_  "GenSigActiveRepetitions" 0;
+BA_DEF_DEF_  "GenSigInactiveValue" 0;
+BA_DEF_DEF_  "GenSigSendType" "NoSigSendType";
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_DEF_DEF_  "NWM-WakeupAllowed" "No";
+BA_DEF_DEF_  "GenSigFuncType" "NoFunction";
+BA_DEF_DEF_  "GenSigSwitchedByIgnition" "Yes";
+BA_DEF_DEF_  "Fehlerwert" 0;
+BA_DEF_DEF_  "GenSigMissingSourceValue" 0;
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "NodeLayerModules" "";
+BA_DEF_DEF_  "ECU" "";
+BA_DEF_DEF_  "CANoeJitterMax" 0;
+BA_DEF_DEF_  "CANoeJitterMin" 0;
+BA_DEF_DEF_  "CANoeDrift" 0;
+BA_DEF_DEF_  "CANoeStartDelay" 0;
+

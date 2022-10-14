@@ -1,0 +1,302 @@
+/*@!Encoding:1250*/
+variables
+{
+  const dword INVALID_SOCKET = 0;
+  const dword SOCKET_ERROR = -1;
+  const long WSA_IO_PENDING = 997; 
+  const dword INVALID_IP = 0xffffffff;
+  dword gIpAddress = INVALID_IP;
+  const int gkSTATUS_UNINITIALISED = 0;
+  const int gkSTATUS_INITIALISED = 1;
+  
+  char TcpClientIp[20];
+  dword TcpClientPort;
+  char TcpClientData[100];
+
+  dword TcpClientSocket=INVALID_SOCKET;
+  
+  char gTcpRxBuffer[8192];
+  char ErrorText[200];
+  long ipLastErr;
+  int rc;
+  int x;
+  int gStatus = 0;
+ 
+}
+
+long TcpRecv( dword socket)
+{
+  int result = 0;
+  result = TcpReceive( socket, gTcpRxBuffer, elcount( gTcpRxBuffer));
+  if ( 0 != result)
+  {
+    ipLastErr = IpGetLastSocketError( socket);
+    if ( WSA_IO_PENDING != ipLastErr)
+    {
+      IpGetLastSocketErrorAsString( socket, ErrorText, elcount( ErrorText));
+      writelineex( 0, 2, "TcpReceive error (%d): %s", ipLastErr, ErrorText);
+    }
+  }
+  return result;
+}
+
+  void OnTcpReceive( dword socket, long result, dword address, dword port, char buffer[], dword size)
+  {
+    char  addressString[64] = "";
+    write("receive is OK");
+    if ( TcpClientSocket != socket)
+    {
+      writelineex(0, 2, "OnTcpReceive called for unknown socket 0x%X", socket);
+      return;
+    }
+    if (0 != result)
+    {
+      IpGetLastSocketErrorAsString( socket, ErrorText, elcount( ErrorText));
+      writelineex( 0, 2, "OnTcpReceive error (%d): %s", IpGetLastSocketError( socket), ErrorText);
+      return;
+    }
+    IpGetAddressAsString(address, addressString, elcount(addressString));
+    strncpy(TcpClientData, buffer, elcount(buffer)); 
+    write("time of data reached:%d", TimeNow());
+    TestSupplyTextEvent("Data is reached!");
+  }
+  
+  void OnTcpSend( dword socket, long result, char buffer[], dword size)
+  {
+    TestSupplyTextEvent("Request is sent!");
+    
+    if ( TcpClientSocket != socket)
+    {
+      writelineex(0, 2, "OnTcpSend called for unknown socket 0x%X", socket);
+    }
+    if (0 != result)
+    {
+      IpGetLastSocketErrorAsString( socket, ErrorText, elcount( ErrorText));
+      writelineex( 0, 2, "OnTcpSend error (%d): %s", IpGetLastSocketError( socket), ErrorText);
+    }
+  }
+  
+  long ConnectTcp()
+  { 
+    char buffer[64];
+    dword serverIp;
+    long result;
+
+    strncpy(buffer,"127.0.0.1",elcount("127.0.0.1"));
+    serverIp = IpGetAddressAsNumber(buffer);
+    if (INVALID_IP == serverIp)
+    {
+      writelineex(0, 1, "Error: invalid server Ip address!");  
+      return -1;
+    }
+    //putValue(EnvSocketID, TcpOpen(gIpAddress, 0));
+    TcpClientSocket = TcpOpen(gIpAddress, 0);
+    write("%d",gIpAddress);
+    if ( INVALID_SOCKET == TcpClientSocket)
+    {
+      writelineex(0, 1, "Error: could not open Tcp socket!");
+      return -1;
+    }
+    else
+    {
+      writelineex(0, 1, "Tcp socket opened.");    
+      write("time of request sent:%d", TimeNow());    
+      result=TcpConnect(TcpClientSocket, serverIp, 1234); //-> itt lehet megadni a portot
+      return result;
+    }
+    
+  }
+  
+  void DisconnectTcp()
+  {
+    if (INVALID_SOCKET != TcpClientSocket)
+    {
+      TcpClose(TcpClientSocket); 
+      TcpClientSocket = INVALID_SOCKET;
+    }
+    writelineex(0, 1, "Tcp socket is closed.");
+  }
+  
+  void SendTcpData(char DataToSend[] )
+  {
+    if (INVALID_SOCKET == TcpClientSocket)
+    {
+      writelineex( 0, 2, "Tcp socket is invalid!");
+      return;
+    }
+    if (0 != TcpSend( TcpClientSocket, DataToSend, elcount(DataToSend)))
+    {
+      ipLastErr = IpGetLastSocketError( TcpClientSocket);
+      if ( WSA_IO_PENDING != ipLastErr)
+      {
+        IpGetLastSocketErrorAsString( TcpClientSocket, ErrorText, elcount( ErrorText ));
+        writelineex( 0, 2, "TcpSend error (%d): %s", ipLastErr, ErrorText);
+      }
+    }
+    else
+    {
+      TestSupplyTextEvent("Request is sent!");
+      writelineex( 0, 1, "Tcp request sent successfully!");     
+    }
+  }
+  
+  
+  void OnTcpConnect( dword socket, long result)
+  {
+    if ( TcpClientSocket != socket)
+    {
+      writelineex(0, 2, "OnTcpConnect called for unknown socket 0x%X", socket);
+      return;
+    }
+    if (0 != result)
+    {
+      IpGetLastSocketErrorAsString( socket, ErrorText, elcount( ErrorText));
+      writelineex( 0, 2, "OnTcpConnect error (%d): %s", IpGetLastSocketError( socket), ErrorText);
+      return;
+    }
+    else
+    {
+      writelineex(0, 1, "Successfully connected to server via Tcp");
+      //SendTcpData("CErrormgrFidOutput");
+    }
+  }
+
+
+
+//CAPL testcase FID lekérdezéséhez
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Compares the permission values of the FID interface with a string.
+//!   The string is composed from the expected FID permission values.
+//!
+//! \param  char inputStr represents the expected permission values of the FID interface.
+//- -----------------------------------------------------------------------------------------------
+testcase GetDataOnTcp(char inputStr[])
+{
+  char outputStr[47];
+  int i;
+  int j;
+  char nullStr[1] = ""; //empty string to set zero char arrays 
+  char data[50];
+  long g;
+  j=0;
+  
+  
+  ConnectTcp();
+  //TcpClientSocket = @EnvSocketID;
+  strncpy(outputStr, nullStr, elcount(nullStr));
+  strncpy(TcpClientData, nullStr, elcount(nullStr));
+  SendTcpData("CErrormgrFidOutpu:1");
+  SendTcpData("CErrormgrFidOutput2");
+  SendTcpData("CErrormgrFidOutput3");
+  TcpRecv(TcpClientSocket);
+  TestWaitForTextEvent("Data is reached!",500);
+   
+  
+      /*------------------------DATA COMPARE---------------------*/
+  
+  	if(strlen(TcpClientData) > 0)
+  	{
+  		for(i = 0; i < strlen(inputStr); i++)
+  		{   
+  			outputStr[i] = TcpClientData[i];	
+  			if( TcpClientData[i] != inputStr[i])
+  				{
+  					j=1;
+  				}					
+  		}
+  		write("Input:%s", inputStr);
+  		write("Output:%s", outputStr);
+  		TestStep("INFO","EXPECTED: %s", inputStr);
+  		TestStep("INFO","RECEIVED: %s", outputStr);
+      write("\n \n");
+  		if( j == 0 )
+  		{
+  			TestStepPass("Test PASSED!");
+  		}
+  		else
+  		{
+  			TestStepFail("Test FAILED!");
+  		}	 						
+  	}
+  	else
+  	{
+  		TestStepFail("No data arrived!");
+  	}
+}
+
+
+
+
+testcase connect()
+{
+
+  ConnectTcp();
+
+}
+
+testcase disconnect()
+{
+
+DisconnectTcp();
+
+}
+
+
+
+//- -----------------------------------------------------------------------------------------------
+//! \brief  Sends command to LabView host and waits for positive acknowledgement
+//!   
+//! \param  char commandStr represents the full command string for LabView (parameter added).
+//! \param  char expectedStr represents the expected response from LabView.
+//- -----------------------------------------------------------------------------------------------
+testcase SendLabViewCommand(char commandStr[], char expectedStr[])
+{
+  int i;
+  int j;
+  char nullStr[1] = ""; //empty string to set zero char arrays 
+  char data[50];
+  long g;
+  j=0;
+  
+  
+
+  //TcpClientSocket = @EnvSocketID;
+  snprintf(TcpClientData, elcount(TcpClientData), nullStr);
+  SendTcpData(commandStr);
+  TcpRecv(TcpClientSocket);
+  TestWaitForTextEvent("Data is reached!",20000);
+   
+  
+      /*------------------------DATA COMPARE---------------------*/
+  
+  	if(strlen(TcpClientData) > 0)
+  	{
+  		for(i = 0; i < strlen(expectedStr); i++)
+  		{   	
+  			if( TcpClientData[i] != expectedStr[i])
+  				{
+  					j=1;
+  				}					
+  		}
+  		write("Input:%s", expectedStr);
+  		TestStep("INFO","EXPECTED: %s", expectedStr);
+      write("\n \n");
+  		if( j == 0 )
+  		{
+  			TestStepPass("Positive ACK arrived!");
+  		}
+  		else
+  		{
+  			TestStepFail("Negative ACK arrived!");
+  		}	 						
+  	}
+  	else
+  	{
+  		TestStepFail("No data arrived!");
+  	}
+	
+
+	
+}
+
+

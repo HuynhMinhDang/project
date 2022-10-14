@@ -1,0 +1,394 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testmodule title="CA_S401_BL01_V3.0" version="1.0">
+	<variants>
+		<variant name="Automated">SERVICE_2EAutomated Testcase</variant>
+	</variants>
+	<testgroup title="SERVICE_2EAutomated Testcase">
+		<externalref type="doors" owner="TAE - DOORS extension" title="ID_2" />
+		<testgroup title="F190_VINDataIdentifier">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_3" />
+			<testcase title="1- Tester Present is ON" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+				<caplparam name="Request" type="string">1003</caplparam>
+				<caplparam name="Response" type="string">5003.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+			<testcase title="3- Request Seed from the camera 0x27 01" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<testcase title="4- Wait for seed-Key Calculation" ident="-">
+				<wait time="1000" title="wait" />
+			</testcase>
+			<testcase title="5- Send valid Key to the camera : 0x27 02 XX XX XX XX (Where XX XX XX XX is the exact calculated key using seed key algorithm)" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="6- Write 17 Byte data for DID F190 using Physical addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1903030303030303030303030303030303030</caplparam>
+				<caplparam name="Response" type="string">6ef190</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="7- Write 17 Byte data for DID F190 using Functional addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1903030303030303030303030303030303030</caplparam>
+				<caplparam name="Response" type="string" />
+				<caplparam name="CompareMode" type="string">None</caplparam>
+			</capltestcase>
+			<capltestcase name="RequestResponse" title="8- Send service 0x22 to read the new 17 byte data of the DID F190" ident="-">
+				<caplparam name="Request" type="string">22f190</caplparam>
+				<caplparam name="Response" type="string">62f1903030303030303030303030303030303030</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<testcase title="9- Tester Present is OFF" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="10- Change to Default session with Service 0x10 01" ident="-">
+				<caplparam name="Request" type="string">1001</caplparam>
+				<caplparam name="Response" type="string">5001.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+		</testgroup>
+		<testgroup title="F1F0_vehicle type">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_4" />
+			<testcase title="1- Tester Present is ON" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+				<caplparam name="Request" type="string">1003</caplparam>
+				<caplparam name="Response" type="string">5003.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+			<testcase title="3- Request Seed from the camera 0x27 01" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<testcase title="4- Wait for seed-Key Calculation" ident="-">
+				<wait time="1000" title="wait" />
+			</testcase>
+			<testcase title="5- Send valid Key to the camera : 0x27 02 XX XX XX XX (Where XX XX XX XX is the exact calculated key using seed key algorithm)" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="6- Write 1 Byte data for DID F1F0 using Physical addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1f000</caplparam>
+				<caplparam name="Response" type="string">6ef1f0</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="7- Write 1 Byte data for DID F1F0 using Functional addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1f000</caplparam>
+				<caplparam name="Response" type="string" />
+				<caplparam name="CompareMode" type="string">None</caplparam>
+			</capltestcase>
+			<capltestcase name="RequestResponse" title="8- Send service 0x22 to read the new 1 byte data of the DID F1F0" ident="-">
+				<caplparam name="Request" type="string">22f1f0</caplparam>
+				<caplparam name="Response" type="string">62f1f000</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<testcase title="9- Tester Present is OFF" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="10- Change to Default session with Service 0x10 01" ident="-">
+				<caplparam name="Request" type="string">1001</caplparam>
+				<caplparam name="Response" type="string">5001.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+		</testgroup>
+		<testgroup title="F1F4_vehicle configuration">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_5" />
+			<testcase title="1- Tester Present is ON" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+				<caplparam name="Request" type="string">1003</caplparam>
+				<caplparam name="Response" type="string">5003.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+			<testcase title="3- Request Seed from the camera 0x27 01" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<testcase title="4- Wait for seed-Key Calculation" ident="-">
+				<wait time="1000" title="wait" />
+			</testcase>
+			<testcase title="5- Send valid Key to the camera : 0x27 02 XX XX XX XX (Where XX XX XX XX is the exact calculated key using seed key algorithm)" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="6- Write 1 Byte data for DID F1F4 using Physical addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1f401</caplparam>
+				<caplparam name="Response" type="string">6ef1f4</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="7- Write 1 Byte data for DID F1F4 using Functional addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1f401</caplparam>
+				<caplparam name="Response" type="string" />
+				<caplparam name="CompareMode" type="string">None</caplparam>
+			</capltestcase>
+			<capltestcase name="RequestResponse" title="8- Send service 0x22 to read the new 1 byte data of the DID F1F4" ident="-">
+				<caplparam name="Request" type="string">22f1f4</caplparam>
+				<caplparam name="Response" type="string">62f1f401</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<testcase title="9- Tester Present is OFF" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="10- Change to Default session with Service 0x10 01" ident="-">
+				<caplparam name="Request" type="string">1001</caplparam>
+				<caplparam name="Response" type="string">5001.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+		</testgroup>
+		<testgroup title="F1F1_FAB switch">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_6" />
+			<testcase title="1- Tester Present is ON" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+				<caplparam name="Request" type="string">1003</caplparam>
+				<caplparam name="Response" type="string">5003.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+			<testcase title="3- Request Seed from the camera 0x27 01" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<testcase title="4- Wait for seed-Key Calculation" ident="-">
+				<wait time="1000" title="wait" />
+			</testcase>
+			<testcase title="5- Send valid Key to the camera : 0x27 02 XX XX XX XX (Where XX XX XX XX is the exact calculated key using seed key algorithm)" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="6- Write 1 Byte data for DID F1F1 using Physical addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1f101</caplparam>
+				<caplparam name="Response" type="string">6ef1f1</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="7- Write 1 Byte data for DID F1F1 using Functional addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1f101</caplparam>
+				<caplparam name="Response" type="string" />
+				<caplparam name="CompareMode" type="string">None</caplparam>
+			</capltestcase>
+			<capltestcase name="RequestResponse" title="8- Send service 0x22 to read the new 1 byte data of the DID F1F1" ident="-">
+				<caplparam name="Request" type="string">22f1f1</caplparam>
+				<caplparam name="Response" type="string">62f1f101</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<testcase title="9- Tester Present is OFF" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="10- Change to Default session with Service 0x10 01" ident="-">
+				<caplparam name="Request" type="string">1001</caplparam>
+				<caplparam name="Response" type="string">5001.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+		</testgroup>
+		<testgroup title="F1F2_TSR switch">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_7" />
+			<testcase title="1- Tester Present is ON" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+				<caplparam name="Request" type="string">1003</caplparam>
+				<caplparam name="Response" type="string">5003.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+			<testcase title="3- Request Seed from the camera 0x27 01" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<testcase title="4- Wait for seed-Key Calculation" ident="-">
+				<wait time="1000" title="wait" />
+			</testcase>
+			<testcase title="5- Send valid Key to the camera : 0x27 02 XX XX XX XX (Where XX XX XX XX is the exact calculated key using seed key algorithm)" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="6- Write 1 Byte data for DID F1F2 using Physical addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1f201</caplparam>
+				<caplparam name="Response" type="string">6ef1f2</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="7- Write 1 Byte data for DID F1F2 using Functional addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1f201</caplparam>
+				<caplparam name="Response" type="string" />
+				<caplparam name="CompareMode" type="string">None</caplparam>
+			</capltestcase>
+			<capltestcase name="RequestResponse" title="8- Send service 0x22 to read the new 1 byte data of the DID F1F2" ident="-">
+				<caplparam name="Request" type="string">22f1f2</caplparam>
+				<caplparam name="Response" type="string">62f1f201</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<testcase title="9- Tester Present is OFF" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="10- Change to Default session with Service 0x10 01" ident="-">
+				<caplparam name="Request" type="string">1001</caplparam>
+				<caplparam name="Response" type="string">5001.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+		</testgroup>
+		<testgroup title="F1F3_TLA switch">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_8" />
+			<testcase title="1- Tester Present is ON" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+				<caplparam name="Request" type="string">1003</caplparam>
+				<caplparam name="Response" type="string">5003.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+			<testcase title="3- Request Seed from the camera 0x27 01" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<testcase title="4- Wait for seed-Key Calculation" ident="-">
+				<wait time="1000" title="wait" />
+			</testcase>
+			<testcase title="5- Send valid Key to the camera : 0x27 02 XX XX XX XX (Where XX XX XX XX is the exact calculated key using seed key algorithm)" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="6- Write 1 Byte data for DID F1F3 using Physical addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1f301</caplparam>
+				<caplparam name="Response" type="string">6ef1f3</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="7- Write 1 Byte data for DID F1F3 using Functional addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1f301</caplparam>
+				<caplparam name="Response" type="string" />
+				<caplparam name="CompareMode" type="string">None</caplparam>
+			</capltestcase>
+			<capltestcase name="RequestResponse" title="8- Send service 0x22 to read the new 1 byte data of the DID F1F3" ident="-">
+				<caplparam name="Request" type="string">22f1f3</caplparam>
+				<caplparam name="Response" type="string">62f1f301</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<testcase title="9- Tester Present is OFF" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="10- Change to Default session with Service 0x10 01" ident="-">
+				<caplparam name="Request" type="string">1001</caplparam>
+				<caplparam name="Response" type="string">5001.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+		</testgroup>
+		<testgroup title="F1FE_Lane Function Configuration">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_9" />
+			<testcase title="1- Tester Present is ON" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="2- Change to Extended session with Service 0x10 03" ident="-">
+				<caplparam name="Request" type="string">1003</caplparam>
+				<caplparam name="Response" type="string">5003.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+			<testcase title="3- Request Seed from the camera 0x27 01" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">1</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<testcase title="4- Wait for seed-Key Calculation" ident="-">
+				<wait time="1000" title="wait" />
+			</testcase>
+			<testcase title="5- Send valid Key to the camera : 0x27 02 XX XX XX XX (Where XX XX XX XX is the exact calculated key using seed key algorithm)" ident="-">
+				<set title="EnvLogInLevel1">
+					<envvar name="EnvLogInLevel1">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="6- Write 1 Byte data for DID F1FE using Physical addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1fe00</caplparam>
+				<caplparam name="Response" type="string">6ef1fe</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<capltestcase name="FunctionalMessage" title="7- Write 1 Byte data for DID F1FE using Functional addressing." ident="-">
+				<caplparam name="Request" type="string">2ef1fe00</caplparam>
+				<caplparam name="Response" type="string" />
+				<caplparam name="CompareMode" type="string">None</caplparam>
+			</capltestcase>
+			<capltestcase name="RequestResponse" title="8- Send service 0x22 to read the new 1 byte data of the DID F1FE" ident="-">
+				<caplparam name="Request" type="string">22f1fe</caplparam>
+				<caplparam name="Response" type="string">62f1fe00</caplparam>
+				<caplparam name="CompareMode" type="string">Equal</caplparam>
+			</capltestcase>
+			<testcase title="9- Tester Present is OFF" ident="-">
+				<set title="EnvTesterPresentOnOff">
+					<envvar name="EnvTesterPresentOnOff">0</envvar>
+				</set>
+				<wait time="0" title="wait" />
+			</testcase>
+			<capltestcase name="RequestResponse" title="10- Change to Default session with Service 0x10 01" ident="-">
+				<caplparam name="Request" type="string">1001</caplparam>
+				<caplparam name="Response" type="string">5001.*</caplparam>
+				<caplparam name="CompareMode" type="string">Regexp</caplparam>
+			</capltestcase>
+		</testgroup>
+	</testgroup>
+</testmodule>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by PP_Developer (Robert Bosch GmbH) -->
+<!--Vector Test Automation Editor 2.1.28.0-->
+<testmodule title="GAC - Datensatz Download EOL" version="1.0" xmlns="http://www.vector-informatik.de/CANoe/TestModule/1.23">
+  <variants>
+    <variant name="GAC">DSDL EOL script for GAC</variant>
+  </variants>
+  <engineer>
+    <info>
+      <name>Name:</name>
+      <description>SURYA PRAKASH</description>
+    </info>
+    <info>
+      <name>Department:</name>
+      <description>CC/EDA3-Bp</description>
+    </info>
+  </engineer>
+  <sut>
+    <!--Iinformation module concerning the testing engineer and the system under test -->
+    <info>
+      <name>Device</name>
+      <description>GAC</description>
+    </info>
+  </sut>
+  <capltestcase name="ReadFile" title="Read the Datensatz Download parameters from *.xml file" variants="GAC">
+    <caplparam name="caseHandle" type="int">
+      <!--0 == Get filepath from dialogbox-->0</caplparam>
+    <caplparam name="interactive" type="int">0</caplparam>
+  </capltestcase>
+  <!--Run all preparations that is needed for the "Datensatz Download" -->
+  <testgroup title="Datensatz Download as good case" variants="GAC">
+    <testcase ident="" title="Waitstate for clean Init">
+      <wait time="6000" title="" />
+    </testcase>
+    <capltestcase name="RequestResponse" title="Change to Default session with service 0x10 01" ident="Positive response is received: 0x50 01 00 32 01 F4">
+      <caplparam name="Request" type="string">1001</caplparam>
+      <caplparam name="Response" type="string">5001003200c8</caplparam>
+      <caplparam name="CompareMode" type="string">Equal</caplparam>
+    </capltestcase>
+    <!-- Plant mode activation  -->
+    <capltestcase name="RequestResponse" title="Read DTCs with service 0x19 02 09" ident="">
+      <caplparam name="Request" type="string">190209</caplparam>
+      <caplparam name="Response" type="string">59.*</caplparam>
+      <caplparam name="CompareMode" type="string">Regexp</caplparam>
+    </capltestcase>
+    <capltestcase name="RequestResponse" title="Activate Plant Mode part1 with service 0x80 FA 31 03 30 05" ident="Positive response is received: 0xC0 .{2}">
+      <caplparam name="Request" type="string">80fa31033005</caplparam>
+      <caplparam name="Response" type="string">c0fa</caplparam>
+      <caplparam name="CompareMode" type="string">Equal</caplparam>
+    </capltestcase>
+    <capltestcase name="RequestResponse" title="Activate Plant Mode part2 with service 0x80 FA 11 08" ident="Positive response is received: 0xC0 .{4}">
+      <caplparam name="Request" type="string">80fa1108</caplparam>
+      <caplparam name="Response" type="string">c0fa00</caplparam>
+      <caplparam name="CompareMode" type="string">Equal</caplparam>
+    </capltestcase>
+    <!-- RBEOL Login -->
+    <capltestcase name="Login" title="Login with RBEOL key" ident="Positive response is received: 0x67 62">
+      <caplparam type="string" name="LoginType">RBEOL</caplparam>
+    </capltestcase>
+    <!-- Erase the flash memory -->
+    <capltestcase name="RequestResponse" title="Erase flash memory with service 0x31 01 FF 00" ident="Positive response is received: 71 01 FF 00">
+      <caplparam name="Request" type="string">3101ff00</caplparam>
+      <caplparam name="Response" type="string">7101ff00</caplparam>
+      <caplparam name="CompareMode" type="string">Equal</caplparam>
+    </capltestcase>
+    <!-- Get erase flash memory result -->
+    <capltestcase name="RequestResponse" title="Get Erase flash memory result with service 0x31 03 FF 00" ident="Positive response is received: 71 03 FF 00 01">
+      <caplparam name="Request" type="string">3103ff00</caplparam>
+      <caplparam name="Response" type="string">7103ff0001</caplparam>
+      <caplparam name="CompareMode" type="string">Equal</caplparam>
+    </capltestcase>
+    <testgroup title="Write 'Datensatz' to flash">
+      <!-- Define startaddress for flashdata  -->
+      <capltestcase name="RequestDownload" title="Initialize start address and data size to be downloaded" variants="GAC" />
+      <capltestcase name="TransmitData" title="TransmitData">
+        <caplparam name="TimeoutValue" type="int"><![CDATA[20000]]></caplparam>
+      </capltestcase>
+      <!-- Quit the data transfer -->
+      <capltestcase name="RequestResponse" title="Exit transfer data with service 0x37" ident="Positive response is received: 77 01">
+        <caplparam name="Request" type="string">37</caplparam>
+        <caplparam name="Response" type="string">7701</caplparam>
+        <caplparam name="CompareMode" type="string">Equal</caplparam>
+      </capltestcase>
+    </testgroup>
+    <capltestcase name="RequestResponse" title="Change to Default session with service 0x10 01" ident="Positive response is received: 0x50 01 00 32 01 F4">
+      <caplparam name="Request" type="string">1001</caplparam>
+      <caplparam name="Response" type="string">5001003200c8</caplparam>
+      <caplparam name="CompareMode" type="string">Equal</caplparam>
+    </capltestcase>
+    <capltestcase name="ResetCamera" title="Reset the camera with service 0x11 02" ident="">
+      <caplparam name="Request" type="int">7000</caplparam>
+    </capltestcase>
+    <capltestcase name="RequestResponse" title="Read DTCs with service 0x19 02 09" ident="">
+      <caplparam name="Request" type="string">190209</caplparam>
+      <caplparam name="Response" type="string">59.*</caplparam>
+      <caplparam name="CompareMode" type="string">Regexp</caplparam>
+    </capltestcase>
+  </testgroup>
+</testmodule>

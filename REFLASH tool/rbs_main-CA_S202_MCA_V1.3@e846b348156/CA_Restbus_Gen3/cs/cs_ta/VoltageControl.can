@@ -1,0 +1,953 @@
+/*@!Encoding:1250*/
+
+//!************************************************************************************************************************************
+//! Copyright(c) - This program/software is the exclusive property of Robert Bosch
+//! Gmbh. Without their consent it may not be reproduced or given to third parties.
+//!************************************************************************************************************************************
+
+//!************************************************************************************************************************************
+//! This test module Contains the function for controlling power supply through RS232 interface 
+//! there is always a voltage difference between power supply and ECU internal volatege. this file provide a functions which set the
+//!   -the power supply voltage automatically, so that ECU internal voltge is set to user requested voltage level.
+//!************************************************************************************************************************************
+
+//!***********************************************
+//! Author Sathisha Ninge Gowda (RBEI/ESD-CN3)
+//!***********************************************
+
+variables
+{
+  // parameters for RS232 configuration
+  long COMPort = 1;
+  long BitPerSeconds = 9600;
+  long DataBits = 8;
+  long Stopbits = 1;
+  long Parity = 0;
+  
+  // Others
+  byte TextoutByte[100];
+  byte TextinByte[100];      
+	char TextinChar[100];
+	char TextinCharTmp[100];
+  dword receiveBufferCounter = 0;
+
+  // Global Variable for creating a voltage command string
+  char Commandstring[15];
+
+  //Global Variable successful Data sent indicator
+	mstimer Indicator;
+
+  //Global Variable for diagnostic send and receive  
+  	byte 	ReceiveBuffer[4096];	
+  	int 	ReceiveBufferLength;
+	  char	MVbuffer2[4096] = "0x"; 
+ 
+  // Global Variable for Reading volatge through diagnostic
+    msTimer ReadVtgTimer;
+    msTimer ReadVtgTimer1;
+    char    ReadSID[3] = "22";
+    char    Response[4096] = "";
+    float   Factor;
+    char    ReadVtgRequest[25];
+    char    VtgDID[25];
+    char    VtgByte[25];
+    char    Temp[10]="0x";
+    float   ReadVoltage;
+  
+  // Global Variable for Setting voltage considering tolerance of the power supply
+    int     ReqType;
+    msTimer SetVtgTimer;
+    msTimer SetVtgTimer1;
+    msTimer SetVtgTimer2;
+    msTimer SetVtgTimer3;
+    float   UserReqVoltage;
+    float   TempVoltage;
+  
+  
+    int RequestType = 0;
+  
+  
+}
+
+on preStart
+{
+  InitSerialPort();
+  putvalue(Env_VC_VoltageDID,"");
+  putvalue(Env_VC_Factor,1);
+  putvalue(Env_VC_RecIndicator,0);
+}
+
+on start
+{
+  f_InitialSupplyState();
+  
+}
+
+InitSerialPort()
+{
+  // close serial port (port may have changed, former port shall not remain open)
+  if(Rs232Close(COMPort)==1)
+  {
+    writeLineEx(0,1, "Serial port %d successfully closed.", COMPort);  
+  }
+      
+  else
+  {
+    writeLineEx(0,3,"An error occurred during closing of the serial port %d.", COMPort);  
+  }
+      
+  // open the serial port (comes up with Windows defaults)
+  if(Rs232Open(COMPort)==1)
+  {
+    writeLineEx(0,1, "Serial port %d successfully opened.", COMPort);
+  }    
+  else
+  {
+    writeLineEx(0,3,"An error occurred during opening of the serial port %d.", COMPort);
+  }    
+
+  // configure the serial port
+  if(RS232Configure(COMPort,BitPerSeconds,DataBits,Stopbits,Parity)==1)
+  {
+    writeLineEx(0,1, "Serial port %d successfully initialized.", COMPort);    
+  }
+    
+  else
+  {
+    writeLineEx(0,3,"An error occurred during initialization of the serial port %d.", COMPort); 
+  }
+
+  // port, handshake, xonLim, xoffLim, xonChar, xoffChar, writeTimeout
+  // without last timeout parameter: use default timeout
+  // for transmission of small amounts of data one may not need to use handshake ! 
+  // e.g. 33 for RTS/CTS as second parameter for large volumes of data, 0 for small volumes
+//  if(Rs232SetHandshake(COMPort, kHANDSHAKE_DISABLED, 0, 0, 0, 0))
+//    writeLineEx(0,1, "Handshake parameters for serial port %d successfully configured.", COMPort);    
+//  else
+//    writeLineEx(0,3,"An error occurred during the serial port %d configuration of handshake parameters.", COMPort);
+
+//  // set buffer for reception (otherwise callback would not work)
+//  if(Rs232Receive(COMPort, gReceiverCallbackBuffer, kBUFFER_SIZE))
+//    writeLineEx(0,1, "Receiver buffer for serial port %d successfully set.", COMPort);    
+//  else
+//    writeLineEx(0,3,"An error occurred during setting the receiver buffer for serial port %d.", COMPort);
+//  
+//    RS232Receive(COMPort,gReceiverCallbackBuffer,10);
+}
+
+f_InitialSupplyState()
+{
+  SendToCOM("SYST:REM");
+  SendToCOM("C 5");
+  SendToCOM("EX ON");
+  SendToCOM("SEL 2");
+  SendToCOM("V 12.000");
+  SendToCOM("SEL 1");
+  SendToCOM("V 12.000");
+}
+
+on envVar Env_VC_ControlType
+{
+  ClearOutputInfoBuffer();
+  SetDefaultControlColors("VoltageControl", "Radio Button 2");
+  
+  if(@this==1)
+  {
+    InitSerialPort();
+    SendToCOM("SYST:REM");
+  }
+  else 
+  {
+    SendToCOM("SYST:LOC");
+    if(Rs232Close(COMPort)==1)
+    writeLineEx(0,1, "Serial port %d successfully closed.", COMPort);    
+    else
+    writeLineEx(0,3,"An error occurred during closing of the serial port %d.", COMPort);
+  }
+}
+
+on envVar Env_VC_MaxCurLimitCh1
+{
+  float MaxCurrent;
+  
+  ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  
+  else
+  {
+    MaxCurrent = getValue(Env_VC_MaxCurLimitCh1);
+    snprintf(Commandstring, 15, "C %.3f",MaxCurrent);
+    SendToCOM("SEL 1");
+    SendToCOM(Commandstring);
+  }
+
+}
+
+on envVar Env_VC_MaxCurLimitCh2
+{
+  float MaxCurrent;
+  
+  ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  else 
+  {
+    MaxCurrent = getValue(Env_VC_MaxCurLimitCh2);
+    snprintf(Commandstring, 15, "C %.3f",MaxCurrent);
+    SendToCOM("SEL 2");
+    SendToCOM(Commandstring);
+  }
+}
+
+on envVar Env_VC_MaxVtgLimitCh1
+{
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "will be implemented in future");
+}
+
+on envVar Env_VC_MaxVtgLimitCh2
+{
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "will be implemented in future");
+}
+
+on envVar Env_VC_ComPort
+{
+  COMPort = @Env_VC_ComPort;
+  InitSerialPort(); 
+}
+
+on envVar Env_VC_BaudRate
+{
+  BitPerSeconds = @Env_VC_BaudRate;
+  InitSerialPort(); 
+}
+
+on envVar Env_VC_SetVtgCh1
+{
+  float Voltage;
+  
+  ClearOutputInfoBuffer();
+
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  
+  else 
+  {
+    putvalue(Env_VC_SupplySwitch1,1);
+    Voltage = getValue(Env_VC_SetVtgCh1);
+    snprintf(Commandstring, 15, "V %.3f",Voltage);
+    SendToCOM("SEL 1");
+    SendtoCOM(Commandstring);
+  }
+  
+}
+
+on envVar Env_VC_SetVtgBtnCh1
+{
+  float Voltage;
+  
+  ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  
+  else 
+  {
+    Voltage = getValue(Env_VC_SetVtgCh1);
+    snprintf(Commandstring, 15, "V %.3f",Voltage);
+    SendToCOM("SEL 1");
+    SendtoCOM(Commandstring);
+  }
+}
+
+on envVar Env_VC_SetVtgCh2
+{
+  float Voltage;
+  
+  ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  else 
+  {
+    putvalue(Env_VC_SupplySwitch2,1);
+    Voltage = getValue(Env_VC_SetVtgCh2);
+    snprintf(Commandstring, 15, "V %.3f",Voltage);
+    SendToCOM("SEL 2");
+    SendtoCOM(Commandstring);
+  }
+}
+
+on envVar Env_VC_SetVtgBtnCh2
+{
+  float Voltage;
+ 
+  ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  
+  else 
+  {
+    Voltage = getValue(Env_VC_SetVtgCh2);
+    snprintf(Commandstring, 15, "V %.3f",Voltage);
+    SendToCOM("SEL 2");
+    SendtoCOM(Commandstring);
+  }
+}
+
+on envVar Env_VC_SupplySwitch1
+{
+  float Temp;
+ 
+  ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  else if(@Env_VC_MainSwitch == 0)
+  {
+    putValueToControl("VoltageControl", "Power supply Info", "Please turn ON Main Switch");
+  }
+  else 
+  {
+    SendToCOM("SEL 1");
+    Temp = getValue(Env_VC_SetVtgCh1);
+    
+    if(@this==1)
+    { 
+      snprintf(Commandstring, 15, "V %.3f",Temp);
+      SendToCOM(Commandstring);
+    }
+    else
+    {
+      SendToCOM("V 0.00");
+    }
+  }
+}
+
+on envVar Env_VC_SupplySwitch2
+{
+  float Temp;
+ 
+  ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  else if(@Env_VC_MainSwitch == 0)
+  {
+    putValueToControl("VoltageControl", "Power supply Info", "Please turn ON Main Switch");
+  }
+  else 
+  {
+    SendToCOM("SEL 2");
+    Temp = getValue(Env_VC_SetVtgCh2);
+    
+    if(@this==1)
+    { 
+      snprintf(Commandstring, 15, "V %.3f",Temp);
+      SendToCOM(Commandstring);
+    }
+    else
+    {
+      SendToCOM("V 0.00");
+    }
+  }
+}
+
+on envVar Env_VC_MainSwitch
+{
+  float Temp;
+  ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  else 
+  {
+    if(@this==1)
+    { 
+      SendToCOM("EX ON");
+      
+      if(@Env_VC_SupplySwitch1 == 1)
+      {
+        SendToCOM("SEL 1");
+        Temp = getValue(Env_VC_SetVtgCh1);
+        snprintf(Commandstring, 15, "V %.3f",Temp);
+        SendToCOM(Commandstring);
+      }
+      else
+      {
+        SendToCOM("V 0.00");
+      }
+
+      if(@Env_VC_SupplySwitch2 == 1)
+      {
+        SendToCOM("SEL 2");
+        Temp = getValue(Env_VC_SetVtgCh2);
+        snprintf(Commandstring, 15, "V %.3f",Temp);
+        SendToCOM(Commandstring);
+      }
+      else
+      {
+        SendToCOM("V 0.00");
+      }
+    }
+    else
+    {
+      SendToCOM("EX OFF");
+    }
+  }
+}
+
+SendtoCOM (char CommondSrting[])
+{
+  int i,j, result=1;
+  
+  //convert command string to byte[]
+  for(j=0;CommondSrting[j]>0;j++)            
+  {
+      TextoutByte[j]=CommondSrting[j];
+  }
+  
+  TextoutByte[j]=10;     // Next Line = Line Feed (ASCII || 0x0A)
+    
+  if(0==Rs232WriteBlock(COMPort, TextoutByte, strlen(CommondSrting)+1))
+  {
+    writeLineEx(0,3,"An error occurred during write of CommondSrting %s to the serial port %d.",CommondSrting,COMPort);
+    return;
+  } 
+  else 
+  {
+    // writeLineEx(0,1, "CommondSrting %s is succesfully sent to COM Port %d.",CommondSrting, COMPort);  
+        
+    //Indicates data sent
+    putValue(Env_VC_RecIndicator,1);
+    setTimer(Indicator,200);   
+  }
+ 
+}
+
+RS232OnReceive( dword port, byte buffer[],  dword receiveBufferLength )
+{ 
+ 	int i;
+	int j=0;
+	float measValue_f;	
+  
+	
+		receiveBufferCounter = 0;
+		//write("Received: %s", TextinCharTmp);
+		write("RequestType: %d", RequestType);
+		
+		for (i=0; i<elcount(buffer); i++)
+		{
+			TextinChar[i] = buffer[i];
+			TextinCharTmp[i] = 0;
+		}
+		
+		switch (RequestType)
+		{
+			// Read CH1 Voltage
+			case 1:
+			
+			  measValue_f = atodbl(TextinChar);		
+				putvalue(Env_VC_VoltageCh1, measValue_f);					
+				
+				break;
+
+			// Read CH1 Current
+			case 2:
+				
+				measValue_f = atodbl(TextinChar);		
+				putvalue(Env_VC_CurrentCh1, measValue_f);
+
+				break;
+
+			// REad CH2 Voltage
+			case 3:
+				measValue_f = atodbl(TextinChar);		
+				putvalue(Env_VC_VoltageCh2, measValue_f);
+
+				break;
+        
+			// Read CH2 Current
+			case 4:
+				measValue_f = atodbl(TextinChar);		
+				putvalue(Env_VC_CurrentCh2, measValue_f);
+
+				break;
+		}
+
+		for (i=0; i<100; i++)
+		{
+			TextinChar[i] = 0;
+		}
+      //Indicates data reception
+    putValue(Env_VC_RecIndicator,1);
+    setTimer(Indicator,200);
+}
+
+RS232OnSend( dword port, byte buffer[], dword number )
+{
+  //writeLineEx(0,1,"Transmission of %d bytes from port %d completed !", number, port);
+}
+
+on timer Indicator
+{
+  putValue(Env_VC_RecIndicator,0);
+  
+}
+
+RS232OnError( dword port, dword errorFlags )
+{
+  writeLineEx(0,3,"Error handler called with error code %d !", errorFlags);
+
+  if ( errorFlags & 1 )
+    writeLineEx(0,1,"%d informs of send error",errorFlags);
+  if ( errorFlags & 2 )
+    writeLineEx(0,1,"%d informs of receive error",errorFlags);
+  if ( errorFlags & 4 )
+    writeLineEx(0,1,"%d informs of frame error",errorFlags);
+  if ( errorFlags & 8 )
+    writeLineEx(0,1,"%d informs of parity error",errorFlags);
+  if ( errorFlags & 16 )
+    writeLineEx(0,1,"%d informs of overrun error",errorFlags);
+  if ( errorFlags & 32 )
+    writeLineEx(0,1,"%d informs of receiver overrun error",errorFlags);
+  if ( errorFlags & 64 )
+    writeLineEx(0,1,"%d informs of break state",errorFlags);
+  if ( errorFlags & 128 )
+    writeLineEx(0,1,"%d informs of send timeout error",errorFlags);
+}
+
+on envVar Env_VC_ProjectDID
+{
+  if(@this==0)
+  {
+    putvalue(Env_VC_VoltageDID,""); // Manual input
+    putvalue(Env_VC_Factor,1);
+  }
+  
+  if(@this==1)
+  {
+    putvalue(Env_VC_VoltageDID,"11b5"); // BJEV
+    putvalue(Env_VC_Factor,0.1);
+  }
+  
+  if(@this==2)
+  {
+    putvalue(Env_VC_VoltageDID,"0285"); // BYD
+    putvalue(Env_VC_Factor,0.1);
+  }
+  
+  if(@this==3)
+  {
+    putvalue(Env_VC_VoltageDID,"11b5"); // CA
+    putvalue(Env_VC_Factor,0.08);
+  }
+  
+  if(@this==4)
+  {
+    putvalue(Env_VC_VoltageDID,"2a02"); // FAW
+    putvalue(Env_VC_Factor,0.08);
+  }
+  
+  if(@this==5)
+  {
+    putvalue(Env_VC_VoltageDID,"1000"); // GAC A18
+    putvalue(Env_VC_Factor,0.08);
+  }
+  
+  if(@this==6)
+  {
+    putvalue(Env_VC_VoltageDID,"1000"); // GAC A20
+    putvalue(Env_VC_Factor,0.1);
+  }
+  
+  if(@this==7)
+  {
+    putvalue(Env_VC_VoltageDID,""); // WM
+    putvalue(Env_VC_Factor,1);
+  }
+  
+  if(@this==8)
+  {
+    putvalue(Env_VC_VoltageDID,"0102"); // XPENG
+    putvalue(Env_VC_Factor,0.1);
+  }
+}
+
+// *********************************************Function for receiving the diagnostic response *********************************************//
+
+on envVar EnvRxData_CAN
+{
+  int i;
+	int RespLength;
+  int length;
+	char buffer[500];
+	char buffer2[500]="0";
+  
+  
+	strncpy(buffer2, "0", 6);
+	strncpy(MVbuffer2, "",6);
+	strncpy(Response, "",6);
+  
+    getValue(EnvRxData_CAN, ReceiveBuffer);
+		ReceiveBufferLength = getValue(EnvRxDataLen_CAN);
+    RespLength = ReceiveBufferLength;
+
+	  for(i=0; i < RespLength; i++)
+	  {
+		  ltoa(ReceiveBuffer[i], MVbuffer2, 16);
+		  if( strlen( MVbuffer2 ) == 1 )
+		  {
+			  strncat(buffer2, MVbuffer2, 4095);
+			  strncat(Response, buffer2, 4095);
+			  strncpy(buffer2, "0", 6);
+		  }
+		  else
+		  {
+			  strncat(Response, MVbuffer2, 4095);
+		  }
+	  }
+}
+
+// *********************************************Functions for reading the voltage with tollarence *********************************************//
+
+on envVar Env_VC_ReadVtgTol
+{
+  char Tempbuffer[25];
+  
+  getValue(Env_VC_VoltageDID,Tempbuffer);
+
+  if(strlen(Tempbuffer)!=4)
+  {
+     ClearOutputInfoBuffer();
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please enter Correct Voltage DID or select from the Project List");
+  }
+  else
+  {
+    if(@this==1)
+    {
+      ClearOutputInfoBuffer();
+      ReqType =0;
+      setTimer(ReadVtgTimer,1);
+    } 
+  }
+}
+
+on timer ReadVtgTimer
+{
+  Factor = getvalue(Env_VC_Factor); // Get factor 
+  getValue(Env_VC_VoltageDID,VtgDID);// fet DID for voltage read
+  strncat(ReadVtgRequest,ReadSID,elcount(ReadSID));      // cast SID + DID to create request string
+  strncat(ReadVtgRequest,VtgDID,elcount(ReadVtgRequest));
+  putvalue(EnvDirectSend,ReadVtgRequest);
+  setTimer(ReadVtgTimer1,100);
+}
+
+on timer ReadVtgTimer1
+{
+  char SID[5];
+  char Tempbuffer[25];
+  char ReceivedResponse[255]="";
+  substr_cpy(SID, Response, 0, 2, elCount(VtgByte));
+  
+  getValue(Env_VC_VoltageDID,Tempbuffer);
+  
+  if(strlen(Tempbuffer)==0)
+  {
+     ClearOutputInfoBuffer();
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please enter Correct Voltage DID or select from the Project List");
+  }
+  
+  else if(strncmp(SID, "7f",2)==0)
+  {
+    
+    ClearOutputInfoBuffer();
+    strncat(ReceivedResponse,Response,elCount(ReceivedResponse));
+    SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+    putValueToControl("VoltageControl", "Power supply Info", "NRC Received while reading voltage through diagnostic");
+    putValueToControl("VoltageControl", "Power supply Info", "\n");
+    putValueToControl("VoltageControl", "Power supply Info",ReceivedResponse);
+    strncpy(ReceivedResponse,"",elCount(ReceivedResponse));
+  }
+  else
+  {
+    substr_cpy(VtgByte, Response, 6, 2, elCount(VtgByte));
+    strncat(Temp,VtgByte,elcount(Temp));
+    ReadVoltage = (atodbl(Temp)*Factor);
+    putValue(Env_VC_ReadVtgTolDisplay,ReadVoltage);
+    //write("ReadVoltage = %4f",ReadVoltage);
+
+    if(ReqType==1)
+    {
+      setTimer(SetVtgTimer3,50);
+    }
+  
+    strncpy(Temp,"0x",elcount(Temp));
+  }
+}
+
+// *********************************************Functions for setting the voltage with tollarence*********************************************//
+
+on envVar Env_VC_SetVtgBtnTolCh1
+{
+  ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  else 
+  {
+    if(@this==1)
+    {
+      ReqType =1;
+      putvalue(Env_VC_SupplySwitch1,1);
+      settimer(SetVtgTimer,1);
+    }
+  }
+}
+
+on envVar Env_VC_SetVtgTolCh1
+{
+  ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  else 
+  {
+    ReqType =1;
+    putvalue(Env_VC_SupplySwitch1,1);
+    settimer(SetVtgTimer,1);
+  }
+}
+
+
+on envVar Env_VC_ReadVtgCh1
+{
+    ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  else
+  {
+  	if(getvalue(Env_VC_ReadVtgCh1))
+    {   
+    SendToCOM("SEL 1");
+    SendToCOM("MV?");
+		RequestType = 1;
+		
+		if ( 1==RS232Receive(COMPort,TextinByte,10 ) ) 
+		{	
+	
+		}	
+
+		putvalue(Env_VC_ReadVtgCh1,0);
+    } 
+  }
+}
+
+on envVar Env_VC_ReadCrrCh1
+{
+    ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  else
+  {
+  	if(getvalue(Env_VC_ReadCrrCh1))
+    {   
+    SendToCOM("SEL 1");
+    SendToCOM("MC?");
+		RequestType = 2;
+		
+		if ( 1==RS232Receive(COMPort,TextinByte,10 ) ) 
+		{	
+	
+		}	
+
+		putvalue(Env_VC_ReadCrrCh1,0);
+    } 
+  }
+}
+
+on envVar Env_VC_ReadVtgCh2
+{
+    ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  else
+  {
+  	if(getvalue(Env_VC_ReadVtgCh1))
+    {   
+    SendToCOM("SEL 2");
+    SendToCOM("MV?");
+		RequestType = 3;
+		
+		if ( 1==RS232Receive(COMPort,TextinByte,10 ) ) 
+		{	
+	
+		}	
+
+		putvalue(Env_VC_ReadVtgCh1,0);
+    } 
+  }
+}
+
+on envVar Env_VC_ReadCrrCh2
+{
+      ClearOutputInfoBuffer();
+  
+  if(@Env_VC_ControlType == 2)
+  {
+     SetControlColors("VoltageControl", "Radio Button 2", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     SetControlColors("VoltageControl", "Power supply Info", MakeRGB(255,0,0), MakeRGB(0,0,0));
+     putValueToControl("VoltageControl", "Power supply Info", "Please select Remote Control mode");
+  }
+  else
+  {
+  	if(getvalue(Env_VC_ReadCrrCh1))
+    {   
+    SendToCOM("SEL 2");
+    SendToCOM("MC?");
+		RequestType = 4;
+		
+		if ( 1==RS232Receive(COMPort,TextinByte,10 ) ) 
+		{	
+	
+		}	
+
+		putvalue(Env_VC_ReadCrrCh1,0);
+    } 
+  }
+}
+
+on timer SetVtgTimer
+{
+  getValue(Env_VC_VoltageDID,VtgDID);// get DID for viltage read
+  strncat(ReadVtgRequest,ReadSID,elcount(ReadSID));      // cast SID + DID to create request string
+  strncat(ReadVtgRequest,VtgDID,elcount(ReadVtgRequest));
+  UserReqVoltage = getValue(Env_VC_SetVtgTolCh1);
+  TempVoltage = UserReqVoltage;
+  setTimer(SetVtgTimer1,1);
+}
+ 
+on timer SetVtgTimer1
+{
+  snprintf(Commandstring, 15, "V %.3f",TempVoltage);
+  SendToCOM("SEL 1");
+  SendtoCOM(Commandstring);
+  setTimer(SetVtgTimer2,200); 
+}
+
+on timer SetVtgTimer2
+{ 
+   setTimer(ReadVtgTimer,100);
+}
+
+on timer SetVtgTimer3
+{
+  char PowerSupplyVoltage[250];
+  char ECUInternalVoltage[250];
+  
+  if(ReadVoltage!=0)
+  {
+    if(ReadVoltage == UserReqVoltage)
+      {     
+        ReqType =0;
+        SetControlColors("VoltageControl", "Power supply Info", MakeRGB(0,255,0), MakeRGB(0,0,0));
+        snprintf(PowerSupplyVoltage, elCount(PowerSupplyVoltage), "Power Supply Voltage = %.2f Volts",TempVoltage);
+        snprintf(ECUInternalVoltage, elCount(PowerSupplyVoltage), "ECU Internal Voltage = %.2f Volts",ReadVoltage);
+        putValueToControl("VoltageControl", "Power supply Info", PowerSupplyVoltage); 
+        putValueToControl("VoltageControl", "Power supply Info", "\n");
+        putValueToControl("VoltageControl", "Power supply Info", ECUInternalVoltage); 
+      }
+    else if((ReadVoltage > UserReqVoltage) && (ReadVoltage < (UserReqVoltage+0.099)))
+      {     
+        ReqType =0;
+        SetControlColors("VoltageControl", "Power supply Info", MakeRGB(0,255,0), MakeRGB(0,0,0));
+        snprintf(PowerSupplyVoltage, elCount(PowerSupplyVoltage), "Power Supply Voltage = %.2f Volts",TempVoltage);
+        snprintf(ECUInternalVoltage, elCount(PowerSupplyVoltage), "ECU Internal Voltage = %.2f Volts",ReadVoltage);
+        putValueToControl("VoltageControl", "Power supply Info", PowerSupplyVoltage); 
+        putValueToControl("VoltageControl", "Power supply Info", "\n");
+        putValueToControl("VoltageControl", "Power supply Info", ECUInternalVoltage); 
+      }
+    else if(UserReqVoltage > ReadVoltage)
+      {
+        TempVoltage = TempVoltage + 0.1;
+        setTimer(SetVtgTimer1,50);
+      }
+    else if(UserReqVoltage < ReadVoltage)
+      {
+        TempVoltage = TempVoltage - 0.1;
+        setTimer(SetVtgTimer1,50);
+      }
+  }
+
+}
+
+ClearOutputInfoBuffer()
+{
+  DeleteControlContent("VoltageControl", "Power supply Info");
+}

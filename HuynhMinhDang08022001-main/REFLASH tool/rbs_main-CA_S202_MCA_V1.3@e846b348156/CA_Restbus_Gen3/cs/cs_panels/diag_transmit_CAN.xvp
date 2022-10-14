@@ -1,0 +1,872 @@
+<?xml version="1.0"?>
+<Panel Type="Vector.CANalyzer.Panels.PanelSerializer, Vector.CANalyzer.Panels.Serializer, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null">
+  <Object Type="Vector.CANalyzer.Panels.Runtime.Panel, Vector.CANalyzer.Panels.Common, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="Panel" Children="Controls" ControlName="CAN_Diagnostics">
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl3" Children="Controls" ControlName="ElemST">
+      <Property Name="Name">StaticTextControl3</Property>
+      <Property Name="Size">108, 14</Property>
+      <Property Name="Location">312, 223</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Courier New, 8pt</Property>
+      <Property Name="Text">Error free switch</Property>
+      <Property Name="ForeColor">Black</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl1" ControlName="SwitchControl35">
+      <Property Name="Name">SwitchControl1</Property>
+      <Property Name="Size">33, 40</Property>
+      <Property Name="Location">332, 246</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">Left</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+      <Property Name="SwitchValuesRx">1;2;0;1</Property>
+      <Property Name="SwitchValuesVT">1;2;0/Lower/0;1/Lower/1</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag;;;Env_error_free_switch;1;;;-1;;;</Property>
+      <Property Name="TabIndex">78</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl7" Children="Controls" ControlName="ElemST">
+      <Property Name="Name">StaticTextControl7</Property>
+      <Property Name="Size">27, 16</Property>
+      <Property Name="Location">428, 113</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt</Property>
+      <Property Name="TextAlign">TopCenter</Property>
+      <Property Name="Text">dec</Property>
+      <Property Name="ForeColor">Black</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl8" Children="Controls" ControlName="ElemST">
+      <Property Name="Name">StaticTextControl8</Property>
+      <Property Name="Size">26, 16</Property>
+      <Property Name="Location">428, 93</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt</Property>
+      <Property Name="TextAlign">TopCenter</Property>
+      <Property Name="Text">hex</Property>
+      <Property Name="ForeColor">Black</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl9" Children="Controls" ControlName="EnvVar:EnvDtcNr">
+      <Property Name="Name">TextBoxControl9</Property>
+      <Property Name="Size">70, 21</Property>
+      <Property Name="Location">358, 111</Property>
+      <Property Name="AlarmUpperTextColor">Black</Property>
+      <Property Name="BoxForeColor">Black</Property>
+      <Property Name="AlarmLowerBkgColor">Blue</Property>
+      <Property Name="BoxTextAlign">Right</Property>
+      <Property Name="TextBackColor">White</Property>
+      <Property Name="ValueDisplay">Decimal</Property>
+      <Property Name="AlarmUpperBkgColor">Red</Property>
+      <Property Name="AlarmLowerTextColor">Black</Property>
+      <Property Name="BoxFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmUpperFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmLowerFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmGeneralSettings">1;0;0;0</Property>
+      <Property Name="DisplayLabel">Hide</Property>
+      <Property Name="DescriptionText">EnvDtcNr_dec_2:</Property>
+      <Property Name="BoxBackColor">White</Property>
+      <Property Name="DescriptionSize">0, 0</Property>
+      <Property Name="UsedValueTable">PhysicalValue</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvDtcNr_dec_2;1;;;-1;;;</Property>
+      <Property Name="TabIndex">9</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl10" Children="Controls" ControlName="TextBoxControl10">
+      <Property Name="Name">TextBoxControl10</Property>
+      <Property Name="Size">356, 20</Property>
+      <Property Name="Location">471, 508</Property>
+      <Property Name="AlarmUpperTextColor">Black</Property>
+      <Property Name="BoxForeColor">Black</Property>
+      <Property Name="AlarmLowerBkgColor">Blue</Property>
+      <Property Name="TextBackColor">White</Property>
+      <Property Name="ValueDisplay">Text</Property>
+      <Property Name="AlarmUpperBkgColor">Red</Property>
+      <Property Name="AlarmLowerTextColor">Black</Property>
+      <Property Name="BoxFont">Arial, 8pt</Property>
+      <Property Name="AlarmUpperFont">Arial, 8pt</Property>
+      <Property Name="AlarmLowerFont">Arial, 8pt</Property>
+      <Property Name="AlarmGeneralSettings">1;2;0;0</Property>
+      <Property Name="DisplayLabel">Hide</Property>
+      <Property Name="DescriptionText">EnvDirectReceive_1:</Property>
+      <Property Name="BoxBackColor">White</Property>
+      <Property Name="DescriptionSize">0, 0</Property>
+      <Property Name="UsedValueTable">PhysicalValue</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvDirectReceive_1;4;;;-1;;;</Property>
+      <Property Name="TabIndex">10</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl11" Children="Controls" ControlName="ElemST">
+      <Property Name="Name">StaticTextControl11</Property>
+      <Property Name="Size">171, 15</Property>
+      <Property Name="Location">471, 492</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 8pt</Property>
+      <Property Name="Text">EnvDirectReceive (can be copied)</Property>
+      <Property Name="ForeColor">Black</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl16" Children="Controls" ControlName="EnvDevLoginValue">
+      <Property Name="Name">TextBoxControl16</Property>
+      <Property Name="Size">0, 21</Property>
+      <Property Name="Location">753, 210</Property>
+      <Property Name="AlarmUpperTextColor">Black</Property>
+      <Property Name="BoxForeColor">Black</Property>
+      <Property Name="AlarmLowerBkgColor">Blue</Property>
+      <Property Name="BoxTextAlign">Right</Property>
+      <Property Name="TextBackColor">White</Property>
+      <Property Name="ValueDisplay">Hexadecimal</Property>
+      <Property Name="AlarmUpperBkgColor">Red</Property>
+      <Property Name="AlarmLowerTextColor">Black</Property>
+      <Property Name="BoxFont">Courier New, 9pt</Property>
+      <Property Name="AlarmUpperFont">Courier New, 9pt</Property>
+      <Property Name="AlarmLowerFont">Courier New, 9pt</Property>
+      <Property Name="AlarmGeneralSettings">1;0;0;0</Property>
+      <Property Name="DisplayLabel">Hide</Property>
+      <Property Name="DescriptionText">EnvDevLoginValue:</Property>
+      <Property Name="BoxBackColor">White</Property>
+      <Property Name="DescriptionSize">0, 0</Property>
+      <Property Name="UsedValueTable">PhysicalValue</Property>
+      <Property Name="SymbolConfiguration">1;1;;;;EnvDevLoginValue</Property>
+      <Property Name="TabIndex">16</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl28" Children="Controls" ControlName="EnvVar:ClearBuffer_CAN">
+      <Property Name="Name">ButtonControl28</Property>
+      <Property Name="Size">98, 22</Property>
+      <Property Name="Location">728, 487</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="Text">Clear Buffer</Property>
+      <Property Name="UseTransparentColor">False</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvClearBuffer_CAN_1;1;;;-1;;;</Property>
+      <Property Name="TabIndex">28</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl29" Children="Controls" ControlName="ElemST">
+      <Property Name="Name">StaticTextControl29</Property>
+      <Property Name="Size">25, 15</Property>
+      <Property Name="Location">551, 101</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="Text">Nr.:</Property>
+      <Property Name="ForeColor">Black</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl30" Children="Controls" ControlName="ElemST">
+      <Property Name="Name">StaticTextControl30</Property>
+      <Property Name="Size">47, 15</Property>
+      <Property Name="Location">458, 100</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="Text">Status:</Property>
+      <Property Name="ForeColor">Black</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl31" Children="Controls" ControlName="EnvVar:EnvClearErrors">
+      <Property Name="Name">ButtonControl31</Property>
+      <Property Name="Size">95, 22</Property>
+      <Property Name="Location">323, 63</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="Text">Clear DTCs</Property>
+      <Property Name="UseTransparentColor">False</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvClearErrors_2;1;;;-1;;;</Property>
+      <Property Name="TabIndex">31</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl32" Children="Controls" ControlName="ElemST">
+      <Property Name="Name">StaticTextControl32</Property>
+      <Property Name="Size">98, 15</Property>
+      <Property Name="Location">584, 36</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Courier New, 8pt</Property>
+      <Property Name="Text">Diag. Session</Property>
+      <Property Name="ForeColor">Black</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl33" ControlName="SwitchControl33">
+      <Property Name="Name">SwitchControl33</Property>
+      <Property Name="Size">33, 40</Property>
+      <Property Name="Location">678, 32</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">Left</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+      <Property Name="SwitchValuesRx">1;2;0;1</Property>
+      <Property Name="SwitchValuesVT">1;2;0/Lower/0;1/Lower/1</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvDiagSession_2;1;;;-1;;;</Property>
+      <Property Name="TabIndex">33</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl34" Children="Controls" ControlName="ElemST">
+      <Property Name="Name">StaticTextControl34</Property>
+      <Property Name="Size">98, 15</Property>
+      <Property Name="Location">449, 36</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Courier New, 8pt</Property>
+      <Property Name="Text">TesterPresent</Property>
+      <Property Name="ForeColor">Black</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl35" ControlName="SwitchControl35">
+      <Property Name="Name">SwitchControl35</Property>
+      <Property Name="Size">33, 40</Property>
+      <Property Name="Location">544, 32</Property>
+      <Property Name="StateCnt">2</Property>
+      <Property Name="Activation">Left</Property>
+      <Property Name="SwitchValues">1;2;0;1</Property>
+      <Property Name="SwitchValuesRx">1;2;0;1</Property>
+      <Property Name="SwitchValuesVT">1;2;0/Lower/0;1/Lower/1</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvTesterPresentOnOff_2;1;;;-1;;;</Property>
+      <Property Name="TabIndex">35</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.HexEditorControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="HexEditorControl36" Children="Controls" ControlName="EnvVar:EnvEnvDataDisplay">
+      <Property Name="Name">HexEditorControl36</Property>
+      <Property Name="Size">206, 30</Property>
+      <Property Name="Location">323, 155</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Courier New, 9pt</Property>
+      <Property Name="ForeColor">Black</Property>
+      <Property Name="ColumnCount">34</Property>
+      <Property Name="ViewLayout">OnlyTextfield</Property>
+      <Property Name="SymbolDataType">String</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvEnvDataDisplay_2;4;;;-1;;;</Property>
+      <Property Name="TabIndex">36</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl37" Children="Controls" ControlName="EnvVar:EnvDtcName">
+      <Property Name="Name">TextBoxControl37</Property>
+      <Property Name="Size">395, 20</Property>
+      <Property Name="Location">323, 133</Property>
+      <Property Name="AlarmUpperTextColor">Black</Property>
+      <Property Name="BoxForeColor">Black</Property>
+      <Property Name="AlarmLowerBkgColor">Blue</Property>
+      <Property Name="BoxTextAlign">Right</Property>
+      <Property Name="TextBackColor">White</Property>
+      <Property Name="ValueDisplay">Text</Property>
+      <Property Name="AlarmUpperBkgColor">Red</Property>
+      <Property Name="AlarmLowerTextColor">Black</Property>
+      <Property Name="BoxFont">Arial, 8pt</Property>
+      <Property Name="AlarmUpperFont">Arial, 8pt</Property>
+      <Property Name="AlarmLowerFont">Arial, 8pt</Property>
+      <Property Name="AlarmGeneralSettings">1;0;0;0</Property>
+      <Property Name="DisplayLabel">Hide</Property>
+      <Property Name="DescriptionText">EnvDtcName_2:</Property>
+      <Property Name="BoxBackColor">White</Property>
+      <Property Name="DescriptionSize">0, 0</Property>
+      <Property Name="UsedValueTable">PhysicalValue</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvDtcName_2;4;;;-1;;;</Property>
+      <Property Name="TabIndex">37</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl38" Children="Controls" ControlName="EnvVar:EnvDtcState">
+      <Property Name="Name">TextBoxControl38</Property>
+      <Property Name="Size">35, 21</Property>
+      <Property Name="Location">502, 99</Property>
+      <Property Name="AlarmUpperTextColor">Black</Property>
+      <Property Name="BoxForeColor">Black</Property>
+      <Property Name="AlarmLowerBkgColor">Blue</Property>
+      <Property Name="BoxTextAlign">Right</Property>
+      <Property Name="TextBackColor">White</Property>
+      <Property Name="ValueDisplay">Text</Property>
+      <Property Name="AlarmUpperBkgColor">Red</Property>
+      <Property Name="AlarmLowerTextColor">Black</Property>
+      <Property Name="BoxFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmUpperFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmLowerFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmGeneralSettings">1;0;0;0</Property>
+      <Property Name="DisplayLabel">Hide</Property>
+      <Property Name="DescriptionText">EnvDtcState_2:</Property>
+      <Property Name="BoxBackColor">White</Property>
+      <Property Name="DescriptionSize">0, 0</Property>
+      <Property Name="UsedValueTable">PhysicalValue</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvDtcState_2;4;;;-1;;;</Property>
+      <Property Name="TabIndex">38</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl39" Children="Controls" ControlName="EnvVar:EnvDtcPosition">
+      <Property Name="Name">TextBoxControl39</Property>
+      <Property Name="Size">45, 21</Property>
+      <Property Name="Location">574, 99</Property>
+      <Property Name="AlarmUpperTextColor">Black</Property>
+      <Property Name="BoxForeColor">Black</Property>
+      <Property Name="AlarmLowerBkgColor">Blue</Property>
+      <Property Name="BoxTextAlign">Right</Property>
+      <Property Name="TextBackColor">White</Property>
+      <Property Name="ValueDisplay">Text</Property>
+      <Property Name="AlarmUpperBkgColor">Red</Property>
+      <Property Name="AlarmLowerTextColor">Black</Property>
+      <Property Name="BoxFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmUpperFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmLowerFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmGeneralSettings">1;0;0;0</Property>
+      <Property Name="DisplayLabel">Hide</Property>
+      <Property Name="DescriptionText">EnvDtcPosition_2:</Property>
+      <Property Name="BoxBackColor">White</Property>
+      <Property Name="DescriptionSize">0, 0</Property>
+      <Property Name="UsedValueTable">PhysicalValue</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvDtcPosition_2;4;;;-1;;;</Property>
+      <Property Name="TabIndex">39</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl40" Children="Controls" ControlName="EnvVar:EnvDtcNr">
+      <Property Name="Name">TextBoxControl40</Property>
+      <Property Name="Size">70, 21</Property>
+      <Property Name="Location">358, 91</Property>
+      <Property Name="AlarmUpperTextColor">Black</Property>
+      <Property Name="BoxForeColor">Black</Property>
+      <Property Name="AlarmLowerBkgColor">Blue</Property>
+      <Property Name="BoxTextAlign">Right</Property>
+      <Property Name="TextBackColor">White</Property>
+      <Property Name="ValueDisplay">Text</Property>
+      <Property Name="AlarmUpperBkgColor">Red</Property>
+      <Property Name="AlarmLowerTextColor">Black</Property>
+      <Property Name="BoxFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmUpperFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmLowerFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmGeneralSettings">1;0;0;0</Property>
+      <Property Name="DisplayLabel">Hide</Property>
+      <Property Name="DescriptionText">EnvDtcNr_2:</Property>
+      <Property Name="BoxBackColor">White</Property>
+      <Property Name="DescriptionSize">0, 0</Property>
+      <Property Name="UsedValueTable">PhysicalValue</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvDtcNr_2;4;;;-1;;;</Property>
+      <Property Name="TabIndex">40</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl41" Children="Controls" ControlName="EnvVar:EnvDtcCountUp">
+      <Property Name="Name">ButtonControl41</Property>
+      <Property Name="Size">45, 22</Property>
+      <Property Name="Location">627, 98</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="Text">Up</Property>
+      <Property Name="UseTransparentColor">False</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvDtcCountUp_2;1;;;-1;;;</Property>
+      <Property Name="TabIndex">41</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl42" Children="Controls" ControlName="EnvVar:EnvDtcCountDown">
+      <Property Name="Name">ButtonControl42</Property>
+      <Property Name="Size">54, 22</Property>
+      <Property Name="Location">676, 98</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="Text">Down</Property>
+      <Property Name="UseTransparentColor">False</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvDtcCountDown_2;1;;;-1;;;</Property>
+      <Property Name="TabIndex">42</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl43" Children="Controls" ControlName="EnvVar:EnvReadPassiveErrors">
+      <Property Name="Name">ButtonControl43</Property>
+      <Property Name="Size">100, 22</Property>
+      <Property Name="Location">323, 41</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="Text">Passive DTCs</Property>
+      <Property Name="UseTransparentColor">False</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvReadPassiveErrors_2;1;;;-1;;;</Property>
+      <Property Name="TabIndex">43</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl44" Children="Controls" ControlName="EnvVar:EnvReadErrors">
+      <Property Name="Name">ButtonControl44</Property>
+      <Property Name="Size">95, 22</Property>
+      <Property Name="Location">323, 19</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="Text">Read DTCs</Property>
+      <Property Name="UseTransparentColor">False</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvReadErrors_2;1;;;-1;;;</Property>
+      <Property Name="TabIndex">44</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl45" Children="Controls" ControlName="ElemST">
+      <Property Name="Name">StaticTextControl45</Property>
+      <Property Name="Size">33, 16</Property>
+      <Property Name="Location">323, 103</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="TextAlign">TopCenter</Property>
+      <Property Name="Text">DTC:</Property>
+      <Property Name="ForeColor">Black</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl46" Children="Controls" ControlName="EnvVar:EnvRespTime">
+      <Property Name="Name">TextBoxControl46</Property>
+      <Property Name="Size">75, 21</Property>
+      <Property Name="Location">184, 510</Property>
+      <Property Name="AlarmUpperTextColor">Black</Property>
+      <Property Name="BoxForeColor">Black</Property>
+      <Property Name="AlarmLowerBkgColor">Blue</Property>
+      <Property Name="BoxTextAlign">Right</Property>
+      <Property Name="TextBackColor">White</Property>
+      <Property Name="ValueDisplay">Double</Property>
+      <Property Name="AlarmUpperBkgColor">Red</Property>
+      <Property Name="AlarmLowerTextColor">Black</Property>
+      <Property Name="BoxFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmUpperFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmLowerFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmGeneralSettings">1;0;0;0</Property>
+      <Property Name="DisplayLabel">Hide</Property>
+      <Property Name="DescriptionText">EnvRespTime_CAN_1:</Property>
+      <Property Name="BoxBackColor">White</Property>
+      <Property Name="DescriptionSize">0, 0</Property>
+      <Property Name="UsedValueTable">PhysicalValue</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvRespTime_CAN_1;2;;;-1;;;</Property>
+      <Property Name="TabIndex">46</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl47" Children="Controls" ControlName="ElemST">
+      <Property Name="Name">StaticTextControl47</Property>
+      <Property Name="Size">98, 15</Property>
+      <Property Name="Location">87, 512</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="Text">Response Time:</Property>
+      <Property Name="ForeColor">Black</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl48" Children="Controls" ControlName="EnvVar:EnvReqStatus">
+      <Property Name="Name">TextBoxControl48</Property>
+      <Property Name="Size">354, 21</Property>
+      <Property Name="Location">16, 531</Property>
+      <Property Name="AlarmUpperTextColor">Black</Property>
+      <Property Name="BoxForeColor">Blue</Property>
+      <Property Name="AlarmLowerBkgColor">Blue</Property>
+      <Property Name="TextBackColor">White</Property>
+      <Property Name="ValueDisplay">Text</Property>
+      <Property Name="AlarmUpperBkgColor">Red</Property>
+      <Property Name="AlarmLowerTextColor">Black</Property>
+      <Property Name="BoxFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmUpperFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmLowerFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmGeneralSettings">1;0;0;0</Property>
+      <Property Name="DisplayLabel">Hide</Property>
+      <Property Name="DescriptionText">EnvReqStatus_CAN_1:</Property>
+      <Property Name="BoxBackColor">White</Property>
+      <Property Name="DescriptionSize">0, 0</Property>
+      <Property Name="UsedValueTable">PhysicalValue</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvReqStatus_CAN_1;4;;;-1;;;</Property>
+      <Property Name="TabIndex">48</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl50" Children="Controls" ControlName="ElemST">
+      <Property Name="Name">StaticTextControl50</Property>
+      <Property Name="Size">49, 15</Property>
+      <Property Name="Location">272, 512</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="Text">Rx Len:</Property>
+      <Property Name="ForeColor">Black</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl51" Children="Controls" ControlName="EnvVar:EnvRxDataLen">
+      <Property Name="Name">TextBoxControl51</Property>
+      <Property Name="Size">52, 21</Property>
+      <Property Name="Location">319, 510</Property>
+      <Property Name="AlarmUpperTextColor">Black</Property>
+      <Property Name="BoxForeColor">Black</Property>
+      <Property Name="AlarmLowerBkgColor">Blue</Property>
+      <Property Name="BoxTextAlign">Right</Property>
+      <Property Name="TextBackColor">White</Property>
+      <Property Name="ValueDisplay">Decimal</Property>
+      <Property Name="AlarmUpperBkgColor">Red</Property>
+      <Property Name="AlarmLowerTextColor">Black</Property>
+      <Property Name="BoxFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmUpperFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmLowerFont">Arial, 9pt, style=Bold</Property>
+      <Property Name="AlarmGeneralSettings">1;0;0;0</Property>
+      <Property Name="DisplayLabel">Hide</Property>
+      <Property Name="DescriptionText">EnvRxDataLen_CAN_1:</Property>
+      <Property Name="BoxBackColor">White</Property>
+      <Property Name="DescriptionSize">0, 0</Property>
+      <Property Name="UsedValueTable">PhysicalValue</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvRxDataLen_CAN_1;1;;;-1;;;</Property>
+      <Property Name="TabIndex">51</Property>
+      <Property Name="ReadOnlyControl">True</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl52" Children="Controls" ControlName="ElemST">
+      <Property Name="Name">StaticTextControl52</Property>
+      <Property Name="Size">83, 15</Property>
+      <Property Name="Location">10, 15</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="Text">Identifikation:</Property>
+      <Property Name="ForeColor">Black</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.HexEditorControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="HexEditorControl53" Children="Controls" ControlName="EnvVar:EnvRxData">
+      <Property Name="Name">HexEditorControl53</Property>
+      <Property Name="Size">358, 125</Property>
+      <Property Name="Location">471, 366</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt</Property>
+      <Property Name="ForeColor">Black</Property>
+      <Property Name="ColumnCount">10</Property>
+      <Property Name="SymbolDataType">ByteArray</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvRxData_CAN_1;8;;;-1;;;</Property>
+      <Property Name="TabIndex">53</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl54" Children="Controls" ControlName="EnvVar:EnvSendBuffer_1">
+      <Property Name="Name">ButtonControl54</Property>
+      <Property Name="Size">72, 22</Property>
+      <Property Name="Location">243, 118</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold</Property>
+      <Property Name="Text">Transmit</Property>
+      <Property Name="UseTransparentColor">False</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvSendBuffer_2;1;;;-1;;;</Property>
+      <Property Name="TabIndex">54</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.HexEditorControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="HexEditorControl55" Children="Controls" ControlName="EnvVar:EnvTxData_1">
+      <Property Name="Name">HexEditorControl55</Property>
+      <Property Name="Size">209, 65</Property>
+      <Property Name="Location">10, 120</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt</Property>
+      <Property Name="ForeColor">Black</Property>
+      <Property Name="ColumnCount">10</Property>
+      <Property Name="ViewLayout">OnlyHexfield</Property>
+      <Property Name="SymbolDataType">ByteArray</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvTxData_2;8;;;-1;;;</Property>
+      <Property Name="TabIndex">55</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.ComboBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ComboBoxControl56" Children="Controls" ControlName="ComboBoxControl56">
+      <Property Name="Name">ComboBoxControl56</Property>
+      <Property Name="Size">290, 21</Property>
+      <Property Name="Location">10, 30</Property>
+      <Property Name="DropDownWidth">290</Property>
+      <Property Name="BackColor">Window</Property>
+      <Property Name="ForeColor">WindowText</Property>
+      <Property Name="TextBackColor">White</Property>
+      <Property Name="DisplayLabel">Hide</Property>
+      <Property Name="DescriptionText">EnvDiagTxDefaultValues_2:</Property>
+      <Property Name="UsedValueTable">PhysicalValue</Property>
+      <Property Name="DescriptionSize">0, 0</Property>
+      <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvDiagTxDefaultValues_2;1;;;-1;;;</Property>
+      <Property Name="TabIndex">56</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl57" Children="Controls" ControlName="ElemFrame">
+      <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl49" Children="Controls" ControlName="ElemST">
+        <Property Name="Name">StaticTextControl49</Property>
+        <Property Name="Size">47, 15</Property>
+        <Property Name="Location">15, 15</Property>
+        <Property Name="BackColor">White</Property>
+        <Property Name="Font">Arial, 9pt, style=Bold</Property>
+        <Property Name="Text">Status:</Property>
+        <Property Name="ForeColor">Black</Property>
+      </Object>
+      <Property Name="Name">GroupBoxControl57</Property>
+      <Property Name="Size">366, 60</Property>
+      <Property Name="Location">12, 496</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold, Italic</Property>
+      <Property Name="Text">Status CAN</Property>
+      <Property Name="ForeColor">Blue</Property>
+      <Property Name="TabIndex">57</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl58" Children="Controls" ControlName="ElemFrame">
+      <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl5" Children="Controls" ControlName="ElemST">
+        <Property Name="Name">StaticTextControl5</Property>
+        <Property Name="Size">220, 15</Property>
+        <Property Name="Location">8, 20</Property>
+        <Property Name="BackColor">White</Property>
+        <Property Name="Font">Arial, 8pt</Property>
+        <Property Name="Text">EnvFuncRequest (can be pasted) + ENTER</Property>
+        <Property Name="ForeColor">Black</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl6" Children="Controls" ControlName="EnvVar:EnvFuncRequest">
+        <Property Name="Name">TextBoxControl6</Property>
+        <Property Name="Size">259, 21</Property>
+        <Property Name="Location">8, 38</Property>
+        <Property Name="AlarmUpperTextColor">Black</Property>
+        <Property Name="BoxForeColor">Black</Property>
+        <Property Name="AlarmLowerBkgColor">Blue</Property>
+        <Property Name="TextBackColor">White</Property>
+        <Property Name="ValueDisplay">Text</Property>
+        <Property Name="AlarmUpperBkgColor">Red</Property>
+        <Property Name="AlarmLowerTextColor">Black</Property>
+        <Property Name="BoxFont">Microsoft Sans Serif, 9pt, style=Bold</Property>
+        <Property Name="AlarmUpperFont">Microsoft Sans Serif, 9pt, style=Bold</Property>
+        <Property Name="AlarmLowerFont">Microsoft Sans Serif, 9pt, style=Bold</Property>
+        <Property Name="AlarmGeneralSettings">1;0;0;0</Property>
+        <Property Name="DisplayLabel">Hide</Property>
+        <Property Name="DescriptionText">EnvFuncRequest_1:</Property>
+        <Property Name="BoxBackColor">White</Property>
+        <Property Name="DescriptionSize">0, 0</Property>
+        <Property Name="UsedValueTable">PhysicalValue</Property>
+        <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvFuncRequest_1;4;;;-1;;;</Property>
+        <Property Name="TabIndex">6</Property>
+      </Object>
+      <Property Name="Name">GroupBoxControl58</Property>
+      <Property Name="Size">280, 65</Property>
+      <Property Name="Location">469, 208</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold, Italic</Property>
+      <Property Name="Text">Functional Addressing</Property>
+      <Property Name="ForeColor">Blue</Property>
+      <Property Name="TabIndex">58</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl59" Children="Controls" ControlName="DTCSearch">
+      <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl24" Children="Controls" ControlName="ElemST">
+        <Property Name="Name">StaticTextControl24</Property>
+        <Property Name="Size">111, 15</Property>
+        <Property Name="Location">4, 20</Property>
+        <Property Name="BackColor">White</Property>
+        <Property Name="Font">Arial, 9pt, style=Bold</Property>
+        <Property Name="Text">look for DTC (hex):</Property>
+        <Property Name="ForeColor">Black</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl23" Children="Controls" ControlName="EnvVar:EnvDtcNr">
+        <Property Name="Name">TextBoxControl23</Property>
+        <Property Name="Size">100, 21</Property>
+        <Property Name="Location">116, 15</Property>
+        <Property Name="AlarmUpperTextColor">Black</Property>
+        <Property Name="BoxForeColor">Black</Property>
+        <Property Name="AlarmLowerBkgColor">Blue</Property>
+        <Property Name="BoxTextAlign">Right</Property>
+        <Property Name="TextBackColor">White</Property>
+        <Property Name="ValueDisplay">Text</Property>
+        <Property Name="AlarmUpperBkgColor">Red</Property>
+        <Property Name="AlarmLowerTextColor">Black</Property>
+        <Property Name="BoxFont">Arial, 9pt, style=Bold</Property>
+        <Property Name="AlarmUpperFont">Arial, 9pt, style=Bold</Property>
+        <Property Name="AlarmLowerFont">Arial, 9pt, style=Bold</Property>
+        <Property Name="AlarmGeneralSettings">1;0;0;0</Property>
+        <Property Name="DisplayLabel">Hide</Property>
+        <Property Name="DescriptionText">EnvDtcLookForInEm:</Property>
+        <Property Name="BoxBackColor">White</Property>
+        <Property Name="DescriptionSize">0, 0</Property>
+        <Property Name="UsedValueTable">PhysicalValue</Property>
+        <Property Name="SymbolConfiguration">1;1;;;;EnvDtcLookForInEm</Property>
+        <Property Name="TabIndex">23</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl22" Children="Controls" ControlName="ElemST">
+        <Property Name="Name">StaticTextControl22</Property>
+        <Property Name="Size">90, 15</Property>
+        <Property Name="Location">4, 40</Property>
+        <Property Name="BackColor">White</Property>
+        <Property Name="Font">Arial, 9pt, style=Bold</Property>
+        <Property Name="Text">DTC found :</Property>
+        <Property Name="ForeColor">Black</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl21" Children="Controls" ControlName="EnvVar:EnvDtc">
+        <Property Name="Name">TextBoxControl21</Property>
+        <Property Name="Size">45, 21</Property>
+        <Property Name="Location">116, 38</Property>
+        <Property Name="AlarmUpperTextColor">Black</Property>
+        <Property Name="BoxForeColor">Black</Property>
+        <Property Name="AlarmLowerBkgColor">Blue</Property>
+        <Property Name="BoxTextAlign">Right</Property>
+        <Property Name="TextBackColor">White</Property>
+        <Property Name="ValueDisplay">Decimal</Property>
+        <Property Name="AlarmUpperBkgColor">Red</Property>
+        <Property Name="AlarmLowerTextColor">Black</Property>
+        <Property Name="BoxFont">Arial, 9pt, style=Bold</Property>
+        <Property Name="AlarmUpperFont">Arial, 9pt, style=Bold</Property>
+        <Property Name="AlarmLowerFont">Arial, 9pt, style=Bold</Property>
+        <Property Name="AlarmGeneralSettings">1;0;0;0</Property>
+        <Property Name="DisplayLabel">Hide</Property>
+        <Property Name="DescriptionText">EnvDtcInEmPresent:</Property>
+        <Property Name="BoxBackColor">White</Property>
+        <Property Name="DescriptionSize">0, 0</Property>
+        <Property Name="UsedValueTable">PhysicalValue</Property>
+        <Property Name="SymbolConfiguration">1;1;;;;EnvDtcInEmPresent</Property>
+        <Property Name="TabIndex">21</Property>
+        <Property Name="ReadOnlyControl">True</Property>
+      </Object>
+      <Property Name="Name">GroupBoxControl59</Property>
+      <Property Name="Size">285, 62</Property>
+      <Property Name="Location">468, 278</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold, Italic</Property>
+      <Property Name="Text">Search for DTC</Property>
+      <Property Name="ForeColor">Blue</Property>
+      <Property Name="TabIndex">59</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl60" ControlName="ElemFrame">
+      <Property Name="Name">GroupBoxControl60</Property>
+      <Property Name="Size">365, 194</Property>
+      <Property Name="Location">468, 344</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold, Italic</Property>
+      <Property Name="Text">Direct Rx</Property>
+      <Property Name="ForeColor">Blue</Property>
+      <Property Name="TabIndex">60</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl61" Children="Controls" ControlName="ElemFrame">
+      <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl3" Children="Controls" ControlName="ButtonControl1">
+        <Property Name="Name">ButtonControl3</Property>
+        <Property Name="Size">145, 22</Property>
+        <Property Name="Location">4, 53</Property>
+        <Property Name="Font">Arial, 9pt, style=Bold</Property>
+        <Property Name="Text">Security Boot Unlock</Property>
+        <Property Name="UseTransparentColor">False</Property>
+        <Property Name="SymbolConfiguration">5;1;env_vars_diag_CAN;;;EnvLogInLevel2_1;1;;;-1;;;</Property>
+        <Property Name="TabIndex">2</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl1" Children="Controls" ControlName="ButtonControl1">
+        <Property Name="Name">ButtonControl1</Property>
+        <Property Name="Size">145, 22</Property>
+        <Property Name="Location">4, 20</Property>
+        <Property Name="Font">Arial, 9pt, style=Bold</Property>
+        <Property Name="Text">Security Unlock 1</Property>
+        <Property Name="UseTransparentColor">False</Property>
+        <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvLogInLevel1_1;1;;;-1;;;</Property>
+        <Property Name="TabIndex">1</Property>
+      </Object>
+      <Property Name="Name">GroupBoxControl61</Property>
+      <Property Name="Size">194, 105</Property>
+      <Property Name="Location">8, 198</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold, Italic</Property>
+      <Property Name="Text">Login</Property>
+      <Property Name="ForeColor">Blue</Property>
+      <Property Name="TabIndex">61</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl62" ControlName="ElemFrame">
+      <Property Name="Name">GroupBoxControl62</Property>
+      <Property Name="Size">275, 60</Property>
+      <Property Name="Location">442, 18</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Courier New, 9pt</Property>
+      <Property Name="Text">
+      </Property>
+      <Property Name="ForeColor">Black</Property>
+      <Property Name="TabIndex">62</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl63" ControlName="ElemFrame">
+      <Property Name="Name">GroupBoxControl63</Property>
+      <Property Name="Size">428, 190</Property>
+      <Property Name="Location">315, 0</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold, Italic</Property>
+      <Property Name="Text">DTCs</Property>
+      <Property Name="ForeColor">Blue</Property>
+      <Property Name="TabIndex">63</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl64" Children="Controls" ControlName="ElemFrame">
+      <Object Type="Vector.CANalyzer.Panels.Design.HexEditorControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="HexEditorControl0" Children="Controls" ControlName="HexEditorControl0">
+        <Property Name="Name">HexEditorControl0</Property>
+        <Property Name="Size">283, 25</Property>
+        <Property Name="Location">4, 84</Property>
+        <Property Name="BackColor">White</Property>
+        <Property Name="Font">Courier New, 9pt</Property>
+        <Property Name="ForeColor">Black</Property>
+        <Property Name="ColumnCount">35</Property>
+        <Property Name="ViewLayout">OnlyTextfield</Property>
+        <Property Name="SymbolDataType">String</Property>
+        <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvDirectSend_2;4;;;-1;;;</Property>
+        <Property Name="TabIndex">13</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl14" Children="Controls" ControlName="ElemST">
+        <Property Name="Name">StaticTextControl14</Property>
+        <Property Name="Size">202, 15</Property>
+        <Property Name="Location">2, 63</Property>
+        <Property Name="BackColor">White</Property>
+        <Property Name="Font">Arial, 8pt</Property>
+        <Property Name="Text">EnvDirectSend (can be pasted) + ENTER</Property>
+        <Property Name="ForeColor">Black</Property>
+      </Object>
+      <Property Name="Name">GroupBoxControl64</Property>
+      <Property Name="Size">308, 190</Property>
+      <Property Name="Location">6, 0</Property>
+      <Property Name="BackColor">White</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold, Italic</Property>
+      <Property Name="Text">Direct Tx</Property>
+      <Property Name="ForeColor">Blue</Property>
+      <Property Name="TabIndex">64</Property>
+    </Object>
+    <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl1" Children="Controls" ControlName="Group Box">
+      <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl2" Children="Controls" ControlName="ButtonControlDUMP">
+        <Property Name="Name">ButtonControl2</Property>
+        <Property Name="Size">64, 22</Property>
+        <Property Name="Location">280, 64</Property>
+        <Property Name="Font">Arial, 9pt, style=Bold</Property>
+        <Property Name="Text">DUMP</Property>
+        <Property Name="UseTransparentColor">False</Property>
+        <Property Name="SymbolConfiguration">5;1;env_vars_diag_CAN;;;ENV_Dump_EEPROM_1;1;;;-1;;;</Property>
+        <Property Name="TabIndex">96</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.PanelButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="PanelButtonControl1" Children="Controls" ControlName="Panel Control Button">
+        <Property Name="Name">PanelButtonControl1</Property>
+        <Property Name="Size">116, 24</Property>
+        <Property Name="Location">157, 62</Property>
+        <Property Name="PanelList">1;1;Dynamic Key_CAN.xvp</Property>
+        <Property Name="NodeList">1;0</Property>
+        <Property Name="NetworkList">1;0</Property>
+        <Property Name="Font">Microsoft Sans Serif, 9pt, style=Bold</Property>
+        <Property Name="Text">Dynamic Key</Property>
+        <Property Name="TabIndex">92</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl8" Children="Controls" ControlName="ButtonControl17">
+        <Property Name="Name">ButtonControl8</Property>
+        <Property Name="Size">146, 22</Property>
+        <Property Name="Location">5, 64</Property>
+        <Property Name="Font">Arial, 9pt, style=Bold</Property>
+        <Property Name="Text">Dynamic_RBEOL_Unlock</Property>
+        <Property Name="UseTransparentColor">False</Property>
+        <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;Dynamic_Unlock_1;1;;;-1;;;</Property>
+        <Property Name="TabIndex">91</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.HexEditorControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="HexEditorControl3" Children="Controls" ControlName="Hex/Text Editor">
+        <Property Name="Name">HexEditorControl3</Property>
+        <Property Name="Size">317, 50</Property>
+        <Property Name="Location">6, 118</Property>
+        <Property Name="ColumnCount">2048</Property>
+        <Property Name="ViewLayout">OnlyTextfield</Property>
+        <Property Name="SymbolDataType">String</Property>
+        <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;Env_Doip_Security_SeedOutput_1;4;;;-1;;;</Property>
+        <Property Name="TabIndex">90</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl2" Children="Controls" ControlName="Static Text 7">
+        <Property Name="Name">StaticTextControl2</Property>
+        <Property Name="Size">172, 13</Property>
+        <Property Name="Location">6, 99</Property>
+        <Property Name="Font">Microsoft Sans Serif, 8.25pt, style=Bold</Property>
+        <Property Name="Text">Seed Output (Can be copied)</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl9" Children="Controls" ControlName="Static Text 8">
+        <Property Name="Name">StaticTextControl9</Property>
+        <Property Name="Size">83, 13</Property>
+        <Property Name="Location">213, 12</Property>
+        <Property Name="Font">Microsoft Sans Serif, 8.25pt, style=Bold</Property>
+        <Property Name="Text">Current Mode</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl5" Children="Controls" ControlName="Input/Output Box 2">
+        <Property Name="Name">TextBoxControl5</Property>
+        <Property Name="Size">194, 20</Property>
+        <Property Name="Location">158, 29</Property>
+        <Property Name="AlarmUpperTextColor">WindowText</Property>
+        <Property Name="BoxForeColor">Blue</Property>
+        <Property Name="ValueDecimalPlaces">0</Property>
+        <Property Name="AlarmLowerBkgColor">Salmon</Property>
+        <Property Name="BoxTextAlign">Center</Property>
+        <Property Name="ValueDisplay">Text</Property>
+        <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+        <Property Name="AlarmLowerTextColor">WindowText</Property>
+        <Property Name="BoxFont">Microsoft Sans Serif, 8.25pt, style=Bold</Property>
+        <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt, style=Bold</Property>
+        <Property Name="AlarmLowerFont">Microsoft Sans Serif, 8.25pt, style=Bold</Property>
+        <Property Name="AlarmGeneralSettings">1;0;0;100</Property>
+        <Property Name="DisplayLabel">Hide</Property>
+        <Property Name="TextFont">Microsoft Sans Serif, 8.25pt, style=Bold</Property>
+        <Property Name="DescriptionText">Env_Doip_SecurityMode_Output_1:</Property>
+        <Property Name="TextForeColor">Red</Property>
+        <Property Name="DescriptionSize">0, 0</Property>
+        <Property Name="UsedValueTable">PhysicalValue</Property>
+        <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;Env_Doip_SecurityMode_Output_1;4;;;-1;;;</Property>
+        <Property Name="TabIndex">75</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl17" Children="Controls" ControlName="ButtonControl17">
+        <Property Name="Name">ButtonControl17</Property>
+        <Property Name="Size">64, 22</Property>
+        <Property Name="Location">378, 30</Property>
+        <Property Name="Font">Arial, 9pt, style=Bold</Property>
+        <Property Name="Text">RB EOL</Property>
+        <Property Name="UseTransparentColor">False</Property>
+        <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;EnvRBEOL_1;1;;;-1;;;</Property>
+        <Property Name="TabIndex">17</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl1" Children="Controls" ControlName="Static Text 5">
+        <Property Name="Name">StaticTextControl1</Property>
+        <Property Name="Size">82, 13</Property>
+        <Property Name="Location">90, 15</Property>
+        <Property Name="Font">Microsoft Sans Serif, 8.25pt, style=Bold</Property>
+        <Property Name="Text">Sub-Function</Property>
+      </Object>
+      <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=11.0.81.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl6" Children="Controls" ControlName="ButtonControl17">
+        <Property Name="Name">ButtonControl6</Property>
+        <Property Name="Size">98, 22</Property>
+        <Property Name="Location">5, 28</Property>
+        <Property Name="Font">Arial, 9pt, style=Bold</Property>
+        <Property Name="Text">RBEOL_Unlock</Property>
+        <Property Name="UseTransparentColor">False</Property>
+        <Property Name="SymbolConfiguration">5;1;env_vars_diag2;;;Env_MPC3_EOL_unlock_1;1;;;-1;;;</Property>
+        <Property Name="TabIndex">65</Property>
+      </Object>
+      <Property Name="Name">GroupBoxControl1</Property>
+      <Property Name="Size">452, 182</Property>
+      <Property Name="Location">12, 309</Property>
+      <Property Name="Font">Arial, 9pt, style=Bold, Italic</Property>
+      <Property Name="Text">RBEOL Security</Property>
+      <Property Name="TabIndex">75</Property>
+    </Object>
+    <Property Name="Name">Panel</Property>
+    <Property Name="Size">842, 559</Property>
+    <Property Name="BackColor">LemonChiffon</Property>
+    <Property Name="Panel">Panel</Property>
+  </Object>
+</Panel>

@@ -1,0 +1,580 @@
+/*@!Encoding:1252*/
+variables
+{
+int seq = 0;
+char buffer[255];
+char empty_buffer[255];
+msTimer     Tm_RBEOL_intrinsic_write;
+msTimer     Tm_RBEOL_extrinsic_write;
+msTimer     Tm_RBEOL_intrinsic_SVC2_write;
+msTimer     Tm_RBEOL_intrinsic_MPC2_5_write;
+msTimer     Tm_RBEOL_extrinsic_MPC2_5_write;
+mstimer     Tm_static_calibration;
+ 
+msTimer Tm_RBEOL_int_SVC2_5_mono_write;
+
+msTimer Tm_RBEOL_int_SVC2_5_Stero_write;
+  
+msTimer Tm_RBEOL_internal_Stero_write;
+  
+msTimer Tm_RBEOL_internal_mono_write;
+  
+}
+
+on Start
+{
+	putvalue(Env_RBEOL_intrinsic,"3d220043004cE606AD445899AE44192F21445110B943425E113DA0DE183D793D30BC8CB9913C5DE22F3DEA4F04C1ACACEEBC2EA9163DE87D14C1224EA6C04FE49BBCA76B513A209ABCBFCDCCCC3A610B363B");
+	putvalue(Env_RBEOL_extrinsic,"3d2200440020e17aa43f16c5063c4d309cbcbb7e41bc00000000000000000000000000000000");
+	putvalue(Env_RBEOL_intrinsic_SVC2,"3d22004c0064aeefac4400b0af4408ec2144e5a0ac432f8a5ebd4511d2bd48a3323f1ede07bf6ce2b9bd48f903c114d42bbd7873a2bdfa5013c10fb9a3c0607bb1bd111dc03be2afa5bfcdcccc3a6a0b363bea9c3d390bd0f6bd311674b8e2cfb4bb933bd63bcb6e963b");
+	putvalue(Env_RBEOL_intrinsic_MPC2_5,"3d220043004ce606ad445899ae44192f21445110b943425e113da0de183d793d30bc8cb9913c5de22f3dea4f04c1acaceebc2ea9163de87d14c1224ea6c04fe49bbca76b513a209abcbfcdcccc3a610b363b");
+	putvalue(Env_RBEOL_extrinsic_MPC2_5,"3d2200D50020e17aa43f16c5063c4d309cbcbb7e41bc00000000000000000000000000000000");
+  
+  putvalue(Env_RBEOL_intrinsic_SVC2_5_mono,"3D220043004C532AAC4403B9AD448D062244A725B743913068BD543437BC29EDC8BD1E3CD43D18AEEBBBC4F404C1CA3E37BD4F048C3CA94915C11332A7C00E9C91BC5FE973BD777CBABFCDCCCC3A610B363B");
+ putvalue(Env_RBEOL_intrinsic_SVC2_5_Stero,"3D22004C0064E02EAC44E7BFAD44EF7C2144BE50B6434CA9C8BDF0E39FBCF83161BEB5AF073E874AA13C6B9404C110D8F43B3DFF903B5E4715C1804DACC02AEB27BCBD2BFFBDABE4BEBFCDCCCC3A610B363BBB4B9BB98686F6BDE9ACF3391DC23CBBDA5785BBEC1AA43A");
+  
+  putvalue(Env_RBEOL_internal_mono,"3D2200C2000CD9339B3B8E36EC3B2F0108BB");
+  putvalue(Env_RBEOL_internal_Stereo,"3D2200C3000C8976F43A975A4D3B92DD5CBA");
+  
+  
+}
+
+
+//For SVC2.5 intrensic mono
+on envVar Env_RBEOL_int_SVC2_5_mono_write
+{
+	if(getValue(this)){
+		putvalue(Env_RBEOL_int_SVC2_5_mono_write,0);
+		seq = 0;
+		setTimer(Tm_RBEOL_int_SVC2_5_mono_write,10);
+    }
+}
+
+
+on timer Tm_RBEOL_int_SVC2_5_mono_write
+{
+    switch (seq)
+	{
+		case 0:
+			putvalue(EnvDirectSend,"1001");
+            write("in case 0");
+			setTimer(Tm_RBEOL_int_SVC2_5_mono_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+        write("seq=%x",seq);
+		break;
+		case 1:
+         write("in case 1");
+			putvalue(EnvDirectSend,"80FA31033005");
+			setTimer(Tm_RBEOL_int_SVC2_5_mono_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+        write("seq=%x",seq);
+		break;
+		case 2:
+        write("in case 2");
+			putvalue(EnvDirectSend,"80FA1108");
+			setTimer(Tm_RBEOL_int_SVC2_5_mono_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+             write("seq=%x",seq);
+		break;
+		case 3:
+        write("in case 3");
+			putvalue(EnvRBEOL,1);
+			setTimer(Tm_RBEOL_int_SVC2_5_mono_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+             write("seq=%x",seq);
+		break;
+		case 4:
+        write("in case 4");
+			strncpy(buffer, empty_buffer, 255);
+			getvalue(Env_RBEOL_intrinsic_SVC2_5_mono,buffer);
+			putvalue(EnvDirectSend,buffer);
+			setTimer(Tm_RBEOL_int_SVC2_5_mono_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+             write("seq=%x",seq);
+		break;
+		case 5:
+        
+ write("in case 5");
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_int_SVC2_5_mono_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+         write("seq=%x",seq);
+		break;
+                    
+
+	}
+}
+
+//For SVC2.5 intrensic Stereo
+on envVar Env_RBEOL_int_SVC2_5_Stero_write
+{
+	if(getValue(this)){
+		putvalue(Env_RBEOL_int_SVC2_5_Stero_write,0);
+		seq = 0;
+		setTimer(Tm_RBEOL_int_SVC2_5_Stero_write,10);
+    }
+}
+
+
+on timer Tm_RBEOL_int_SVC2_5_Stero_write
+{
+    switch (seq)
+	{
+		case 0:
+			putvalue(EnvDirectSend,"1001");
+            write("in case 0");
+			setTimer(Tm_RBEOL_int_SVC2_5_Stero_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+        write("seq=%x",seq);
+		break;
+		case 1:
+         write("in case 1");
+			putvalue(EnvDirectSend,"80FA31033005");
+			setTimer(Tm_RBEOL_int_SVC2_5_Stero_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+        write("seq=%x",seq);
+		break;
+		case 2:
+        write("in case 2");
+			putvalue(EnvDirectSend,"80FA1108");
+			setTimer(Tm_RBEOL_int_SVC2_5_Stero_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+             write("seq=%x",seq);
+		break;
+		case 3:
+        write("in case 3");
+			putvalue(EnvRBEOL,1);
+			setTimer(Tm_RBEOL_int_SVC2_5_Stero_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+             write("seq=%x",seq);
+		break;
+		case 4:
+        write("in case 4");
+			strncpy(buffer, empty_buffer, 255);
+			getvalue(Env_RBEOL_intrinsic_SVC2_5_Stero,buffer);
+			putvalue(EnvDirectSend,buffer);
+			setTimer(Tm_RBEOL_int_SVC2_5_Stero_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+             write("seq=%x",seq);
+		break;
+		case 5:
+        
+ write("in case 5");
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_int_SVC2_5_Stero_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+         write("seq=%x",seq);
+		break;
+                    
+
+	}
+}
+
+
+//For internal MONO
+on envVar Env_RBEOL_internal_mono_write
+{
+	if(getValue(this)){
+		putvalue(Env_RBEOL_internal_mono_write,0);
+		seq = 0;
+		setTimer(Tm_RBEOL_internal_mono_write,10);
+    }
+}
+
+
+on timer Tm_RBEOL_internal_mono_write
+{
+    switch (seq)
+	{
+		case 0:
+			putvalue(EnvDirectSend,"1001");
+            write("in case 0");
+			setTimer(Tm_RBEOL_internal_mono_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+        write("seq=%x",seq);
+		break;
+		case 1:
+         write("in case 1");
+			putvalue(EnvDirectSend,"80FA31033005");
+			setTimer(Tm_RBEOL_internal_mono_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+        write("seq=%x",seq);
+		break;
+		case 2:
+        write("in case 2");
+			putvalue(EnvDirectSend,"80FA1108");
+			setTimer(Tm_RBEOL_internal_mono_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+             write("seq=%x",seq);
+		break;
+		case 3:
+        write("in case 3");
+			putvalue(EnvRBEOL,1);
+			setTimer(Tm_RBEOL_internal_mono_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+             write("seq=%x",seq);
+		break;
+		case 4:
+        write("in case 4");
+			strncpy(buffer, empty_buffer, 255);
+			getvalue(Env_RBEOL_internal_mono,buffer);
+			putvalue(EnvDirectSend,buffer);
+			setTimer(Tm_RBEOL_internal_mono_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+             write("seq=%x",seq);
+		break;
+		case 5:
+        
+ write("in case 5");
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_internal_mono_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+         write("seq=%x",seq);
+		break;
+                    
+
+	}
+}
+
+//For internal STEREO
+on envVar Env_RBEOL_internal_Stereo_write
+{
+	if(getValue(this)){
+		putvalue(Env_RBEOL_internal_Stereo_write,0);
+		seq = 0;
+		setTimer(Tm_RBEOL_internal_mono_write,10);
+    }
+}
+
+
+on timer Tm_RBEOL_internal_Stero_write
+{
+    switch (seq)
+	{
+		case 0:
+			putvalue(EnvDirectSend,"1001");
+            write("in case 0");
+			setTimer(Tm_RBEOL_internal_Stero_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+        write("seq=%x",seq);
+		break;
+		case 1:
+         write("in case 1");
+			putvalue(EnvDirectSend,"80FA31033005");
+			setTimer(Tm_RBEOL_internal_Stero_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+        write("seq=%x",seq);
+		break;
+		case 2:
+        write("in case 2");
+			putvalue(EnvDirectSend,"80FA1108");
+			setTimer(Tm_RBEOL_internal_Stero_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+             write("seq=%x",seq);
+		break;
+		case 3:
+        write("in case 3");
+			putvalue(EnvRBEOL,1);
+			setTimer(Tm_RBEOL_internal_Stero_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+             write("seq=%x",seq);
+		break;
+		case 4:
+        write("in case 4");
+			strncpy(buffer, empty_buffer, 255);
+			getvalue(Env_RBEOL_internal_Stereo,buffer);
+			putvalue(EnvDirectSend,buffer);
+			setTimer(Tm_RBEOL_internal_Stero_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+             write("seq=%x",seq);
+		break;
+		case 5:
+        
+ write("in case 5");
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_internal_Stero_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+         write("seq=%x",seq);
+		break;
+                    
+
+	}
+}
+
+
+on envVar Env_RBEOL_intrinsic_write
+{
+	if(getValue(this)){
+		putvalue(Env_RBEOL_intrinsic_write,0);
+		seq = 0;
+		setTimer(Tm_RBEOL_intrinsic_write,10);
+    }
+}
+
+on timer Tm_RBEOL_intrinsic_write
+{
+    switch (seq)
+	{
+		case 0:
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_intrinsic_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 1:
+			putvalue(EnvDirectSend,"80FA31033005");
+			setTimer(Tm_RBEOL_intrinsic_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 2:
+			putvalue(EnvDirectSend,"80FA1108");
+			setTimer(Tm_RBEOL_intrinsic_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 3:
+			putvalue(EnvRBEOL,1);
+			setTimer(Tm_RBEOL_intrinsic_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 4:
+			strncpy(buffer, empty_buffer, 255);
+			getvalue(Env_RBEOL_intrinsic,buffer);
+			putvalue(EnvDirectSend,buffer);
+			setTimer(Tm_RBEOL_intrinsic_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 5:
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_intrinsic_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+	}
+}
+
+on envVar Env_RBEOL_extrinsic_write
+{
+	if(getValue(this)){
+		putvalue(Env_RBEOL_extrinsic_write,0);
+		seq = 0;
+		setTimer(Tm_RBEOL_extrinsic_write,10);
+    }
+}
+
+on envVar Env_RBEOL_extrinsic_MPC2_5_write
+{
+	if(getValue(this)){
+		putvalue(Env_RBEOL_extrinsic_MPC2_5_write,0);
+		seq = 0;
+		setTimer(Tm_RBEOL_extrinsic_MPC2_5_write,10);
+    }
+}
+
+on timer Tm_RBEOL_extrinsic_write
+{
+    switch (seq)
+	{
+		case 0:
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_extrinsic_write,500); //Tm_RBEOL_extrinsic_write
+			seq++;
+		break;
+		case 1:
+			putvalue(EnvDirectSend,"80FA31033005");
+			setTimer(Tm_RBEOL_extrinsic_write,500); //Tm_RBEOL_extrinsic_write
+			seq++;
+		break;
+		case 2:
+			putvalue(EnvDirectSend,"80FA1108");
+			setTimer(Tm_RBEOL_extrinsic_write,500); //Tm_RBEOL_extrinsic_write
+			seq++;
+		break;
+		case 3:
+			putvalue(EnvRBEOL,1);
+			setTimer(Tm_RBEOL_extrinsic_write,1000); //Tm_RBEOL_extrinsic_write
+			seq++;
+		break;
+		case 4:
+			strncpy(buffer, empty_buffer, 255);
+			getvalue(Env_RBEOL_extrinsic,buffer);
+			putvalue(EnvDirectSend,buffer);
+			setTimer(Tm_RBEOL_extrinsic_write,1000); //Tm_RBEOL_extrinsic_write
+			seq++;
+		break;
+		case 5:
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_extrinsic_write,500); //Tm_RBEOL_extrinsic_write
+			seq++;
+		break;
+	}
+}
+
+on timer Tm_RBEOL_extrinsic_MPC2_5_write
+{
+    switch (seq)
+	{
+		case 0:
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_extrinsic_MPC2_5_write,500); //Tm_RBEOL_extrinsic_MPC2_5_write
+			seq++;
+		break;
+		case 1:
+			putvalue(EnvDirectSend,"80FA31033005");
+			setTimer(Tm_RBEOL_extrinsic_MPC2_5_write,500); //Tm_RBEOL_extrinsic_MPC2_5_write
+			seq++;
+		break;
+		case 2:
+			putvalue(EnvDirectSend,"80FA1108");
+			setTimer(Tm_RBEOL_extrinsic_MPC2_5_write,500); //Tm_RBEOL_extrinsic_MPC2_5_write
+			seq++;
+		break;
+		case 3:
+			putvalue(EnvRBEOL,1);
+			setTimer(Tm_RBEOL_extrinsic_MPC2_5_write,1000); //Tm_RBEOL_extrinsic_MPC2_5_write
+			seq++;
+		break;
+		case 4:
+			strncpy(buffer, empty_buffer, 255);
+			getvalue(Env_RBEOL_extrinsic_MPC2_5,buffer);
+			putvalue(EnvDirectSend,buffer);
+			setTimer(Tm_RBEOL_extrinsic_MPC2_5_write,1000); //Tm_RBEOL_extrinsic_MPC2_5_write
+			seq++;
+		break;
+		case 5:
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_extrinsic_MPC2_5_write,500); //Tm_RBEOL_extrinsic_MPC2_5_write
+			seq++;
+		break;
+	}
+}
+
+on envVar Env_RBEOL_intrinsic_SVC2_write
+{
+	if(getValue(this)){
+		putvalue(Env_RBEOL_intrinsic_SVC2_write,0);
+		seq = 0;
+		setTimer(Tm_RBEOL_intrinsic_SVC2_write,10);
+    }
+}
+
+on timer Tm_RBEOL_intrinsic_SVC2_write
+{
+    switch (seq)
+	{
+		case 0:
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_intrinsic_SVC2_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 1:
+			putvalue(EnvDirectSend,"80FA31033005");
+			setTimer(Tm_RBEOL_intrinsic_SVC2_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 2:
+			putvalue(EnvDirectSend,"80FA1108");
+			setTimer(Tm_RBEOL_intrinsic_SVC2_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 3:
+			putvalue(EnvRBEOL,1);
+			setTimer(Tm_RBEOL_intrinsic_SVC2_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 4:
+			strncpy(buffer, empty_buffer, 255);
+			getvalue(Env_RBEOL_intrinsic_SVC2,buffer);
+			putvalue(EnvDirectSend,buffer);
+			setTimer(Tm_RBEOL_intrinsic_SVC2_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 5:
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_intrinsic_SVC2_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+	}
+}
+
+on envVar Env_RBEOL_intrinsic_MPC2_5_write
+{
+	if(getValue(this)){
+		putvalue(Env_RBEOL_intrinsic_MPC2_5_write,0);
+		seq = 0;
+		setTimer(Tm_RBEOL_intrinsic_MPC2_5_write,10);
+    }
+}
+
+on timer Tm_RBEOL_intrinsic_MPC2_5_write
+{
+    switch (seq)
+	{
+		case 0:
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_intrinsic_MPC2_5_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 1:
+			putvalue(EnvDirectSend,"80FA31033005");
+			setTimer(Tm_RBEOL_intrinsic_MPC2_5_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 2:
+			putvalue(EnvDirectSend,"80FA1108");
+			setTimer(Tm_RBEOL_intrinsic_MPC2_5_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 3:
+			putvalue(EnvRBEOL,1);
+			setTimer(Tm_RBEOL_intrinsic_MPC2_5_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 4:
+			strncpy(buffer, empty_buffer, 255);
+			getvalue(Env_RBEOL_intrinsic_MPC2_5,buffer);
+			putvalue(EnvDirectSend,buffer);
+			setTimer(Tm_RBEOL_intrinsic_MPC2_5_write,1000); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+		case 5:
+			putvalue(EnvDirectSend,"1001");
+			setTimer(Tm_RBEOL_intrinsic_MPC2_5_write,500); //Tm_RBEOL_intrinsic_write
+			seq++;
+		break;
+	}
+}
+
+
+on envVar EnvSCal
+{
+	if(getValue(this)){
+		putvalue(EnvSCal,0);
+    putvalue(EnvTesterPresentOnOff, 1);
+		seq = 0;
+		setTimer(Tm_static_calibration,500);
+    }
+}
+
+on timer Tm_static_calibration
+{
+    switch (seq)
+	{
+		case 0:
+			putvalue(EnvDirectSend, "1003");
+			setTimer(Tm_static_calibration,1000); //Tm_static_calibration
+			seq++;
+		break;
+		case 1:
+			putvalue(EnvDirectSend,"3101800B028A028A051407D000A004B00000");
+			setTimer(Tm_static_calibration,2000); //Tm_static_calibration
+			seq++;
+		break;
+		case 2:
+			putvalue(EnvDirectSend,"3103800B");
+			setTimer(Tm_static_calibration,2000); //Tm_static_calibration
+			seq++;
+		break;
+		case 3:
+			putvalue(EnvDirectSend,"1001");
+		break;
+	}
+}
+
+

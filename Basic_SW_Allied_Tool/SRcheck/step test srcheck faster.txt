@@ -1,0 +1,7 @@
+falsh basesw via uart --> do step 1 and 2 of testcase 1 --> do step1 of test case 4 --> sreenshot value of 0200 0201 for testcase 10 
+
+--> reflash latest sw via i-flash tool do the remaining step of test case 1 to 10 except 7 
+
+--> flash latest sw uart --> do step 1 2 3 4 of testcase 7 --> reflash latest sw via i-flash tool --> do step 5,6 of tesst case 7 
+
+-->flash base sw via uart --> do step 1 2 3 of test case 11 --> reflash latest sw via i flash tool --> do step 4,5 of test case 11

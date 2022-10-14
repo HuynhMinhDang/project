@@ -1,0 +1,1243 @@
+<?xml version="1.0"?>
+<Panel Type="Vector.CANalyzer.Panels.PanelSerializer, Vector.CANalyzer.Panels.Serializer, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null">
+    <Object Type="Vector.CANalyzer.Panels.Runtime.Panel, Vector.CANalyzer.Panels.Common, Version=1.0.12.0, Culture=neutral, PublicKeyToken=null" Name="Panel1" Children="Controls">
+        <Object Type="Vector.CANalyzer.Panels.Design.GroupBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="GroupBoxControl1" Children="Controls">        
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl1" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">165, 22</Property>                                                                                                                                                            
+                <Property Name="Text">cyclic Tx Msgs of this Node:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 23</Property>
+                <Property Name="TextAlign">MiddleLeft</Property>                
+                <Property Name="Name">StaticTextControl1</Property>                                                                                                                                                 
+            </Object>                
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl1" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">68, 25</Property>
+                <Property Name="BackColor">ButtonFace</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Msgs OFF</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_CycMsgsOFF;1</Property>
+                <Property Name="Location">187,23</Property>
+                <Property Name="Name">ButtonControl1</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>            
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl2">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="BackColor">ButtonFace</Property>
+                <Property Name="Size">68, 25</Property>
+                <Property Name="TabIndex">2</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Msgs ON</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_CycMsgsON;1</Property>
+                <Property Name="Location">256, 23</Property>
+                <Property Name="Name">ButtonControl2</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>                         
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl101" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_170:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 78</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl101</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl101" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_170_tx;1</Property>
+                <Property Name="Location">185, 78</Property>
+                <Property Name="Name">ButtonControl101</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl101" Children="Controls">
+                <Property Name="Name">TextBoxControl101</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_170_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:10;Set:</Property>
+                <Property Name="Location">245, 81</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl101" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_170_Tm;1</Property>
+              <Property Name="Location">415, 78</Property>
+              <Property Name="Name">SwitchControl101</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl102" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_17E:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 116</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl102</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl102" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_17E_tx;1</Property>
+                <Property Name="Location">185, 116</Property>
+                <Property Name="Name">ButtonControl102</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl102" Children="Controls">
+                <Property Name="Name">TextBoxControl102</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_17E_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:10;Set:</Property>
+                <Property Name="Location">245, 119</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl102" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_17E_Tm;1</Property>
+              <Property Name="Location">415, 116</Property>
+              <Property Name="Name">SwitchControl102</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl103" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_180:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 154</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl103</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl103" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_180_tx;1</Property>
+                <Property Name="Location">185, 154</Property>
+                <Property Name="Name">ButtonControl103</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl103" Children="Controls">
+                <Property Name="Name">TextBoxControl103</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_180_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:10;Set:</Property>
+                <Property Name="Location">245, 157</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl103" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_180_Tm;1</Property>
+              <Property Name="Location">415, 154</Property>
+              <Property Name="Name">SwitchControl103</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl104" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_1A6:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 192</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl104</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl104" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_1A6_tx;1</Property>
+                <Property Name="Location">185, 192</Property>
+                <Property Name="Name">ButtonControl104</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl104" Children="Controls">
+                <Property Name="Name">TextBoxControl104</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_1A6_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:10;Set:</Property>
+                <Property Name="Location">245, 195</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl104" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_1A6_Tm;1</Property>
+              <Property Name="Location">415, 192</Property>
+              <Property Name="Name">SwitchControl104</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl105" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_1A8:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 230</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl105</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl105" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_1A8_tx;1</Property>
+                <Property Name="Location">185, 230</Property>
+                <Property Name="Name">ButtonControl105</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl105" Children="Controls">
+                <Property Name="Name">TextBoxControl105</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_1A8_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:10;Set:</Property>
+                <Property Name="Location">245, 233</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl105" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_1A8_Tm;1</Property>
+              <Property Name="Location">415, 230</Property>
+              <Property Name="Name">SwitchControl105</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl106" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_1C6:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 268</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl106</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl106" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_1C6_tx;1</Property>
+                <Property Name="Location">185, 268</Property>
+                <Property Name="Name">ButtonControl106</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl106" Children="Controls">
+                <Property Name="Name">TextBoxControl106</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_1C6_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:10;Set:</Property>
+                <Property Name="Location">245, 271</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl106" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_1C6_Tm;1</Property>
+              <Property Name="Location">415, 268</Property>
+              <Property Name="Name">SwitchControl106</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl107" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_24F:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 306</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl107</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl107" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_24F_tx;1</Property>
+                <Property Name="Location">185, 306</Property>
+                <Property Name="Name">ButtonControl107</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl107" Children="Controls">
+                <Property Name="Name">TextBoxControl107</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_24F_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:20;Set:</Property>
+                <Property Name="Location">245, 309</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl107" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_24F_Tm;1</Property>
+              <Property Name="Location">415, 306</Property>
+              <Property Name="Name">SwitchControl107</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl108" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_28C:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 344</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl108</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl108" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_28C_tx;1</Property>
+                <Property Name="Location">185, 344</Property>
+                <Property Name="Name">ButtonControl108</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl108" Children="Controls">
+                <Property Name="Name">TextBoxControl108</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_28C_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:40;Set:</Property>
+                <Property Name="Location">245, 347</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl108" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_28C_Tm;1</Property>
+              <Property Name="Location">415, 344</Property>
+              <Property Name="Name">SwitchControl108</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl109" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_340:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 382</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl109</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl109" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_340_tx;1</Property>
+                <Property Name="Location">185, 382</Property>
+                <Property Name="Name">ButtonControl109</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl109" Children="Controls">
+                <Property Name="Name">TextBoxControl109</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_340_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:100;Set:</Property>
+                <Property Name="Location">245, 385</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl109" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_340_Tm;1</Property>
+              <Property Name="Location">415, 382</Property>
+              <Property Name="Name">SwitchControl109</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl110" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_362:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 420</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl110</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl110" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_362_tx;1</Property>
+                <Property Name="Location">185, 420</Property>
+                <Property Name="Name">ButtonControl110</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl110" Children="Controls">
+                <Property Name="Name">TextBoxControl110</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_362_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:100;Set:</Property>
+                <Property Name="Location">245, 423</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl110" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_362_Tm;1</Property>
+              <Property Name="Location">415, 420</Property>
+              <Property Name="Name">SwitchControl110</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl111" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_366:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 458</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl111</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl111" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_366_tx;1</Property>
+                <Property Name="Location">185, 458</Property>
+                <Property Name="Name">ButtonControl111</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl111" Children="Controls">
+                <Property Name="Name">TextBoxControl111</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_366_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:100;Set:</Property>
+                <Property Name="Location">245, 461</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl111" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_366_Tm;1</Property>
+              <Property Name="Location">415, 458</Property>
+              <Property Name="Name">SwitchControl111</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl112" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_394:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 496</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl112</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl112" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_394_tx;1</Property>
+                <Property Name="Location">185, 496</Property>
+                <Property Name="Name">ButtonControl112</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl112" Children="Controls">
+                <Property Name="Name">TextBoxControl112</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_394_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:100;Set:</Property>
+                <Property Name="Location">245, 499</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl112" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_394_Tm;1</Property>
+              <Property Name="Location">415, 496</Property>
+              <Property Name="Name">SwitchControl112</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl113" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_3AF:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 534</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl113</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl113" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3AF_tx;1</Property>
+                <Property Name="Location">185, 534</Property>
+                <Property Name="Name">ButtonControl113</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl113" Children="Controls">
+                <Property Name="Name">TextBoxControl113</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3AF_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:100;Set:</Property>
+                <Property Name="Location">245, 537</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl113" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3AF_Tm;1</Property>
+              <Property Name="Location">415, 534</Property>
+              <Property Name="Name">SwitchControl113</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl114" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_3B8:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 572</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl114</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl114" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3B8_tx;1</Property>
+                <Property Name="Location">185, 572</Property>
+                <Property Name="Name">ButtonControl114</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl114" Children="Controls">
+                <Property Name="Name">TextBoxControl114</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3B8_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:100;Set:</Property>
+                <Property Name="Location">245, 575</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl114" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3B8_Tm;1</Property>
+              <Property Name="Location">415, 572</Property>
+              <Property Name="Name">SwitchControl114</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl115" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_3BB:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 610</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl115</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl115" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3BB_tx;1</Property>
+                <Property Name="Location">185, 610</Property>
+                <Property Name="Name">ButtonControl115</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl115" Children="Controls">
+                <Property Name="Name">TextBoxControl115</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3BB_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:100;Set:</Property>
+                <Property Name="Location">245, 613</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl115" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3BB_Tm;1</Property>
+              <Property Name="Location">415, 610</Property>
+              <Property Name="Name">SwitchControl115</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl116" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_3C2:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 648</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl116</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl116" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3C2_tx;1</Property>
+                <Property Name="Location">185, 648</Property>
+                <Property Name="Name">ButtonControl116</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl116" Children="Controls">
+                <Property Name="Name">TextBoxControl116</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3C2_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:100;Set:</Property>
+                <Property Name="Location">245, 651</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl116" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3C2_Tm;1</Property>
+              <Property Name="Location">415, 648</Property>
+              <Property Name="Name">SwitchControl116</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl117" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_3C4:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 686</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl117</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl117" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3C4_tx;1</Property>
+                <Property Name="Location">185, 686</Property>
+                <Property Name="Name">ButtonControl117</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl117" Children="Controls">
+                <Property Name="Name">TextBoxControl117</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3C4_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:100;Set:</Property>
+                <Property Name="Location">245, 689</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl117" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3C4_Tm;1</Property>
+              <Property Name="Location">415, 686</Property>
+              <Property Name="Name">SwitchControl117</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl118" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_3C6:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 724</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl118</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl118" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3C6_tx;1</Property>
+                <Property Name="Location">185, 724</Property>
+                <Property Name="Name">ButtonControl118</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl118" Children="Controls">
+                <Property Name="Name">TextBoxControl118</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3C6_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:100;Set:</Property>
+                <Property Name="Location">245, 727</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl118" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3C6_Tm;1</Property>
+              <Property Name="Location">415, 724</Property>
+              <Property Name="Name">SwitchControl118</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl119" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_3C7:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 762</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl119</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl119" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3C7_tx;1</Property>
+                <Property Name="Location">185, 762</Property>
+                <Property Name="Name">ButtonControl119</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl119" Children="Controls">
+                <Property Name="Name">TextBoxControl119</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3C7_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:100;Set:</Property>
+                <Property Name="Location">245, 765</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl119" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_3C7_Tm;1</Property>
+              <Property Name="Location">415, 762</Property>
+              <Property Name="Name">SwitchControl119</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl120" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_50:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 800</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl120</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl120" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_50_tx;1</Property>
+                <Property Name="Location">185, 800</Property>
+                <Property Name="Name">ButtonControl120</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl120" Children="Controls">
+                <Property Name="Name">TextBoxControl120</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_50_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:500;Set:</Property>
+                <Property Name="Location">245, 803</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl120" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_50_Tm;1</Property>
+              <Property Name="Location">415, 800</Property>
+              <Property Name="Name">SwitchControl120</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl121" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_500:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 838</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl121</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl121" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_500_tx;1</Property>
+                <Property Name="Location">185, 838</Property>
+                <Property Name="Name">ButtonControl121</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl121" Children="Controls">
+                <Property Name="Name">TextBoxControl121</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_500_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:1000;Set:</Property>
+                <Property Name="Location">245, 841</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl121" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_500_Tm;1</Property>
+              <Property Name="Location">415, 838</Property>
+              <Property Name="Name">SwitchControl121</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl122" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_501:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 876</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl122</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl122" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_501_tx;1</Property>
+                <Property Name="Location">185, 876</Property>
+                <Property Name="Name">ButtonControl122</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl122" Children="Controls">
+                <Property Name="Name">TextBoxControl122</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_501_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:1000;Set:</Property>
+                <Property Name="Location">245, 879</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl122" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_501_Tm;1</Property>
+              <Property Name="Location">415, 876</Property>
+              <Property Name="Name">SwitchControl122</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl123" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_514:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 914</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl123</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl123" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_514_tx;1</Property>
+                <Property Name="Location">185, 914</Property>
+                <Property Name="Name">ButtonControl123</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.StaticTextControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="StaticTextControl124" Children="Controls">              
+                <Property Name="Font">Verdana, 8pt</Property>                                                                                                                                                       
+                <Property Name="Size">160, 22</Property>                                                                                                                                                            
+                <Property Name="Text">GW_530:</Property>                                                                                                                                     
+                <Property Name="Font">Verdana, 8pt </Property>                                                                                                                                                      
+                <Property Name="Location">20, 952</Property>                                                                                                                                                        
+                <Property Name="Name">StaticTextControl124</Property>                                                                                                                                                
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.ButtonControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="ButtonControl124" Children="Controls">
+                <Property Name="Font">Verdana, 8pt</Property>
+                <Property Name="Size">50, 25</Property>
+                <Property Name="BackColor">Lavender</Property>
+                <Property Name="ReleaseValue">0</Property>
+                <Property Name="Text">Send</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_530_tx;1</Property>
+                <Property Name="Location">185, 952</Property>
+                <Property Name="Name">ButtonControl124</Property>
+                <Property Name="ImageFile">Choose Image...</Property>
+                <Property Name="PressValue">1</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.TextBoxControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="TextBoxControl124" Children="Controls">
+                <Property Name="Name">TextBoxControl124</Property>
+                <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_530_cycleTm;2</Property>
+                <Property Name="AlarmUpperTextColor">ControlText</Property>
+                <Property Name="ValueDecimalPlaces">0</Property>
+                <Property Name="AlarmLowerBkgColor">Salmon</Property>
+                <Property Name="ValueDisplay">Decimal</Property>
+                <Property Name="AlarmUpperBkgColor">IndianRed</Property>
+                <Property Name="AlarmLowerTextColor">ControlText</Property>
+                <Property Name="BoxFont">Verdana, 7.5pt</Property>
+                <Property Name="AlarmUpperFont">Microsoft Sans Serif, 8.25pt</Property>
+                <Property Name="AlarmGeneralSettings">1;3;0;2147483647</Property>
+                <Property Name="TextFont">Verdana, 8pt</Property>
+                <Property Name="DescriptionText">CTm:500;Set:</Property>
+                <Property Name="Location">245, 955</Property>
+                <Property Name="AlarmLowerFont">Verdana, 8pt</Property>
+                <Property Name="Size">154,20</Property>
+                <Property Name="TabIndex">3</Property>
+            </Object>
+            <Object Type="Vector.CANalyzer.Panels.Design.SwitchControl, Vector.CANalyzer.Panels.CommonControls, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null" Name="SwitchControl124" Children="Controls">
+              <Property Name="StateCnt">2</Property>
+              <Property Name="Size">15, 25</Property>
+              <Property Name="TransparentColor">Lavender</Property>
+              <Property Name="TabIndex">1</Property>
+              <Property Name="Activation">Left</Property>
+              <Property Name="SymbolConfiguration">2;1;EnvVar;;;E_pubc_GW_GW_530_Tm;1</Property>
+              <Property Name="Location">415, 952</Property>
+              <Property Name="Name">SwitchControl124</Property>
+              <Property Name="SwitchValues">1;2;0;1</Property>
+              <Property Name="ImageFile">Choose Image...</Property>
+            </Object>
+            <Property Name="Size">440,1038</Property>
+            <Property Name="Text">Node:GW</Property>
+            <Property Name="Location">10,10</Property>
+            <Property Name="BackColor">WhiteSmoke</Property>
+            <Property Name="Font">Verdana, 8pt, style=Bold</Property>
+            <Property Name="Name">GroupBoxControl1</Property>
+        </Object>
+        <Property Name="Size">460,1058</Property>
+        <Property Name="BackColor">Lavender</Property>
+        <Property Name="Name">GW</Property>
+    </Object>
+</Panel>

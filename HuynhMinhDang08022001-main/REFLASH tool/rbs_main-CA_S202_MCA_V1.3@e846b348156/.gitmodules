@@ -1,0 +1,3 @@
+[submodule "CA_Restbus_Gen3/cp"]
+	path = CA_Restbus_Gen3/cp
+	url = ssh://git@sourcecode01.de.bosch.com:7999/g3n/cp.git

@@ -1,0 +1,1120 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testmodule title="CA_S401_BL01_V3.0" version="1.0">
+	<variants>
+		<variant name="Automated">SRCHECKAutomated Testcase</variant>
+	</variants>
+	<testgroup title="SRCHECKAutomated Testcase">
+		<externalref type="doors" owner="TAE - DOORS extension" title="ID_2" />
+		<testgroup title="ECU RESET">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_3" />
+			<testgroup title="in Default Session">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_4" />
+				<capltestcase name="RequestResponse" title="1- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="2- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="3- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="4- ECU RESET 1101 using physical addressing" ident="-">
+					<caplparam name="Request" type="string">1101</caplparam>
+					<caplparam name="Response" type="string">5101</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="5- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="6- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="7- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="8- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="FunctionalMessage" title="9- ECU RESET 1101 using functional addressing" ident="-">
+					<caplparam name="Request" type="string">1101</caplparam>
+					<caplparam name="Response" type="string">5101</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="10- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="11- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="12- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="13- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+			</testgroup>
+			<testgroup title="in Default Session">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_5" />
+				<capltestcase name="RequestResponse" title="1- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="2- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="3- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="4- ECU RESET 1102 using physical addressing (NRC12 is reponsed)" ident="-">
+					<caplparam name="Request" type="string">1102</caplparam>
+					<caplparam name="Response" type="string">7f1112</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="5- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="6- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="7- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="8- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="FunctionalMessage" title="9- ECU RESET 1102 using functional addressing (NRC12 is reponsed)" ident="-">
+					<caplparam name="Request" type="string">1102</caplparam>
+					<caplparam name="Response" type="string" />
+					<caplparam name="CompareMode" type="string">None</caplparam>
+				</capltestcase>
+				<testcase title="10- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="11- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="12- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="13- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+			</testgroup>
+			<testgroup title="in Default Session">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_6" />
+				<capltestcase name="RequestResponse" title="1- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="2- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="3- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="4- ECU RESET 1103 using physical addressing" ident="-">
+					<caplparam name="Request" type="string">1103</caplparam>
+					<caplparam name="Response" type="string">5103</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="5- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="6- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="7- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="8- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="FunctionalMessage" title="9- ECU RESET 1103 using functional addressing" ident="-">
+					<caplparam name="Request" type="string">1103</caplparam>
+					<caplparam name="Response" type="string">5103</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="10- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="11- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="12- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="13- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+			</testgroup>
+			<testgroup title="in Extended Session">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_7" />
+				<capltestcase name="RequestResponse" title="1- Access to Extended Session" ident="-">
+					<caplparam name="Request" type="string">1003</caplparam>
+					<caplparam name="Response" type="string">5003.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="2- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="3- Check active session should be Extended Session" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}3</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="4- ECU RESET 1101 using physical addressing" ident="-">
+					<caplparam name="Request" type="string">1101</caplparam>
+					<caplparam name="Response" type="string">5101</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="5- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="6- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="7- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="8- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="9- Access to Extended Session" ident="-">
+					<caplparam name="Request" type="string">1003</caplparam>
+					<caplparam name="Response" type="string">5003.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="10- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="11- Check active session should be Extended Session" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}3</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="FunctionalMessage" title="12- ECU RESET 1101 using functional addressing" ident="-">
+					<caplparam name="Request" type="string">1101</caplparam>
+					<caplparam name="Response" type="string">5101</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="13- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="14- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="15- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="16- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+			</testgroup>
+			<testgroup title="in Extended Session">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_8" />
+				<capltestcase name="RequestResponse" title="1- Access to Extended Session" ident="-">
+					<caplparam name="Request" type="string">1003</caplparam>
+					<caplparam name="Response" type="string">5003.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="2- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="3- Check active session should be Extended Session" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}3</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="4- ECU RESET 1102 using physical addressing (NRC12 is responsed)" ident="-">
+					<caplparam name="Request" type="string">1102</caplparam>
+					<caplparam name="Response" type="string">7f1112</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="5- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="6- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="7- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="8- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="9- Access to Extended Session" ident="-">
+					<caplparam name="Request" type="string">1003</caplparam>
+					<caplparam name="Response" type="string">5003.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="10- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="11- Check active session should be Extended Session" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}3</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="FunctionalMessage" title="12- ECU RESET 1102 using functional addressing (NRC12 is reponsed)" ident="-">
+					<caplparam name="Request" type="string">1102</caplparam>
+					<caplparam name="Response" type="string" />
+					<caplparam name="CompareMode" type="string">None</caplparam>
+				</capltestcase>
+				<testcase title="13- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="14- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="15- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="16- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+			</testgroup>
+			<testgroup title="in Extended Session">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_9" />
+				<capltestcase name="RequestResponse" title="1- Access to Extended Session" ident="-">
+					<caplparam name="Request" type="string">1003</caplparam>
+					<caplparam name="Response" type="string">5003.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="2- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="3- Check active session should be Extended Session" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}3</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="4- ECU RESET 1103 using physical addressing" ident="-">
+					<caplparam name="Request" type="string">1103</caplparam>
+					<caplparam name="Response" type="string">5103</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="5- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="6- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="7- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="8- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="9- Access to Extended Session" ident="-">
+					<caplparam name="Request" type="string">1003</caplparam>
+					<caplparam name="Response" type="string">5003.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="10- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="11- Check active session should be Extended Session" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}3</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="FunctionalMessage" title="12- ECU RESET 1103 using functional addressing" ident="-">
+					<caplparam name="Request" type="string">1103</caplparam>
+					<caplparam name="Response" type="string">5103</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="13- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="14- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="15- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="16- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+			</testgroup>
+		</testgroup>
+		<testgroup title="ITC ">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_10" />
+			<testgroup title="Create 10 DTC and check ITC">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_11" />
+				<testcase title="1- Create DTCs" ident="-">
+					<set title="E_pubc_GW_GW_3C2_Tm">
+						<envvar name="E_pubc_GW_GW_3C2_Tm">0</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="2- Create DTCs" ident="-">
+					<set title="E_pubc_GW_GW_3C7_Tm">
+						<envvar name="E_pubc_GW_GW_3C7_Tm">0</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="3- Create DTCs" ident="-">
+					<set title="E_pubc_GW_GW_394_Tm">
+						<envvar name="E_pubc_GW_GW_394_Tm">0</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="4- Create DTCs" ident="-">
+					<set title="E_pubc_GW_GW_277_Tm">
+						<envvar name="E_pubc_GW_GW_277_Tm">0</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="5- Create DTCs" ident="-">
+					<set title="E_pubc_GW_GW_278_Tm">
+						<envvar name="E_pubc_GW_GW_278_Tm">0</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="6- Create DTCs" ident="-">
+					<set title="E_pubc_GW_GW_340_Tm">
+						<envvar name="E_pubc_GW_GW_340_Tm">0</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="7- Create DTCs" ident="-">
+					<set title="E_pubc_GW_GW_366_Tm">
+						<envvar name="E_pubc_GW_GW_366_Tm">0</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="8- Create DTCs" ident="-">
+					<set title="E_pubc_GW_GW_387_Tm">
+						<envvar name="E_pubc_GW_GW_387_Tm">0</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="9- Create DTCs" ident="-">
+					<set title="E_pubc_GW_GW_3C4_Tm">
+						<envvar name="E_pubc_GW_GW_3C4_Tm">0</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="10- Create DTCs" ident="-">
+					<set title="E_pubc_GW_GW_3C6_HU_RollingCounter_3C6_wrongvalctr">
+						<envvar name="E_pubc_GW_GW_3C6_HU_RollingCounter_3C6_wrongvalctr">1</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="11- Read DTCs" ident="-">
+					<caplparam name="Request" type="string">190209</caplparam>
+					<caplparam name="Response" type="string">5902.{1}[9|f|b].*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="12- Wait 10s" ident="-">
+					<wait time="10000" title="wait" />
+				</testcase>
+				<testcase title="13- Access to RBEOL" ident="-">
+					<set title="EnvRBEOL">
+						<envvar name="EnvRBEOL">1</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+					<set title="EnvRBEOL">
+						<envvar name="EnvRBEOL">0</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+				</testcase>
+				<testcase title="14- Unlock RBEOL" ident="-">
+					<set title="Env_MPC3_EOL_unlock">
+						<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+					<set title="Env_MPC3_EOL_unlock">
+						<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+				</testcase>
+				<testcase title="15- Wait 5s" ident="-">
+					<wait time="5000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="16- ITC Check for 23 22 20 00 00 84" ident="-">
+					<caplparam name="Request" type="string">232220000084</caplparam>
+					<caplparam name="Response" type="string">7f2331</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="17- ITC Check for 23 22 20 01 00 84" ident="-">
+					<caplparam name="Request" type="string">232220010084</caplparam>
+					<caplparam name="Response" type="string">7f2331</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="18- ITC Check for 23 22 20 02 00 84" ident="-">
+					<caplparam name="Request" type="string">232220020084</caplparam>
+					<caplparam name="Response" type="string">632220020084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="19- ITC Check for 23 22 20 03 00 84" ident="-">
+					<caplparam name="Request" type="string">232220030084</caplparam>
+					<caplparam name="Response" type="string">632220030084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="20- ITC Check for 23 22 20 04 00 84" ident="-">
+					<caplparam name="Request" type="string">232220040084</caplparam>
+					<caplparam name="Response" type="string">632220040084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="21- ITC Check for 23 22 20 05 00 84" ident="-">
+					<caplparam name="Request" type="string">232220050084</caplparam>
+					<caplparam name="Response" type="string">632220050084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="22- ITC Check for 23 22 20 06 00 84" ident="-">
+					<caplparam name="Request" type="string">232220060084</caplparam>
+					<caplparam name="Response" type="string">632220060084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="23- ITC Check for 23 22 20 07 00 84" ident="-">
+					<caplparam name="Request" type="string">232220070084</caplparam>
+					<caplparam name="Response" type="string">632220070084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="24- ITC Check for 23 22 20 08 00 84" ident="-">
+					<caplparam name="Request" type="string">232220080084</caplparam>
+					<caplparam name="Response" type="string">632220080084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="25- ITC Check for 23 22 20 09 00 84" ident="-">
+					<caplparam name="Request" type="string">232220090084</caplparam>
+					<caplparam name="Response" type="string">632220090084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="26- ITC Check for 23 22 20 0A 00 84" ident="-">
+					<caplparam name="Request" type="string">2322200a0084</caplparam>
+					<caplparam name="Response" type="string">6322200a0084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="27- ITC Check for 23 22 20 0B 00 84" ident="-">
+					<caplparam name="Request" type="string">2322200b0084</caplparam>
+					<caplparam name="Response" type="string">6322200b0084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="28- ITC Check for 23 22 20 0C 00 84" ident="-">
+					<caplparam name="Request" type="string">2322200c0084</caplparam>
+					<caplparam name="Response" type="string">7f2331</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="29- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="30- Reset ECU to access to default session" ident="-">
+					<caplparam name="Request" type="string">1101</caplparam>
+					<caplparam name="Response" type="string">5101</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="31- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="32- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="33- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="34- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="35- Remove DTCs" ident="-">
+					<set title="E_pubc_GW_GW_3C2_Tm">
+						<envvar name="E_pubc_GW_GW_3C2_Tm">1</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="36- Remove DTCs" ident="-">
+					<set title="E_pubc_GW_GW_3C7_Tm">
+						<envvar name="E_pubc_GW_GW_3C7_Tm">1</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="37- Remove DTCs" ident="-">
+					<set title="E_pubc_GW_GW_394_Tm">
+						<envvar name="E_pubc_GW_GW_394_Tm">1</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="38- Remove DTCs" ident="-">
+					<set title="E_pubc_GW_GW_277_Tm">
+						<envvar name="E_pubc_GW_GW_277_Tm">1</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="39- Remove DTCs" ident="-">
+					<set title="E_pubc_GW_GW_278_Tm">
+						<envvar name="E_pubc_GW_GW_278_Tm">1</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="40- Remove DTCs" ident="-">
+					<set title="E_pubc_GW_GW_340_Tm">
+						<envvar name="E_pubc_GW_GW_340_Tm">1</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="41- Remove DTCs" ident="-">
+					<set title="E_pubc_GW_GW_366_Tm">
+						<envvar name="E_pubc_GW_GW_366_Tm">1</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="42- Remove DTCs" ident="-">
+					<set title="E_pubc_GW_GW_387_Tm">
+						<envvar name="E_pubc_GW_GW_387_Tm">1</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="43- Remove DTCs" ident="-">
+					<set title="E_pubc_GW_GW_3C4_Tm">
+						<envvar name="E_pubc_GW_GW_3C4_Tm">1</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+				<testcase title="44- Remove DTCs" ident="-">
+					<set title="E_pubc_GW_GW_3C6_HU_RollingCounter_3C6_wrongvalctr">
+						<envvar name="E_pubc_GW_GW_3C6_HU_RollingCounter_3C6_wrongvalctr">1</envvar>
+					</set>
+					<wait time="500" title="wait" />
+				</testcase>
+			</testgroup>
+			<testgroup title="Create 1 DTC and check ITC">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_12" />
+				<testcase title="1- Create 1 DTC lost communication of message GW_1A6" ident="-">
+					<set title="E_pubc_GW_GW_390_Tm">
+						<envvar name="E_pubc_GW_GW_390_Tm">0</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="2- Read DTCs" ident="-">
+					<caplparam name="Request" type="string">190209</caplparam>
+					<caplparam name="Response" type="string">5902.{1}[9|f|b].*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="3- Access to RBEOL" ident="-">
+					<set title="EnvRBEOL">
+						<envvar name="EnvRBEOL">1</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+					<set title="EnvRBEOL">
+						<envvar name="EnvRBEOL">0</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+				</testcase>
+				<testcase title="4- Unlock RBEOL" ident="-">
+					<set title="Env_MPC3_EOL_unlock">
+						<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+					<set title="Env_MPC3_EOL_unlock">
+						<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+				</testcase>
+				<testcase title="5- Wait 5s" ident="-">
+					<wait time="5000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="6- ITC Check for 23 22 20 00 00 84" ident="-">
+					<caplparam name="Request" type="string">232220000084</caplparam>
+					<caplparam name="Response" type="string">7f2331</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="7- ITC Check for 23 22 20 01 00 84" ident="-">
+					<caplparam name="Request" type="string">232220010084</caplparam>
+					<caplparam name="Response" type="string">7f2331</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="8- ITC Check for 23 22 20 02 00 84" ident="-">
+					<caplparam name="Request" type="string">232220020084</caplparam>
+					<caplparam name="Response" type="string">632220020084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="9- ITC Check for 23 22 20 03 00 84" ident="-">
+					<caplparam name="Request" type="string">232220030084</caplparam>
+					<caplparam name="Response" type="string">632220030084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="10- ITC Check for 23 22 20 04 00 84" ident="-">
+					<caplparam name="Request" type="string">232220040084</caplparam>
+					<caplparam name="Response" type="string">632220040084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="11- ITC Check for 23 22 20 05 00 84" ident="-">
+					<caplparam name="Request" type="string">232220050084</caplparam>
+					<caplparam name="Response" type="string">632220050084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="12- ITC Check for 23 22 20 06 00 84" ident="-">
+					<caplparam name="Request" type="string">232220060084</caplparam>
+					<caplparam name="Response" type="string">632220060084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="13- ITC Check for 23 22 20 07 00 84" ident="-">
+					<caplparam name="Request" type="string">232220070084</caplparam>
+					<caplparam name="Response" type="string">632220070084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="14- ITC Check for 23 22 20 08 00 84" ident="-">
+					<caplparam name="Request" type="string">232220080084</caplparam>
+					<caplparam name="Response" type="string">632220080084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="15- ITC Check for 23 22 20 09 00 84" ident="-">
+					<caplparam name="Request" type="string">232220090084</caplparam>
+					<caplparam name="Response" type="string">632220090084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="16- ITC Check for 23 22 20 0A 00 84" ident="-">
+					<caplparam name="Request" type="string">2322200a0084</caplparam>
+					<caplparam name="Response" type="string">6322200a0084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="17- ITC Check for 23 22 20 0B 00 84" ident="-">
+					<caplparam name="Request" type="string">2322200b0084</caplparam>
+					<caplparam name="Response" type="string">6322200b0084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="18- ITC Check for 23 22 20 0C 00 84" ident="-">
+					<caplparam name="Request" type="string">2322200c0084</caplparam>
+					<caplparam name="Response" type="string">7f2331</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="19- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="20- Reset ECU to access to default session" ident="-">
+					<caplparam name="Request" type="string">1101</caplparam>
+					<caplparam name="Response" type="string">5101</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="21- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="22- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="23- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="24- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="25- Remove DTC lost communication of message GW_1A6" ident="-">
+					<set title="E_pubc_GW_GW_390_Tm">
+						<envvar name="E_pubc_GW_GW_390_Tm">1</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+				</testcase>
+			</testgroup>
+			<testgroup title="Reset Power after the above testcase and check ITC">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_13" />
+				<capltestcase name="RequestResponse" title="1- Reset ECU" ident="-">
+					<caplparam name="Request" type="string">1101</caplparam>
+					<caplparam name="Response" type="string">5101</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="2- Create 1 DTC lost communication of message GW_1A6" ident="-">
+					<set title="E_pubc_GW_GW_390_Tm">
+						<envvar name="E_pubc_GW_GW_390_Tm">0</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="3- Read DTCs" ident="-">
+					<caplparam name="Request" type="string">190209</caplparam>
+					<caplparam name="Response" type="string">5902.{1}[9|f|b].*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="4- Access to RBEOL" ident="-">
+					<set title="EnvRBEOL">
+						<envvar name="EnvRBEOL">1</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+					<set title="EnvRBEOL">
+						<envvar name="EnvRBEOL">0</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+				</testcase>
+				<testcase title="5- Unlock RBEOL" ident="-">
+					<set title="Env_MPC3_EOL_unlock">
+						<envvar name="Env_MPC3_EOL_unlock">1</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+					<set title="Env_MPC3_EOL_unlock">
+						<envvar name="Env_MPC3_EOL_unlock">0</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+				</testcase>
+				<testcase title="6- Wait 5s" ident="-">
+					<wait time="5000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="7- ITC Check for 23 22 20 00 00 84" ident="-">
+					<caplparam name="Request" type="string">232220000084</caplparam>
+					<caplparam name="Response" type="string">7f2331</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="8- ITC Check for 23 22 20 01 00 84" ident="-">
+					<caplparam name="Request" type="string">232220010084</caplparam>
+					<caplparam name="Response" type="string">7f2331</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="9- ITC Check for 23 22 20 02 00 84" ident="-">
+					<caplparam name="Request" type="string">232220020084</caplparam>
+					<caplparam name="Response" type="string">632220020084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="10- ITC Check for 23 22 20 03 00 84" ident="-">
+					<caplparam name="Request" type="string">232220030084</caplparam>
+					<caplparam name="Response" type="string">632220030084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="11- ITC Check for 23 22 20 04 00 84" ident="-">
+					<caplparam name="Request" type="string">232220040084</caplparam>
+					<caplparam name="Response" type="string">632220040084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="12- ITC Check for 23 22 20 05 00 84" ident="-">
+					<caplparam name="Request" type="string">232220050084</caplparam>
+					<caplparam name="Response" type="string">632220050084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="13- ITC Check for 23 22 20 06 00 84" ident="-">
+					<caplparam name="Request" type="string">232220060084</caplparam>
+					<caplparam name="Response" type="string">632220060084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="14- ITC Check for 23 22 20 07 00 84" ident="-">
+					<caplparam name="Request" type="string">232220070084</caplparam>
+					<caplparam name="Response" type="string">632220070084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="15- ITC Check for 23 22 20 08 00 84" ident="-">
+					<caplparam name="Request" type="string">232220080084</caplparam>
+					<caplparam name="Response" type="string">632220080084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="16- ITC Check for 23 22 20 09 00 84" ident="-">
+					<caplparam name="Request" type="string">232220090084</caplparam>
+					<caplparam name="Response" type="string">632220090084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="17- ITC Check for 23 22 20 0A 00 84" ident="-">
+					<caplparam name="Request" type="string">2322200a0084</caplparam>
+					<caplparam name="Response" type="string">6322200a0084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="18- ITC Check for 23 22 20 0B 00 84" ident="-">
+					<caplparam name="Request" type="string">2322200b0084</caplparam>
+					<caplparam name="Response" type="string">6322200b0084.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="19- ITC Check for 23 22 20 0C 00 84" ident="-">
+					<caplparam name="Request" type="string">2322200c0084</caplparam>
+					<caplparam name="Response" type="string">7f2331</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="20- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="21- Reset ECU to access to default session" ident="-">
+					<caplparam name="Request" type="string">1101</caplparam>
+					<caplparam name="Response" type="string">5101</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="22- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="23- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="24- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="25- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="26- Remove DTC lost communication of message GW_1A6" ident="-">
+					<set title="E_pubc_GW_GW_390_Tm">
+						<envvar name="E_pubc_GW_GW_390_Tm">1</envvar>
+					</set>
+					<wait time="1000" title="wait" />
+				</testcase>
+			</testgroup>
+		</testgroup>
+		<testgroup title="SESSION TRANSITION">
+			<externalref type="doors" owner="TAE - DOORS extension" title="ID_14" />
+			<testgroup title="Default SS to Extended SS directly and vice versa">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_15" />
+				<capltestcase name="RequestResponse" title="1- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="2- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="3- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f186</caplparam>
+					<caplparam name="Response" type="string">62f186.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="4- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="5- Access to Extended Session" ident="-">
+					<caplparam name="Request" type="string">1003</caplparam>
+					<caplparam name="Response" type="string">5003.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="6- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="7- Check active session should be Extended" ident="-">
+					<caplparam name="Request" type="string">22f186</caplparam>
+					<caplparam name="Response" type="string">62f186.{1}3</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="8- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="9- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="10- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="11- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f186</caplparam>
+					<caplparam name="Response" type="string">62f186.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+			</testgroup>
+			<testgroup title="Default SS to Programming SS directly and vice versa">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_16" />
+				<capltestcase name="RequestResponse" title="1- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="2- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="3- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f186</caplparam>
+					<caplparam name="Response" type="string">62f186.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="4- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="5- Access to Programming Session (can’t access directly and NRC 7E is responsed)" ident="-">
+					<caplparam name="Request" type="string">1002</caplparam>
+					<caplparam name="Response" type="string">7f107e</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="6- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="7- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f186</caplparam>
+					<caplparam name="Response" type="string">62f186.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="8- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="9- Access to Extended Session before access to Programming session" ident="-">
+					<caplparam name="Request" type="string">1003</caplparam>
+					<caplparam name="Response" type="string">5003.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="10- Tester Present ON" ident="-">
+					<caplparam name="Request" type="string">3e00</caplparam>
+					<caplparam name="Response" type="string">7e00</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="11- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="12- Check active session should be Extended" ident="-">
+					<caplparam name="Request" type="string">22f186</caplparam>
+					<caplparam name="Response" type="string">62f186.{1}3</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="13- Access to Programming Session" ident="-">
+					<caplparam name="Request" type="string">1002</caplparam>
+					<caplparam name="Response" type="string">5002.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="14- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="15- Check active session should be Programming" ident="-">
+					<caplparam name="Request" type="string">22f186</caplparam>
+					<caplparam name="Response" type="string">62f186.{1}2</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="16- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="17- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="18- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f186</caplparam>
+					<caplparam name="Response" type="string">62f186.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+			</testgroup>
+			<testgroup title="Programming SS to Extended SS directly and vice versa">
+				<externalref type="doors" owner="TAE - DOORS extension" title="ID_17" />
+				<capltestcase name="RequestResponse" title="1- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="2- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="3- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f186</caplparam>
+					<caplparam name="Response" type="string">62f186.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="4- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="5- Access to Extended Session before access to Programming session" ident="-">
+					<caplparam name="Request" type="string">1003</caplparam>
+					<caplparam name="Response" type="string">5003.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="6- Tester Present ON" ident="-">
+					<caplparam name="Request" type="string">3e00</caplparam>
+					<caplparam name="Response" type="string">7e00</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="7- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="8- Check active session should be Extended" ident="-">
+					<caplparam name="Request" type="string">22f186</caplparam>
+					<caplparam name="Response" type="string">62f186.{1}3</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="9- Access to Programming Session" ident="-">
+					<caplparam name="Request" type="string">1002</caplparam>
+					<caplparam name="Response" type="string">5002.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="10- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="11- Check active session should be Programming" ident="-">
+					<caplparam name="Request" type="string">22f1fd</caplparam>
+					<caplparam name="Response" type="string">62f1fd.{1}2</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="12- Access to Extended Session (can’t access directly and NRC 7E is responsed)" ident="-">
+					<caplparam name="Request" type="string">1003</caplparam>
+					<caplparam name="Response" type="string">7f107e</caplparam>
+					<caplparam name="CompareMode" type="string">Equal</caplparam>
+				</capltestcase>
+				<testcase title="13- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="14- Check active session should be Programming" ident="-">
+					<caplparam name="Request" type="string">22f186</caplparam>
+					<caplparam name="Response" type="string">62f186.{1}2</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<capltestcase name="RequestResponse" title="15- Access to Default Session" ident="-">
+					<caplparam name="Request" type="string">1001</caplparam>
+					<caplparam name="Response" type="string">5001.*</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+				<testcase title="16- Wait 3s" ident="-">
+					<wait time="3000" title="wait" />
+				</testcase>
+				<capltestcase name="RequestResponse" title="17- Check active session should be Default" ident="-">
+					<caplparam name="Request" type="string">22f186</caplparam>
+					<caplparam name="Response" type="string">62f186.{1}1</caplparam>
+					<caplparam name="CompareMode" type="string">Regexp</caplparam>
+				</capltestcase>
+			</testgroup>
+		</testgroup>
+	</testgroup>
+</testmodule>

@@ -1,0 +1,1118 @@
+/*@!Encoding:1252*/
+variables
+{    
+    /*Debug*/
+    int     g_debug = 0;
+    
+    /*Globals*/
+    int     ByteSize;
+    int     SID;
+    int     StoredSignalValue;
+    char    byteString[2048];
+    char    seedString[2048];
+    byte    seedData[2048];
+    
+    /* ReadDataByID data */
+    byte    RqTxData[2048];
+    char    RqTxStringData[4096];
+    byte    RsRxIntData[2048];
+    char    RsRxStringData[2048];
+    
+    /* XCP messages */
+    //message XCP_Kamera_CRO_01 Msg_XCP_Kamera_CRO_01;
+   // message XCP_Kamera_DTO_01 Msg_XCP_Kamera_DTO_01;
+    message 0x731 DSDL;
+
+    //msTimer 20_ms;
+    msTimer     Act20ms;
+    //message XCP_MPC_CRO       Msg_XCP_MPC_CRO;
+    //message XCP_MPC_DTO       Msg_XCP_MPC_DTO;
+    
+    /* Handle to switch within the TP Rx routines */
+    long routineHandle = 0;
+    char g_TextEvent[12];
+}
+
+on preStart
+{
+    dword BusContext;
+    int stMinTime;
+    int blockSize;
+    int rxId;
+    int txId;
+
+    //putValue(EnvFilePath,"");
+
+    /* Set Bus context for correct CAN channel usage */
+    if (1 == g_debug)
+    {
+        BusContext = GetBusContext();
+        write("BusContext pre set = %x",BusContext); //Debugmsg   
+    }
+    SetBusContext(0x10001); //Set CAN channel
+    CanOnline(3); //reset CAN
+    BusContext = GetBusContext(); //Read CAN bus channel context
+    write("BusContext set = %x",BusContext);
+
+    stMinTime = 0x14;
+    blockSize = 0x08;
+    rxId = 0x70C;
+    txId = 0x704;
+
+    SysSetVariableString(sysvar::Diag::SessionID, "0xFF");
+    SysSetVariableString(sysvar::Diag::Data, "0xFF");
+    SysSetVariableString(sysvar::Diag::ServiceID, "0xFF");
+    SysSetVariableString(sysvar::Diag::LocalID, "0xFFFF");
+
+    /* Init */
+    OSEKTL_SetTxId(txId);
+    OSEKTL_SetRxId(rxId);
+    OSEKTL_SetSTMIN(stMinTime);
+    OSEKTL_SetBS(blockSize);
+    OSEKTL_SetNrmlMode();
+    /****************/
+}
+
+testcase EstablishXCPConnection(int CANChannel)
+{
+    long result;
+    long timeOutValue;
+    
+    result = 0;
+    timeOutValue = 2000;
+
+//    switch(CANChannel)
+//    {
+//      case 1:
+//        /*Msg_XCP_CRO_BoschVideo.Byte(0)=0xFF;
+//        Msg_XCP_CRO_BoschVideo.Byte(1)=0x00;
+//        Msg_XCP_CRO_BoschVideo.Byte(2)=0x00;
+//        Msg_XCP_CRO_BoschVideo.Byte(3)=0x00;
+//        Msg_XCP_CRO_BoschVideo.Byte(4)=0x00;
+//        Msg_XCP_CRO_BoschVideo.Byte(5)=0x00;
+//        Msg_XCP_CRO_BoschVideo.Byte(6)=0x00;
+//        Msg_XCP_CRO_BoschVideo.Byte(7)=0x00;*/
+//
+//        TestWaitForTimeout(500);
+//        //output(Msg_XCP_CRO_BoschVideo);
+//        
+//        result = TestWaitForTextEvent("XCPConnection CAN1", timeOutValue);
+//      break;
+//      
+//      case 2:
+//        Msg_XCP_Kamera_CRO_01.Byte(0)=0xFF;
+//        Msg_XCP_Kamera_CRO_01.Byte(1)=0x00;
+//        Msg_XCP_Kamera_CRO_01.Byte(2)=0x00;
+//        Msg_XCP_Kamera_CRO_01.Byte(3)=0x00;
+//        Msg_XCP_Kamera_CRO_01.Byte(4)=0x00;
+//        Msg_XCP_Kamera_CRO_01.Byte(5)=0x00;
+//        Msg_XCP_Kamera_CRO_01.Byte(6)=0x00;
+//        Msg_XCP_Kamera_CRO_01.Byte(7)=0x00;
+//
+//        TestWaitForTimeout(500);
+//        output(Msg_XCP_Kamera_CRO_01);
+//        
+//        result = TestWaitForTextEvent("XCPConnection CAN2", timeOutValue);
+//      break;
+//    }
+//
+//    switch(result)
+//    {
+//        case 0:
+//            TestStepFail("1.0","Timeout while waiting for XCP connection");
+//        break;
+//
+//        case 1:
+//            TestStepPass("1.0","XCP connection established!");
+//        break;
+//
+//    }
+}
+
+CharArray2Byte(char convertable_array[])
+{
+
+    int i;
+    char c1,c2;
+    int strIndex;
+    
+    strIndex = 0;
+    
+    for (i = 0; i < elcount(RqTxStringData); i++)
+      {
+          RqTxStringData[i] = 0;
+      } 
+   
+    for (i = 0; i < elcount(convertable_array); i++)
+     {
+      RqTxStringData[i] = convertable_array[i];     //RqTxStringData is a global variable
+     }
+
+    ByteSize = 0;  //ByteSize is a global variable
+    for (i = 0; i < (strlen(RqTxStringData)/2); i++)
+    {
+        strIndex = i * 2;
+         
+        c1 = RqTxStringData[strIndex];
+        c2 = RqTxStringData[strIndex + 1];
+//        write ("Here is c1: %c and c2: %c", c1, c2);
+        RqTxData[i] = char2byte(c1, 16) + char2byte(c2, 1);     // RqTxData is a global variable
+        ByteSize++;
+    }
+    SID = RqTxData[0];
+}
+
+setType(int rxId, int txId)
+{
+// TODO:   Check if the rxId an txId is a valid hex format
+
+//They will be from now the message IDs in CAN
+  OSEKTL_SetTxId(txId);   
+  OSEKTL_SetRxId(rxId);
+}
+
+RequestResponseCompareLogic(char Request[], char Response[], char CompareMode[])
+{
+
+    byte responsePending;
+    long result;
+    long timeOutValue;
+    int numberRPs;
+    
+    responsePending = 0;
+    numberRPs = 0;
+    timeOutValue = 5000;
+
+    if(0 == strncmp("Equal", CompareMode,strlen(CompareMode)))
+      {
+//        write ("###### CompareMode: %s ", CompareMode);
+        TestStep("INFO","The CompareMode is: %s", CompareMode);
+      }
+    else if(0 == strncmp("Regexp", CompareMode,strlen(CompareMode)))
+      {
+//        write ("###### CompareMode: %s ", CompareMode);
+        TestStep("INFO","The CompareMode is: %s", CompareMode);
+      } 
+    else if(0 == strncmp("None", CompareMode,strlen(CompareMode)))
+      {
+//        write ("###### CompareMode: %s ", CompareMode);
+        TestStep("INFO","The CompareMode is: %s", CompareMode);
+      }
+    else 
+      {
+//        write("###### CompareMode is invalid: %s ", CompareMode");
+        TestStepFail("INFO","The CompareMode is not valid!");
+        TestStepFail("INFO","Please choose from the following CompareMode types: Equal, Regexp, None!");
+      }
+
+    CharArray2Byte(Request);              // It is necessary to convert the char array to byte array before sending it out with the inside Vector function
+    TestStep("INFO","REQUEST: %s", Request);
+    //OSEKTL_ActivateAck(1);
+    OSEKTL_DataReq(RqTxData, ByteSize);   //Sending out Request in a RxTxData global byte array
+    
+    setType (0x7B1,0x731);
+    //check whether the CompareMode is None
+    //if yes, no response is expected
+    if (0 != strncmp("None", CompareMode,strlen(CompareMode)))
+    {  
+      do
+      { 
+          responsePending = 0;
+          result = TestWaitForTextEvent("TpMsgReceived", timeOutValue);
+          if(result == 0)
+          {  
+              TestStepFail("INFO","Timeout while waiting for diag response");          
+          }
+          else if(result == 1)
+          { 
+              TestStep("INFO","Diag response received!");
+              TestStep("INFO","EXPECTED: %s", Response);
+              TestStep("INFO","RECEIVED: %s", byteString);
+              
+              //Negative branch starts
+              if( RsRxIntData[0] == 0x7f && RsRxIntData[1] == SID ) 
+              { 
+                  if( RsRxIntData[2] == 0x78 )
+                  {
+                      TestStep("INFO","Response Pending received from ECU");
+                      responsePending = 1;
+                      numberRPs++;
+                      timeOutValue = 10000;
+                  }
+                  else
+                  {
+                      TestStep("INFO","Negative response received!");
+
+                      if(0 == strncmp("Equal", CompareMode, strlen("Equal")))
+                      {   
+                          if(0 == strncmp(byteString, Response, strlen(Response)) && strlen(byteString) == strlen(Response))
+                          {
+                              TestStepPass("INFO","Expected NRC received!");
+                          }
+                          else
+                          {   
+                              TestStepFail("INFO","Unexpected NRC received!");
+                          }
+                      }
+                      else
+                      {
+                          if(0 == strncmp("Regexp", CompareMode,strlen("Regexp")))
+                          {   
+//                              write("Debug ==> the value of the byteString: %s and the Response is: %s", byteString, Response);
+                              if(1 == str_match_regex(byteString, Response))
+                              {
+                                  TestStepPass("INFO","Expected substring in NRC received!");
+                              }
+                              else
+                              {
+                                  TestStepFail("INFO","NRC contains not expected substring!");
+                              }
+                          }
+                      }
+                  }
+
+              }
+              // End of negative branch
+              
+              //Positive branch starts
+              if( RsRxIntData[0] == (SID + 0x40) )  
+              {
+                  TestStep("INFO","Positive Response from ECU!");
+
+                  if(0 == strncmp("Equal", CompareMode,strlen("Equal")))
+                  {
+                      if(0 == strncmp(byteString, Response, strlen(Response))&& strlen(byteString) == strlen(Response))
+                      {
+                          TestStepPass("INFO","Expected response received!");
+                      }
+                      else
+                      {
+                          TestStepFail("INFO","Unexpected response received!");
+                      }
+                  }
+                  else
+                  {   
+                          if(0 == strncmp("Regexp", CompareMode,strlen("Regexp")))
+                          {   
+//                              write("Debug ==> the value of the byteString: %s and the Response is: %s", byteString, Response);
+                              if(1 == str_match_regex(byteString, Response))
+                          {
+                              TestStepPass("INFO","Expected substring in response received!");
+                          }
+                          else
+                          {
+                              TestStepFail("INFO","Response contains not expected substring!");
+                          }
+                      }
+                  }
+              }
+
+          }
+         
+      } while( (responsePending == 1) && (numberRPs < 24) );  //Pending response handling
+
+      if( responsePending == 1 )
+      {
+          TestStepFail("INFO","Timeout while waiting for diag response!");
+      }
+    }
+    else 
+    {
+        timeOutValue = 5000;
+    //  write("CompareMode is None, no response is required!");
+        result = TestWaitForTextEvent("TpMsgReceived", timeOutValue);
+    //  write ("Here is the response result: %d", result);
+        TestStep("INFO","CompareMode is None, no response is required!");
+        if( result == 0 )
+        {   
+            TestStepPass("INFO","Response did not arrive as expected!");
+        }
+        else
+        {
+            TestStepFail("INFO","Response arrived but it was NOT expected!");
+        }
+    }
+
+}
+
+//Save the previously received response to a global variable
+void saveResponse()
+{
+    int i;
+    for (i=1; i<2048; i++)
+    { 
+        seedString[i] = byteString[i];
+        seedData[i] =  RsRxIntData[i];
+        //write(">>save<< seedString values: %c",seedString[i]);
+    }
+}
+
+//Compare the previously saved seed with the actual.
+int compareSeedAlgo()
+{
+    int i, equal;
+    equal = 0;
+    for (i=4; i<12; i++)
+    { 
+        write("seedString values: %c",seedString[i]);
+        write("byteString values: %c",byteString[i]);
+        if (seedString[i] != byteString[i])
+        {
+            equal++;
+        }
+    }
+    if (equal == 0)
+    {   
+        return 1;//TestStepPass("INFO","Seeds are identical!");
+    }
+    else
+    {
+        return 0;//TestStepFail("INFO","Seeds are different!");
+    }
+}
+
+//Send key to the camera based on the previously saved seed
+void sendKeyAlgo(char sendKey[], char sendKeyResponse[], dword Pin)
+{
+	dword authKey;
+    byte resultarray[6] = {0,0,0,0,0,0};
+
+    resultarray[0] = char2byte(sendKey[0], 16) + char2byte(sendKey[1], 1);
+    resultarray[1] = char2byte(sendKey[2], 16) + char2byte(sendKey[3], 1);
+
+    authKey = seedData[5] |
+           (seedData[4] << 8) |
+           (seedData[3] << 16) |
+           (seedData[2] << 24);
+      
+    authKey = authKey + Pin;
+        
+    resultarray[5] = (byte)(authKey & 0xff);
+	resultarray[4] = (byte)((authKey >> 8) & 0xff);
+	resultarray[3] = (byte)((authKey >> 16) & 0xff);
+	resultarray[2] = (byte)((authKey >> 24) & 0xff);
+      
+    CreateByteString(resultarray, 0, elcount(resultarray));
+
+    if(0 == strncmp("None", sendKeyResponse,strlen(sendKeyResponse)))
+    {
+        RequestResponseCompareLogic(byteString, "", "None");
+    }
+    else
+    {
+        RequestResponseCompareLogic(byteString, sendKeyResponse, "Equal");
+    }  
+}
+
+void sendKeyAlgoREP(char sendKey[], char sendKeyResponse[], dword REP_A_Key, dword REP_B_Key, dword REP_C_Key, dword REP_D_Key)
+{
+    dword authKey;
+    dword tempkey;
+    dword keyLowValue, keyUpperValue;
+    dword keyMaxValue = 0xFFFFFFFF; 
+    int i;
+    byte resultarray[6] = {0,0,0,0,0,0};
+
+    resultarray[0] = char2byte(sendKey[0], 16) + char2byte(sendKey[1], 1);
+    resultarray[1] = char2byte(sendKey[2], 16) + char2byte(sendKey[3], 1);
+
+    authKey = seedData[5] |
+           (seedData[4] << 8) |
+           (seedData[3] << 16) |
+           (seedData[2] << 24);
+               
+    for(i = 0; i <7 ; i++)
+    {
+
+        tempkey = authKey ;
+        authKey = authKey + REP_A_Key;
+        // write(" tempkey and authKey  for j value %i beginning loop: %lx, %lx ",j, tempkey, authKey );    
+
+        if((keyMaxValue - REP_A_Key) < tempkey)
+        {
+        /* Rotate Right by 10 */
+            keyLowValue = authKey & (0x000003FF);
+            keyUpperValue = keyLowValue << 22;
+            authKey = authKey >> 10;
+            authKey = authKey | keyUpperValue;
+            authKey = authKey ^ REP_B_Key;
+        }
+        else
+        {
+        /* Rotate Left by 13 */
+            keyUpperValue = authKey & (0xFFF80000);
+            keyLowValue   = keyUpperValue >> 19;
+            authKey      = authKey << 13;
+            authKey      = authKey | keyLowValue;
+            authKey      = authKey ^ REP_C_Key;
+        }
+    }
+
+    authKey = authKey - REP_D_Key;
+        
+    resultarray[5] = (byte)(authKey & 0xff);
+	resultarray[4] = (byte)((authKey >> 8) & 0xff);
+	resultarray[3] = (byte)((authKey >> 16) & 0xff);
+	resultarray[2] = (byte)((authKey >> 24) & 0xff);
+      
+    CreateByteString(resultarray, 0, elcount(resultarray));
+
+    if(0 == strncmp("None", sendKeyResponse,strlen(sendKeyResponse)))
+    {
+        RequestResponseCompareLogic(byteString, "", "None");
+    }
+    else
+    {
+        RequestResponseCompareLogic(byteString, sendKeyResponse, "Equal");
+    }
+}
+
+void sendKeyAlgoRBEOL(char sendKey[], char sendKeyResponse[], dword RBEOLPin, dword PMARequest)
+{
+	  //Calculation of the key is described in MPC2 MDC DCOM BASE module:
+      //doors://abt-doors-da.de.bosch.com:36665/?version=2&prodID=0&view=0000001d&urn=urn:telelogic::1-4147106800294823-O-1044-0002a241
+      dword authKey;
+      byte resultarray[6] = {0,0,0,0,0,0};
+      
+      resultarray[0] = char2byte(sendKey[0], 16) + char2byte(sendKey[1], 1);
+      resultarray[1] = char2byte(sendKey[2], 16) + char2byte(sendKey[3], 1);
+      
+      authKey = seedData[5] |
+               (seedData[4] << 8) |
+               (seedData[3] << 16) |
+               (seedData[2] << 24);
+               
+      authKey = authKey & RBEOLPin; //It has been derived from the ASCII values of "Bosch Diagnostics for Driver Assistance"
+      authKey = authKey | PMARequest; //Plant mode activation part request
+      
+      resultarray[5] = (byte)(authKey & 0xff);
+	  resultarray[4] = (byte)((authKey >> 8) & 0xff);
+	  resultarray[3] = (byte)((authKey >> 16) & 0xff);
+	  resultarray[2] = (byte)((authKey >> 24) & 0xff);
+      
+      CreateByteString(resultarray, 0, elcount(resultarray));
+
+      if(0 == strncmp("None", sendKeyResponse,strlen(sendKeyResponse)))
+      {
+        RequestResponseCompareLogic(byteString, "", "None");
+      }
+      else
+      {
+        RequestResponseCompareLogic(byteString, sendKeyResponse, "Equal");
+      }
+}
+
+changeSession(int sessionId)
+{
+	  byte buffer[2];
+    long result;
+    byte responsePending = 0;
+    int  numberRPs;
+    long timeOutValue = 1000;
+    long rc = 0;
+
+    buffer[0] = 0x10;
+    buffer[1] = sessionId;
+
+    OSEKTL_DataReq(buffer, 2);
+
+    do
+    {
+        responsePending = 0;
+        result = TestWaitForTextEvent("TpMsgReceived", timeOutValue);
+
+        if(result == 0)
+        {
+            TestStepFail("INFO","Timeout while waiting for diag response");          
+        }
+        else if(result == 1)
+        {
+            TestStep("INFO","Diag response received!");
+            TestStep("INFO","$%02x %02x %02x %02x %02x %02x %02x", RsRxIntData[0], RsRxIntData[1], RsRxIntData[2], RsRxIntData[3], RsRxIntData[4], RsRxIntData[5], RsRxIntData[6]);
+            
+            if( RsRxIntData[0] == 0x7f && RsRxIntData[1] == 0x10 )
+            {
+                if( RsRxIntData[2] == 0x78 )
+                {
+                    TestStep("INFO","Response Pending received from ECU");
+                    responsePending = 1;
+                    numberRPs++;
+                    timeOutValue = 5000;
+                }
+                else
+                {
+                    TestStepFail("INFO","Diag session could not be set!");
+                }
+
+            }
+            else if( RsRxIntData[0] == 0x50 && RsRxIntData[1] == sessionId )
+            {
+                TestStepPass("INFO","Diag session successfully set!");
+            }
+            else
+            {
+                TestStep("INFO","Waiting...");
+                responsePending = 1;
+            }
+
+        }
+
+    } while( (responsePending == 1) && (numberRPs < 24) );
+}
+
+/*on message XCP_MPC_DTO
+{
+    Msg_XCP_MPC_DTO = this;
+
+    if(Msg_XCP_MPC_DTO.byte(0) == 0xFF)
+    {
+      TestSupplyTextEvent("XCPConnection CAN1");
+    }
+}*/
+
+/*on message XCP_Kamera_DTO_01
+{
+    Msg_XCP_Kamera_DTO_01 = this;
+
+    if(Msg_XCP_Kamera_DTO_01.byte(0) == 0xFF)
+    {
+      TestSupplyTextEvent("XCPConnection CAN2");
+    }
+}*/
+
+OSEKTL_DataCon (long c)
+{
+    TestStep("INFO","Data Transmission done!");
+    //write ("Successfully sent data length: %d", c);
+}
+
+OSEKTL_DataInd (long count)
+{
+    int RIP;
+    int i = 0;
+    //char tmpString[255];
+
+    RIP = SID + 0x40;
+    OSEKTL_GetRxData(RsRxIntData, elcount(RsRxIntData));
+
+    if(count <= elcount(RsRxIntData))
+    {
+        if(0x7F == RsRxIntData[0] &&
+           0x21 == RsRxIntData[2]  )
+        {
+           
+            OSEKTL_DataReq(RqTxData, ByteSize);
+            write("Busy Repeat Request detected -> Repeat last request!");
+            write("***********************************************************");
+        }
+        else if(0x7F == RsRxIntData[0] && 0x36 == RsRxIntData[1] &&
+           0x78 == RsRxIntData[2]  )
+        {
+            OSEKTL_FI_AbortTx();
+            setTimer(Act20ms,20);
+
+        }
+        else
+        {
+          switch(routineHandle)
+          {
+            case 10:
+                CreateByteString(RsRxIntData, 0, count);
+                snprintf(g_TextEvent, elcount(g_TextEvent), "Datablock%d",RsRxIntData[1]);
+                TestSupplyTextEvent(g_TextEvent);
+                break;
+       // write("Debug ==> the value of RsRxIntData is: - %x", RsRxIntData[1]);
+            default:
+                CreateByteString(RsRxIntData, 0, count);
+                TestSupplyTextEvent("TpMsgReceived");
+                break;
+          }
+        }
+    }
+}
+
+OSEKTL_ErrorInd(int error)
+{
+    
+
+
+long FI_ID ;
+
+write("Surya TP Error %d", error);
+
+    if (!OSEKTL_GetRxId())
+    {	
+    switch( error )
+	{
+		case 1: 	
+			write(" Error (%d): Timeout while waiting for CF",  error );
+			putValue( EnvReqStatus_CAN, "Timeout while waiting for CF" );
+			putValue( EnvRespTime_CAN, OSEKTL_GetTimeoutCF() );	
+		break;
+
+		case 2: 	
+			write(" Error (%d): Timeout while waiting for FC",  error ); 
+			putValue( EnvReqStatus_CAN, "Timeout while waiting for FC" );
+			putValue( EnvRespTime_CAN, OSEKTL_GetTimeoutFC() );			
+		break;
+
+		case 3:
+		 	write(" Error (%d): Wrong Sequence Number",  error );
+			putValue( EnvReqStatus_CAN, "Wrong Sequence Number" );
+		break;
+
+		case 4:
+		 	write(" Error (%d): TP_DLL busy",  error ); 
+			putValue( EnvReqStatus_CAN, "TP_DLL busy" );
+		break;
+
+		case 5:
+		 	write(" Error (%d): Unexpected PDU",  error ); 
+			putValue( EnvReqStatus_CAN, "Unexpected PDU" );
+		break;
+
+		case 6:
+		 	write(" Error (%d): Timeout while trying to send a CAN frame",  error );
+			putValue( EnvReqStatus_CAN, "Timeout while trying to send a CAN frame" );
+		break;
+
+		case 7:
+		 	write(" Error (%d): Too many FCs: WFT Overrun",  error ); 
+			putValue( EnvReqStatus_CAN, "To many flow control: WFT Overrun" );
+		break;
+		
+		case 8:
+			write(" Error (%d):Receiver buffer overflow",  error ); 
+			putValue( EnvReqStatus_CAN, "Receiver buffer overflow" );
+		break;
+
+		case 9:
+			write(" Error (%d): Wrong parameter",  error ); 
+			putValue( EnvReqStatus_CAN, "Wrong parameter" );
+		break;
+		
+		default: 	
+			write(" Error (%d): unknown error",  error ); 
+			putValue( EnvReqStatus_CAN, "unknown error" );
+		break;
+	}
+    }
+
+
+}
+
+on sysvar Diag::PlainData
+{
+    int i = 0;
+    int byteLen = 1023;
+    char c1;
+    char c2;
+    int strIndex = 0;
+ 
+    for (i = 0; i < elcount(RqTxStringData); i++)
+    {
+        RqTxStringData[i] = 0;
+    }
+    SysGetVariableString(sysvar::Diag::PlainData, RqTxStringData, elcount(RqTxStringData));
+
+    ByteSize = 0;
+    for (i = 0; i < byteLen; i++)
+    {
+        strIndex = i * 2;
+        if (RqTxStringData[strIndex] != 0)
+        {
+            c1 = RqTxStringData[strIndex];
+            c2 = RqTxStringData[strIndex + 1];
+            RqTxData[i] = char2byte(c1, 16) + char2byte(c2, 1);
+            ByteSize++;
+        }
+    }
+    SID = RqTxData[0];
+}
+
+on envVar EnvTransmitDataODX
+{
+    routineHandle = getValue(this);
+}
+
+byte char2byte (char c, int factor)
+{
+    switch(c){
+    case 'F':
+    case 'f': return 15 * factor;
+    case 'E':
+    case 'e': return 14 * factor;
+    case 'D':
+    case 'd': return 13 * factor;
+    case 'C':
+    case 'c': return 12 * factor;
+    case 'B':
+    case 'b': return 11 * factor;
+    case 'A':
+    case 'a': return 10 * factor;
+    case '9': return 9 * factor;
+    case '8': return 8 * factor;
+    case '7': return 7 * factor;
+    case '6': return 6 * factor;
+    case '5': return 5 * factor;
+    case '4': return 4 * factor;
+    case '3': return 3 * factor;
+    case '2': return 2 * factor;
+    case '1': return 1 * factor;
+    }
+    return 0;
+}
+
+testcase CommonRequest (char expResp[], int isSubstring)
+{
+    /* isSubstring is an extension for being able to check whether the response contains the expResp as substring */
+    /* values: 0 - expResp has to match with the whole response                                                   */
+    /*         1 - expResp can be a substring of the response                                                     */
+    /*         2 - it is expected that the response does not contain expResp as substring                         */
+
+    long result;
+    byte responsePending;
+    byte suppressPositive;
+    int numberRPs;
+    long timeOutValue;
+    long rc;
+
+    responsePending = 0;
+    numberRPs = 0;
+    timeOutValue = 5000;
+    rc = 0;
+	
+    //OSEKTL_ActivateAck(1);
+    OSEKTL_DataReq(RqTxData, ByteSize);
+    
+    //check whether the suppress positive is switvhed on in the request
+    //if yes, no response is expected
+    suppressPositive = RqTxData[1] >> 4;
+    
+    if (suppressPositive != 0x08)
+    {
+      do
+      {
+          responsePending = 0;
+          result = TestWaitForTextEvent("TpMsgReceived", timeOutValue);
+          if(result == 0)
+          {
+              TestStepFail("INFO","Timeout while waiting for diag response");          
+          }
+          else if(result == 1)
+          {
+              TestStep("INFO","Diag response received!");
+              TestStep("INFO","EXPECTED: %s", expResp);
+              TestStep("INFO","RECEIVED: %s", byteString);
+              
+              if( RsRxIntData[0] == 0x7f && RsRxIntData[1] == SID )
+              {
+                  if( RsRxIntData[2] == 0x78 )
+                  {
+                      TestStep("INFO","Response Pending received from ECU");
+                      responsePending = 1;
+                      numberRPs++;
+                      timeOutValue = 10000;
+                  }
+                  else
+                  {
+                      TestStep("INFO","Negative response received!");
+
+                      if(0 == isSubstring)
+                      {
+                          if(0 == strncmp(byteString, expResp, strlen(expResp)) && strlen(byteString) == strlen(expResp))
+                          {
+                              TestStepPass("1.1","Expected NRC received!");
+                          }
+                          else
+                          {
+                              TestStepFail("1.1","Unexpected NRC received!");
+                          }
+                      }
+                      else
+                      {
+                          if(-1 != strstr(byteString, expResp))
+                          {
+                              if(1 == isSubstring)
+                              {
+                                  TestStepPass("1.1","Expected substring in NRC received!");
+                              }
+                              else
+                              {
+                                  TestStepFail("1.1","NRC contains not expected substring!");
+                              }
+                          }
+                          else
+                          {
+                              if(2 == isSubstring)
+                              {
+                                  TestStepPass("1.1","NRC does not contain not expected substring!");
+                              }
+                              else
+                              {
+                                  TestStepFail("1.1","Expected substring in NRC not received!");
+                              }
+                          }
+                      }
+                  }
+
+              }
+
+              if( RsRxIntData[0] == (SID + 0x40) )
+              {
+                  TestStep("INFO","Positive Response from ECU!");
+
+                  if(0 == isSubstring)
+                  {
+                      if(0 == strncmp(byteString, expResp, strlen(expResp))&& strlen(byteString) == strlen(expResp))
+                      {
+                          TestStepPass("1.1","Expected response received!");
+                      }
+                      else
+                      {
+                          TestStepFail("1.1","Unexpected response received!");
+                      }
+                  }
+                  else
+                  {
+                      if(-1 != strstr(byteString, expResp))
+                      {
+                          if(1 == isSubstring)
+                          {
+                              TestStepPass("1.1","Expected substring in response received!");
+                          }
+                          else
+                          {
+                              TestStepFail("1.1","Response contains not expected substring!");
+                          }
+                      }
+                      else
+                      {
+                          if(2 == isSubstring)
+                          {
+                              TestStepPass("1.1","Response does not contain not expected substring!");
+                          }
+                          else
+                          {
+                              TestStepFail("1.1","Expected substring in response not received!");
+                          }
+                      }
+                  }
+              }
+
+          }
+
+      } while( (responsePending == 1) && (numberRPs < 24) );
+
+      if( responsePending == 1 )
+      {
+          TestStepFail("1.1","Timeout while waiting for diag response!");
+      }
+    }
+}
+
+testcase RequestResponseCanMsgId(char Request[], char Response[], char CompareMode[], int rxId, int txId)
+{
+    /* CompareMode is an extension for being able to check whether the response contains the Response as substring */
+    /* values: Equal  - Response has to match with the whole response                                                   */
+    /*         Regexp - Response can be a substring of the response                                                     */
+    /*         None   - it is expected that the response does not contain Response as substring                         */
+
+
+// Check whether is the rxId and the txId is empty (empty = 0)
+    if(rxId != 0 && txId !=0)
+    {
+      setType (rxId, txId);
+    }
+    else 
+    {
+      setType (0x7B6,0x736);
+    }
+         
+    RequestResponseCompareLogic(Request, Response, CompareMode);
+    
+    //Reset the deafult CAN message IDs
+    setType (0x7B6,0x736);
+}
+
+testcase RequestResponse(char Request[], char Response[], char CompareMode[])
+{
+  RequestResponseCompareLogic(Request, Response, CompareMode);
+}
+
+testcase ResetCamera(dword WaitTime)
+{
+
+  long result;
+  
+	RequestResponseCompareLogic("1102", "5102", "Equal");
+  result = testWaitForTimeout(WaitTime);
+  if (-1 == result)
+  {
+//    write ("General error with the testWaitForTimeout function, for example, functionality is not available!");
+    TestStepFail("INFO","General error with the testWaitForTimeout function, for example, functionality is not available!");
+  } else if (-2 == result)
+  {
+//    write ("Resume due to constraint violation in the testWaitForTimeout function!");
+    TestStepFail("INFO","Resume due to constraint violation in the testWaitForTimeout function!");
+  }
+}
+
+testcase Login (char LoginType[])
+{ 
+  dword repairFixValue, devFixValue;
+  
+  //init
+  repairFixValue = 0x4e87;
+  devFixValue = 0x15e57;
+  
+  
+  if(0 == strncmp("AppRepair", LoginType, strlen(LoginType)))
+  {
+//    write ("Debug == > LoginType is: %s", LoginType);
+    TestStep("INFO","The LoginType is: %s", LoginType);
+    RequestResponseCompareLogic("2703", "6703.+", "Regexp");
+    saveResponse();
+    sendKeyAlgo("2704", "6704", repairFixValue);
+  }
+  else if(0 == strncmp("AppDev", LoginType, strlen(LoginType)))
+  {
+//    write ("Debug == > LoginType is: %s", LoginType);
+    TestStep("INFO","The LoginType is: %s", LoginType);
+    RequestResponseCompareLogic("2703", "6703.+", "Regexp");
+    saveResponse();
+    sendKeyAlgo("2704", "6704", devFixValue);
+  }
+  else if(0 == strncmp("FblRep", LoginType, strlen(LoginType)))
+  {
+    TestStep("INFO","The LoginType is: %s", LoginType);
+    RequestResponseCompareLogic("2711", "6711.+", "Regexp");
+    saveResponse();
+    sendKeyAlgoREP("2712", "6712", 0x41916668, 0x12774118, 0x86905668, 0x10371229);
+  }
+  else if(0 == strncmp("RBEOL", LoginType, strlen(LoginType)))
+  {
+//    write ("Debug == > LoginType is: %s", LoginType);
+    TestStep("INFO","The LoginType is: %s", LoginType);
+    RequestResponseCompareLogic("2761", "6761.+", "Regexp");
+    saveResponse();
+    sendKeyAlgoRBEOL("2762", "6762", 0x42444441, 0x80FA1108); 
+  }
+  else
+  {
+//    write ("The LoginType is wrong! %s",LoginType);  
+//    write ("Please choose from the following Login types: AppDev, AppRepair, FblRep, RBEOL!");
+    TestStepFail("INFO","The LoginType is not valid!");
+    TestStepFail("INFO","Please choose from the following Login types: AppDev, AppRepair, FblRep, RBEOL!");
+  }  
+}
+
+testcase DiagSessionCtrl (char sessionName[])
+{
+    
+    int sessionId;
+    
+    if(0 == strncmp("Default", sessionName, strlen(sessionName)))
+      {
+//        write ("Debug == > sessionName is: %s", sessionName);
+        TestStep("INFO","The sessionName is: %s", sessionName);
+        sessionId = 0x01;
+        changeSession(sessionId);   
+      }
+    else if(0 == strncmp("Extended", sessionName, strlen(sessionName)))
+    {
+//      write ("Debug == > sessionName is: %s", sessionName);
+      TestStep("INFO","The sessionName is: %s", sessionName);
+      sessionId = 0x03;
+      changeSession(sessionId);   
+    }
+    else if(0 == strncmp("EOL", sessionName, strlen(sessionName)))
+    {
+//      write ("Debug == > sessionName is: %s", sessionName);
+      TestStep("INFO","The sessionName is: %s", sessionName);
+      sessionId = 0x40;
+      changeSession(sessionId);
+    }
+    else if(0 == strncmp("Development", sessionName, strlen(sessionName)))
+    {
+//      write ("Debug == > sessionName is: %s", sessionName);
+      TestStep("INFO","The sessionName is: %s", sessionName);
+      sessionId = 0x4f;
+      changeSession(sessionId);   
+    }
+    else if(0 == strncmp("Programming", sessionName, strlen(sessionName)))
+    {
+//      write ("Debug == > sessionName is: %s", sessionName);
+      TestStep("INFO","The sessionName is: %s", sessionName);
+      sessionId = 0x02;
+      changeSession(sessionId);   
+    }
+    else
+    {
+//       write ("The sessionName is not valid! %s",sessionName);  
+//       write ("Please choose from the following sessionName types: Default, Extended, EOL, Development, Programming!");
+       TestStepFail("INFO","The sessionName is not valid!");
+       TestStepFail("INFO","Please choose from the following sessionName types: Default, Extended, EOL, Development, Programming!");
+    }
+    putvalue(EnvTesterPresentOnOff,1);
+}
+
+testcase SaveSignalValue (char EnvvarName[])
+{
+    StoredSignalValue = getValue (EnvvarName);
+}
+
+testcase RestoreSignalValue (char EnvvarName[])
+{
+    putValue (EnvvarName, StoredSignalValue);
+}
+
+testcase WaitForMessage (char MessageName[], long Timeout)
+{
+    dword MessageID;
+    MessageID = GetMessageID(MessageName);
+
+    TestWaitForMessage(MessageID, Timeout);
+
+}
+
+void CreateByteString (byte response[], long offset,long responseLength)
+{
+    char intString[1023];
+    char catString[10];
+    int i=0;
+    long dataLength;
+
+    snprintf(byteString, elcount(byteString), "");
+    dataLength = responseLength;
+
+    for(i=offset; i < dataLength;i++)
+    {
+        ltoa(response[i], intString, 16);
+
+        if( 1==strlen(intString) )
+        {
+            snprintf(catString, elcount(catString), "0");
+            strncat(catString, intString, elcount(catString));
+            strncpy(intString, catString, elcount(intString));
+        }
+       
+        strncat(byteString, intString, elcount(byteString));
+    }
+
+//    write("Debug ==> Created byte string - %s", byteString);
+}
+
+on timer Act20ms
+{
+   /* DSDL.byte(0) = 0x11;
+    DSDL.byte(0) = 0x02;
+    DSDL.byte(0) = 0x36;
+    DSDL.byte(0) = 0x02;
+    DSDL.byte(0) = 0x99;
+    DSDL.byte(0) = 0x3E;
+    DSDL.byte(0) = 0x00;
+    DSDL.byte(0) = 0x00;
+    output(DSDL);*/
+}
+
