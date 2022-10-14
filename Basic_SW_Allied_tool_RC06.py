@@ -1,3 +1,12 @@
+################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+# Date : 14/10/2022                                                                     
+# Basic_SW_Allied_Tool                                                                 
+# developer : Huynh Minh Dang                                                          
+# version : V1.1.1                                                                     
+# Description : update SRcheck , update optional length bytes or not length bytes, change data base    
+######################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+from pkg_resources import DEVELOP_DIST
 from email import message
 from msilib.schema import RadioButton
 from turtle import textinput
@@ -64,6 +73,28 @@ except:
         print('Failed creating the file TC_FBL.xlsx')
     else:
         print('File TC_FBL.xlsx created ')
+
+try:
+    # os.system('TASKKILL /F /IM EXCEL.exe')
+    os.remove("TC_SRcheck.xlsx")
+    wb_TC_SRcheck = Workbook()
+    ws_TC_SRcheck = wb_TC_SRcheck.active
+    ws_TC_SRcheck.title = "TC_SRcheck"
+    wb_TC_SRcheck.save("TC_SRcheck.xlsx")
+    wb_TC_SRcheck.close()
+    os.close("TC_SRcheck.xlsx")
+except:
+    try:
+        wb_TC_SRcheck = Workbook()
+        ws_TC_SRcheck = wb_TC_SRcheck.active
+        ws_TC_SRcheck.title = "TC_SRcheck"
+        wb_TC_SRcheck.save("TC_SRcheck.xlsx")
+        wb_TC_SRcheck.close()
+        # os.system('TASKKILL /F /IM EXCEL.exe')
+    except OSError:
+        print('Failed creating the file TC_SRcheck.xlsx')
+    else:
+        print('File TC_SRcheck.xlsx created ')
 
 
 def create_value_file():
@@ -339,23 +370,107 @@ def create_value_file():
 
 # ket thuc sheet DID_DPT
 
+        wb5.create_sheet("SRcheck_value")
+        ws5 = wb5['SRcheck_value']
+        sheet4 = wb5.worksheets[3]
+        sheet4.column_dimensions['A'].width = 30
+        sheet4.column_dimensions['B'].width = 50
+        sheet4.column_dimensions['C'].width = 20
+        sheet4.column_dimensions['D'].width = 30
+        sheet4.column_dimensions['E'].width = 30
+        sheet4.column_dimensions['F'].width = 30
+        sheet4.column_dimensions['G'].width = 30
+        sheet4.column_dimensions['A'].number_format = numbers.FORMAT_TEXT
+        sheet4.column_dimensions['B'].number_format = numbers.FORMAT_TEXT
+        sheet4.column_dimensions['C'].number_format = numbers.FORMAT_TEXT
+        sheet4.column_dimensions['D'].number_format = numbers.FORMAT_TEXT
+        sheet4.column_dimensions['E'].number_format = numbers.FORMAT_TEXT
+        sheet4.column_dimensions['F'].number_format = numbers.FORMAT_TEXT
+        sheet4.column_dimensions['G'].number_format = numbers.FORMAT_TEXT
+        sheet4.column_dimensions['A'].alignment = alignment
+        sheet4.column_dimensions['B'].alignment = alignment
+        sheet4.column_dimensions['C'].alignment = alignment
+        sheet4.column_dimensions['D'].alignment = alignment
+        sheet4.column_dimensions['E'].alignment = alignment
+        sheet4.column_dimensions['F'].alignment = alignment
+        sheet4.column_dimensions['G'].alignment = alignment
+        # column_count2 = sheet2.max_column
+
+        ws5.append(['DID for write', 'Description','ASCII Value', 'HEX_Value', 'DTC', 'Service 11 support','CHOOSE OPTION'])
+
+        for col in range(1, 8):
+            cell_header = ws5.cell(1, col)
+            # used hex code for red color
+            cell_header.fill = PatternFill(
+                start_color='000066CC', end_color='000066CC', fill_type="solid")
+            cell_header.border = border
+            cell_header.font = font_text
+            cell_header.alignment = alignment
+
+            
+        ws5['F2'] = '1001'
+        cell_header = ws5.cell(2, 6)
+        cell_header.border = border
+        cell_header.font = font_text2
+        cell_header.alignment = alignment
+
+        ws5['F3'] = '1003'
+        cell_header = ws5.cell(3, 6)
+        cell_header.border = border
+        cell_header.font = font_text2
+        cell_header.alignment = alignment
+
+        ws5['F4'] = '1002'
+        cell_header = ws5.cell(4, 6)
+        cell_header.border = border
+        cell_header.font = font_text2
+        cell_header.alignment = alignment
+
+        ws5['G2'] = 'YES'
+        cell_header = ws5.cell(2, 7)
+        cell_header.border = border
+        cell_header.font = font_text2
+        cell_header.alignment = alignment
+
+        ws5['G3'] = 'YES'
+        cell_header = ws5.cell(3, 7)
+        cell_header.border = border
+        cell_header.font = font_text2
+        cell_header.alignment = alignment
+
+        ws5['G4'] = 'YES'
+        cell_header = ws5.cell(4, 7)
+        cell_header.border = border
+        cell_header.font = font_text2
+        cell_header.alignment = alignment
+
+        data_validation_data_FBL = '"YES,NO"'
+        
+        for row in range(2, 5):
+            data_validation_FBL = DataValidation(type='list', formula1 = data_validation_data_FBL)
+            ws5.add_data_validation(data_validation_FBL)
+            data_validation_FBL.add(ws5['G'+str(row)])
+
+
+
+
 # tao ra sheet general information
 
         wb5.create_sheet("General Information")
         ws5 = wb5['General Information']
-        sheet4 = wb5.worksheets[3]
-        sheet4.column_dimensions['A'].width = 50
-        sheet4.column_dimensions['B'].width = 50
-        sheet4.column_dimensions['C'].width = 50
+        sheet5 = wb5.worksheets[4]
+        sheet5.column_dimensions['A'].width = 50
+        sheet5.column_dimensions['B'].width = 50
+        sheet5.column_dimensions['C'].width = 50
         
         
-        sheet4.column_dimensions['A'].number_format = numbers.FORMAT_TEXT
-        sheet4.column_dimensions['B'].number_format = numbers.FORMAT_TEXT
-        sheet4.column_dimensions['C'].number_format = numbers.FORMAT_TEXT
+        sheet5.column_dimensions['A'].number_format = numbers.FORMAT_TEXT
+        sheet5.column_dimensions['B'].number_format = numbers.FORMAT_TEXT
+        sheet5.column_dimensions['C'].number_format = numbers.FORMAT_TEXT
         
-        sheet4.column_dimensions['A'].alignment = alignment
-        sheet4.column_dimensions['B'].alignment = alignment
-        sheet4.column_dimensions['C'].alignment = alignment
+        sheet5.column_dimensions['A'].alignment = alignment
+        sheet5.column_dimensions['B'].alignment = alignment
+        sheet5.column_dimensions['C'].alignment = alignment
 
         ws5['A1'] = 'BaseSW Name'
         cell_header = ws5.cell(1, 1)
@@ -3882,6 +3997,398 @@ def TC_FBL():
 
     run_btn_text.set("RUN")
     tkinter.messagebox.showinfo("GREAT!", "Test case FBL tool created successfully")
+
+def Progamming_Counters(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status):
+
+    direct = Input_path_text.get()
+    locate_save = Output_path_text.get()
+
+
+    if direct == '':
+        wb_SRcheck_BaseSW = load_workbook('BSWAvalue.xlsx')
+        wb_SRcheck_LatestSW = load_workbook('BSWAvalue.xlsx')
+        wb_General_Infomation = load_workbook('BSWAvalue.xlsx')
+        wb_DID_In_DPT = load_workbook('BSWAvalue.xlsx')
+        wb_TC_SRcheck_Clear = load_workbook('TC_SRcheck.xlsx')
+    else:
+        wb_SRcheck_BaseSW = load_workbook(direct)
+        wb_SRcheck_LatestSW = load_workbook(direct)
+        wb_General_Infomation = load_workbook(direct)
+        wb_DID_In_DPT = load_workbook(direct)
+        wb_TC_SRcheck_Clear = load_workbook(locate_save + '/'+'TC_SRcheck.xlsx')
+    # wb_SRcheck_LatestSW = load_workbook(direct)
+
+    ws_SRcheck_BaseSW = wb_SRcheck_BaseSW.active
+    ws_SRcheck_LatestSW = wb_SRcheck_LatestSW.active
+    ws_General_Infomation = wb_General_Infomation.active
+    ws_DID_In_DPT = wb_DID_In_DPT.active
+
+    ws_SRcheck_BaseSW = wb_SRcheck_BaseSW['RFvalue_baseSW']
+    ws_SRcheck_LatestSW = wb_SRcheck_LatestSW['RFvalue_latestSW']
+    ws_General_Infomation = wb_General_Infomation['General Information']
+    ws_DID_In_DPT = wb_DID_In_DPT['DID_DPT']
+    
+
+    sheet_SRcheck_BaseSW = wb_SRcheck_BaseSW.worksheets[0]
+    sheet_SRcheck_LatestSW = wb_SRcheck_BaseSW.worksheets[1]
+    sheet_DID_In_DPT = wb_DID_In_DPT.worksheets[2]
+
+
+    
+# baseSW name
+    for row in range(1, 2):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            baseSW = ws_General_Infomation[char + str(row)].value
+
+# latestSW name
+    for row in range(2, 3):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            latestSW = ws_General_Infomation[char + str(row)].value
+
+# ticket
+    for row in range(3, 4):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            ticket_baseSW = ws_General_Infomation[char + str(row)].value
+            ticket_latestSW = ws_General_Infomation[char + str(row)].value
+
+# Programming_counter_DID
+    for row in range(4, 5):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            Programming_counter_DID = ws_General_Infomation[char + str(row)].value
+
+# Programming_Attempt_counter_DID
+    for row in range(5, 6):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            Programming_Attempt_counter_DID = ws_General_Infomation[char + str(row)].value
+
+# Programming_counter_step
+    for row in range(6, 7):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            Programming_counter_step = ws_General_Infomation[char + str(row)].value
+
+# Programming_Attempt_counter_step
+    for row in range(7, 8):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            Programming_Attempt_counter_step = ws_General_Infomation[char + str(row)].value
+
+    for row in range(8, 9):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            row_DID_Check_Active_Session = ws_General_Infomation[char + str(row)].value
+            row_DID_Check_Active_Session_lowercase = str(row_DID_Check_Active_Session).lower()
+
+    if str(status) == 'Default':
+        ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Access to Default Session' , 'Access to Default Session', '1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Send service 0x22 to the camera for the DID '+ str(Programming_counter_DID) + ' using physical addressing\n5) Send service 0x22 to the camera for the DID '+ str(Programming_Attempt_counter_DID) + ' using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) RequestResponse(22' + str(Programming_counter_DID) + ', 62'+ str(Programming_counter_DID)+'.*'+str(PC_step)+', Regexp)\n5) RequestResponse(22' + str(Programming_Attempt_counter_DID) + ', 62'  + str(Programming_Attempt_counter_DID) + '.*'+str(PAC_step)+', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+        id += 1
+        number2 += 1
+        status = ''
+    if str(status) == 'Extended':
+        ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Access to Extended Session' , 'Access to Extended Session', '1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Extended Session\n6) Tester Present ON\n7) Wait 5s\n8) Check active session should be Extended\n9) Send service 0x22 to the camera for the DID '+ str(Programming_counter_DID) + ' using physical addressing\n10) Send service 0x22 to the camera for the DID '+ str(Programming_Attempt_counter_DID) + ' using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1003,5003.*, Regexp)\n6) envvar(EnvTesterPresentOnOff(1;0))\n7) wait(5000)\n8) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)\n9) RequestResponse(22' + str(Programming_counter_DID) + ', 62'+ str(Programming_counter_DID)+'.*'+str(PC_step)+', Regexp)\n10) RequestResponse(22' + str(Programming_Attempt_counter_DID) + ', 62'  + str(Programming_Attempt_counter_DID) + '.*'+str(PAC_step)+', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+        id += 1
+        number2 += 1
+        status = ''
+    if str(status) == 'Programming':
+        ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + ' Access to Extended Session' , 'Access to Extended Session', '1) Access to Default Session\n2) Wait 3s\n3) Check active session should be Default\n4) Wait 3s\n5) Access to Extended Session\n6) Tester Present ON\n7) Wait 5s\n8) Check active session should be Extended\n9) Access to Programming Session\n10) Wait 3s\n11) Check active session should be Programming\n12) Send service 0x22 to the camera for the DID '+ str(Programming_counter_DID) + ' using physical addressing\n13) Send service 0x22 to the camera for the DID '+ str(Programming_Attempt_counter_DID) + ' using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -', '1) RequestResponse(1001,5001.*, Regexp)\n2) wait(3000)\n3) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*1' + ', Regexp)\n4) wait(3000)\n5) RequestResponse(1003,5003.*, Regexp)\n6) envvar(EnvTesterPresentOnOff(1;0))\n7) wait(5000)\n8) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*3' + ', Regexp)\n9) RequestResponse(1002, 5002.*, Regexp)\n10) wait(3000)\n11) RequestResponse(' + '22' + str(row_DID_Check_Active_Session_lowercase) + ','+'62'+str(row_DID_Check_Active_Session_lowercase) + '.*2' + ', Regexp)\n12) RequestResponse(22' + str(Programming_counter_DID) + ', 62'+ str(Programming_counter_DID)+'.*'+str(PC_step)+', Regexp)\n13) RequestResponse(22' + str(Programming_Attempt_counter_DID) + ', 62'  + str(Programming_Attempt_counter_DID) + '.*'+str(PAC_step)+', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+        id += 1
+        number2 += 1
+        status = ''
+        p = 1
+    # PC_step = int(Programming_counter_step) + int(Programming_counter_step)
+    # PAC_step = int(Programming_Attempt_counter_step) + int(Programming_Attempt_counter_step)
+    PC_step = ''
+    PAC_step = ''
+    
+
+def TC_SRcheck():
+    run_btn_text.set("Loading...")
+
+    direct = Input_path_text.get()
+    locate_save = Output_path_text.get()
+
+
+    if direct == '':
+        wb_SRcheck_BaseSW = load_workbook('BSWAvalue.xlsx')
+        wb_SRcheck_LatestSW = load_workbook('BSWAvalue.xlsx')
+        wb_General_Infomation = load_workbook('BSWAvalue.xlsx')
+        wb_DID_In_DPT = load_workbook('BSWAvalue.xlsx')
+        wb_TC_SRcheck_Clear = load_workbook('TC_SRcheck.xlsx')
+    else:
+        wb_SRcheck_BaseSW = load_workbook(direct)
+        wb_SRcheck_LatestSW = load_workbook(direct)
+        wb_General_Infomation = load_workbook(direct)
+        wb_DID_In_DPT = load_workbook(direct)
+        wb_TC_SRcheck_Clear = load_workbook(locate_save + '/'+'TC_SRcheck.xlsx')
+    # wb_SRcheck_LatestSW = load_workbook(direct)
+
+    ws_SRcheck_BaseSW = wb_SRcheck_BaseSW.active
+    ws_SRcheck_LatestSW = wb_SRcheck_LatestSW.active
+    ws_General_Infomation = wb_General_Infomation.active
+    ws_DID_In_DPT = wb_DID_In_DPT.active
+
+    ws_SRcheck_BaseSW = wb_SRcheck_BaseSW['RFvalue_baseSW']
+    ws_SRcheck_LatestSW = wb_SRcheck_LatestSW['RFvalue_latestSW']
+    ws_General_Infomation = wb_General_Infomation['General Information']
+    ws_DID_In_DPT = wb_DID_In_DPT['DID_DPT']
+    
+
+    sheet_SRcheck_BaseSW = wb_SRcheck_BaseSW.worksheets[0]
+    sheet_SRcheck_LatestSW = wb_SRcheck_BaseSW.worksheets[1]
+    sheet_DID_In_DPT = wb_DID_In_DPT.worksheets[2]
+
+    row_count_SRcheck_BaseSW = sheet_SRcheck_BaseSW.max_row
+    row_count_SRcheck_LatestSW = sheet_SRcheck_LatestSW.max_row
+    row_count_DID_In_DPT = sheet_DID_In_DPT.max_row
+
+
+    tasks = row_count_SRcheck_LatestSW + row_count_SRcheck_BaseSW + 151
+
+    ws_TC_SRcheck_Clear = wb_TC_SRcheck_Clear.active
+    ws_TC_SRcheck_Clear = wb_TC_SRcheck_Clear['TC_SRcheck']
+    sheet_TC_SRcheck_Clear = wb_TC_SRcheck_Clear.worksheets[0]
+    row_count_TC_SRcheck_Clear = sheet_TC_SRcheck_Clear.max_row
+
+    # print(row_count_TC_SRcheck_Clear)
+    # print(tasks)
+
+#  clear old TC_SRcheck
+    if row_count_TC_SRcheck_Clear >= tasks:
+        n = 0
+        while n < row_count_TC_SRcheck_Clear:
+            ws_TC_SRcheck.delete_rows(1)
+            n += 1
+            print("dang xoa")
+        print("done")
+        n = 0
+
+# baseSW name
+    for row in range(1, 2):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            baseSW = ws_General_Infomation[char + str(row)].value
+
+# latestSW name
+    for row in range(2, 3):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            latestSW = ws_General_Infomation[char + str(row)].value
+
+# ticket
+    for row in range(3, 4):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            ticket_baseSW = ws_General_Infomation[char + str(row)].value
+            ticket_latestSW = ws_General_Infomation[char + str(row)].value
+
+# Programming_counter_DID
+    for row in range(4, 5):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            Programming_counter_DID = ws_General_Infomation[char + str(row)].value
+
+# Programming_Attempt_counter_DID
+    for row in range(5, 6):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            Programming_Attempt_counter_DID = ws_General_Infomation[char + str(row)].value
+
+# Programming_counter_step
+    for row in range(6, 7):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            Programming_counter_step = ws_General_Infomation[char + str(row)].value
+
+# Programming_Attempt_counter_step
+    for row in range(7, 8):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            Programming_Attempt_counter_step = ws_General_Infomation[char + str(row)].value
+
+    for row in range(8, 9):
+        for col in range(2, 3):
+            char = get_column_letter(col)
+            row_DID_Check_Active_Session = ws_General_Infomation[char + str(row)].value
+            row_DID_Check_Active_Session_lowercase = str(row_DID_Check_Active_Session).lower()
+
+    
+    # script begin
+    id = 2
+    number1 = 1
+    number2 = 1
+    number3 = 1
+    number4 = 1
+
+    border = Border(left=Side(border_style='thin', color='000000'), right=Side(border_style='thin', color='000000'), top=Side(
+        border_style='thin', color='000000'), bottom=Side(border_style='thin', color='000000'))
+    font_text_header = Font(name="Calibri", size=13,
+                            color='00FFFFFF', bold=True)
+    font_text = Font(name="Calibri", size=11, color='00000000', bold=False)
+    alignment = Alignment(horizontal='center', vertical='center')
+    ws_TC_SRcheck.append(['ID', 'XXX Component',  'Test Description', 'Test Steps',  'Test Response','Teststep keywords', 'ObjectType', 'TestStatus', 'Project', 'TestResult'])
+    
+    for col in range(1, 11):
+        cell_header = ws_TC_SRcheck.cell(1, col)
+        # used hex code for red color
+        cell_header.fill = PatternFill(
+            start_color='000066CC', end_color='000066CC', fill_type="solid")
+        cell_header.border = border
+        cell_header.font = font_text_header
+        # cell_header.alignment = alignment
+
+    ws_TC_SRcheck.append(['ID_'+str(id),  '1 SRCHECK', '','', '', '', 'Test group', '', '', ''])
+
+    for col in range(1, 11):
+        cell_header = ws_TC_SRcheck.cell(2, col)
+        # used hex code for red color
+        cell_header.fill = PatternFill(
+            start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
+        cell_header.border = border
+        cell_header.font = font_text
+        # cell_header.alignment = alignment
+    # ------------------------------------------------------------------------------------------------------
+    # BEGIN TEST CASE 1
+    # TEST CASE 1 base SW to latestSW M3
+
+    # RBEOL read
+    id += 1
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    number3 += 1
+    ws_TC_SRcheck.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + ' DID in RBEOL',
+                '', '', '', '', 'Test group', '', '', ''])
+
+    for col in range(1, 11):
+        cell_header = ws_TC_SRcheck.cell(id, col)
+        # used hex code for red color
+        cell_header.fill = PatternFill(
+            start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
+        cell_header.border = border
+        cell_header.font = font_text
+
+    
+    id += 1
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    number4 = 1
+    ws_TC_SRcheck.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' Check DID in RBEOL', 'To check value of the DID F1E0, F1DD, 4255, 4259', '1) Access to RBEOL\n2) Unlock RBEOL\n3) Wait 5s\n4) Send service 0x22 to the camera for the DID F1E0\n5) Send service 0x22 to the camera for the DID F1DD\n6) Send service 0x22 to the camera for the DID 4255\n7) Send service 0x22 to the camera for the DID 4259\n8) Reset ECU\n9) Wait 3s\n10) Send 1001\n11) Wait 3s\n12) Reset ECU', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -',
+                '1) envvar(EnvRBEOL(1;1000), EnvRBEOL(0;1000))\n2) envvar(Env_MPC3_EOL_unlock(1;1000), Env_MPC3_EOL_unlock(0;1000))\n3) wait(5000)\n4) RequestResponse(22f1e0,62f1e0.*3,Regexp)\n5) RequestResponse(22f1dd,62f1dd.*,Regexp)\n6) RequestResponse(224255,624255.*,Regexp)\n7) RequestResponse(224259,624259.*,Regexp)\n8) RequestResponse(1101, 5101, Equal)\n9) wait(3000)\n10) RequestResponse(1001, 5001.*, Regexp)\n11) wait(3000)\n12) RequestResponse(1101, 5101, Equal)', 'Automated Testcase', 'implemented', baseSW, ''])
+
+    # programing couter
+    id += 1
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    number3 += 1
+    ws_TC_SRcheck.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + ' Programming Counter and Programming Attempt Counter',
+                '', '', '', '', 'Test group', '', '', ''])
+    for col in range(1, 11):
+        cell_header = ws_TC_SRcheck.cell(id, col)
+        # used hex code for red color
+        cell_header.fill = PatternFill(
+            start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
+        cell_header.border = border
+        cell_header.font = font_text
+    # print(id)
+
+    # PC_step = int(Programming_counter_step) + int(Programming_counter_step)
+    # PAC_step = int(Programming_Attempt_counter_step) + int(Programming_Attempt_counter_step)
+    PC_step = ''
+    PAC_step = ''
+    id += 1
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    ws_TC_SRcheck.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(Programming_counter_DID) + '_ProgrammingCounter', 'To check value of the DID '+ str(Programming_counter_DID), '1) Send service 0x22 to the camera for the DID '+ str(Programming_counter_DID) + ' using physical addressing',
+                '1) -', '1) RequestResponse(22' + str(Programming_counter_DID) + ', 62'+ str(Programming_counter_DID)+'.*'+str(PC_step)+', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+    id += 1
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    number4 += 1
+    ws_TC_SRcheck.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' '+ str(Programming_Attempt_counter_DID) + '_ProgrammingAttemptCounter', 'To check value of the DID '+ str(Programming_Attempt_counter_DID),
+                '1) Send service 0x22 to the camera for the DID '+ str(Programming_Attempt_counter_DID) + ' using physical addressing', '1) -', '1) RequestResponse(22' + str(Programming_Attempt_counter_DID) + ', 62'  + str(Programming_Attempt_counter_DID) + '.*'+str(PAC_step)+', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+
+        # DID in DPT
+    id += 1
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    number1 += 1
+    number2 = 0
+    ws_TC_SRcheck.append(['ID_'+str(id),  '1.' + str(number1) + ' Read DID DPT in Default section','', '', '', '', 'Test group', '', '', ''])
+    
+    for col in range(1, 11):
+        cell_header = ws_TC_SRcheck.cell(id, col)
+        # used hex code for red color
+        cell_header.fill = PatternFill(
+            start_color='0000CCFF', end_color='0000CCFF', fill_type="solid")
+        cell_header.border = border
+        cell_header.font = font_text
+
+    bar['value'] += 1
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+    status = 'Default'
+    id = DID_In_DPT(ws_DID_In_DPT, wb_DID_In_DPT, id, number1, number2, number3, number4, direct, status)
+    # print(id)
+
+    bar['value'] += 36
+    percent.set(str((id//tasks)*100)+"%")
+    app.update_idletasks()
+
+    # print(id)
+    # print(str((id//tasks)*100)+"%")
+    # print(bar['value'])
+
+    locate_save = Output_path_text.get()
+    ws_TC_SRcheck.title = "TC_SRcheck"
+    # print(locate_save)
+    if locate_save == '':
+        # print('Ok')
+        wb_TC_SRcheck.save('TC_SRcheck.xlsx')
+    else:
+        wb_TC_SRcheck.save(locate_save + '/'+'TC_SRcheck.xlsx')
+
+    if locate_save == '':
+        wb_TC_SRcheck_Rebuild_format = load_workbook('TC_SRcheck.xlsx')
+    else:
+        wb_TC_SRcheck_Rebuild_format = load_workbook(locate_save + '/'+'TC_SRcheck.xlsx')
+
+    ws_TC_SRcheck_Rebuild_format = wb_TC_SRcheck_Rebuild_format['TC_SRcheck']
+    sheet_TC_SRcheck_Rebuild_format = wb_TC_SRcheck_Rebuild_format.worksheets[0]
+    row_count_TC_SRcheck_Rebuild_format = sheet_TC_SRcheck_Rebuild_format.max_row
+
+    # sheet_TC_SRcheck_Rebuild_format = wb6.worksheets[0]
+    sheet_TC_SRcheck_Rebuild_format.column_dimensions['A'].width = 30
+    sheet_TC_SRcheck_Rebuild_format.column_dimensions['B'].width = 30
+    sheet_TC_SRcheck_Rebuild_format.column_dimensions['C'].width = 30
+    sheet_TC_SRcheck_Rebuild_format.column_dimensions['D'].width = 30
+    sheet_TC_SRcheck_Rebuild_format.column_dimensions['E'].width = 30
+    sheet_TC_SRcheck_Rebuild_format.column_dimensions['F'].width = 30
+    sheet_TC_SRcheck_Rebuild_format.column_dimensions['G'].width = 30
+    sheet_TC_SRcheck_Rebuild_format.column_dimensions['H'].width = 30
+    sheet_TC_SRcheck_Rebuild_format.column_dimensions['I'].width = 30
+    sheet_TC_SRcheck_Rebuild_format.column_dimensions['J'].width = 30
+    # print(row_count_TC_SRcheck_Rebuild_format)
+    # print(tasks)
+
+
+    if locate_save == '':
+        wb_TC_SRcheck_Rebuild_format.save('TC_SRcheck.xlsx')
+    else:
+        wb_TC_SRcheck_Rebuild_format.save(locate_save + '/'+'TC_SRcheck.xlsx')
+    
+
+    run_btn_text.set("RUN")
+    tkinter.messagebox.showinfo("GREAT!", "Test case SRcheck tool created successfully")
 
 def run_program():
     if selected_test_option.get() == 'ReFlash':
