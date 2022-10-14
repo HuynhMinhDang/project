@@ -1,8 +1,0 @@
-ID,XXX Component,Test Description,Test Steps,Test Response,Teststep keywords,ObjectType,TestStatus,Project,TestResult
-ID_2,1 REFFLASH,,,,,Test group,,,
-ID_3,1.1 Base SW to Latest SW M3,,,,,Test group,,,
-ID_4,1.1.1 Flash Base SW via UART,,,,,Test group,,,
-ID_5,1.1.1.1 Flash SW,,,,,Test group,,,
-ID_6,1.1.1.1.1 UART flash CA_CD569ICA_BL03_V4,Detail information is mentioned in the ticket: …,Screen shot the successful flash procress,Screen shot the successful flash procress,Screen shot the successful flash procress,Manual Testcase,implemented,CA_CD569ICA_BL03_V4,
-ID_7,1.1.1.2 Variant and Software  Identification,,,,,Test group,,,
-ID_8,1.1.1.2.1 Select_and_check_variant,To Select and check variant,1) Tester Present is ON2) Change to Extended session with Service 0x10 033) Security unlock ON4) wait5) Security unlock OFF6) Select variant7) Check variant,,,Test group,,,
