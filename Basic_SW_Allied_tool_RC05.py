@@ -1,3 +1,11 @@
+################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+# Date : 14/10/2022                                                                
+# Basic_SW_Allied_Tool RC05                                                                
+# developer : Huynh Minh Dang                                                          
+# version : V1.1.1                                                                     
+# Description : fix bug 
+######################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
 from email import message
 from msilib.schema import RadioButton
 from turtle import textinput
@@ -93,12 +101,11 @@ def create_value_file():
 
         sheet.column_dimensions['B'].width = 50
         sheet.column_dimensions['C'].width = 20
-        sheet.column_dimensions['D'].width = 20
+        sheet.column_dimensions['D'].width = 30
         sheet.column_dimensions['E'].width = 30
-        sheet.column_dimensions['F'].width = 30
+        sheet.column_dimensions['F'].width = 40
         sheet.column_dimensions['G'].width = 40
-        sheet.column_dimensions['H'].width = 40
-        sheet.column_dimensions['I'].width = 35
+        sheet.column_dimensions['H'].width = 35
         sheet.column_dimensions['A'].number_format = numbers.FORMAT_TEXT
         sheet.column_dimensions['B'].number_format = numbers.FORMAT_TEXT
         sheet.column_dimensions['C'].number_format = numbers.FORMAT_TEXT
@@ -106,7 +113,6 @@ def create_value_file():
         sheet.column_dimensions['E'].number_format = numbers.FORMAT_TEXT
         sheet.column_dimensions['F'].number_format = numbers.FORMAT_TEXT
         sheet.column_dimensions['G'].number_format = numbers.FORMAT_TEXT
-        sheet.column_dimensions['H'].number_format = numbers.FORMAT_TEXT
         sheet.column_dimensions['A'].alignment = alignment
         sheet.column_dimensions['B'].alignment = alignment
         sheet.column_dimensions['C'].alignment = alignment
@@ -114,14 +120,13 @@ def create_value_file():
         sheet.column_dimensions['E'].alignment = alignment
         sheet.column_dimensions['F'].alignment = alignment
         sheet.column_dimensions['G'].alignment = alignment
-        sheet.column_dimensions['H'].alignment = alignment
 
 
 # tao ra sheet base sw
 
         ws5.title = "RFvalue_baseSW"
-        ws5.append(['DID', 'Description', 'Length (Byte)','ASCII Value', 'HEX_Value', 'Type'])
-        # ws5.append(['DID', 'Description','ASCII Value', 'HEX_Value', 'Type'])
+        # ws5.append(['DID', 'Description', 'Length (Byte)','ASCII Value', 'HEX_Value', 'Type'])
+        ws5.append(['DID', 'Description','ASCII Value', 'HEX_Value', 'Type'])
 
         # ws5['F1'] = 'BaseSW Name'
         # cell_header = ws5.cell(1, 6)
@@ -131,46 +136,46 @@ def create_value_file():
         # cell_header.font = font_text
         # cell_header.alignment = alignment
         # ws5.append(['', '', '', '', '', 'Ticket BaseSW'])
-        ws5['G2'] = 'Variant Name baseSW'
-        cell_header = ws5.cell(2, 7)
+        ws5['F2'] = 'Variant Name baseSW'
+        cell_header = ws5.cell(2, 6)
         cell_header.fill = PatternFill(
             start_color='000066CC', end_color='000066CC', fill_type="solid")
         cell_header.border = border
         cell_header.font = font_text
         cell_header.alignment = alignment
         # ws5.append(['', '', '', '', '', 'Variant BaseSW'])
-        ws5['G3'] = 'Variant BaseSW'
-        cell_header = ws5.cell(3, 7)
+        ws5['F3'] = 'Variant BaseSW'
+        cell_header = ws5.cell(3, 6)
         cell_header.fill = PatternFill(
             start_color='000066CC', end_color='000066CC', fill_type="solid")
         cell_header.border = border
         cell_header.font = font_text
         cell_header.alignment = alignment
         # ws5.append(['', '', '', '', '', 'DID check variant BaseSW'])
-        ws5['G4'] = 'DID check variant BaseSW'
-        cell_header = ws5.cell(4, 7)
+        ws5['F4'] = 'DID check variant BaseSW'
+        cell_header = ws5.cell(4, 6)
         cell_header.fill = PatternFill(
             start_color='000066CC', end_color='000066CC', fill_type="solid")
         cell_header.border = border
         cell_header.font = font_text
         cell_header.alignment = alignment
 
-        ws5['G5'] = 'Security Unlock Level'
-        cell_header = ws5.cell(5, 7)
+        ws5['F5'] = 'Security Unlock Level'
+        cell_header = ws5.cell(5, 6)
         cell_header.fill = PatternFill(
             start_color='000066CC', end_color='000066CC', fill_type="solid")
         cell_header.border = border
         cell_header.font = font_text
         cell_header.alignment = alignment
 
-        ws5['I5'] = '0: No level; 1: level1; 2: level2; 3: level3'
-        cell_header = ws5.cell(5, 10)
+        ws5['H5'] = '0: No level; 1: level1; 2: level2; 3: level3'
+        cell_header = ws5.cell(5, 8)
         cell_header.border = border
         cell_header.font = font_text2
 
 
 
-        for col in range(1, 8):
+        for col in range(1, 7):
             cell_header = ws5.cell(1, col)
             # used hex code for red color
             cell_header.fill = PatternFill(
@@ -183,7 +188,7 @@ def create_value_file():
         for row in range(2, 30):
             data_validation = DataValidation(type='list', formula1 = data_validation_data)
             ws5.add_data_validation(data_validation)
-            data_validation.add(ws5['F'+str(row)])
+            data_validation.add(ws5['E'+str(row)])
 
 
 
@@ -200,13 +205,12 @@ def create_value_file():
         sheet2 = wb5.worksheets[1]
         sheet2.column_dimensions['B'].width = 50
         sheet2.column_dimensions['C'].width = 20
-        sheet2.column_dimensions['D'].width = 20
-        sheet2.column_dimensions['E'].width = 30
-        sheet2.column_dimensions['F'].width = 20
-        sheet2.column_dimensions['G'].width = 30
+        sheet2.column_dimensions['D'].width = 30
+        sheet2.column_dimensions['E'].width = 20
+        sheet2.column_dimensions['F'].width = 50
+        sheet2.column_dimensions['G'].width = 40
         sheet2.column_dimensions['H'].width = 40
-        sheet2.column_dimensions['I'].width = 40
-        sheet2.column_dimensions['J'].width = 35
+        sheet2.column_dimensions['I'].width = 35
         sheet2.column_dimensions['A'].number_format = numbers.FORMAT_TEXT
         sheet2.column_dimensions['B'].number_format = numbers.FORMAT_TEXT
         sheet2.column_dimensions['C'].number_format = numbers.FORMAT_TEXT
@@ -215,7 +219,6 @@ def create_value_file():
         sheet2.column_dimensions['F'].number_format = numbers.FORMAT_TEXT
         sheet2.column_dimensions['G'].number_format = numbers.FORMAT_TEXT
         sheet2.column_dimensions['H'].number_format = numbers.FORMAT_TEXT
-        sheet2.column_dimensions['I'].number_format = numbers.FORMAT_TEXT
         sheet2.column_dimensions['A'].alignment = alignment
         sheet2.column_dimensions['B'].alignment = alignment
         sheet2.column_dimensions['C'].alignment = alignment
@@ -224,51 +227,50 @@ def create_value_file():
         sheet2.column_dimensions['F'].alignment = alignment
         sheet2.column_dimensions['G'].alignment = alignment
         sheet2.column_dimensions['H'].alignment = alignment
-        sheet2.column_dimensions['I'].alignment = alignment
         # column_count2 = sheet2.max_column
-        ws5.append(['DID', 'Description', 'Length (Byte)','ASCII Value', 'HEX_Value', 'Type','DummySW value(hex)'])
-        # ws5.append(['DID', 'Description','ASCII Value', 'HEX_Value', 'Type','DummySW value(hex)'])
+        # ws5.append(['DID', 'Description', 'Length (Byte)','ASCII Value', 'HEX_Value', 'Type'])
+        ws5.append(['DID', 'Description','ASCII Value', 'HEX_Value', 'Type','DummySW value(hex)'])
 
-        ws5['H2'] = 'Variant Name LatestSW'
-        cell_header = ws5.cell(2, 8)
+        ws5['G2'] = 'Variant Name LatestSW'
+        cell_header = ws5.cell(2, 7)
         cell_header.fill = PatternFill(
             start_color='000066CC', end_color='000066CC', fill_type="solid")
         cell_header.border = border
         cell_header.font = font_text
         cell_header.alignment = alignment
         # ws5.append(['', '', '', '', '', 'Variant LatestSW'])
-        ws5['H3'] = 'Variant LatestSW'
-        cell_header = ws5.cell(3, 8)
+        ws5['G3'] = 'Variant LatestSW'
+        cell_header = ws5.cell(3, 7)
         cell_header.fill = PatternFill(
             start_color='000066CC', end_color='000066CC', fill_type="solid")
         cell_header.border = border
         cell_header.font = font_text
         cell_header.alignment = alignment
         # ws5.append(['', '', '', '', '', 'DID check variant LatestSW'])
-        ws5['H4'] = 'DID check variant LatestSW'
-        cell_header = ws5.cell(4, 8)
+        ws5['G4'] = 'DID check variant LatestSW'
+        cell_header = ws5.cell(4, 7)
         cell_header.fill = PatternFill(
             start_color='000066CC', end_color='000066CC', fill_type="solid")
         cell_header.border = border
         cell_header.font = font_text
         cell_header.alignment = alignment
 
-        ws5['H5'] = 'Security Unlock Level'
-        cell_header = ws5.cell(5, 8)
+        ws5['G5'] = 'Security Unlock Level'
+        cell_header = ws5.cell(5, 7)
         cell_header.fill = PatternFill(
             start_color='000066CC', end_color='000066CC', fill_type="solid")
         cell_header.border = border
         cell_header.font = font_text
         cell_header.alignment = alignment
 
-        ws5['J5'] = '0: No level; 1: level1; 2: level2; 3: level3'
-        cell_header = ws5.cell(5, 11)
+        ws5['I5'] = '0: No level; 1: level1; 2: level2; 3: level3'
+        cell_header = ws5.cell(5, 9)
         cell_header.border = border
         cell_header.font = font_text2
 
 
 
-        for col in range(1, 9):
+        for col in range(1, 8):
             cell_header = ws5.cell(1, col)
             # used hex code for red color
             cell_header.fill = PatternFill(
@@ -282,7 +284,7 @@ def create_value_file():
         for row in range(2, 30):
             data_validation = DataValidation(type='list', formula1 = data_validation_data)
             ws5.add_data_validation(data_validation)
-            data_validation.add(ws5['F'+str(row)])
+            data_validation.add(ws5['E'+str(row)])
 
 
 # ket thuc sheet latest SW
@@ -479,8 +481,6 @@ def DID_baseSW(ws_RF_BaseSW, wb_RF_baseSW, id, number1, number2, number3, number
     k = 1
     number4 += 1
 
-    c = 0
-
     i = 0
     count_string_number = 0
     hexvalue_baseSW = ""
@@ -504,21 +504,15 @@ def DID_baseSW(ws_RF_BaseSW, wb_RF_baseSW, id, number1, number2, number3, number
         for row in range(o, j):
             for col in range(3, 4):
                 char = get_column_letter(col)
-                row_list_length_byte_baseSW = ws_RF_BaseSW[char + str(row)].value
-                # print(row_list_length_byte_baseSW)
-
-        for row in range(o, j):
-            for col in range(4, 5):
-                char = get_column_letter(col)
                 row_list_ASCII_values_baseSW = ws_RF_BaseSW[char + str(row)].value
         
         for row in range(o, j):
-            for col in range(5, 6):
+            for col in range(4, 5):
                 char = get_column_letter(col)
                 row_list_hex_values_baseSW = ws_RF_BaseSW[char + str(row)].value
 
         for row in range(o, j):
-            for col in range(6, 7):
+            for col in range(5, 6):
                 char = get_column_letter(col)
                 row_list_type_baseSW = ws_RF_BaseSW[char + str(row)].value
                 # print(row_list_type_baseSW)
@@ -529,108 +523,60 @@ def DID_baseSW(ws_RF_BaseSW, wb_RF_baseSW, id, number1, number2, number3, number
         hexvalue_baseSW = ""
         length_byte = 0
         if str(row_list_ASCII_values_baseSW) == 'None'  and str(row_list_hex_values_baseSW) == 'None':
-            # hexvalue_baseSW = str(".{" + str(row_list_length_byte_baseSW) + "}")
-            if str(row_list_length_byte_baseSW) != 'None':
-                    length_byte = int(row_list_length_byte_baseSW) * 2
-                    # print(length_byte)
-                    hexvalue_baseSW = str(".{" + str(length_byte) + "}")
-            else:
-                    hexvalue_baseSW = str(".*")
-                # print('dung')
-                # print(hexvalue_baseSW)
-            c = 1
+
+            hexvalue_baseSW = str(".*")
+
         else:
             if str(row_list_hex_values_baseSW) == "None":
                 # change ascii sang hex value
                 for i in str(row_list_ASCII_values_baseSW):
                     hexvalue_baseSW += hex(ord(i))[2:]
 
-            # danh cho co length byter thi su dung
-                if str(row_list_length_byte_baseSW) != 'None':
-                    # print(hexvalue_baseSW)
-                    count_hexvalue_baseSW = len(hexvalue_baseSW)
-                    count_hexvalue_baseSW = int(count_hexvalue_baseSW) // 2
-                    # print('count: ' + str(count_hexvalue_baseSW))
-                    # print(type(row_list_length_byte_baseSW))
-                    if str(count_hexvalue_baseSW) < row_list_length_byte_baseSW:
-                        # print("Day la do dai byte",row_list_length_byte_baseSW)
-                        length_byte = (int(row_list_length_byte_baseSW) -
-                                    int(count_hexvalue_baseSW)) * 2
-                        # print("byte bi thieu", length_byte)
-                        hexvalue_baseSW = hexvalue_baseSW.lower()
-                        hexvalue_baseSW = str(hexvalue_baseSW + ".{" + str(length_byte) + "}")
-                        c = 1
-                    else:
-                        c = 0
-                if str(row_list_length_byte_baseSW) == 'None':
-                    hexvalue_baseSW = hexvalue_baseSW.lower()
-                    hexvalue_baseSW = str( hexvalue_baseSW + ".*")
-                    c = 1
-                
-            
+                hexvalue_baseSW = hexvalue_baseSW.lower()
+                hexvalue_baseSW = str( hexvalue_baseSW + ".*")
             else:
 
-            # danh cho co length byter thi su dung
-                if str(row_list_length_byte_baseSW) != 'None':
-                    count_hexvalue_baseSW = len(row_list_hex_values_baseSW)
-                    count_hexvalue_baseSW = int(count_hexvalue_baseSW) // 2
-                    if str(count_hexvalue_baseSW) < row_list_length_byte_baseSW:
-                        length_byte = (int(row_list_length_byte_baseSW) - int(count_hexvalue_baseSW)) * 2
-                        hexvalue_baseSW = row_list_hex_values_baseSW.lower()
-                        hexvalue_baseSW = str(hexvalue_baseSW + ".{" + str(length_byte) + "}")
-                        c = 1
-                else:
-                    hexvalue_baseSW = row_list_hex_values_baseSW.lower()
-                    hexvalue_baseSW = str(hexvalue_baseSW + ".*")
-                    c = 1
-
-                # hexvalue_baseSW = row_list_hex_values_baseSW.lower()
-                # hexvalue_baseSW = str(hexvalue_baseSW + ".*")
-                # c = 1
+                hexvalue_baseSW = row_list_hex_values_baseSW.lower()
+                hexvalue_baseSW = str(hexvalue_baseSW + ".*")
             
             # print("hoan thanh",hexvalue_baseSW)
         if str(row_list_name_baseSW) == "None":
             row_list_name_baseSW = ""
             
         # if str(row_list_name_baseSW) != "Supplier Software number":
+
+        if str(row_list_type_baseSW) == "APPL":
+            
+            ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW)+' in Application', '1) Send service 0x22 to the camera for the DID ' +
+                        str(row_list_DID_baseSW) + ' using physical addressing', '1) -', '1) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)', 'Automated Testcase', 'implemented', baseSW, ''])
         
-        if c == 1:
-    
-            if str(row_list_type_baseSW) == "APPL":
-                
-                ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW)+' in Application', '1) Send service 0x22 to the camera for the DID ' +
-                            str(row_list_DID_baseSW) + ' using physical addressing', '1) -', '1) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)', 'Automated Testcase', 'implemented', baseSW, ''])
-            
-            if str(row_list_type_baseSW) == "FBL":
-                # ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 3s\n4) Check active session should be Extended\n4) Wait 3s\n5) Change to Programming session with Service 0x10 02\n6) Wait 3s\n7) Check active session should be Programming\n8) Wait 3s\n9) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + ' using physical addressing\n10) Wait 3s\n11) Change to Default session with Service 0x10 01\n12) Wait 3s\n13) Check active session should be Default\n14) Wait 3s\n15) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(3000)\n5) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}3, Regexp)\n6) wait(1000)\n7) RequestResponse(1002, 5002.*, Regexp)\n8) wait(3000)\n9) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}2, Regexp)\n10) wait(3000)\n11) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)\n12) RequestResponse(1001, 5001.*, Regexp)\n13) wait(3000)\n14) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}2, Regexp)\n15) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)', 'Automated Testcase', 'implemented', baseSW, ''])
-                ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 1s\n4) Change to Programming session with Service 0x10 02\n5) Wait 5s\n6) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + ' using physical addressing\n7) Wait 3s\n8) Change to Default session with Service 0x10 01\n9) Wait 1s\n10) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(1000)\n4) RequestResponse(1002, 5002.*, Regexp)\n5) wait(5000)\n6) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)\n7) wait(3000)\n8) RequestResponse(1001, 5001.*, Regexp)\n9) wait(1000)\n10) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)', 'Automated Testcase', 'implemented', baseSW, ''])
+            ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW)+' in Application', '1) Send service 0x22 to the camera for the DID ' +
+                        str(row_list_DID_baseSW) + ' using physical addressing', '1) -', '1) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)', 'Automated Testcase', 'implemented', baseSW, ''])
+        
 
-            if str(row_list_type_baseSW) == "RBEOL":
-                ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in RBEOL', '1) Access to RBEOL\n2) Unlock RBEOL\n3) Wait 5s\n4) Send service 0x22 to the camera for the DID ' +
-                    str(row_list_DID_baseSW) + ' using physical addressing\n5) Reset ECU\n6) Wait 3s\n7) Send 1001\n8) Wait 3s', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -',
-                    '1) envvar(EnvRBEOL(1;1000), EnvRBEOL(0;1000))\n2) envvar(Env_MPC3_EOL_unlock(1;1000), Env_MPC3_EOL_unlock(0;1000))\n3) wait(5000)\n4) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)\n5) RequestResponse(1101, 5101, Equal)\n6) wait(3000)\n7) RequestResponse(1001, 5001.*, Regexp)\n8) wait(3000)', 'Automated Testcase', 'implemented', baseSW, ''])
-        if c == 0:
-            
-            if str(row_list_type_baseSW) == "APPL":
-                
-                ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW)+' in Application', '1) Send service 0x22 to the camera for the DID ' +
-                            str(row_list_DID_baseSW) + ' using physical addressing', '1) -', '1) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Equal)', 'Automated Testcase', 'implemented', baseSW, ''])
-            
-            if str(row_list_type_baseSW) == "FBL":
-                # ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 3s\n4) Check active session should be Extended\n4) Wait 3s\n5) Change to Programming session with Service 0x10 02\n6) Wait 3s\n7) Check active session should be Programming\n8) Wait 3s\n9) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + ' using physical addressing\n10) Wait 3s\n11) Change to Default session with Service 0x10 01\n12) Wait 3s\n13) Check active session should be Default\n14) Wait 3s\n15) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(3000)\n5) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}3, Regexp)\n6) wait(1000)\n7) RequestResponse(1002, 5002.*, Regexp)\n8) wait(3000)\n9) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}2, Regexp)\n10) wait(3000)\n11) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)\n12) RequestResponse(1001, 5001.*, Regexp)\n13) wait(3000)\n14) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}2, Regexp)\n15) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)', 'Automated Testcase', 'implemented', baseSW, ''])
-                ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 1s\n4) Change to Programming session with Service 0x10 02\n5) Wait 5s\n6) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + ' using physical addressing\n7) Wait 3s\n8) Change to Default session with Service 0x10 01\n9) Wait 3s\n10) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(1000)\n4) RequestResponse(1002, 5002.*, Regexp)\n5) wait(5000)\n6) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Equal)\n7) wait(3000)\n8) RequestResponse(1001, 5001.*, Regexp)\n9) wait(1000)\n10) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Equal)', 'Automated Testcase', 'implemented', baseSW, ''])
+        if str(row_list_type_baseSW) == "FBL":
+            # ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 3s\n4) Check active session should be Extended\n4) Wait 3s\n5) Change to Programming session with Service 0x10 02\n6) Wait 3s\n7) Check active session should be Programming\n8) Wait 3s\n9) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + ' using physical addressing\n10) Wait 3s\n11) Change to Default session with Service 0x10 01\n12) Wait 3s\n13) Check active session should be Default\n14) Wait 3s\n15) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(3000)\n5) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}3, Regexp)\n6) wait(1000)\n7) RequestResponse(1002, 5002.*, Regexp)\n8) wait(3000)\n9) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}2, Regexp)\n10) wait(3000)\n11) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)\n12) RequestResponse(1001, 5001.*, Regexp)\n13) wait(3000)\n14) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}2, Regexp)\n15) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)', 'Automated Testcase', 'implemented', baseSW, ''])
+            ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 1s\n4) Change to Programming session with Service 0x10 02\n5) Wait 5s\n6) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + ' using physical addressing\n7) Wait 3s\n8) Change to Default session with Service 0x10 01\n9) Wait 1s\n10) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(1000)\n4) RequestResponse(1002, 5002.*, Regexp)\n5) wait(5000)\n6) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)\n7) wait(3000)\n8) RequestResponse(1001, 5001.*, Regexp)\n9) wait(1000)\n10) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)', 'Automated Testcase', 'implemented', baseSW, ''])
 
-            if str(row_list_type_baseSW) == "RBEOL":
-                ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in RBEOL', '1) Access to RBEOL\n2) Unlock RBEOL\n3) Wait 5s\n4) Send service 0x22 to the camera for the DID ' +
-                    str(row_list_DID_baseSW) + ' using physical addressing\n5) Reset ECU\n6) Wait 3s\n7) Send 1001\n8) Wait 3s', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -',
-                    '1) envvar(EnvRBEOL(1;1000), EnvRBEOL(0;1000))\n2) envvar(Env_MPC3_EOL_unlock(1;1000), Env_MPC3_EOL_unlock(0;1000))\n3) wait(5000)\n4) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Equal)\n5) RequestResponse(1101, 5101, Equal)\n6) wait(3000)\n7) RequestResponse(1001, 5001.*, Regexp)\n8) wait(3000)', 'Automated Testcase', 'implemented', baseSW, ''])
+            ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 1s\n4) Change to Programming session with Service 0x10 02\n5) Wait 5s\n6) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + ' using physical addressing\n7) Wait 3s\n8) Change to Default session with Service 0x10 01\n9) Wait 1s\n10) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(1000)\n4) RequestResponse(1002, 5002.*, Regexp)\n5) wait(5000)\n6) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)\n7) wait(3000)\n8) RequestResponse(1001, 5001.*, Regexp)\n9) wait(1000)\n10) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)', 'Automated Testcase', 'implemented', baseSW, ''])
+
+        if str(row_list_type_baseSW) == "RBEOL":
+            ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in RBEOL', '1) Access to RBEOL\n2) Unlock RBEOL\n3) Wait 5s\n4) Send service 0x22 to the camera for the DID ' +
+                str(row_list_DID_baseSW) + ' using physical addressing\n5) Reset ECU\n6) Wait 3s\n7) Send 1001\n8) Wait 3s', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -',
+                '1) envvar(EnvRBEOL(1;1000), EnvRBEOL(0;1000))\n2) envvar(Env_MPC3_EOL_unlock(1;1000), Env_MPC3_EOL_unlock(0;1000))\n3) wait(5000)\n4) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)\n5) RequestResponse(1101, 5101, Equal)\n6) wait(3000)\n7) RequestResponse(1001, 5001.*, Regexp)\n8) wait(3000)', 'Automated Testcase', 'implemented', baseSW, ''])
             
+            ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in RBEOL', '1) Access to RBEOL\n2) Unlock RBEOL\n3) Wait 5s\n4) Send service 0x22 to the camera for the DID ' +
+                str(row_list_DID_baseSW) + ' using physical addressing\n5) Reset ECU\n6) Wait 3s\n7) Send 1001\n8) Wait 3s', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -',
+                '1) envvar(EnvRBEOL(1;1000), EnvRBEOL(0;1000))\n2) envvar(Env_MPC3_EOL_unlock(1;1000), Env_MPC3_EOL_unlock(0;1000))\n3) wait(5000)\n4) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)\n5) RequestResponse(1101, 5101, Equal)\n6) wait(3000)\n7) RequestResponse(1001, 5001.*, Regexp)\n8) wait(3000)', 'Automated Testcase', 'implemented', baseSW, ''])
+            
+
         number4 += 1
         o += 1
         j += 1
         k += 1
 
     return id
+
 
 def DID_latestSW(ws_RF_LatestSW, wb_RF_LatestSW, id, number1, number2, number3, number4, direct,dummy):
     if direct == '':
@@ -658,7 +604,7 @@ def DID_latestSW(ws_RF_LatestSW, wb_RF_LatestSW, id, number1, number2, number3, 
     o = 2
     j = 3
     k = 1
-    c = 0
+    # c = 0
     status_dummy = 0
     number4 += 1
 
@@ -681,16 +627,16 @@ def DID_latestSW(ws_RF_LatestSW, wb_RF_LatestSW, id, number1, number2, number3, 
                 if str(row_list_DID_latestSW) == "None":
                     return id
                 # print(ws_RF_LatestSW[char + str(row)].value)
-        for row in range(o, j):
-            for col in range(3, 4):
-                char = get_column_letter(col)
-                row_list_length_byte_latestSW = ws_RF_LatestSW[char + str(row)].value
-                if str(row_list_DID_latestSW) == "None":
-                    return id
+        # for row in range(o, j):
+        #     for col in range(3, 4):
+        #         char = get_column_letter(col)
+        #         row_list_length_byte_latestSW = ws_RF_LatestSW[char + str(row)].value
+        #         if str(row_list_DID_latestSW) == "None":
+        #             return id
                 # print(ws[char + str(row)].value)
                 # print(row_list_length_byte_latestSW)
         for row in range(o, j):
-            for col in range(4, 5):
+            for col in range(3, 4):
                 char = get_column_letter(col)
                 row_list_ASCII_values_latestSW = ws_RF_LatestSW[char + str(row)].value
                 if str(row_list_DID_latestSW) == "None":
@@ -698,18 +644,18 @@ def DID_latestSW(ws_RF_LatestSW, wb_RF_LatestSW, id, number1, number2, number3, 
                 # print(ws_RF_LatestSW[char + str(row)].value)
         
         for row in range(o, j):
-            for col in range(5, 6):
+            for col in range(4, 5):
                 char = get_column_letter(col)
                 row_list_hex_values_latestSW = ws_RF_LatestSW[char + str(row)].value
 
         for row in range(o, j):
-            for col in range(6, 7):
+            for col in range(5, 6):
                 char = get_column_letter(col)
                 row_list_type_latestSW = ws_RF_LatestSW[char + str(row)].value
                 # print("latest" + str(row_list_type_latestSW))
 
         for row in range(o, j):
-            for col in range(7, 8):
+            for col in range(6, 7):
                 char = get_column_letter(col)
                 row_list_hex_values_DummySW = ws_RF_LatestSW[char + str(row)].value
                 # print("latest" + str(row_list_hex_values_DummySW))
@@ -722,14 +668,10 @@ def DID_latestSW(ws_RF_LatestSW, wb_RF_LatestSW, id, number1, number2, number3, 
             # length_byte = ""
             if dummy == "dummy":
                 if str(row_list_name_latestSW) == "Supplier Software number":
-                    if str(row_list_length_byte_latestSW) != 'None':
-                        length_byte = int(row_list_length_byte_latestSW) * 2
-                        # print(length_byte)
-                        hexvalue_latestSW = str(".{" + str(length_byte) + "}")
-                    else:
-                        hexvalue_latestSW = str(".*")
+
+                    hexvalue_latestSW = str(".*")
                     # print('dung')
-                    #print(hexvalue_latestSW)
+                    print(hexvalue_latestSW)
                     dummy = ""
                     # c = 1
                     status_dummy  = 1
@@ -739,169 +681,79 @@ def DID_latestSW(ws_RF_LatestSW, wb_RF_LatestSW, id, number1, number2, number3, 
             else:
                 if status_dummy == 0:
                     if str(row_list_ASCII_values_latestSW) == 'None' and str(row_list_hex_values_latestSW) == 'None':
-                        if str(row_list_length_byte_latestSW) != 'None':
-                            length_byte = int(row_list_length_byte_latestSW) * 2
-                            #print(length_byte)
-                            hexvalue_latestSW = str(".{" + str(length_byte) + "}")
-                        else:
-                            hexvalue_latestSW = str(".*")
+
+                        hexvalue_latestSW = str(".*")
                         # print('dung')
                         # print(hexvalue_latestSW)
-                        c = 1
+                        # c = 1
                     else:
                         if str(row_list_hex_values_latestSW) == "None":
                             # change ascii sang hex value
                             for i in str(row_list_ASCII_values_latestSW):
                                 hexvalue_latestSW += hex(ord(i))[2:]
-            
-                        # danh cho co length byter thi su dung
-                            if str(row_list_length_byte_latestSW) != 'None':
-                                # print(hexvalue_latestSW)
-                                count_hexvalue_latestSW = len(hexvalue_latestSW)
-                                count_hexvalue_latestSW = int(count_hexvalue_latestSW) // 2
-                                # print(count_hexvalue_latestSW)
-                                # print(type(row_list_length_byte_latestSW))
-                                if str(count_hexvalue_latestSW) < row_list_length_byte_latestSW:
-                                    # print("Day la do dai byte",row_list_length_byte_latestSW)
-                                    length_byte = (int(row_list_length_byte_latestSW) -
-                                                int(count_hexvalue_latestSW)) * 2
-                                    # print("byte bi thieu", length_byte)
-                                    hexvalue_latestSW = hexvalue_latestSW.lower()
-                                    hexvalue_latestSW = str(hexvalue_latestSW + ".{" + str(length_byte) + "}")
-                                    c = 1
-                                else:
-                                    c = 0
-                            if str(row_list_length_byte_latestSW) == 'None':
-                                hexvalue_latestSW = hexvalue_latestSW.lower()
-                                hexvalue_latestSW = str(hexvalue_latestSW + ".*")
-                                c = 1
-                            
+
+
+                            hexvalue_latestSW = hexvalue_latestSW.lower()
+                            hexvalue_latestSW = str(hexvalue_latestSW + ".*")
                         else:
-                        # danh cho co length byter thi su dung
-                            if str(row_list_length_byte_latestSW) != 'None':
-                                count_hexvalue_latestSW = len(row_list_hex_values_latestSW)
-                                count_hexvalue_latestSW = int(count_hexvalue_latestSW) // 2
-                                if str(count_hexvalue_latestSW) < row_list_length_byte_latestSW:
-                                    length_byte = (int(row_list_length_byte_latestSW) - int(count_hexvalue_latestSW)) * 2
-                                    hexvalue_latestSW = row_list_hex_values_latestSW.lower()
-                                    hexvalue_latestSW = str(hexvalue_latestSW + ".{" + str(length_byte) + "}")
-                                    c = 1
-                            else:    
-                                hexvalue_latestSW = row_list_hex_values_latestSW.lower()
-                                hexvalue_latestSW = str(hexvalue_latestSW + ".*")
-                                c = 1
 
-                            # hexvalue_latestSW = row_list_hex_values_latestSW.lower()
-                            # hexvalue_latestSW = str(hexvalue_latestSW + ".*")
-                            # c = 1
-
+                            hexvalue_latestSW = row_list_hex_values_latestSW.lower()
+                            hexvalue_latestSW = str(hexvalue_latestSW + ".*")
                 if  status_dummy  == 1:
                     if str(row_list_hex_values_DummySW) == 'None':
                         if str(row_list_ASCII_values_latestSW) == 'None' and str(row_list_hex_values_latestSW) == 'None':
-                            if str(row_list_length_byte_latestSW) != 'None':
-                                length_byte = int(row_list_length_byte_latestSW) * 2
-                                #print(length_byte)
-                                hexvalue_latestSW = str(".{" + str(length_byte) + "}")
-                            else:
-                                hexvalue_latestSW = str(".*")
-                            c = 1
+                            
+                            hexvalue_latestSW = str(".*")
                             
                         else:
                             if str(row_list_hex_values_latestSW) == "None":
                                 # change ascii sang hex value
                                 for i in str(row_list_ASCII_values_latestSW):
                                     hexvalue_latestSW += hex(ord(i))[2:]
-                                    
-                            # danh cho co length byter thi su dung
-                                if str(row_list_length_byte_latestSW) != 'None':
-                                    # print(hexvalue_latestSW)
-                                    count_hexvalue_latestSW = len(hexvalue_latestSW)
-                                    count_hexvalue_latestSW = int(count_hexvalue_latestSW) // 2
-                                    # print(count_hexvalue_latestSW)
-                                    # print(type(row_list_length_byte_latestSW))
-                                    if str(count_hexvalue_latestSW) < row_list_length_byte_latestSW:
-                                        # print("Day la do dai byte",row_list_length_byte_latestSW)
-                                        length_byte = (int(row_list_length_byte_latestSW) - int(count_hexvalue_latestSW)) * 2
-                                        # print("byte bi thieu", length_byte)
-                                        hexvalue_latestSW = hexvalue_latestSW.lower()
-                                        hexvalue_latestSW = str(hexvalue_latestSW + ".{" + str(length_byte) + "}")
-                                        c = 1
-                                    else:
-                                        c = 0
-                                if str(row_list_length_byte_latestSW) == 'None':
-                                    hexvalue_latestSW = hexvalue_latestSW.lower()
-                                    hexvalue_latestSW = str(hexvalue_latestSW + ".*")
-                                    c = 1
-                                else:
-                                    c = 0
+                            
+                                hexvalue_latestSW = hexvalue_latestSW.lower()
+                                hexvalue_latestSW = str(hexvalue_latestSW + ".*")
                             else:
-                                if str(row_list_length_byte_latestSW) == 'None':
-                                    hexvalue_latestSW = row_list_hex_values_latestSW.lower()
-                                    hexvalue_latestSW = str(hexvalue_latestSW + ".*")
+                            
+                                hexvalue_latestSW = row_list_hex_values_latestSW.lower()
+                                hexvalue_latestSW = str(hexvalue_latestSW + ".*")
                     else:
-                        # if str(row_list_length_byte_latestSW) != 'None':
-                        #     count_hexvalue_DummySW = len(row_list_hex_values_DummySW)
-                        #     count_hexvalue_DummySW = int(count_hexvalue_DummySW) // 2
-                        #     if str(count_hexvalue_DummySW) < row_list_length_byte_latestSW:
-                        #         length_byte = (int(row_list_length_byte_latestSW) - int(count_hexvalue_DummySW)) * 2
-                        #         hexvalue_latestSW = row_list_hex_values_DummySW.lower()
-                        #         hexvalue_latestSW = str(hexvalue_latestSW + ".{" + str(length_byte) + "}")
-                        #         c = 1
-                        # else:
-                        #     hexvalue_latestSW = row_list_hex_values_DummySW.lower()
-                        #     hexvalue_latestSW = str(hexvalue_latestSW + ".*")
-                        #     c = 1
 
                         hexvalue_latestSW = row_list_hex_values_DummySW.lower()
-                        hexvalue_latestSW = str(hexvalue_latestSW + ".*")     
-                        c = 1
+                        hexvalue_latestSW = str(hexvalue_latestSW + ".*")                                            
                     # print(hexvalue_latestSW)
             
-            # if str(row_list_name_latestSW) == "None":
-            #     row_list_name_latestSW = ""
-            
-            # if c == 1:
-            #     ws2.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW), '1) Send service 0x22 to the camera for the DID ' +
-            #                 str(row_list_DID_latestSW) + ' using physical addressing', '1) -', '1) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
-            # if c == 0:
-            #     ws2.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW), '1) Send service 0x22 to the camera for the DID ' +
-            #                 str(row_list_DID_latestSW) + ' using physical addressing', '1) -', '1) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Equal)', 'Automated Testcase', 'implemented', latestSW, ''])
-            
+
                 if str(row_list_name_latestSW) == "None":
                     row_list_name_latestSW = ""
             
                 # if str(row_list_name_baseSW) != "Supplier Software number":
-                
-                if c == 1:
-                    if str(row_list_type_latestSW) == "APPL":
 
-                        ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW), '1) Send service 0x22 to the camera for the DID ' +
-                            str(row_list_DID_latestSW) + ' using physical addressing', '1) -', '1) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+                if str(row_list_type_latestSW) == "APPL":
 
-                    if str(row_list_type_latestSW) == "FBL":
-                        # ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 3s\n4) Check active session should be Extended\n4) Wait 3s\n5) Change to Programming session with Service 0x10 02\n6) Wait 3s\n7) Check active session should be Programming\n8) Wait 3s\n9) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + ' using physical addressing\n10) Wait 3s\n11) Change to Default session with Service 0x10 01\n12) Wait 3s\n13) Check active session should be Default\n14) Wait 3s\n15) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(3000)\n5) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}3, Regexp)\n6) wait(1000)\n7) RequestResponse(1002, 5002.*, Regexp)\n8) wait(3000)\n9) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}2, Regexp)\n10) wait(3000)\n11) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)\n12) RequestResponse(1001, 5001.*, Regexp)\n13) wait(3000)\n14) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}2, Regexp)\n15) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)', 'Automated Testcase', 'implemented', baseSW, ''])
-                        ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 1s\n4) Change to Programming session with Service 0x10 02\n5) Wait 5s\n6) Send service 0x22 to the camera for the DID ' +str(row_list_DID_latestSW) + ' using physical addressing\n7) Wait 3s\n8) Change to Default session with Service 0x10 01\n9) Wait 1s\n10) Send service 0x22 to the camera for the DID ' +str(row_list_DID_latestSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(1000)\n4) RequestResponse(1002, 5002.*, Regexp)\n5) wait(5000)\n6) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)\n7) wait(3000)\n8) RequestResponse(1001, 5001.*, Regexp)\n9) wait(1000)\n10) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
+                    ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW), '1) Send service 0x22 to the camera for the DID ' +
+                        str(row_list_DID_latestSW) + ' using physical addressing', '1) -', '1) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
 
-                    if str(row_list_type_latestSW) == "RBEOL":
-                        ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW) + ' in RBEOL', '1) Access to RBEOL\n2) Unlock RBEOL\n3) Wait 5s\n4) Send service 0x22 to the camera for the DID ' +
-                            str(row_list_DID_latestSW) + ' using physical addressing\n5) Reset ECU\n6) Wait 3s\n7) Send 1001\n8) Wait 3s', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -',
-                    '1) envvar(EnvRBEOL(1;1000), EnvRBEOL(0;1000))\n2) envvar(Env_MPC3_EOL_unlock(1;1000), Env_MPC3_EOL_unlock(0;1000))\n3) wait(5000)\n4) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)\n5) RequestResponse(1101, 5101, Equal)\n6) wait(3000)\n7) RequestResponse(1001, 5001.*, Regexp)\n8) wait(3000)', 'Automated Testcase', 'implemented', latestSW, ''])
+                    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW), '1) Send service 0x22 to the camera for the DID ' +
+                        str(row_list_DID_latestSW) + ' using physical addressing', '1) -', '1) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
 
-                if c == 0:
-                    if str(row_list_type_latestSW) == "APPL":
 
-                        ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW), '1) Send service 0x22 to the camera for the DID ' +
-                            str(row_list_DID_latestSW) + ' using physical addressing', '1) -', '1) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Equal)', 'Automated Testcase', 'implemented', latestSW, ''])
+                if str(row_list_type_latestSW) == "FBL":
+                    # ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 3s\n4) Check active session should be Extended\n4) Wait 3s\n5) Change to Programming session with Service 0x10 02\n6) Wait 3s\n7) Check active session should be Programming\n8) Wait 3s\n9) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + ' using physical addressing\n10) Wait 3s\n11) Change to Default session with Service 0x10 01\n12) Wait 3s\n13) Check active session should be Default\n14) Wait 3s\n15) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(3000)\n5) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}3, Regexp)\n6) wait(1000)\n7) RequestResponse(1002, 5002.*, Regexp)\n8) wait(3000)\n9) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}2, Regexp)\n10) wait(3000)\n11) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)\n12) RequestResponse(1001, 5001.*, Regexp)\n13) wait(3000)\n14) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}2, Regexp)\n15) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)', 'Automated Testcase', 'implemented', baseSW, ''])
+                    ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 1s\n4) Change to Programming session with Service 0x10 02\n5) Wait 5s\n6) Send service 0x22 to the camera for the DID ' +str(row_list_DID_latestSW) + ' using physical addressing\n7) Wait 3s\n8) Change to Default session with Service 0x10 01\n9) Wait 1s\n10) Send service 0x22 to the camera for the DID ' +str(row_list_DID_latestSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(1000)\n4) RequestResponse(1002, 5002.*, Regexp)\n5) wait(5000)\n6) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)\n7) wait(3000)\n8) RequestResponse(1001, 5001.*, Regexp)\n9) wait(1000)\n10) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
 
-                    if str(row_list_type_latestSW) == "FBL":
-                        # ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_baseSW) + ' ' + str(row_list_name_baseSW), 'To check value of the DID ' + str(row_list_DID_baseSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 3s\n4) Check active session should be Extended\n4) Wait 3s\n5) Change to Programming session with Service 0x10 02\n6) Wait 3s\n7) Check active session should be Programming\n8) Wait 3s\n9) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + ' using physical addressing\n10) Wait 3s\n11) Change to Default session with Service 0x10 01\n12) Wait 3s\n13) Check active session should be Default\n14) Wait 3s\n15) Send service 0x22 to the camera for the DID ' +str(row_list_DID_baseSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -\n11) -\n12) -\n13) -\n14) -\n15) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(3000)\n5) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}3, Regexp)\n6) wait(1000)\n7) RequestResponse(1002, 5002.*, Regexp)\n8) wait(3000)\n9) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}2, Regexp)\n10) wait(3000)\n11) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)\n12) RequestResponse(1001, 5001.*, Regexp)\n13) wait(3000)\n14) RequestResponse(' + '22' + str(DID_check_active_baseSW_lowercase) + ','+'62'+str(DID_check_active_baseSW_lowercase) + '.{'+'1}2, Regexp)\n15) RequestResponse(' + '22' + str(row_list_DID_baseSW_lowercase) + ','+'62'+str(row_list_DID_baseSW_lowercase) + str(hexvalue_baseSW) + ', Regexp)', 'Automated Testcase', 'implemented', baseSW, ''])
-                        ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 1s\n4) Change to Programming session with Service 0x10 02\n5) Wait 5s\n6) Send service 0x22 to the camera for the DID ' +str(row_list_DID_latestSW) + ' using physical addressing\n7) Wait 3s\n8) Change to Default session with Service 0x10 01\n9) Wait 1s\n10) Send service 0x22 to the camera for the DID ' +str(row_list_DID_latestSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(1000)\n4) RequestResponse(1002, 5002.*, Regexp)\n5) wait(5000)\n6) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Equal)\n7) wait(3000)\n8) RequestResponse(1001, 5001.*, Regexp)\n9) wait(1000)\n10) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Equal)', 'Automated Testcase', 'implemented', latestSW, ''])
+                    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW) + ' in Programming', '1) Tester Present is ON\n2) Change to Extended session with Service 0x10 03\n3) Wait 1s\n4) Change to Programming session with Service 0x10 02\n5) Wait 5s\n6) Send service 0x22 to the camera for the DID ' +str(row_list_DID_latestSW) + ' using physical addressing\n7) Wait 3s\n8) Change to Default session with Service 0x10 01\n9) Wait 1s\n10) Send service 0x22 to the camera for the DID ' +str(row_list_DID_latestSW) + 'using physical addressing', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -\n9) -\n10) -', '1) envvar(EnvTesterPresentOnOff(1;0))\n2) RequestResponse(1003, 5003.*, Regexp)\n3) wait(1000)\n4) RequestResponse(1002, 5002.*, Regexp)\n5) wait(5000)\n6) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)\n7) wait(3000)\n8) RequestResponse(1001, 5001.*, Regexp)\n9) wait(1000)\n10) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)', 'Automated Testcase', 'implemented', latestSW, ''])
 
-                    if str(row_list_type_latestSW) == "RBEOL":
-                        ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW) + ' in RBEOL', '1) Access to RBEOL\n2) Unlock RBEOL\n3) Wait 5s\n4) Send service 0x22 to the camera for the DID ' +
-                            str(row_list_DID_latestSW) + ' using physical addressing\n5) Reset ECU\n6) Wait 3s\n7) Send 1001\n8) Wait 3s', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -',
-                    '1) envvar(EnvRBEOL(1;1000), EnvRBEOL(0;1000))\n2) envvar(Env_MPC3_EOL_unlock(1;1000), Env_MPC3_EOL_unlock(0;1000))\n3) wait(5000)\n4) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Equal)\n5) RequestResponse(1101, 5101, Equal)\n6) wait(3000)\n7) RequestResponse(1001, 5001.*, Regexp)\n8) wait(3000)', 'Automated Testcase', 'implemented', latestSW, ''])
+                if str(row_list_type_latestSW) == "RBEOL":
+                    ws_TC_RF.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW) + ' in RBEOL', '1) Access to RBEOL\n2) Unlock RBEOL\n3) Wait 5s\n4) Send service 0x22 to the camera for the DID ' +
+                        str(row_list_DID_latestSW) + ' using physical addressing\n5) Reset ECU\n6) Wait 3s\n7) Send 1001\n8) Wait 3s', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -',
+                '1) envvar(EnvRBEOL(1;1000), EnvRBEOL(0;1000))\n2) envvar(Env_MPC3_EOL_unlock(1;1000), Env_MPC3_EOL_unlock(0;1000))\n3) wait(5000)\n4) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)\n5) RequestResponse(1101, 5101, Equal)\n6) wait(3000)\n7) RequestResponse(1001, 5001.*, Regexp)\n8) wait(3000)', 'Automated Testcase', 'implemented', latestSW, ''])
             
+                    ws_TC_FBL.append(['ID_'+str(id),  '1.' + str(number1) + '.' + str(number2) + '.' + str(number3) + '.' + str(number4) + ' ' + str(row_list_DID_latestSW) + ' ' + str(row_list_name_latestSW), 'To check value of the DID ' + str(row_list_DID_latestSW) + ' in RBEOL', '1) Access to RBEOL\n2) Unlock RBEOL\n3) Wait 5s\n4) Send service 0x22 to the camera for the DID ' +
+                        str(row_list_DID_latestSW) + ' using physical addressing\n5) Reset ECU\n6) Wait 3s\n7) Send 1001\n8) Wait 3s', '1) -\n2) -\n3) -\n4) -\n5) -\n6) -\n7) -\n8) -',
+                '1) envvar(EnvRBEOL(1;1000), EnvRBEOL(0;1000))\n2) envvar(Env_MPC3_EOL_unlock(1;1000), Env_MPC3_EOL_unlock(0;1000))\n3) wait(5000)\n4) RequestResponse(' + '22' + str(row_list_DID_latestSW_lowercase) + ','+'62'+str(row_list_DID_latestSW_lowercase) + str(hexvalue_latestSW) + ', Regexp)\n5) RequestResponse(1101, 5101, Equal)\n6) wait(3000)\n7) RequestResponse(1001, 5001.*, Regexp)\n8) wait(3000)', 'Automated Testcase', 'implemented', latestSW, ''])
+            
+
             number4 += 1
             o += 1
             j += 1
